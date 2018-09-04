@@ -1,1 +1,5 @@
-Allows non-department-code entries in string for option 2
+Is it okay that cin for strings will accept numbers/punctuation without error message?
+
+How do I check for memory leaks?
+
+Will I be docked points for lack of class creation/delegating processes?
