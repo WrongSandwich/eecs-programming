@@ -36,7 +36,6 @@ Directory::Directory(std::string fileName)
         inFile >> tempStudents[j];
       }
       catalog[i].setStudents(tempStudents);
-      delete[] tempStudents;
     }
     inFile.close();
   }
