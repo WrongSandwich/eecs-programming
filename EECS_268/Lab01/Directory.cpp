@@ -36,6 +36,7 @@ Directory::Directory(std::string fileName)
         inFile >> tempStudents[j];
       }
       catalog[i].setStudents(tempStudents);
+      delete[] tempStudents;
     }
     inFile.close();
   }
@@ -303,6 +304,7 @@ void Directory::run()
     //Exiting the program
     else if (userChoice == 7)
     {
+      delete[] catalog;
       std::cout << "Exiting...\n";
     }
     //The user is an idiot and can't use a simple menu
