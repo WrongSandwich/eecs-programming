@@ -7,7 +7,6 @@ int main()
 	cin >> t; //Number of test cases
 	for(int i = 1; i <= t; i++)
 	{
-		cout << "Case #" << i << ": ";
 		cin >> n;
 		n = n*2;
 		bus = new int[n];
@@ -16,6 +15,7 @@ int main()
 			cin >> bus[j];
 		}
 		cin >> p;
+		cout << "Case #" << i << ": ";
 		for (int j = 0; j < p; j++)
 		{
 			cin >> x;
