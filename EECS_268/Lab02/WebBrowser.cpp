@@ -1,11 +1,16 @@
+#include <iostream>
+#include <string>
+
 //Need to create a LinkedList in this code
 WebBrowser::WebBrowser() : position(0)
 {
 }
+
 WebBrowser::~WebBrowser()
 {
 
 }
+
 void WebBrowser::navigateTo(std::string url)
 {
   //Add a new node with given url and navigate to it
@@ -24,6 +29,7 @@ void WebBrowser::navigateTo(std::string url)
   }
   position++; //Move to new url in list
 }
+
 void WebBrowser::forward()
 {
   //Move to next node if there is one
@@ -32,6 +38,7 @@ void WebBrowser::forward()
     position++;
   }
 }
+
 void WebBrowser::back()
 {
   //Move to previous node if there is one
@@ -45,6 +52,7 @@ std::string WebBrowser::currentURL() const
   //Retrieve current url and return it
   return ll.getEntry(position);
 }
+
 void WebBrowser::copyCurrentHistory(LinkedList<string>& destination)
 {
   int length = ll.getLength();
@@ -52,4 +60,19 @@ void WebBrowser::copyCurrentHistory(LinkedList<string>& destination)
   {
     destination.insert(i, ll.getEntry(i))
   }
+}
+
+void WebBrowser::printHistory()
+{
+  std::cout << "Oldest\n==========\n";
+  for (int i = 1; i <= ll.getLength(); i++)
+  {
+    std::cout << ll.getEntry(i);
+    if (i == position)
+    {
+      std::cout << " <==current";
+    }
+    std::cout << '\n';
+  }
+  std::cout << "==========\nNewest\n";
 }
