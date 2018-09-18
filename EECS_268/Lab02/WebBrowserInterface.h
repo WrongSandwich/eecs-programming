@@ -11,7 +11,7 @@ class WebBrowserInterface
   *       This, as with all virtual destrucors, is an empty definition since we
   *       have no knowledge of specific implementation details.
   */
-  virtual ~WebBrowserInterface(){}
+  virtual ~WebBrowserInterface(){};
 
   /**
   * @pre none
