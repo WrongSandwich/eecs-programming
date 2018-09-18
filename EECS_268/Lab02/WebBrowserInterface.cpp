@@ -1,5 +1,4 @@
-#include <iostream>
-#include <string>
+#include "WebBrowserInterface.h"
 
 virtual WebBrowserInterface::~WebBrowserInterface()
 {}

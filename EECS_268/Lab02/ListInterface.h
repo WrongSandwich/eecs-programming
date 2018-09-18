@@ -29,4 +29,6 @@ class ListInterface
      virtual void replace(int position, T newEntry) throw (std::runtime_error) = 0;
 };
 
+#include "ListInterface.cpp"
+
 #endif

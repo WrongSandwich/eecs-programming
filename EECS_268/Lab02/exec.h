@@ -1,12 +1,14 @@
 #ifndef EXEC_H
 #define EXEC_H
 #include <string>
+#include "LinkedList.h"
+#include "WebBrowser.h"
 
 class Exec
 {
 private:
   std::string fileName;
-  std::string* commList;
+  WebBrowser wb;
 public:
   Exec(std::string fileName);
   void run();

@@ -16,5 +16,7 @@ public:
   ItemType getItem() const;
   Node<ItemType>* getNext() const;
 };
+
 #include "Node.cpp"
+
 #endif

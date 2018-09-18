@@ -1,12 +1,13 @@
 #ifndef WEB_BROWSER_H
 #define WEB_BROWSER_H
-#include "ListInterface.h"
+#include "WebBrowserInterface.h"
 #include <string>
 
 class WebBrowser : public WebBrowserInterface
 {
 private:
 LinkedList ll;
+int position;
 
 public:
   WebBrowser();

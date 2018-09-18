@@ -1,3 +1,11 @@
+#include <iostream>
+#include <string>
+#include <stdexcept>
+
+#include "LinkedList.h"
+#include "Node.h"
+#include "ListInterface.h"
+
 template<class itemType>
 Node<itemType>* LinkedList<itemType>::getNodeAt(int position) const
 {
@@ -143,5 +151,4 @@ void LinkedList<ItemType>::setEntry(int position, const ItemType& newEntry)
   }
   else throw PrecondViolatedExcep("error");
 }
-
 }

@@ -1,6 +1,5 @@
 #ifndef WEB_BROWSER_INTERFACE_H
 #define WEB_BROWSER_INTERFACE_H
-#include "ListInterface.h"
 #include <string>
 
 class WebBrowserInterface

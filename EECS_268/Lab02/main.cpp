@@ -18,8 +18,8 @@
   }
   else
   {
-     Directory exec(argv[1]); //sample creation of executive object
-     exec.run(); //presumably handles the calling of all other member methods
+     Directory Exec(argv[1]); //sample creation of executive object
+     Exec.run(); //presumably handles the calling of all other member methods
   }
 
   return(0);
