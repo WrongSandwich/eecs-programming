@@ -1,5 +1,11 @@
 //Need to create a WebBrowser in this code
+#include "Exec.h"
+#include "LinkedList.h"
+#include "WebBrowser.h"
 
+#include <iostream>
+#include <fstream>
+#include <string>
 
 Exec::Exec(std::string fileName)
 {
@@ -7,7 +13,7 @@ Exec::Exec(std::string fileName)
   inFile.open(fileName);
   if(inFile.is_open())
   {
-    WebBrowser();
+    WebBrowser wb;
     inFile.close();
   }
   else
@@ -27,26 +33,24 @@ void Exec::run()
     //NAVIGATE
     if (command == "NAVIGATE")
     {
-
+      inFile >> address;
+      wb.navigateTo(address);
     }
     //BACK
     else if (command == "BACK")
     {
-
+      wb.back();
     }
     //FORWARD
     else if (command == "FORWARD")
     {
-
+      wb.forward();
     }
     //HISTORY
     else if (command == "HISTORY")
     {
-
-    }
-    else
-    {
-      
+      wb.printHistory();
     }
   } while(!inFile.eof()); //Checks if end of file has been reached
+  inFile.close()
 }
