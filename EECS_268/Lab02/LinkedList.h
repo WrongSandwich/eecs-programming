@@ -33,8 +33,7 @@ public:
 
    ItemType getEntry(int position) const throw(PrecondViolatedExcep);
 
-   void setEntry(int position, const ItemType& newEntry)
-                               throw(PrecondViolatedExcep);
+   void setEntry(int position, const ItemType& newEntry) throw(PrecondViolatedExcep);
 };
 
 #include "LinkedList.cpp"
