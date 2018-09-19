@@ -1,7 +1,7 @@
 #ifndef WEB_BROWSER_INTERFACE_H
 #define WEB_BROWSER_INTERFACE_H
 #include <string>
-#include "ListInterface.h"
+#include "LinkedList.h"
 
 class WebBrowserInterface
 {
@@ -11,7 +11,7 @@ class WebBrowserInterface
   *       This, as with all virtual destrucors, is an empty definition since we
   *       have no knowledge of specific implementation details.
   */
-  virtual ~WebBrowserInterface(){};
+  virtual ~WebBrowserInterface(){}
 
   /**
   * @pre none
@@ -44,7 +44,7 @@ class WebBrowserInterface
   * @post The current browser history is copied into the given list
   * @param destination, an empty list of strings that will have a copy of current history copied into
   */
-  virtual void copyCurrentHistory(ListInterface<string>& destination) = 0;
+  virtual void copyCurrentHistory(LinkedList<std::string>& destination) = 0;
 };
 
 #endif

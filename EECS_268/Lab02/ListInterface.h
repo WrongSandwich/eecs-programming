@@ -30,6 +30,4 @@ class ListInterface
      virtual void setEntry(int position, const T& newEntry) throw (std::runtime_error) = 0;
 };
 
-#include "ListInterface.cpp"
-
 #endif

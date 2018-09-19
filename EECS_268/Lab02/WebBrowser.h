@@ -7,7 +7,7 @@
 class WebBrowser : public WebBrowserInterface
 {
 private:
-LinkedList ll;
+LinkedList<std::string>* ll;
 int position;
 
 public:
@@ -17,7 +17,8 @@ public:
   void forward();
   void back();
   std::string currentURL() const;
-  void copyCurrentHistory(LinkedList<string>& destination);
+  void copyCurrentHistory(LinkedList<std::string>& destination);
+  void printHistory();
 };
 
 #endif

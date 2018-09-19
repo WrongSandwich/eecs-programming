@@ -7,12 +7,12 @@
 #include "ListInterface.h"
 
 template<class ItemType>
-Node<itemType>* LinkedList<itemType>::getNodeAt(int position) const
+Node<ItemType>* LinkedList<ItemType>::getNodeAt(int position) const
 {
   if ((position>0) && (position<=itemCount))
   {
     int p = 1;
-    Node<itemType>* ptr = headPtr;
+    Node<ItemType>* ptr = headPtr;
     while(p!=position)
     {
       p++;
@@ -32,7 +32,7 @@ LinkedList<ItemType>::LinkedList() : headPtr(nullptr)
 }
 
 template <class ItemType> //Create a deep copy of a linked list
-LinkedList<ItemType>::LinkedList(const LinkedList<ItemType>& aList);
+LinkedList<ItemType>::LinkedList(const LinkedList<ItemType>& aList)
 {
   int length = aList.getLength();
   for (int i = 1; i <= length; i++)
@@ -48,7 +48,7 @@ LinkedList<ItemType>::~LinkedList()
 }
 
 template <class ItemType>
-bool LinkedList<ItemType>::isEmpty() const;
+bool LinkedList<ItemType>::isEmpty() const
 {
   if (headPtr == nullptr) //If headPtr is nullptr then list is empty
   {
@@ -58,19 +58,19 @@ bool LinkedList<ItemType>::isEmpty() const;
 }
 
 template <class ItemType>
-int LinkedList<ItemType>::getLength() const;
+int LinkedList<ItemType>::getLength() const
 {
   return itemCount;
 }
 
 template <class ItemType>
-void LinkedList<ItemType>::insert(int newPosition, const itemType& newEntry) throw (std::runtime_error)
+void LinkedList<ItemType>::insert(int newPosition, const ItemType& newEntry) throw (std::runtime_error)
 {
   //Must first confirm that insertion is valid (pos is not too high or low)
   //Main has this list start at pos 1 which is why 0 is not allowed
-  if (newPosition > 0) && (newPosition <= (itemCount + 1))
+  if ((newPosition > 0) && (newPosition <= (itemCount + 1)))
   {
-    Node<itemType>* n = new Node<itemType>(newEntry);
+    Node<ItemType>* n = new Node<ItemType>(newEntry);
     if (headPtr == nullptr) //Checking if list is empty, also could check itemCount
     {
       headPtr = n; //Make this node the new head
@@ -84,7 +84,7 @@ void LinkedList<ItemType>::insert(int newPosition, const itemType& newEntry) thr
     }
     else
     {
-      Node<ItemType>* prev = getNodeAt(pos-1);
+      Node<ItemType>* prev = getNodeAt(newPosition-1);
       n->setNext(prev->getNext()); //Setting n's pointer to next item in list
       prev->setNext(n);//Setting prev's pointer to point to new addition
       itemCount++;
@@ -96,11 +96,11 @@ void LinkedList<ItemType>::insert(int newPosition, const itemType& newEntry) thr
 template <class ItemType>
 void LinkedList<ItemType>::remove(int position) throw (std::runtime_error)
 {
-  if (position > 0) && (position <= itemCount) //Checking that position is valid
+  if ((position > 0) && (position <= itemCount)) //Checking that position is valid
   {
-    if (isEmpty = true) //List is empty
+    if (isEmpty() == true) //List is empty
     {
-      throw std::runtime_error("error")
+      throw std::runtime_error("error");
     }
     else if (position == 1)
     {
@@ -149,7 +149,7 @@ ItemType LinkedList<ItemType>::getEntry(int position) const throw (std::runtime_
 
 template <class ItemType>
 void LinkedList<ItemType>::setEntry(int position, const ItemType& newEntry)
-                                    throw (std:runtime_error)
+                                    throw (std::runtime_error)
 {
   if ((position > 0) && (position <= itemCount))
   {

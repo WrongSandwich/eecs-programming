@@ -12,7 +12,7 @@ Exec::Exec(std::string fileName)
   inFile.open(fileName);
   if(inFile.is_open())
   {
-    WebBrowser wb;
+    wb = new WebBrowser;
     inFile.close();
   }
   else
@@ -33,23 +33,24 @@ void Exec::run()
     if (command == "NAVIGATE")
     {
       inFile >> address;
-      wb.navigateTo(address);
+      wb->navigateTo(address);
     }
     //BACK
     else if (command == "BACK")
     {
-      wb.back();
+      wb->back();
     }
     //FORWARD
     else if (command == "FORWARD")
     {
-      wb.forward();
+      wb->forward();
     }
     //HISTORY
     else if (command == "HISTORY")
     {
-      wb.printHistory();
+      wb->printHistory();
     }
   } while(!inFile.eof()); //Checks if end of file has been reached
-  inFile.close()
+  inFile.close();
+  delete[] wb;
 }
