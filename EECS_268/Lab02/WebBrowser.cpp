@@ -2,6 +2,7 @@
 #include <string>
 #include "WebBrowser.h"
 #include "WebBrowserInterface.h"
+#include "LinkedList.h"
 
 //Need to create a LinkedList in this code
 WebBrowser::WebBrowser() : position(0)

@@ -1,6 +1,7 @@
 #ifndef WEB_BROWSER_H
 #define WEB_BROWSER_H
 #include "WebBrowserInterface.h"
+#include "LinkedList.h"
 #include <string>
 
 class WebBrowser : public WebBrowserInterface
@@ -17,4 +18,6 @@ public:
   void back();
   std::string currentURL() const;
   void copyCurrentHistory(LinkedList<string>& destination);
-}
+};
+
+#endif

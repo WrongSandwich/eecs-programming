@@ -134,7 +134,7 @@ void LinkedList<ItemType>::clear() //Removes all entries in the list
 template <class ItemType>
 ItemType LinkedList<ItemType>::getEntry(int position) const throw (std::runtime_error)
 {
-  if (position > 0) && (position <= itemCount)
+  if ((position > 0) && (position <= itemCount))
   {
     Node<ItemType>* targetNode = getNodeAt(position);
     return targetNode->getItem();
@@ -146,11 +146,10 @@ template <class ItemType>
 void LinkedList<ItemType>::setEntry(int position, const ItemType& newEntry)
                                     throw (std:runtime_error)
 {
-  if (position > 0) && (position <= itemCount)
+  if ((position > 0) && (position <= itemCount))
   {
     Node<ItemType>* targetNode = getNodeAt(position);
     targetNode->setItem(newEntry);
   }
   else throw std::runtime_error("error");
-}
 }

@@ -1,2 +1,3 @@
-virtual ListInterface::~ListInterface()
+template <typename T>
+virtual ListInterface<T>::~ListInterface()
 {}
