@@ -6,29 +6,36 @@
 #include <fstream>
 #include <string>
 
-Exec::Exec(std::string fileName)
+Exec::Exec(std::string file)
 {
+  wb = new WebBrowser;
   std::ifstream inFile;
-  inFile.open(fileName);
+  inFile.open(file);
   if(inFile.is_open())
   {
-    wb = new WebBrowser;
+    std::cout << "WHAT THE FUCK";
     inFile.close();
   }
-  else
-  {
-    std::cout << "ERROR: File could not be opened\n";
-  }
+  fileName = file;
 }
 
 void Exec::run()
 {
+  std::cout << fileName;
   std::ifstream inFile;
+  std::cout << "Reached run()\n";
   inFile.open(fileName);
-  std::string command, address;
+  if(inFile.is_open())
+  {
+    std::cout <<"ARGH";
+  }
+  std::cout << "File opened";
+  std::string command;
+  std::string address;
   do
   {
     inFile >> command;
+    std::cout << command;
     //NAVIGATE
     if (command == "NAVIGATE")
     {
