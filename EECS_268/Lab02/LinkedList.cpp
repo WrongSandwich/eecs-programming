@@ -31,9 +31,14 @@ LinkedList<ItemType>::LinkedList() : headPtr(nullptr)
 {
 }
 
-template <class ItemType>
+template <class ItemType> //Create a deep copy of a linked list
 LinkedList<ItemType>::LinkedList(const LinkedList<ItemType>& aList);
 {
+  int length = aList.getLength();
+  for (int i = 1; i <= length; i++)
+  {
+    insert(i, aList.getEntry(i));
+  }
 }
 
 template <class ItemType>
