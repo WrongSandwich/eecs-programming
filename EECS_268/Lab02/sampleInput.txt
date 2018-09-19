@@ -1,0 +1,9 @@
+NAVIGATE http://google.com
+NAVIGATE http://reddit.com
+NAVIGATE http://facebook.com
+NAVIGATE http://myspace.com
+BACK
+BACK
+HISTORY
+NAVIGATE http://bing.com
+HISTORY
