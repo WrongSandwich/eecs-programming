@@ -6,7 +6,7 @@
 #include "Node.h"
 #include "ListInterface.h"
 
-template<class itemType>
+template<class ItemType>
 Node<itemType>* LinkedList<itemType>::getNodeAt(int position) const
 {
   if ((position>0) && (position<=itemCount))
@@ -26,23 +26,24 @@ Node<itemType>* LinkedList<itemType>::getNodeAt(int position) const
 
 //See LinkedList.h and main on 268 site
 
-template <class itemType>
-LinkedList<itemType>::LinkedList() : headPtr(nullptr)
+template <class ItemType>
+LinkedList<ItemType>::LinkedList() : headPtr(nullptr)
 {
 }
 
-template <class itemType>
-LinkedList<itemType>::LinkedList(const LinkedList<ItemType>& aList);
+template <class ItemType>
+LinkedList<ItemType>::LinkedList(const LinkedList<ItemType>& aList);
 {
 }
 
-template <class itemType>
-LinkedList<itemType>::~LinkedList()
+template <class ItemType>
+LinkedList<ItemType>::~LinkedList()
 {
+  clear();
 }
 
-template <class itemType>
-bool LinkedList<itemType>::isEmpty() const;
+template <class ItemType>
+bool LinkedList<ItemType>::isEmpty() const;
 {
   if (headPtr == nullptr) //If headPtr is nullptr then list is empty
   {
@@ -51,14 +52,14 @@ bool LinkedList<itemType>::isEmpty() const;
   else return false;
 }
 
-template <class itemType>
-int LinkedList<itemType>::getLength() const;
+template <class ItemType>
+int LinkedList<ItemType>::getLength() const;
 {
   return itemCount;
 }
 
-template <class itemType>
-void LinkedList<T>::insert(int newPosition, const itemType& newEntry) throw (PrecondViolatedExcep)
+template <class ItemType>
+void LinkedList<ItemType>::insert(int newPosition, const itemType& newEntry) throw (std::runtime_error)
 {
   //Must first confirm that insertion is valid (pos is not too high or low)
   //Main has this list start at pos 1 which is why 0 is not allowed
@@ -84,16 +85,17 @@ void LinkedList<T>::insert(int newPosition, const itemType& newEntry) throw (Pre
       itemCount++;
     }
   }
-  else throw PrecondViolatedExcep("error");
+  else throw std::runtime_error("error");
+}
 
 template <class ItemType>
-void LinkedList<ItemType>::remove(int position) throw (PrecondViolatedExcep)
+void LinkedList<ItemType>::remove(int position) throw (std::runtime_error)
 {
   if (position > 0) && (position <= itemCount) //Checking that position is valid
   {
     if (isEmpty = true) //List is empty
     {
-      throw PrecondViolatedExcep("error")
+      throw std::runtime_error("error")
     }
     else if (position == 1)
     {
@@ -112,11 +114,11 @@ void LinkedList<ItemType>::remove(int position) throw (PrecondViolatedExcep)
       itemCount = itemCount - 1;
     }
   }
-  else throw PrecondViolatedExcep("error");
+  else throw std::runtime_error("error");
 }
 
 template <class ItemType>
-void LinkedList<itemType>::clear() //Removes all entries in the list
+void LinkedList<ItemType>::clear() //Removes all entries in the list
 {
   Node<ItemType>* nodeToDeletePtr = headPtr;
   while (headPtr != nullptr)
@@ -130,25 +132,25 @@ void LinkedList<itemType>::clear() //Removes all entries in the list
 }
 
 template <class ItemType>
-ItemType LinkedList<ItemType>::getEntry(int position) const throw (PrecondViolatedExcep)
+ItemType LinkedList<ItemType>::getEntry(int position) const throw (std::runtime_error)
 {
   if (position > 0) && (position <= itemCount)
   {
     Node<ItemType>* targetNode = getNodeAt(position);
     return targetNode->getItem();
   }
-  else throw PrecondViolatedExcep("error");
+  else throw std::runtime_error("error");
 }
 
 template <class ItemType>
 void LinkedList<ItemType>::setEntry(int position, const ItemType& newEntry)
-                                    throw (PrecondViolatedExcep)
+                                    throw (std:runtime_error)
 {
   if (position > 0) && (position <= itemCount)
   {
     Node<ItemType>* targetNode = getNodeAt(position);
     targetNode->setItem(newEntry);
   }
-  else throw PrecondViolatedExcep("error");
+  else throw std::runtime_error("error");
 }
 }

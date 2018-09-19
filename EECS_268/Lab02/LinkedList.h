@@ -27,13 +27,13 @@ public:
 
    bool isEmpty() const;
    int getLength() const;
-   void insert(int newPosition, const ItemType& newEntry) throw (PrecondViolatedExcep);
-   void remove(int position) throw (PrecondViolatedExcep);
+   void insert(int newPosition, const ItemType& newEntry) throw (std::runtime_error);
+   void remove(int position) throw (std::runtime_error);
    void clear();
 
-   ItemType getEntry(int position) const throw(PrecondViolatedExcep);
+   ItemType getEntry(int position) const throw(std::runtime_error);
 
-   void setEntry(int position, const ItemType& newEntry) throw(PrecondViolatedExcep);
+   void setEntry(int position, const ItemType& newEntry) throw(std::runtime_error);
 };
 
 #include "LinkedList.cpp"
