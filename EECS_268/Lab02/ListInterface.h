@@ -1,5 +1,6 @@
 #ifndef LIST_INTERFACE_H
 #define LIST_INTERFACE_H
+#include <stdexcept>
 
 //Need a node.cpp, with 3 constructors (default) (value) (value, pointer)
 //Get value, set value, get pointer, set pointer
@@ -26,7 +27,7 @@ class ListInterface
      * @param newEntry: A new entry to put in the list
      * @throw std::runtime_error if the position is invalid.
      **/
-     virtual void replace(int position, T newEntry) throw (std::runtime_error) = 0;
+     virtual void setEntry(int position, const T& newEntry) throw (std::runtime_error) = 0;
 };
 
 #include "ListInterface.cpp"
