@@ -32,18 +32,65 @@ private:
    Node<ItemType>* getNodeAt(int position) const;
 
 public:
+  /**
+  * @post creates a LinkedList and sets headPtr to nullptr and itemCount to 0
+  * @return the initialized LinkedList
+  */
    LinkedList();
+
+   /**
+   * @post creates a deep copy of a LinkedList aList
+   * @param aList: a LinkedList the user wants to create a copy of
+   * @return the copy of aList
+   */
    LinkedList(const LinkedList<ItemType>& aList);
+
+   /**
+   * @post all memory is freed and the WebBrowser is deleted
+   */
    ~LinkedList();
 
+   /**
+   * @return 1 if the list is empty, 0 if the list is not
+   */
    bool isEmpty() const;
+
+   /**
+   * @return the length of the LinkedList
+   */
    int getLength() const;
+
+   /**
+   * @param position: 1 <= position <= length, a place to insert a new node
+   * @param newEntry: A new entry to put in the list
+   * @post A new node is inserted into the list at the given position.
+   */
    void insert(int newPosition, const ItemType& newEntry) throw (std::runtime_error);
+
+   /**
+   * @param position: 1 <= position <= length, a node the user wants to remove
+   * @post The node at the given position is removed
+   */
    void remove(int position) throw (std::runtime_error);
+
+   /**
+   * @post Removes all entries in the list
+   */
    void clear();
 
+   /**
+   * @param position: 1 <= position <= length, a node the user wants to learn the
+   *                  contents of
+   * @return the object in the node of type ItemType
+   */
    ItemType getEntry(int position) const throw(std::runtime_error);
 
+   /**
+   * @pre The position is between 1 and the list's length
+   * @post The entry at the given position is replaced with the new entry
+   * @param position:  1<= position <= length
+   * @param newEntry: A new entry to put in the list
+   **/
    void setEntry(int position, const ItemType& newEntry) throw(std::runtime_error);
 };
 

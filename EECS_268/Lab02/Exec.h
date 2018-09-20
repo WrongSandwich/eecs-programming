@@ -19,7 +19,17 @@ private:
   std::string* commArray;
   int size;
 public:
+  /**
+  * @param file: a string with a valid file name to be opened
+  * @post the given file is opened and the commands read and put in commArray
+  * @return the constructed Exec, with commands in commArray and a valid size
+  */
   Exec(std::string fileName);
+
+  /**
+  * @pre the Exec has been created successfully with a valid commArray and size
+  * @post Reads and carries out the commands from commArray
+  */
   void run();
 };
 

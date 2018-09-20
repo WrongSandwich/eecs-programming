@@ -15,7 +15,7 @@ class WebBrowserInterface
   public:
   /**
   * @post All memory allocated by the implementing class should be freed.
-  *       This, as with all virtual destrucors, is an empty definition since we
+  *       This is an empty definition since we
   *       have no knowledge of specific implementation details.
   */
   virtual ~WebBrowserInterface(){}

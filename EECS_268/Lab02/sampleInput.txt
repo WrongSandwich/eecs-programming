@@ -7,3 +7,4 @@ BACK
 HISTORY
 NAVIGATE http://bing.com
 HISTORY
+FORWARD
