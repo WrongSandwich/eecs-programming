@@ -1,3 +1,10 @@
+/*******************************************************************************
+*@author  Evan Trout
+*@file    ListInterface.h
+*@date    09/19/2018
+*@brief   Pure abstract template class used as a parent class for LinkedList.
+*******************************************************************************/
+
 #ifndef LIST_INTERFACE_H
 #define LIST_INTERFACE_H
 #include <stdexcept>

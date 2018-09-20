@@ -1,16 +1,15 @@
-/* -------------------------------------------------------------------------------
- * File Name: main.cpp
- * Author: Evan Trout
- * Assignment: EECS-268 Lab 02
- * Description: Create a single-tab web browser.
- * Date: 09/13/18
- * ------------------------------------------------------------------------------- */
+/*******************************************************************************
+*@author  Evan Trout
+*@file    main.cpp
+*@date    09/19/2018
+*@brief   Main file, calls the executive class's constructor and run().
+*******************************************************************************/
 
 #include <iostream>
 #include "Exec.h"
 #include <string>
 
- int main(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
   if(argc < 2)
   {
@@ -18,9 +17,8 @@
   }
   else
   {
-     Exec ex(argv[1]); //sample creation of executive object
-     ex.run(); //presumably handles the calling of all other member methods
+     Exec ex(argv[1]); //creation of executive object
+     ex.run(); //handles the calling of all other member methods
   }
-
   return(0);
 }

@@ -1,3 +1,12 @@
+/*******************************************************************************
+*@author  Evan Trout
+*@file    Node.h
+*@date    09/19/2018
+*@brief   Header file for the Node class. Template class that creates
+*         a single node with an item of ItemType and a pointer to the next item
+*         in the chain. Used by LinkedList class.
+*******************************************************************************/
+
 #ifndef NODE_H
 #define NODE_H
 

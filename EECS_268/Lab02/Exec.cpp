@@ -1,4 +1,11 @@
-//Need to create a WebBrowser in this code
+/*******************************************************************************
+*@author  Evan Trout
+*@file    Exec.cpp
+*@date    09/19/2018
+*@brief   Executive class implementation file. Constructor reads input file into
+*         an array of commands, then run() executes them.
+*******************************************************************************/
+
 #include "Exec.h"
 #include "WebBrowser.h"
 

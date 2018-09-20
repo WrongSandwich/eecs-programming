@@ -1,3 +1,10 @@
+/*******************************************************************************
+*@author  Evan Trout
+*@file    WebBrowserInterface.h
+*@date    09/19/2018
+*@brief   Pure abstract template class used as a parent class for WebBrowser.
+*******************************************************************************/
+
 #ifndef WEB_BROWSER_INTERFACE_H
 #define WEB_BROWSER_INTERFACE_H
 #include <string>

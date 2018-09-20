@@ -1,3 +1,12 @@
+/*******************************************************************************
+*@author  Evan Trout
+*@file    LinkedList.cpp
+*@date    09/19/2018
+*@brief   Implementation file for LinkedList class. Creates and maintains a
+*         linked list of nodes that is used by the WebBrowser class. Derived
+*         from ListInterface class.
+*******************************************************************************/
+
 #include <iostream>
 #include <string>
 #include <stdexcept>
@@ -21,9 +30,6 @@ Node<ItemType>* LinkedList<ItemType>::getNodeAt(int position) const
   }
   else return nullptr;
 }
-
-
-//See LinkedList.h and main on 268 site
 
 template <class ItemType>
 LinkedList<ItemType>::LinkedList()

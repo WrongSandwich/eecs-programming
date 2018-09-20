@@ -1,10 +1,18 @@
+/*******************************************************************************
+*@author  Evan Trout
+*@file    WebBrowser.cpp
+*@date    09/19/2018
+*@brief   Implementation file for the WebBrowser class. Translates actions by
+*         the executive class from browser commands into commands for the
+*         LinkedList class. Derived from WebBrowserInterface.
+*******************************************************************************/
+
 #include <iostream>
 #include <string>
 #include "WebBrowser.h"
 #include "WebBrowserInterface.h"
 #include "LinkedList.h"
 
-//Need to create a LinkedList in this code
 WebBrowser::WebBrowser() : current(0)
 {
 }

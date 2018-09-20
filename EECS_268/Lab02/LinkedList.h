@@ -1,3 +1,12 @@
+/*******************************************************************************
+*@author  Evan Trout
+*@file    LinkedList.h
+*@date    09/19/2018
+*@brief   Header file for the LinkedList class. Creates and maintains a
+*         linked list of nodes that is used by the WebBrowser class. Derived
+*         from ListInterface class.
+*******************************************************************************/
+
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
