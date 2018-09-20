@@ -7,7 +7,9 @@ class Exec
 {
 private:
   std::string fileName;
-  WebBrowser* wb;
+  WebBrowser wb;
+  std::string* commArray;
+  int size;
 public:
   Exec(std::string fileName);
   void run();

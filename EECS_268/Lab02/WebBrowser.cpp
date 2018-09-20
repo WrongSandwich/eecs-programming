@@ -5,7 +5,7 @@
 #include "LinkedList.h"
 
 //Need to create a LinkedList in this code
-WebBrowser::WebBrowser() : position(0)
+WebBrowser::WebBrowser() : current(0)
 {
 }
 
@@ -18,64 +18,68 @@ void WebBrowser::navigateTo(std::string url)
 {
   //Add a new node with given url and navigate to it
   //If there are nodes after current one, must delete them
-  if (position == ll->getLength()) //Currently at end of ll
+  int length = ll.getLength();
+  if (current == length) //Currently at end of ll
   {
-    ll->insert((position+1), url); //throw precondviolatedexcep???
+    ll.insert((current+1), url);
+    current++;
   }
   else //Navigating in the middle of history list
   {
-    while (ll->getLength() > position) //Delete forward history
+    ll.insert((current + 1), url);
+    current++;
+    length++;
+    while (length != current)
     {
-      ll->remove(position + 1);
+      ll.remove(length);
+      length = length - 1;
     }
-    ll->insert(position + 1, url); //throw precondviolatedexcep??
   }
-  position++; //Move to new url in list
 }
 
 void WebBrowser::forward()
 {
   //Move to next node if there is one
-  if (position < ll->getLength())
+  if (current < ll.getLength())
   {
-    position++;
+    current++;
   }
 }
 
 void WebBrowser::back()
 {
   //Move to previous node if there is one
-  if (position > 1)
+  if (current > 1)
   {
-    position = position - 1;
+    current = current - 1;
   }
 }
 std::string WebBrowser::currentURL() const
 {
   //Retrieve current url and return it
-  return ll->getEntry(position);
+  return ll.getEntry(current);
 }
 
 void WebBrowser::copyCurrentHistory(LinkedList<std::string>& destination)
 {
-  int length = ll->getLength();
+  int length = ll.getLength();
   for (int i = 1; i <= length; i++)
   {
-    destination.insert(i, ll->getEntry(i));
+    destination.insert(i, ll.getEntry(i));
   }
 }
 
 void WebBrowser::printHistory()
 {
   std::cout << "Oldest\n==========\n";
-  for (int i = 1; i <= ll->getLength(); i++)
+  for (int i = 1; i <= ll.getLength(); i++)
   {
-    std::cout << ll->getEntry(i);
-    if (i == position)
+    std::cout << ll.getEntry(i);
+    if (i == current)
     {
       std::cout << " <==current";
     }
     std::cout << '\n';
   }
-  std::cout << "==========\nNewest\n";
+  std::cout << "==========\nNewest\n\n";
 }

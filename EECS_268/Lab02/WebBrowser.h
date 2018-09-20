@@ -7,8 +7,8 @@
 class WebBrowser : public WebBrowserInterface
 {
 private:
-LinkedList<std::string>* ll;
-int position;
+LinkedList<std::string> ll;
+int current;
 
 public:
   WebBrowser();

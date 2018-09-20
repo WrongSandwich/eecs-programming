@@ -15,7 +15,7 @@ class ListInterface
 
      virtual bool isEmpty() const = 0;
      virtual int getLength() const = 0;
-     virtual void insert(int position, T entry) throw (std::runtime_error) = 0;
+     virtual void insert(int position,const T& newEntry) throw (std::runtime_error) = 0;
      virtual void remove(int position) throw (std::runtime_error) = 0;
      virtual void clear() = 0;
      virtual T getEntry(int position) const throw (std::runtime_error) = 0;

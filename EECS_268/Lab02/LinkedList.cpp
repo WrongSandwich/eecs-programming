@@ -2,7 +2,6 @@
 #include <string>
 #include <stdexcept>
 
-#include "LinkedList.h"
 #include "Node.h"
 #include "ListInterface.h"
 
@@ -27,8 +26,10 @@ Node<ItemType>* LinkedList<ItemType>::getNodeAt(int position) const
 //See LinkedList.h and main on 268 site
 
 template <class ItemType>
-LinkedList<ItemType>::LinkedList() : headPtr(nullptr)
+LinkedList<ItemType>::LinkedList()
 {
+  headPtr = nullptr;
+  itemCount = 0;
 }
 
 template <class ItemType> //Create a deep copy of a linked list
@@ -114,7 +115,7 @@ void LinkedList<ItemType>::remove(int position) throw (std::runtime_error)
       Node<ItemType>* prev = getNodeAt(position-1);
       Node<ItemType>* next = getNodeAt(position+1);
       Node<ItemType>* target = getNodeAt(position);
-      delete[] target;
+      delete target;
       prev->setNext(next);
       itemCount = itemCount - 1;
     }
