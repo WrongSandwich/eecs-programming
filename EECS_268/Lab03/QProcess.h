@@ -9,13 +9,23 @@
 #ifndef QPROCESS_H
 #define QPROCESS_H
 
+#include "Stack.h"
+
+//Note: using this as a template class but this will only be used for strings
+template<class ItemType>
 class QProcess
 {
 private:
   Stack processStack;
-  std::string processName;
+  ItemType processName;
 public:
-
+  QProcess();
+  QProcess(ItemType& name);
+  bool isEmpty() const;
+  void push(const ItemType& functionName);
+  void pop();
+  ItemType peek() const;
+  ItemType getName() const;
 };
 
 #include "QProcess.cpp"
