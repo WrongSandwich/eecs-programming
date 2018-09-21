@@ -20,31 +20,33 @@ class Queue : public QueueInterface<ItemType>
 private:
   LinkedList<QProcess<std::string>> llQueue;
 public:
-   ~Queue();
-   /** Sees whether this queue is empty.
-    @return True if the queue is empty, or false if not. */
+  Queue();
 
-   bool isEmpty() const;
+  ~Queue();
+  /** Sees whether this queue is empty.
+  @return True if the queue is empty, or false if not. */
 
-   /** Adds a new entry to the back of this queue.
-    @post If the operation was successful, newEntry is at the back of the queue.
-    @param newEntry  The object to be added as a new entry.
-    @throw PrecondViolationExcep if no memory available for the new item */
+  bool isEmpty() const;
 
-   void enqueue(const ItemType& newEntry) throw (PrecondViolationExcep);
+  /** Adds a new entry to the back of this queue.
+  @post If the operation was successful, newEntry is at the back of the queue.
+  @param newEntry  The object to be added as a new entry.
+  @throw PrecondViolationExcep if no memory available for the new item */
 
-   /** Removes the front of this queue.
-    @post If the operation was successful, the front of the queue has been removed.
-    @throw PrecondViolationExcep if the queue is empty when called */
+  void enqueue(const ItemType& newEntry) throw (PrecondViolationExcep);
 
-   void dequeue() throw (PrecondViolationExcep);
+  /** Removes the front of this queue.
+  @post If the operation was successful, the front of the queue has been removed.
+  @throw PrecondViolationExcep if the queue is empty when called */
 
-   /** Returns the front of this queue.
-    @pre The queue is not empty.
-    @post The front of the queue has been returned, and the queue is unchanged.
-    @throw PrecondViolationExcep if the queue is empty when called */
+  void dequeue() throw (PrecondViolationExcep);
 
-   ItemType peekFront() const throw (PrecondViolationExcep);
+  /** Returns the front of this queue.
+  @pre The queue is not empty.
+  @post The front of the queue has been returned, and the queue is unchanged.
+  @throw PrecondViolationExcep if the queue is empty when called */
+
+  ItemType peekFront() const throw (PrecondViolationExcep);
 };
 
 #include "Queue.cpp"

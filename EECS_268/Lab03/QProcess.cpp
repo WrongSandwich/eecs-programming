@@ -11,7 +11,9 @@
 
 template<class ItemType>
 QProcess<ItemType>::QProcess()
-{}
+{
+  Stack<ItemType> processStack;
+}
 
 template<class ItemType>
 QProcess<ItemType>::QProcess(ItemType& name) : processName(name)

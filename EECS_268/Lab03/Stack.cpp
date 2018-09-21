@@ -15,7 +15,9 @@
 
 template<class ItemType>
 Stack<ItemType>::Stack()
-{}
+{
+  LinkedList<ItemType> llStack;
+}
 
 template<class ItemType>
 Stack<ItemType>::~Stack()

@@ -15,6 +15,12 @@
 #include "QueueInterface.h"
 
 template<class ItemType>
+Queue<ItemType>::Queue()
+{
+  LinkedList<QProcess<std::string>> llQueue;
+}
+
+template<class ItemType>
 Queue<ItemType>::~Queue()
 {
 

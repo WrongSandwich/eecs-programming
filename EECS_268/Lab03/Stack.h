@@ -18,7 +18,7 @@ template<class ItemType>
 class Stack : public StackInterface<ItemType>
 {
 private:
-  LinkedList<std::string> llStack;
+  LinkedList<ItemType> llStack;
 public:
   Stack();
 

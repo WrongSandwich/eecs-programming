@@ -112,7 +112,8 @@ void LinkedList<ItemType>::remove(int position) throw (std::runtime_error)
     else if (position == 1)
     {
       Node<ItemType>* newHead = getNodeAt(position+1); //getNode in position 2
-      delete[] headPtr; //delete current head
+      delete headPtr;
+      headPtr = nullptr; //delete current head
       headPtr = newHead; //Make second position new head
       itemCount = itemCount - 1;
     }

@@ -19,6 +19,7 @@
 
 Scheduler::Scheduler(std::string fileName)
 {
+  Queue<QProcess<std::string>> processQueue;
   std::ifstream inFile;
   inFile.open(fileName); //Open given file
   if(inFile.is_open())
@@ -64,7 +65,7 @@ void Scheduler::run()
       processQueue.enqueue(newQProcess);
       std::cout << processName << " added to queue\n";
     }
-    else if (command == "RUN")
+    else if (command == "CALL")
     {
       i++;
       functionName = commArray[i];
@@ -73,8 +74,8 @@ void Scheduler::run()
       std::cout << currProcessName << " calls " << functionName << '\n';
       currProcess.push(functionName);
       //Need to move current process to back of queue
-      processQueue.enqueue(currProcess);
       processQueue.dequeue();
+      processQueue.enqueue(currProcess);
     }
     else if (command == "RETURN")
     {
