@@ -58,6 +58,8 @@ void Scheduler::run()
     {
       i++;
       processName = commArray[i];
+      processQueue.enqueue(processName);
+      std::cout << processName << " added to queue\n";
     }
     else if (command == "RUN")
     {
@@ -66,7 +68,7 @@ void Scheduler::run()
     }
     else if (command == "RETURN")
     {
-      
+
     }
   }
 }
