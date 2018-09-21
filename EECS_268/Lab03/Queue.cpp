@@ -10,9 +10,8 @@
 #include <iostream>
 #include <string>
 
-#include "Queue.h"
 #include "LinkedList.h"
-#include "Queue.h"
+#include "QProcess.h"
 #include "QueueInterface.h"
 
 template<class ItemType>
@@ -30,34 +29,34 @@ bool Queue<ItemType>::isEmpty() const
 
 //Adds a new entry to back of queue
 template<class ItemType>
-void Queue<ItemType>::enqueue(const ItemType& newEntry) throw (PrecondViolatedExcep)
+void Queue<ItemType>::enqueue(const ItemType& newEntry) throw (PrecondViolationExcep)
 {
   if (llQueue.getLength() < 100)
   {
     int newPosition = llQueue.getLength() + 1;
-    ll.insert(newPosition, newEntry);
+    llQueue.insert(newPosition, newEntry);
   }
-  else throw PrecondViolatedExcep("Queue is full");
+  else throw PrecondViolationExcep("Queue is full");
 }
 
 //Removes the front of the queue
 template<class ItemType>
-void Queue<ItemType>::dequeue() throw (PrecondViolatedExcep)
+void Queue<ItemType>::dequeue() throw (PrecondViolationExcep)
 {
   if (llQueue.isEmpty() == false)
   {
     llQueue.remove(1);
   }
-  else throw PrecondViolatedExcep("Queue is empty");
+  else throw PrecondViolationExcep("Queue is empty");
 }
 
 //Returns the front of the queue if not empty
 template<class ItemType>
-ItemType Queue<ItemType>::peekFront() const throw (PrecondViolatedExcep)
+ItemType Queue<ItemType>::peekFront() const throw (PrecondViolationExcep)
 {
   if (llQueue.isEmpty() == false)
   {
     return llQueue.getEntry(1);
   }
-  else throw PrecondViolatedExcep("Queue is empty");
+  else throw PrecondViolationExcep("Queue is empty");
 }

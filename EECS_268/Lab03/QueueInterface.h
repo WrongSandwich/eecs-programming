@@ -8,7 +8,7 @@
 #ifndef _QUEUE_INTERFACE
 #define _QUEUE_INTERFACE
 
-#include "PrecondViolatedExcep.h"
+#include "PrecondViolationExcep.h"
 
 template<class ItemType>
 class QueueInterface
@@ -27,21 +27,21 @@ public:
    /** Adds a new entry to the back of this queue.
     @post If the operation was successful, newEntry is at the back of the queue.
     @param newEntry  The object to be added as a new entry.
-    @throw PrecondViolatedExcep if no memory available for the new item */
+    @throw PrecondViolationExcep if no memory available for the new item */
 
-   virtual void enqueue(const ItemType& newEntry) throw (PrecondViolatedExcep) = 0;
+   virtual void enqueue(const ItemType& newEntry) throw (PrecondViolationExcep) = 0;
 
    /** Removes the front of this queue.
     @post If the operation was successful, the front of the queue has been removed.
-    @throw PrecondViolatedExcep if the queue is empty when called */
+    @throw PrecondViolationExcep if the queue is empty when called */
 
-   virtual void dequeue() throw (PrecondViolatedExcep) = 0;
+   virtual void dequeue() throw (PrecondViolationExcep) = 0;
 
    /** Returns the front of this queue.
     @pre The queue is not empty.
     @post The front of the queue has been returned, and the queue is unchanged.
-    @throw PrecondViolatedExcep if the queue is empty when called */
+    @throw PrecondViolationExcep if the queue is empty when called */
 
-   virtual ItemType peekFront() const throw (PrecondViolatedExcep) = 0;
+   virtual ItemType peekFront() const throw (PrecondViolationExcep) = 0;
 }; // end QueueInterface
 #endif

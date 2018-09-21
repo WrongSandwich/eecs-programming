@@ -2,7 +2,7 @@
 //  Copyright (c) 2013 __Pearson Education__. All rights reserved.
 
 /** Listing 7-5.
-    @file PrecondViolatedExcep.h */
+    @file PrecondViolationExcep.h */
 
 #ifndef _PRECOND_VIOLATED_EXCEP
 #define _PRECOND_VIOLATED_EXCEP
@@ -12,9 +12,9 @@
 
 using namespace std;
 
-class PrecondViolatedExcep : public logic_error
+class PrecondViolationExcep : public logic_error
 {
 public:
-   PrecondViolatedExcep(const string& message = "");
-}; // end PrecondViolatedExcep
+   PrecondViolationExcep(const string& message = "");
+}; // end PrecondViolationExcep
 #endif

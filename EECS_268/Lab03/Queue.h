@@ -11,15 +11,16 @@
 
 #include "QueueInterface.h"
 #include "LinkedList.h"
-#include "PrecondViolatedExcep.h"
+#include "PrecondViolationExcep.h"
+#include "QProcess.h"
 
 template<class ItemType>
-class Queue : public QueueInterface
+class Queue : public QueueInterface<ItemType>
 {
 private:
-  LinkedList<std::string> llQueue;
+  LinkedList<QProcess<std::string>> llQueue;
 public:
-   ~QueueInterface();
+   ~Queue();
    /** Sees whether this queue is empty.
     @return True if the queue is empty, or false if not. */
 
@@ -28,22 +29,22 @@ public:
    /** Adds a new entry to the back of this queue.
     @post If the operation was successful, newEntry is at the back of the queue.
     @param newEntry  The object to be added as a new entry.
-    @throw PrecondViolatedExcep if no memory available for the new item */
+    @throw PrecondViolationExcep if no memory available for the new item */
 
-   void enqueue(const ItemType& newEntry) throw (PrecondViolatedExcep);
+   void enqueue(const ItemType& newEntry) throw (PrecondViolationExcep);
 
    /** Removes the front of this queue.
     @post If the operation was successful, the front of the queue has been removed.
-    @throw PrecondViolatedExcep if the queue is empty when called */
+    @throw PrecondViolationExcep if the queue is empty when called */
 
-   void dequeue() throw (PrecondViolatedExcep);
+   void dequeue() throw (PrecondViolationExcep);
 
    /** Returns the front of this queue.
     @pre The queue is not empty.
     @post The front of the queue has been returned, and the queue is unchanged.
-    @throw PrecondViolatedExcep if the queue is empty when called */
+    @throw PrecondViolationExcep if the queue is empty when called */
 
-   ItemType peekFront() const throw (PrecondViolatedExcep);
+   ItemType peekFront() const throw (PrecondViolationExcep);
 };
 
 #include "Queue.cpp"

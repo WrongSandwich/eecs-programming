@@ -16,10 +16,12 @@ class Scheduler
 {
 private:
   std::string fileName;
-  Queue processQueue;
+  Queue<QProcess<std::string>> processQueue;
   std::string* commArray;
   int size;
 public:
   Scheduler(std::string fileName);
   void run();
-}
+};
+
+#endif

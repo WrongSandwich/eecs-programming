@@ -16,7 +16,7 @@ template<class ItemType>
 class QProcess
 {
 private:
-  Stack processStack;
+  Stack<ItemType> processStack;
   ItemType processName;
 public:
   QProcess();

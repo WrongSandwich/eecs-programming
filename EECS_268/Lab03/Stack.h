@@ -11,16 +11,18 @@
 
 #include "StackInterface.h"
 #include "LinkedList.h"
-#include "PrecondViolatedExcep.h"
+#include "PrecondViolationExcep.h"
 
 
 template<class ItemType>
-class Stack : public StackInterface
+class Stack : public StackInterface<ItemType>
 {
 private:
   LinkedList<std::string> llStack;
 public:
-  ~StackInterface();
+  Stack();
+
+  ~Stack();
 
   /** Sees whether this stack is empty.
    @return True if the stack is empty, or false if not. */
@@ -30,24 +32,24 @@ public:
   /** Adds a new entry to the top of this stack.
    @post If the operation was successful, newEntry is at the top of the stack.
    @param newEntry The object to be added as a new entry.
-   @throw PrecondViolatedExcep if stack size would be over 100 */
+   @throw PrecondViolationExcep if stack size would be over 100 */
 
-  void push(const ItemType& newEntry) throw (PrecondViolatedExcep);
+  void push(const ItemType& newEntry) throw (PrecondViolationExcep);
 
  /** Removes the top of this stack.
  @pre The stack is not empty.
    @post If the operation was successful, the top of the stack has been removed.
-   @throw PrecondViolatedExcep if the stack is empty when called */
+   @throw PrecondViolationExcep if the stack is empty when called */
 
-  void pop() throw (PrecondViolatedExcep);
+  void pop() throw (PrecondViolationExcep);
 
   /** Returns the top of this stack.
    @pre The stack is not empty.
    @post The top of the stack has been returned, and the stack is unchanged.
    @return The top of the stack.
-   @throw PrecondViolatedExcep if the stack is empty when called */
+   @throw PrecondViolationExcep if the stack is empty when called */
 
-  ItemType peek() const throw (PrecondViolatedExcep);
+  ItemType peek() const throw (PrecondViolationExcep);
 };
 
 #include "Stack.cpp"

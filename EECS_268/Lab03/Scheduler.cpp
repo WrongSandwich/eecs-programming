@@ -9,6 +9,8 @@
 
 #include "Scheduler.h"
 #include "Queue.h"
+#include "Stack.h"
+#include "QProcess.h"
 
 #include <iostream>
 #include <fstream>
@@ -58,17 +60,40 @@ void Scheduler::run()
     {
       i++;
       processName = commArray[i];
-      processQueue.enqueue(processName);
+      QProcess<std::string> newQProcess(processName);
+      processQueue.enqueue(newQProcess);
       std::cout << processName << " added to queue\n";
     }
     else if (command == "RUN")
     {
       i++;
       functionName = commArray[i];
+      QProcess<std::string> currProcess = processQueue.peekFront();
+      std::string currProcessName = currProcess.getName();
+      std::cout << currProcessName << " calls " << functionName << '\n';
+      currProcess.push(functionName);
+      //Need to move current process to back of queue
+      processQueue.enqueue(currProcess);
+      processQueue.dequeue();
     }
     else if (command == "RETURN")
     {
-
+      QProcess<std::string> currProcess = processQueue.peekFront();
+      std::string currProcessName = currProcess.getName();
+      if (currProcess.isEmpty() == true)
+      {
+        std::cout << currProcessName << " returns from main\n";
+        std::cout << currProcessName << " has ended\n";
+        processQueue.dequeue();
+      }
+      else
+      {
+        std::cout << currProcessName << " returns from" << currProcess.peek() << '\n';
+        currProcess.pop();
+        processQueue.enqueue(currProcess);
+        processQueue.dequeue();
+      }
     }
   }
+  delete[] commArray;
 }

@@ -9,10 +9,13 @@
 #include <iostream>
 #include <string>
 
-#include "PrecondViolatedExcep.h"
+#include "PrecondViolationExcep.h"
 #include "LinkedList.h"
-#include "Stack.h"
 #include "StackInterface.h"
+
+template<class ItemType>
+Stack<ItemType>::Stack()
+{}
 
 template<class ItemType>
 Stack<ItemType>::~Stack()
@@ -28,33 +31,33 @@ bool Stack<ItemType>::isEmpty() const
 
 //Adds entry to top of stack
 template<class ItemType>
-void Stack<ItemType>::push(const ItemType& newEntry) throw (PrecondViolatedExcep)
+void Stack<ItemType>::push(const ItemType& newEntry) throw (PrecondViolationExcep)
 {
   if (llStack.getLength () < 100)
   {
     llStack.insert(1, newEntry);
   }
-  else throw PrecondViolatedExcep ("Stack is full");
+  else throw PrecondViolationExcep ("Stack is full");
 }
 
 //Removes the top of the stack if it's not empty
 template<class ItemType>
-void Stack<ItemType>::pop() throw (PrecondViolatedExcep)
+void Stack<ItemType>::pop() throw (PrecondViolationExcep)
 {
   if (llStack.isEmpty() == false)
   {
     llStack.remove(1);
   }
-  else throw PrecondViolatedExcep ("Stack is empty");
+  else throw PrecondViolationExcep ("Stack is empty");
 }
 
 //Returns the top of the stack if it's not empty.
 template<class ItemType>
-ItemType Stack<ItemType>::peek() const throw (PrecondViolatedExcep)
+ItemType Stack<ItemType>::peek() const throw (PrecondViolationExcep)
 {
   if (llStack.isEmpty() == false)
   {
     return llStack.getEntry(1);
   }
-  else throw PrecondViolatedExcep ("Stack is empty");
+  else throw PrecondViolationExcep ("Stack is empty");
 }
