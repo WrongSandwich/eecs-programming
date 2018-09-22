@@ -6,9 +6,8 @@ while (len(serverPort) < 4):
     serverPort = raw_input("Please enter a valid port of at least 4 digits: ")
 serverPort = int(serverPort)
 print serverPort
-serverName = 'hostname'
 clientSocket = socket(AF_INET, SOCK_DGRAM)
-message = input('Input lowercase sentence:')
+message = raw_input('Input lowercase sentence:')
 clientSocket.sendto(message.encode(), (serverName, serverPort))
 modifiedMessage, serverAddress = clientSocket.recvfrom(2048)
 print(modifiedMessage.decode())
