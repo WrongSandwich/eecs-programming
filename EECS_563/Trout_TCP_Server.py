@@ -1,5 +1,8 @@
 from socket import *
-serverPort = 12000
+serverPort = ''
+while (len(serverPort) < 4):
+    serverPort = raw_input("Please enter a valid port of at least 4 digits: ")
+serverPort = int(serverPort)
 serverSocket = socket(AF_INET, SOCK_STREAM)
 serverSocket.bind(('', serverPort))
 serverSocket.listen(1)
@@ -9,4 +12,4 @@ while True:
     sentence = connectionSocket.recv(1024).decode()
     capitalizedSentence = sentence.upper()
     connectionSocket.send(capitalizedSentence.encode())
-    connectionSocket.close()
+connectionSocket.close()
