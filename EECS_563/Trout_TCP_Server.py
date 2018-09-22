@@ -1,3 +1,5 @@
+#Evan Trout, Socket Programming TCP Server
+#Submitted 09/25/18
 from socket import *
 serverPort = ''
 while (len(serverPort) < 4):

@@ -1,3 +1,5 @@
+#Evan Trout, Socket Programming UDP Client
+#Submitted 09/25/18
 from socket import *
 serverPort = ''
 serverName = ''

@@ -1,3 +1,5 @@
+#Evan Trout, Socket Programming TCP Client
+#Submitted 09/25/18
 from socket import *
 serverPort = ''
 serverName = ''
