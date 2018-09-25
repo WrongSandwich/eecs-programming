@@ -41,10 +41,12 @@ LinkedList<ItemType>::LinkedList()
 template <class ItemType> //Create a deep copy of a linked list
 LinkedList<ItemType>::LinkedList(const LinkedList<ItemType>& aList)
 {
-  int length = aList.getLength();
-  for (int i = 1; i <= length; i++)
+  itemCount = aList.getLength();
+  ItemType copyItem;
+  for (int i = 1; i <= itemCount; i++)
   {
-    insert(i, aList.getEntry(i));
+    copyItem = aList.getEntry(i)
+    insert(i, copyItem);
   }
 }
 
