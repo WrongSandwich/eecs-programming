@@ -47,6 +47,10 @@ public:
   @throw PrecondViolationExcep if the queue is empty when called */
 
   ItemType peekFront() const throw (PrecondViolationExcep);
+
+  void backOfTheLine(std::string functionName) throw (PrecondViolationExcep);
+
+  std::string getName() const throw (PrecondViolationExcep);
 };
 
 #include "Queue.cpp"

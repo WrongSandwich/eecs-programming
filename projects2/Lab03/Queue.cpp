@@ -66,3 +66,27 @@ ItemType Queue<ItemType>::peekFront() const throw (PrecondViolationExcep)
   }
   else throw PrecondViolationExcep("Queue is empty");
 }
+
+template<class ItemType>
+void Queue<ItemType>::backOfTheLine(std::string functionName) throw (PrecondViolationExcep)
+{
+  if (llQueue.isEmpty() == false)
+  {
+    QProcess<std::string> targetProcess = llQueue.getEntry(1);
+    targetProcess.push(functionName);
+    enqueue(targetProcess);
+    dequeue();
+  }
+  else throw PrecondViolationExcep("Queue is empty");
+}
+
+template<class ItemType>
+std::string Queue<ItemType>::getName() const throw (PrecondViolationExcep)
+{
+  if (llQueue.isEmpty() == false)
+  {
+    QProcess<std::string> targetProcess = llQueue.getEntry(1);
+    return targetProcess.getName();
+  }
+  else throw PrecondViolationExcep("Queue is empty");
+}

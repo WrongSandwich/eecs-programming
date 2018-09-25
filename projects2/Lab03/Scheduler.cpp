@@ -50,6 +50,11 @@ Scheduler::Scheduler(std::string fileName)
 
 void Scheduler::run()
 {
+  //Testing the command array
+  for (int i = 0; i < size; i++)
+  {
+    std::cout << i << ": " << commArray[i] << '\n';
+  }
   std::string command;
   std::string processName;
   std::string functionName;
@@ -69,13 +74,16 @@ void Scheduler::run()
     {
       i++;
       functionName = commArray[i];
-      QProcess<std::string> currProcess = processQueue.peekFront();
-      std::string currProcessName = currProcess.getName();
-      std::cout << currProcessName << " calls " << functionName << '\n';
-      currProcess.push(functionName);
+      //QProcess<std::string> currProcess = processQueue.peekFront();
+      //std::string currProcessName = currProcess.getName();
+      //std::cout << currProcessName << " calls " << functionName << '\n';
+      //currProcess.push(functionName);
       //Need to move current process to back of queue
-      processQueue.dequeue();
-      processQueue.enqueue(currProcess);
+      //processQueue.dequeue();
+      //processQueue.enqueue(currProcess);
+      std::string processName = processQueue.getName();
+      std::cout << processName << " calls " << functionName << '\n';
+      processQueue.backOfTheLine(functionName);
     }
     else if (command == "RETURN")
     {
