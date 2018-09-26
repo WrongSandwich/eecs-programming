@@ -65,9 +65,10 @@ bool Stack<ItemType>::isEmpty() const
 }
 
 //Adds entry to top of stack
-//STILL NEED A REASON FOR THE THROW HERE
+//Do not need to throw PrecondViolationExcep because I used link implementation,
+//cannot become too large to add more items
 template<class ItemType>
-void Stack<ItemType>::push(const ItemType& newEntry) throw (PrecondViolationExcep)
+void Stack<ItemType>::push(const ItemType& newEntry)
 {
   Node<ItemType>* newNodePtr = new Node<ItemType>(newEntry, topPtr);
   topPtr = newNodePtr;

@@ -28,7 +28,7 @@ public:
     @param newEntry The object to be added as a new entry.
     @throw PrecondViolationExcep if no memory available for the new item */
 
-   virtual void push(const ItemType& newEntry) throw (PrecondViolationExcep) = 0;
+   virtual void push(const ItemType& newEntry) = 0;
 
 	/** Removes the top of this stack.
 	@pre The stack is not empty.

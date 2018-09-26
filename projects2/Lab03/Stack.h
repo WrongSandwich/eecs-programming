@@ -34,7 +34,7 @@ public:
    @param newEntry The object to be added as a new entry.
    @throw PrecondViolationExcep if stack size would be over 100 */
 
-  void push(const ItemType& newEntry) throw (PrecondViolationExcep);
+  void push(const ItemType& newEntry);
 
  /** Removes the top of this stack.
  @pre The stack is not empty.
