@@ -45,7 +45,7 @@ LinkedList<ItemType>::LinkedList(const LinkedList<ItemType>& aList)
   ItemType copyItem;
   for (int i = 1; i <= itemCount; i++)
   {
-    copyItem = aList.getEntry(i)
+    copyItem = aList.getEntry(i);
     insert(i, copyItem);
   }
 }

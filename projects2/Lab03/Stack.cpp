@@ -69,7 +69,7 @@ bool Stack<ItemType>::isEmpty() const
 template<class ItemType>
 void Stack<ItemType>::push(const ItemType& newEntry) throw (PrecondViolationExcep)
 {
-  Node<ItemType>* newNodePtr = new Node<ItemType>(newItem, topPtr);
+  Node<ItemType>* newNodePtr = new Node<ItemType>(newEntry, topPtr);
   topPtr = newNodePtr;
   newNodePtr = nullptr;
 }

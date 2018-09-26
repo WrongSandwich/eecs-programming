@@ -92,7 +92,7 @@ void Scheduler::run()
       if (currProcess.isEmpty() == true)
       {
         std::cout << currProcessName << " returns from main\n";
-        std::cout << currProcessName << " has ended\n";
+        std::cout << currProcessName << " process has ended\n";
         processQueue.dequeue();
       }
       else
