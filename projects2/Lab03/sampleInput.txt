@@ -4,3 +4,7 @@ START putty
 CALL play
 CALL navigate
 RETURN
+RETURN
+RETURN
+RETURN
+RETURN
