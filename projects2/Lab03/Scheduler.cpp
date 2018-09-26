@@ -50,11 +50,6 @@ Scheduler::Scheduler(std::string fileName)
 
 void Scheduler::run()
 {
-  //Testing the command array
-  for (int i = 0; i < size; i++)
-  {
-    std::cout << i << ": " << commArray[i] << '\n';
-  }
   std::string command;
   std::string processName;
   std::string functionName;
