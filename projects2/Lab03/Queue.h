@@ -20,6 +20,7 @@ class Queue : public QueueInterface<ItemType>
 private:
   LinkedList<QProcess<std::string>> llQueue;
 public:
+  //Default constructor
   Queue();
 
   ~Queue();
@@ -48,7 +49,18 @@ public:
 
   ItemType peekFront() const throw (PrecondViolationExcep);
 
+  /** Combines Stack.push, enqueue, and dequeue into a single function to make
+  *   my job easier
+  *   @param functionName: Name of the function that will be pushed
+  *   @post functionName is pushed to the relevant stack, and the process with
+  *         that stack is moved to the back of the queue
+  */
   void backOfTheLine(std::string functionName) throw (PrecondViolationExcep);
+
+  /** Returns the name of the process at the front of the queue
+  * @pre the queue is not empty.
+  * @return the name of the process at the front of the queue.
+  */
 
   std::string getName() const throw (PrecondViolationExcep);
 };
