@@ -92,7 +92,7 @@ void Scheduler::run()
       }
       else
       {
-        std::cout << currProcessName << " returns from" << currProcess.peek() << '\n';
+        std::cout << currProcessName << " returns from " << currProcess.peek() << '\n';
         currProcess.pop();
         processQueue.enqueue(currProcess);
         processQueue.dequeue();
