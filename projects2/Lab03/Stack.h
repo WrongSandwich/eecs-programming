@@ -10,18 +10,18 @@
 #define STACK_H
 
 #include "StackInterface.h"
-#include "LinkedList.h"
 #include "PrecondViolationExcep.h"
+#include "Node.h"
 
 
 template<class ItemType>
 class Stack : public StackInterface<ItemType>
 {
 private:
-  LinkedList<ItemType> llStack;
+  Node<ItemType>* topPtr;
 public:
   Stack();
-
+  Stack(const Stack<ItemType>& aStack);
   ~Stack();
 
   /** Sees whether this stack is empty.
