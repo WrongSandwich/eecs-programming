@@ -1,3 +1,10 @@
+/*******************************************************************************
+*@author  Frank M. Carrano, Tim Henry
+*@file    QueueInterface.h
+*@date    2013
+*@brief   Creates and maintains a call stack for functions in a QProcess.
+*******************************************************************************/
+
 //  Created by Frank M. Carrano and Tim Henry.
 //  Copyright (c) 2013 __Pearson Education__. All rights reserved.
 //  Modified (JRM): throw exceptions instead of return bool success codes

@@ -1,3 +1,10 @@
+/*******************************************************************************
+*@author  Frank M. Carrano, Tim Henry
+*@file    PrecondViolationExcep.cpp
+*@date    2013
+*@brief   Defines an exception for when a precondition is violated.
+*******************************************************************************/
+
 //  Created by Frank M. Carrano and Tim Henry.
 //  Copyright (c) 2013 __Pearson Education__. All rights reserved.
 

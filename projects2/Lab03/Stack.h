@@ -3,7 +3,7 @@
 *@file    Stack.h
 *@date    09/20/2018
 *@brief   Header file for the Stack class. Creates and maintains a call stack
-*         for functions from the queue class. Derived from StackInterface.
+*         for functions in a QProcess. Derived from StackInterface.
 *******************************************************************************/
 
 #ifndef STACK_H

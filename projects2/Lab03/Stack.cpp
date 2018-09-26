@@ -3,7 +3,7 @@
 *@file    Stack.cpp
 *@date    09/20/2018
 *@brief   Implementation file for the Stack class. Creates and maintains a call
-*         stack for functions from the queue class. Derived from StackInterface.
+*         stack for functions in a QProcess. Derived from StackInterface.
 *******************************************************************************/
 
 #include <iostream>

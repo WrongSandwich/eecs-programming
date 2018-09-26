@@ -1,3 +1,11 @@
+/*******************************************************************************
+*@author  Frank M. Carrano, Tim Henry
+*@file    QueueInterface.h
+*@date    2013
+*@brief   Creates and maintains a process queue for functions from the executive
+*         class.
+*******************************************************************************/
+
 //  Created by Frank M. Carrano and Tim Henry.
 //  Copyright (c) 2013 __Pearson Education__. All rights reserved.
 //  Modified (JRM): Use Exceptions
