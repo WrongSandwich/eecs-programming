@@ -69,13 +69,6 @@ void Scheduler::run()
     {
       i++;
       functionName = commArray[i];
-      //QProcess<std::string> currProcess = processQueue.peekFront();
-      //std::string currProcessName = currProcess.getName();
-      //std::cout << currProcessName << " calls " << functionName << '\n';
-      //currProcess.push(functionName);
-      //Need to move current process to back of queue
-      //processQueue.dequeue();
-      //processQueue.enqueue(currProcess);
       std::string processName = processQueue.getName();
       std::cout << processName << " calls " << functionName << '\n';
       processQueue.backOfTheLine(functionName);
