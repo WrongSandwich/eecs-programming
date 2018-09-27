@@ -1,0 +1,2 @@
+TA said to fix the first character, then permutate the remaining characters
+  Recursive function would just do this with each successive character
