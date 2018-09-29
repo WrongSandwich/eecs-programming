@@ -1,4 +1,11 @@
-
+/*******************************************************************************
+*@author  Evan Trout
+*@file    Checker.cpp
+*@date    09/29/2018
+*@brief   Implementation file for the executive class Checker. Constructor
+*         reads command line argument class's members, then run() checks to see
+*         if it's balanced.
+*******************************************************************************/
 
 #include <string>
 #include <iostream>
