@@ -1,25 +1,21 @@
 
 
+#include <string>
+#include <iostream>
+#include "Checker.h"
 
-
-Checker::Checker(std::string fileName) throw std::runtime_error
+Checker::Checker(std::string givenStr)
 {
-  std::ifstream inFile;
-  inFile.open(fileName); //Open given file
-  if(inFile.is_open())
-  {
-    inFile >> str;
-    inFile.close();
-  }
-  else throw std::runtime_error("File could not be opened!");
+    origStr = givenStr;
+    str = origStr;
+    strLength = str.size();
 }
 
 void Checker::run()
 {
-  int length = str.size();
-  if ((length % 2) != 0)//Checking if string is an even number
+  if ((strLength % 2) != 0)//Checking if string is an even number
   {
-    std::cout << "The sequence " << str << "is not balanced\n";
+    std::cout << "The sequence " << origStr << " is not balanced\n";
   }
   else
   {
@@ -28,3 +24,28 @@ void Checker::run()
 }
 
 void Checker::test()
+{
+  if (strLength == 0) //base case
+  {
+    std::cout << "The sequence " << origStr << " is balanced\n";
+  }
+  else //String is not empty
+  {
+    if (str.substr(0,1) == "(" && str.substr((strLength - 1),1) == ")") //If first and last characters are equal
+    {
+      str = str.substr(1, (strLength-2));
+      strLength = strLength - 2;
+      test();
+    }
+    else if (str.substr(0,1) == ")" && str.substr((strLength - 1),1) == "(")
+    {
+      str = str.substr(1, (strLength-2));
+      strLength = strLength - 2;
+      test();
+    }
+    else
+    {
+      std::cout << "The sequence " << origStr << " is not balanced\n";
+    }
+  }
+}
