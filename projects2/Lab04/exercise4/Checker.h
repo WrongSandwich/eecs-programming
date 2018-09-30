@@ -3,8 +3,10 @@
 *@file    Checker.cpp
 *@date    09/29/2018
 *@brief   Header file for the executive class Checker. Constructor
-*         reads command line argument class's members, then run() checks to see
-*         if it's balanced.
+*         reads command line argument class's members, then run() removes filler
+*         characters and checks to see if the resulting string is even in length
+*         before sending it to test(). Test then checks char-by-char to confirm
+*         the string is balanced.
 *******************************************************************************/
 
 #ifndef CHECKER_H
@@ -22,7 +24,7 @@ private:
 
 public:
   /**
-  * @param file: a string of parentheses to be checked
+  * @param file: a string to be checked for balance
   * @post the given string is saved to be used by run() and test()
   * @return the constructed Checker, with string and its length saved as members
   */
@@ -30,12 +32,12 @@ public:
 
   /**
   * @pre the Checker has been created successfully with a valid string and length
-  * @post Checks if array is of even length, and if so calls test()
+  * @post Removes filler from string, then checks if it's even before sending to test()
   */
   void run();
 
   /**
-  * @pre run() determines that the length of the string is even and can be tested
+  * @pre run() pares down the string and sends it to test
   * @post recursively checks to see if string is balanced and prints result
   */
   void test();

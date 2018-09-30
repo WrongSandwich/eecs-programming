@@ -3,8 +3,10 @@
 *@file    Checker.cpp
 *@date    09/29/2018
 *@brief   Implementation file for the executive class Checker. Constructor
-*         reads command line argument class's members, then run() checks to see
-*         if it's balanced.
+*         reads command line argument class's members, then run() removes all
+*         filler characters and checks to see if the resulting string is even in
+*         length before sending it to test(). Test then checks char-by-char to
+*         confirm the string is balanced.
 *******************************************************************************/
 
 #include <string>
