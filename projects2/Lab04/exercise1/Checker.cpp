@@ -3,8 +3,8 @@
 *@file    Checker.cpp
 *@date    09/29/2018
 *@brief   Implementation file for the executive class Checker. Constructor
-*         reads command line argument class's members, then run() checks to see
-*         if it's balanced.
+*         reads command line argument class's members, then run() checks if it's
+*         even in length before sending it to test for recursive testing
 *******************************************************************************/
 
 #include <string>
