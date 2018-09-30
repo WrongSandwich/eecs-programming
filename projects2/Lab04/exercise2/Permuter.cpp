@@ -11,7 +11,7 @@ Permuter::Permuter(std::string str)
   permute(pArray, 0, strLength-1);
 }
 
-void permute(char pArray[], int cur, int end)
+void Permuter::permute(char pArray[], int cur, int end)
 {
    int i;
    if (cur == end)
