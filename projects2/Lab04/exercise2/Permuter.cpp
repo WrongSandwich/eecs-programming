@@ -3,6 +3,10 @@
 #include <cstring>
 #include "Permuter.h"
 
+//Kept shrinking length by 1, loop over characters in cstring
+//For ith time through this loop do iterations with ith character in this loop
+//Pass through a prefix with the set characters
+
 Permuter::Permuter(std::string str)
 {
   strLength = str.size(); //Copying string into char array
