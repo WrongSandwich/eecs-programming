@@ -24,6 +24,8 @@ void Permuter::permute(char pArray[], int cur, int end)
           char temp = pArray[cur];
           pArray[cur] = pArray[i];
           pArray[i] = temp;
+          std::cout << pArray[i] << '\n';
+          std::cout << pArray[i];
           permute(pArray, cur+1, end);
           //Swapping back
           temp = pArray[cur];
