@@ -1,4 +1,12 @@
-
+/*******************************************************************************
+*@author  Evan Trout
+*@file    Fibonacci.cpp
+*@date    09/30/2018
+*@brief   Implementation file for the executive class Fibonacci. Constructor
+*         reads flag and target from command line, then calls ith or verify
+*         depending on the flag. ith and verify use the fib function to
+*         accomplish their task.
+*******************************************************************************/
 #include "Fibonacci.h"
 #include <iostream>
 #include <string>
