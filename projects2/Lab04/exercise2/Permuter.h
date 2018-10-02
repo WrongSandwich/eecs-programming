@@ -7,11 +7,13 @@ class Permuter
 {
 private:
   std::string origStr;
+  std::string str;
+  std::string prefix;
   int strLength;
 public:
   Permuter(std::string origStr);
-  void run(std::string str, int length);
-  void permute(std::string str, std::string prefix, int length, int spot);
+  void run(int length);
+  void permute(int length, int spot);
 };
 
 #endif

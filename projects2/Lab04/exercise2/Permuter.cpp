@@ -10,18 +10,18 @@
 Permuter::Permuter(std::string origStr)
 {
   strLength = origStr.size();
-  std::string str = origStr;
-  run(str, strLength);
+  str = origStr;
+  run(strLength);
 }
 
-void Permuter::run(std::string str, int length)
+void Permuter::run(int length)
 {
-  std::string prefix = "";
+  prefix = "";
   int spot = 0;
-  permute(str, prefix, length, spot);
+  permute(length, spot);
 }
 
-void Permuter::permute(std::string str, std::string prefix, int length, int spot)
+void Permuter::permute(int length, int spot)
 {
   for (int cur = 0; cur < length; cur++)
   {
@@ -33,9 +33,10 @@ void Permuter::permute(std::string str, std::string prefix, int length, int spot
     std::cout << prefix << '\n';
     if (length != 0)
     {
-      permute(str, prefix, length, spot+1);
+      permute(length, spot+1);
     }
     str.insert(cur, temp);
     prefix.erase(spot, 1);
+    length++;
   }
 }
