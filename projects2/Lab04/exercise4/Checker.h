@@ -1,6 +1,6 @@
 /*******************************************************************************
 *@author  Evan Trout
-*@file    Checker.cpp
+*@file    Checker.h
 *@date    09/29/2018
 *@brief   Header file for the executive class Checker. Constructor
 *         reads command line argument class's members, then run() removes filler
