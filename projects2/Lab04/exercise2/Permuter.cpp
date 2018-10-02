@@ -1,11 +1,17 @@
+/*******************************************************************************
+*@author  Evan Trout
+*@file    Permuter.cpp
+*@date    10/02/2018
+*@brief   Implementation file for the executive class Permuter. Constructor
+*         takes the given string and stores it and its size, then calls run(),
+*         which in turn calls the iterative permuter.
+*******************************************************************************/
+
 #include <string>
 #include <iostream>
 #include <cstring>
 #include "Permuter.h"
 
-//Kept shrinking length by 1, loop over characters in string
-//For ith time through this loop do iterations with ith character in this loop
-//Pass through a prefix with the set characters
 
 Permuter::Permuter(std::string origStr)
 {
