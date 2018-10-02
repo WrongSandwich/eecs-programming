@@ -6,11 +6,12 @@
 class Permuter
 {
 private:
-  std::string str;
+  std::string origStr;
   int strLength;
 public:
-  Permuter(std::string str);
-  void permute(char pArray[], int cur, int end);
+  Permuter(std::string origStr);
+  void run(std::string str, int length);
+  void permute(std::string str, std::string prefix, int length, int spot);
 };
 
 #endif

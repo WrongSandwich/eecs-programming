@@ -3,38 +3,39 @@
 #include <cstring>
 #include "Permuter.h"
 
-//Kept shrinking length by 1, loop over characters in cstring
+//Kept shrinking length by 1, loop over characters in string
 //For ith time through this loop do iterations with ith character in this loop
 //Pass through a prefix with the set characters
 
-Permuter::Permuter(std::string str)
+Permuter::Permuter(std::string origStr)
 {
-  strLength = str.size(); //Copying string into char array
-  char pArray[strLength + 1];
-  strcpy(pArray, str.c_str());
-  permute(pArray, 0, strLength-1);
+  strLength = origStr.size();
+  std::string str = origStr;
+  run(str, strLength);
 }
 
-void Permuter::permute(char pArray[], int cur, int end)
+void Permuter::run(std::string str, int length)
 {
-   int i;
-   if (cur == end)
-     std::cout << pArray << '\n';
-   else
-   {
-       for (i = cur; i <= end; i++)
-       {
-          //Swapping cur and i
-          char temp = pArray[cur];
-          pArray[cur] = pArray[i];
-          pArray[i] = temp;
-          std::cout << pArray[i] << '\n';
-          std::cout << pArray[i];
-          permute(pArray, cur+1, end);
-          //Swapping back
-          temp = pArray[cur];
-          pArray[cur] = pArray[i];
-          pArray[i] = temp;
-       }
-   }
+  std::string prefix = "";
+  int spot = 0;
+  permute(str, prefix, length, spot);
+}
+
+void Permuter::permute(std::string str, std::string prefix, int length, int spot)
+{
+  for (int cur = 0; cur < length; cur++)
+  {
+    std::string temp;
+    temp += str.at(cur);
+    prefix.insert(spot, temp);
+    str.erase(cur,1);
+    length--;
+    std::cout << prefix << '\n';
+    if (length != 0)
+    {
+      permute(str, prefix, length, spot+1);
+    }
+    str.insert(cur, temp);
+    prefix.erase(spot, 1);
+  }
 }
