@@ -1,6 +1,17 @@
+/*******************************************************************************
+*@author  Evan Trout
+*@file    MapReader.cpp
+*@date    10/04/2018
+*@brief   CPP file for the MapReader class. Reads input from input file and
+*         creates a 2D char array and associated integers. Also contains getters
+*         for all private members.
+*******************************************************************************/
+
+
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <stdexcept>
 #include "MapReader.h"
 
 MapReader::MapReader(std::string fileName)
@@ -46,16 +57,6 @@ MapReader::MapReader(std::string fileName)
     if (map[startRow][startCol] == 'H')
     {
       throw std::range_error("Invalid start position");
-    }
-    //Printing array for testing purposes
-    std::cout << "TEST ARRAY\n";
-    for (int i = 0; i < numRows; i++)
-    {
-      for (int j = 0; j < numCols; j++)
-      {
-        std::cout << map[i][j];
-      }
-      std::cout << '\n';
     }
     inFile.close();
   }

@@ -1,3 +1,12 @@
+/*******************************************************************************
+*@author  Evan Trout
+*@file    Flood.cpp
+*@date    10/04/2018
+*@brief   CPP file for the Flood class. Takes in a 2D char map array created
+*         by MapReader, then recursively plays out a flood.
+*******************************************************************************/
+
+
 #include <iostream>
 #include "Flood.h"
 
