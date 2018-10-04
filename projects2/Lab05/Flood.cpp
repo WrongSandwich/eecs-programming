@@ -1,12 +1,12 @@
 #include <iostream>
 #include "Flood.h"
 
-Flood::Flood(char** theMap, int rows, int cols) : map(theMap), numRows(rows), numCols(cols), water(waterAmnt)
+Flood::Flood(char** theMap, int rows, int cols, int waterAmnt) : map(theMap), numRows(rows), numCols(cols), water(waterAmnt)
 {}
 
 Flood::~Flood()
 {
-  for (int i = 0; i < rows; i++)
+  for (int i = 0; i < numRows; i++)
   {
     delete[] map[i];
   }
@@ -48,7 +48,7 @@ void Flood::recurseFlood(int row, int col)
     //Flooding upwards
     if ((row-1) >= 0)
     {
-      if (map[row-1][col] == '')
+      if (map[row-1][col] == ' ')
       {
         recurseFlood((row-1), col);
       }
@@ -56,7 +56,7 @@ void Flood::recurseFlood(int row, int col)
     //Flooding to the right
     if ((col+1) < numCols)
     {
-      if (map[row][col+1] == '')
+      if (map[row][col+1] == ' ')
       {
         recurseFlood(row, (col+1));
       }
@@ -64,7 +64,7 @@ void Flood::recurseFlood(int row, int col)
     //Flooding downwards
     if ((row+1) < numRows)
     {
-      if (map[row+1][col] == '')
+      if (map[row+1][col] == ' ')
       {
         recurseFlood((row+1), col);
       }
@@ -72,7 +72,7 @@ void Flood::recurseFlood(int row, int col)
     //Flooding to the left
     if ((col-1) >= 0)
     {
-      if (map[row][col-1] == '')
+      if (map[row][col-1] == ' ')
       {
         recurseFlood(col, (row-1));
       }
