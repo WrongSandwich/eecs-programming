@@ -18,9 +18,16 @@ int main(int argc, char* argv[])
   }
   else
   {
-     MapReader mapRead(argv[1]); //creation of MapReader object
-     Flood flooder(mapRead.getMap(), mapRead.getRows(), mapRead.getCols(),  mapRead.getWater());
-     flooder.floodBase(mapRead.getStartRow(), mapRead.getStartCol());
+    try {
+      MapReader mapRead(argv[1]); //creation of MapReader object
+      Flood flooder(mapRead.getMap(), mapRead.getRows(), mapRead.getCols(),  mapRead.getWater());
+      flooder.floodBase(mapRead.getStartRow(), mapRead.getStartCol());
+    }
+    catch(std::exception const& e)
+    {
+      std::cout << "Error: " << e.what() << '\n';
+    }
+
   }
   return(0);
 }

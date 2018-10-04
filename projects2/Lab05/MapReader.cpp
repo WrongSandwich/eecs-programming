@@ -11,21 +11,55 @@ MapReader::MapReader(std::string fileName)
   if (inFile.is_open())
   {
     inFile >> numRows;
+    if (numRows < 1)
+    {
+      throw std::range_error("numRows cannot be less than 1");
+    }
     inFile >> numCols;
+    if (numCols < 1)
+    {
+      throw std::range_error("numCols cannot be less than 1");
+    }
     inFile >> startRow;
+    if (startRow < 0 || startRow >= numRows)
+    {
+      throw std::range_error("Invalid start position");
+    }
     inFile >> startCol;
+    if (startCol < 0 || startCol >= numCols)
+    {
+      throw std::range_error("Invalid start position");
+    }
     inFile >> waterAmnt;
+    inFile.ignore();
     map = new char*[numRows];
     for (int i = 0; i < numRows; i++)
     {
+      std::string temp;
       map[i] = new char[numCols];
+      getline(inFile, temp);
       for (int j = 0; j < numCols; j++)
       {
-        inFile >> map[i][j];
+        map[i][j] = temp[j];
       }
     }
+    if (map[startRow][startCol] == 'H')
+    {
+      throw std::range_error("Invalid start position");
+    }
+    //Printing array for testing purposes
+    std::cout << "TEST ARRAY\n";
+    for (int i = 0; i < numRows; i++)
+    {
+      for (int j = 0; j < numCols; j++)
+      {
+        std::cout << map[i][j];
+      }
+      std::cout << '\n';
+    }
+    inFile.close();
   }
-  inFile.close();
+  else throw std::runtime_error("File does not exist!");
 }
 
 char** MapReader::getMap()

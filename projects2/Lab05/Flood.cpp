@@ -18,7 +18,7 @@ void Flood::floodBase(int startRow, int startCol)
   recurseFlood(startRow, startCol);
   //Print data and board
   std::cout << "Size: " << numRows << "," << numCols << '\n';
-  std::cout << "Starting position: " << startRow << ',' << startCol << '\n';
+  std::cout << "Starting position: " << startRow << "," << startCol << '\n';
   for (int i = 0; i < numRows; i++)
   {
     for (int j = 0; j < numCols; j++)
@@ -74,7 +74,7 @@ void Flood::recurseFlood(int row, int col)
     {
       if (map[row][col-1] == ' ')
       {
-        recurseFlood(col, (row-1));
+        recurseFlood(row, (col-1));
       }
     }
   }
