@@ -11,5 +11,6 @@ private:
 public:
   Flood(char** theMap, int rows, int cols, int waterAmnt);
   ~Flood();
+  void floodBase(int startRow, int startCol);
   void recurseFlood(int row, int col, int water);
 }

@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
   {
      MapReader mapRead(argv[1]); //creation of MapReader object
      Flood flooder(mapRead.getMap(), mapRead.getRows(), mapRead.getCols(),  mapRead.getWater());
-     flooder.recurseFlood(mapRead.getStartRow(), mapRead.getStartCol());
+     flooder.floodBase(mapRead.getStartRow(), mapRead.getStartCol());
   }
   return(0);
 }
