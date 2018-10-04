@@ -60,7 +60,7 @@ MapReader::MapReader(std::string fileName)
     }
     inFile.close();
   }
-  else throw std::runtime_error("File does not exist!");
+  else throw std::runtime_error("File does not exist");
 }
 
 char** MapReader::getMap()
