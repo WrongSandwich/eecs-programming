@@ -1,0 +1,10 @@
+QUESTION What OBJECT is ADJECTIVE ? #
+OBJECT color #
+OBJECT tree #
+OBJECT car #
+OBJECT season #
+OBJECT beer #
+ADJECTIVE good #
+ADJECTIVE popular #
+ADJECTIVE bad #
+ADJECTIVE next #
