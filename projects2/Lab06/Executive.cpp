@@ -22,9 +22,9 @@ void Executive::run()
     if (userInput == 'A')
     {
       std::string question, answer;
-      question = questionGrammar.generateQuestion();
+      question = questionGrammar.generate();
       std::cout << question << '\n';
-      answer = answerGrammar.generateAnswer();
+      answer = answerGrammar.generate();
       std::cout << answer << '\n';
     }
     else if (userInput == 'Q')
