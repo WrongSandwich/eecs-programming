@@ -7,8 +7,8 @@ Executive::Executive(std::string inputFile1, std::string inputFile2)
   //Constructing grammars using inputfile
   Grammar questionGrammar(std::string inputFile1);
   Grammar answerGrammar(std::string inputFile2);
-  //Get set of nonterminals, termainals, and start symbol from questionGrammar and print
-  //Get set of nonterminals, terminals, and start symbol from answerGrammar and print
+  questionGrammar.print();
+  answerGrammar.print();
   run();
 }
 

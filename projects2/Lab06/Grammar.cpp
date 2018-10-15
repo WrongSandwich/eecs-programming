@@ -98,3 +98,13 @@ std::string Grammar::generate()
   }
   return productLine;
 }
+
+void Grammar::print()
+{
+  std::cout << "START SYMBOL\n" << prodRules[0].printRules();
+  std::cout << "PRODUCTION RULES\n";
+  for (int i = 1; i < prodRules.size(); i++)
+  {
+    prodRules[i].printRules();
+  }
+}

@@ -33,3 +33,11 @@ void ProductionRule::addrule(std::string newRule)
 {
   rules.push_back(newRule);
 }
+
+void ProductionRules::printRules()
+{
+  for (int i = 0; i < rules.size(); i++)
+  {
+    std::cout << label << " " << rules[i] << '\n';
+  }
+}

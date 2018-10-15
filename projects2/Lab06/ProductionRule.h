@@ -15,6 +15,7 @@ public:
   std::string getLabel();
   std::string getRandRule();
   void addRule(std::string newRule);
+  void printRules();
 };
 
 #endif
