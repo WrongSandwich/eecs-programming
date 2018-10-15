@@ -18,3 +18,12 @@ push_back() - push the elements into a vector from the back
 pop_back() - remove elements from the back
 insert() inserts new elements before the element at the specified position
 erase() - remove elements from specified position or range
+
+
+Still need to:
+
+  Check differences in implementation on Grammmar line 17 and line 72
+    istringstream vs stringstream; is std:: necessary?
+  Write implementation for copying in rule to genVector, Grammar line 88
+
+  Print formatted grammar entries for Executive constructor
