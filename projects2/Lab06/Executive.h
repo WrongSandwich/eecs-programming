@@ -6,12 +6,9 @@
 
 class Executive
 {
-private:
-  Grammar questionGrammar
-  Grammar answerGrammar
 public:
   Executive(std::string inputFile1, std::string inputFile2);
-  void run();
+  void run(Grammar questionGrammar, Grammar answerGrammar);
 };
 
 #endif

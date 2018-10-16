@@ -1,21 +1,23 @@
 #include <iostream>
 #include <string>
+#include "Grammar.h"
+#include "Executive.h"
 
 
 Executive::Executive(std::string inputFile1, std::string inputFile2)
 {
   //Constructing grammars using inputfile
-  Grammar questionGrammar(std::string inputFile1);
-  Grammar answerGrammar(std::string inputFile2);
+  Grammar questionGrammar(inputFile1);
+  Grammar answerGrammar(inputFile2);
   questionGrammar.print();
   answerGrammar.print();
-  run();
+  run(questionGrammar, answerGrammar);
 }
 
 
-void Executive::run()
+void Executive::run(Grammar questionGrammar, Grammar answerGrammar)
 {
-  char userInput = '';
+  char userInput;
   do {
     std::cout << "Enter command: ";
     std::cin >> userInput;

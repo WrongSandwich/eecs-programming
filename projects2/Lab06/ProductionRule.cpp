@@ -1,6 +1,7 @@
 #include <string>
 #include <random>
 #include <vector>
+#include <iostream>
 #include "ProductionRule.h"
 
 ProductionRule::ProductionRule(std::string newLabel) : label(newLabel)
@@ -29,12 +30,12 @@ std::string ProductionRule::getRandRule()
   return rules[loc];
 }
 
-void ProductionRule::addrule(std::string newRule)
+void ProductionRule::addRule(std::string newRule)
 {
   rules.push_back(newRule);
 }
 
-void ProductionRules::printRules()
+void ProductionRule::printRules()
 {
   for (int i = 0; i < rules.size(); i++)
   {

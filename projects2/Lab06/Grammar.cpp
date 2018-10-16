@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <fstream>
 #include "Grammar.h"
 #include "ProductionRule.h"
 
@@ -9,7 +10,7 @@
 Grammar::Grammar(std::string inputFile)
 {
   std::ifstream inFile;
-  inFile.open(fileName);
+  inFile.open(inputFile);
   if (inFile.is_open())
   {
     while (!inFile.eof())
@@ -63,23 +64,23 @@ Grammar::~Grammar()
   prodRules.clear();
 }
 
-//Need to return a generated line
 std::string Grammar::generate()
 {
   //Set line equal to starting rule before parsing
   std::string genLine = prodRules[0].getRandRule();
   //Transferring the first rule into a vector of strings
-  vector<string> genVector;
+  std::vector<std::string> genVector;
   //https://www.geeksforgeeks.org/tokenizing-a-string-cpp/
   std::stringstream check1(genLine);
   std::string intermediate;
-  while (getline(check1, intermediate, ''))
+  while (getline(check1, intermediate))
   {
     genVector.push_back(intermediate);
   }
+  bool changeOccured = false;
   do //Do change loop until full loop with no changes
   {
-    bool changeOccured = false;
+    changeOccured = false;
     for (int i = 0; i < genVector.size(); i++)
     {
       for (int j = 0; j < prodRules.size(); j++)
@@ -87,15 +88,15 @@ std::string Grammar::generate()
         if (genVector[i] == prodRules[j].getLabel())
         {
           //Replace label with relevant rule
-          std::string rule = prodRules[j].getRandRule();.
+          std::string rule = prodRules[j].getRandRule();
           //Removing relevant nonterminal from genVector
           genVector.erase(genVector.begin()+i);
           std::stringstream check2(rule);
           std::string temp;
           int z = i;
-          while (getline(check2, temp, ''))
+          while (getline(check2, temp))
           {
-            genVector.insert(genVector.begin()+z; temp);
+            genVector.insert(genVector.begin()+z, temp);
             z++;
           }
           changeOccured = true;
@@ -114,7 +115,8 @@ std::string Grammar::generate()
 
 void Grammar::print()
 {
-  std::cout << "START SYMBOL\n" << prodRules[0].printRules();
+  std::cout << "START SYMBOL\n";
+  prodRules[0].printRules();
   std::cout << "PRODUCTION RULES\n";
   for (int i = 1; i < prodRules.size(); i++)
   {
