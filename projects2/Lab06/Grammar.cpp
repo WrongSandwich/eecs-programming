@@ -1,5 +1,7 @@
 #include <string>
 #include <iostream>
+#include <sstream>
+#include <vector>
 #include "Grammar.h"
 #include "ProductionRule.h"
 
@@ -14,7 +16,7 @@ Grammar::Grammar(std::string inputFile)
     {
       std::string temp;
       getline(inFile, temp, '#');
-      istringstream iss(temp);
+      std::istringstream iss(temp);
       //Reading in the nonterminal label for the rule
       std::string word;
       iss >> word;
@@ -85,6 +87,17 @@ std::string Grammar::generate()
         if (genVector[i] == prodRules[j].getLabel())
         {
           //Replace label with relevant rule
+          std::string rule = prodRules[j].getRandRule();.
+          //Removing relevant nonterminal from genVector
+          genVector.erase(genVector.begin()+i);
+          std::stringstream check2(rule);
+          std::string temp;
+          int z = i;
+          while (getline(check2, temp, ''))
+          {
+            genVector.insert(genVector.begin()+z; temp);
+            z++;
+          }
           changeOccured = true;
         }
       }
