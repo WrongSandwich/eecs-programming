@@ -1,3 +1,13 @@
+/*******************************************************************************
+*@author  Evan Trout
+*@file    Grammar.cpp
+*@date    10/17/2018
+*@brief   CPP file for the Grammar class. Reads and stores production rules
+*         from an input file, and recursively carries out said rules to generate
+          an output string.
+*******************************************************************************/
+
+
 #include <string>
 #include <iostream>
 #include <sstream>

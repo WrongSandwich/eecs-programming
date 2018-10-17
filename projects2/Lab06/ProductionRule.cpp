@@ -1,3 +1,13 @@
+/*******************************************************************************
+*@author  Evan Trout
+*@file    ProductionRule.cpp
+*@date    10/17/2018
+*@brief   CPP file for the ProductionRule class. Stores a nonterminal label
+*         and a number of rules for a Grammar rule, and has the ability to return
+*         a random stored rule.
+*******************************************************************************/
+
+
 #include <string>
 #include <random>
 #include <vector>

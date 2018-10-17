@@ -2,8 +2,7 @@
 *@author  Evan Trout
 *@file    main.cpp
 *@date    10/04/2018
-*@brief   Main file, calls the MapReader's function and then constructs a
-*         flooder and its floodBase function using the output.
+*@brief   Main file, calls the Executive's contstructor with both input files.
 *******************************************************************************/
 
 #include <iostream>

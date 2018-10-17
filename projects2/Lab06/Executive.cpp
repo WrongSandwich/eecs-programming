@@ -1,3 +1,12 @@
+/*******************************************************************************
+*@author  Evan Trout
+*@file    Executive.cpp
+*@date    10/17/2018
+*@brief   CPP file for the Executive class. Constructor creates 2 instances
+          of Grammar class, then calls run to handle interaction with user.
+*******************************************************************************/
+
+
 #include <iostream>
 #include <string>
 #include "Grammar.h"
