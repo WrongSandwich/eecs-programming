@@ -34,8 +34,10 @@ void Executive::run(Grammar questionGrammar, Grammar answerGrammar)
     {
       std::string question, answer;
       question = questionGrammar.generate(0);
+      question.erase(question.end()-2, question.end()-1);
       std::cout << "Question: " << question << '\n';
       answer = answerGrammar.generate(0);
+      answer.erase(answer.end()-2, answer.end()-1);
       std::cout << "Answer: " << answer << '\n';
     }
     else if (userInput == 'Q')
