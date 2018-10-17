@@ -105,10 +105,6 @@ std::string Grammar::generate(int labelIndex)
       }
     }
   }
-//  else //Recursion depth is 9, choose nonterminals at random
-  //{
-
-  //}
   std::string productLine = "";
   //Add all members of genVector to a finished product string to return
   for (int i = 0; i < (genVector.size()); i++)
@@ -127,9 +123,14 @@ void Grammar::print()
 {
   std::cout << fileName << '\n';
   std::cout << "==========\nSTART SYMBOL\n==========\n";
-  prodRules[0].printRules();
+  std::cout << prodRules[0].getLabel() << "\n\n";
+  std::cout << "==========\nNONTERMINALS\n==========\n";
+  for (int i = 0; i < prodRules.size(); i++)
+  {
+    std::cout << prodRules[i].getLabel() << '\n';
+  }
   std::cout << "==========\nPRODUCTION RULES\n==========\n";
-  for (int i = 1; i < prodRules.size(); i++)
+  for (int i = 0; i < prodRules.size(); i++)
   {
     prodRules[i].printRules();
   }
