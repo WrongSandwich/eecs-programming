@@ -7,7 +7,7 @@
 #include "ProductionRule.h"
 
 
-Grammar::Grammar(std::string inputFile)
+Grammar::Grammar(std::string inputFile) : fileName(inputFile)
 {
   std::ifstream inFile;
   inFile.open(inputFile);
@@ -40,6 +40,7 @@ Grammar::Grammar(std::string inputFile)
         while (iss >> word)
         {
           newRule += word;
+          newRule += " ";
         }
         prodRules[entry].addRule(newRule);
       }
@@ -52,6 +53,7 @@ Grammar::Grammar(std::string inputFile)
         while (iss >> word)
         {
           newRule += word;
+          newRule += " ";
         }
         prodRules[entry].addRule(newRule);
       }
@@ -71,13 +73,14 @@ std::string Grammar::generate()
   //Transferring the first rule into a vector of strings
   std::vector<std::string> genVector;
   //https://www.geeksforgeeks.org/tokenizing-a-string-cpp/
-  std::stringstream check1(genLine);
+  std::istringstream iss(genLine);
   std::string intermediate;
-  while (getline(check1, intermediate))
+  while (iss >> intermediate)
   {
     genVector.push_back(intermediate);
   }
   bool changeOccured = false;
+  int depthCount = 0;
   do //Do change loop until full loop with no changes
   {
     changeOccured = false;
@@ -91,10 +94,10 @@ std::string Grammar::generate()
           std::string rule = prodRules[j].getRandRule();
           //Removing relevant nonterminal from genVector
           genVector.erase(genVector.begin()+i);
-          std::stringstream check2(rule);
+          std::istringstream iss2(rule);
           std::string temp;
           int z = i;
-          while (getline(check2, temp))
+          while (iss2 >> temp)
           {
             genVector.insert(genVector.begin()+z, temp);
             z++;
@@ -103,21 +106,26 @@ std::string Grammar::generate()
         }
       }
     }
-  } while (changeOccured != false);
+    depthCount++;
+  } while ((changeOccured == true) && (depthCount < 9));
   std::string productLine = "";
   //Add all members of genVector to a finished product string to return
-  for (int i = 0; i < genVector.size(); i++)
+  for (int i = 0; i < (genVector.size() - 2); i++)
   {
     productLine += genVector[i];
+    productLine += " ";
   }
+  productLine += genVector[genVector.size() - 2];
+  productLine += genVector[genVector.size() - 1];
   return productLine;
 }
 
 void Grammar::print()
 {
-  std::cout << "START SYMBOL\n";
+  std::cout << fileName << '\n';
+  std::cout << "==========\nSTART SYMBOL\n==========\n";
   prodRules[0].printRules();
-  std::cout << "PRODUCTION RULES\n";
+  std::cout << "==========\nPRODUCTION RULES\n==========\n";
   for (int i = 1; i < prodRules.size(); i++)
   {
     prodRules[i].printRules();

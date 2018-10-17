@@ -25,9 +25,9 @@ void Executive::run(Grammar questionGrammar, Grammar answerGrammar)
     {
       std::string question, answer;
       question = questionGrammar.generate();
-      std::cout << question << '\n';
+      std::cout << "Question: " << question << '\n';
       answer = answerGrammar.generate();
-      std::cout << answer << '\n';
+      std::cout << "Answer: " << answer << '\n';
     }
     else if (userInput == 'Q')
     {
@@ -35,7 +35,7 @@ void Executive::run(Grammar questionGrammar, Grammar answerGrammar)
     }
     else
     {
-      std::cout << "Error: Please enter a valid menu choice\n";
+      std::cout << "Error: Please enter a valid menu choice(A or Q)\n";
     }
   } while (userInput != 'Q');
 }

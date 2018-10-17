@@ -9,6 +9,7 @@ class Grammar
 {
 private:
   std::vector<ProductionRule> prodRules;
+  std::string fileName;
 public:
   Grammar(std::string inputFile);
   ~Grammar();
