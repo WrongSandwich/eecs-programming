@@ -7,7 +7,7 @@
 #include "ProductionRule.h"
 
 
-Grammar::Grammar(std::string inputFile) : fileName(inputFile)
+Grammar::Grammar(std::string inputFile) : fileName(inputFile), recursionDepth(0)
 {
   std::ifstream inFile;
   inFile.open(inputFile);
@@ -66,10 +66,10 @@ Grammar::~Grammar()
   prodRules.clear();
 }
 
-std::string Grammar::generate()
+std::string Grammar::generate(int labelIndex)
 {
   //Set line equal to starting rule before parsing
-  std::string genLine = prodRules[0].getRandRule();
+  std::string genLine = prodRules[labelIndex].getRandRule();
   //Transferring the first rule into a vector of strings
   std::vector<std::string> genVector;
   //https://www.geeksforgeeks.org/tokenizing-a-string-cpp/
@@ -79,11 +79,8 @@ std::string Grammar::generate()
   {
     genVector.push_back(intermediate);
   }
-  bool changeOccured = false;
-  int depthCount = 0;
-  do //Do change loop until full loop with no changes
+  if (recursionDepth < 9) //Do change loop until full loop with no changes
   {
-    changeOccured = false;
     for (int i = 0; i < genVector.size(); i++)
     {
       for (int j = 0; j < prodRules.size(); j++)
@@ -91,7 +88,9 @@ std::string Grammar::generate()
         if (genVector[i] == prodRules[j].getLabel())
         {
           //Replace label with relevant rule
-          std::string rule = prodRules[j].getRandRule();
+          recursionDepth++;
+          std::string rule = generate(j);
+          recursionDepth--;
           //Removing relevant nonterminal from genVector
           genVector.erase(genVector.begin()+i);
           std::istringstream iss2(rule);
@@ -102,21 +101,25 @@ std::string Grammar::generate()
             genVector.insert(genVector.begin()+z, temp);
             z++;
           }
-          changeOccured = true;
         }
       }
     }
-    depthCount++;
-  } while ((changeOccured == true) && (depthCount < 9));
+  }
+//  else //Recursion depth is 9, choose nonterminals at random
+  //{
+
+  //}
   std::string productLine = "";
   //Add all members of genVector to a finished product string to return
-  for (int i = 0; i < (genVector.size() - 2); i++)
+  for (int i = 0; i < (genVector.size()); i++)
   {
     productLine += genVector[i];
-    productLine += " ";
+    if (i < (genVector.size() - 1))
+    {
+      productLine += " ";
+    }
   }
-  productLine += genVector[genVector.size() - 2];
-  productLine += genVector[genVector.size() - 1];
+  genVector.clear();
   return productLine;
 }
 

@@ -10,10 +10,11 @@ class Grammar
 private:
   std::vector<ProductionRule> prodRules;
   std::string fileName;
+  int recursionDepth;
 public:
   Grammar(std::string inputFile);
   ~Grammar();
-  std::string generate();
+  std::string generate(int labelIndex);
   void print();
 };
 

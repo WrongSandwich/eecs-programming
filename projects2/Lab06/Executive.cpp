@@ -24,9 +24,9 @@ void Executive::run(Grammar questionGrammar, Grammar answerGrammar)
     if (userInput == 'A')
     {
       std::string question, answer;
-      question = questionGrammar.generate();
+      question = questionGrammar.generate(0);
       std::cout << "Question: " << question << '\n';
-      answer = answerGrammar.generate();
+      answer = answerGrammar.generate(0);
       std::cout << "Answer: " << answer << '\n';
     }
     else if (userInput == 'Q')
