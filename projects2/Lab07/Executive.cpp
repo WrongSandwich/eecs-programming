@@ -10,12 +10,13 @@
 #include <stdexcept>
 #include <random>
 #include <stdlib.h>
+#include <iostream>
 
 Executive::Executive(std::string size, std::string array_order, std::string algName)
 {
   srand48(1334); //Reseeding random number generator
-  double* array = nullptr;
-  data_size = std::stoi(size, nullptr, 10);
+  array = nullptr;
+  data_size = std::stoi(size);
   algorithm_name = algName;
   data_order = array_order;
   if (data_order == "random")
@@ -77,7 +78,7 @@ void Executive::run()
   std::cout << "Array size = " << data_size << '\n';
   std::cout << "Algorithm used = " << algorithm_name << '\n';
   std::cout << "Array order = " << data_order << '\n';
-  std::cout << "Time to sort = " << timer << '\n';
+  std::cout << "Time to sort = " << timer << " s\n";
 }
 
 double Executive::searchTimer()
@@ -111,11 +112,11 @@ double Executive::searchTimer()
   else if (algorithm_name == "quick")
   {
     start = clock();
-    quickSort(array, 0, data_size);
+    quickSort(array, 0, data_size-1);
     end = clock();
   }
   else throw std::runtime_error("Invlaid search algorithm name");
   diff = end - start; //Clock ticks consumed by sort algorithm
-  runtime = diff/CLOCKS_PER_SEC; //Converting to seconds
+  runtime = (double)diff/CLOCKS_PER_SEC; //Converting to seconds
   return runtime;
 }
