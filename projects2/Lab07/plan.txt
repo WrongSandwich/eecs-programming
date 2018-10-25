@@ -7,3 +7,8 @@ sortA(array, a_size);
 end = clock();
 diff = end - start; //Clock ticks consumed by sort algorithm, need to convert to seconds
 runtime = diff/CLOCKS_PER_SEC;
+
+
+Must get results 5x3x8 = 120 times
+
+drand48
