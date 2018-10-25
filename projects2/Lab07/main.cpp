@@ -1,7 +1,31 @@
-#include "Sorts.h"
-int main()
-{
-  //Create an array of ints
+/*******************************************************************************
+*@author  Evan Trout
+*@file    main.cpp
+*@date    09/21/2018
+*@brief   Main file, calls the executive class's constructor and run().
+*******************************************************************************/
 
-  Sorts<int>::bubbleSort(someArray, someSize); //calls bubble sort on the array
+#include <iostream>
+#include "Executive.h"
+#include <string>
+#include <stdexcept>
+
+int main(int argc, char* argv[])
+{
+  if(argc < 4)
+  {
+    std::cout << "Incorrect number of parameters!\n";
+  }
+  else
+  {
+    try {
+      Executive ex(argv[1], argv[2], argv[3]); //creation of executive object
+      ex.run(); //handles the calling of all other member methods
+    }
+    catch(std::exception const& e)
+    {
+      std::cout << "Error: " << e.what() << '\n';
+    }
+  }
+  return(0);
 }
