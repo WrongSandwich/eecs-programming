@@ -1,0 +1,19 @@
+//TA lecture nodes
+First generate a binary tree of prefix or postfix expression depending
+on what's given
+
+Then traverse binary tree according to type of traversal
+
+
+binaryNode.cpp: https://courses.washington.edu/css342/shields/Code/binarynode.cpp
+
+binaryNodeTree.cpp: http://cs.stmarys.ca/~porter/csc/common_341_342/code/CarranoTextSourceCode6th/Chapter16/BinaryNodeTree.cpp2html
+
+They reccomend using a stack to implement reading of the prefix n stuff
+Basically fill stack and when an operator is found, pop and move into nodes
+
+Pre - root-left-right
+Post - left-right-root
+Inorder - left-root-right
+
+Only need to implement constructors, destructor, and traversals with helpers
