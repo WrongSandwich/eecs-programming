@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+//Still need
+
 //------------------------------------------------------------
 // Constructor and Destructor Section.
 //------------------------------------------------------------
@@ -36,4 +38,26 @@ template<class ItemType>
 BinaryNodeTree<ItemType>::~BinaryNodeTree()
 {
   destroyTree(rootPtr);
+}
+
+//------------------------------------------------------------
+// Public Traversals Section.
+//------------------------------------------------------------
+
+template<class ItemType>
+void BinaryNodeTree<ItemType>::preorderTraverse(void visit(ItemType&)) const
+{
+
+}
+
+template<class ItemType>
+void BinaryNodeTree<ItemType>::inorderTraverse(void visit(ItemType&)) const
+{
+
+}
+
+template<class ItemType>
+void postorderTraverse(void visit(ItemType&)) const
+{
+
 }
