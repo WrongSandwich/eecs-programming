@@ -1,3 +1,12 @@
+/*******************************************************************************
+*@author  Evan Trout
+*@file    BinaryNodeTree.cpp
+*@date    11/14/18
+*@brief   Implementation file for the BinaryNodeTree class. Creates a tree of
+*         BinaryNode instances and contains member functions for interaction
+*         with and manipulation of the Binary Tree.
+*******************************************************************************/
+
 #include "BinaryNode.h"
 #include "BinaryTreeInterface.h"
 #include "PrecondViolationExcep.h"

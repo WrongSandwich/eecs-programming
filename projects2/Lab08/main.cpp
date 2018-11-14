@@ -2,7 +2,8 @@
 *@author  Evan Trout
 *@file    main.cpp
 *@date    09/21/2018
-*@brief   Main file, calls the executive class's constructor and run().
+*@brief   Main file, calls the executive class's constructor and handles any
+*         catches any exceptions.
 *******************************************************************************/
 
 #include <iostream>

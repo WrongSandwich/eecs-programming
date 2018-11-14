@@ -1,3 +1,11 @@
+/*******************************************************************************
+*@author  Carrano and Henry
+*@file    BinaryTreeInterface.h
+*@date    ?
+*@brief   Interface header for the BinaryNodeTree class. Gives guidelines for
+*         member function implementation for the BinaryNodeTree class.
+*******************************************************************************/
+
 #ifndef _BINARY_TREE_INTERFACE
 #define _BINARY_TREE_INTERFACE
 

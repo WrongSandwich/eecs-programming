@@ -1,3 +1,12 @@
+/*******************************************************************************
+*@author  Evan Trout
+*@file    Executive.cpp
+*@date    11/14/18
+*@brief   Implementation file for the Executive class. Takes user input passed
+*         by main and reads a given file to create a binary tree of information,
+*         then traverses the tree in multiple ways and prints the results.
+*******************************************************************************/
+
 #include "BinaryNodeTree.h"
 #include "Executive.h"
 #include "Stack.h"

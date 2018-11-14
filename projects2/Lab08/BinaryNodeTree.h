@@ -1,3 +1,11 @@
+/*******************************************************************************
+*@author  Carrano and Henry
+*@file    BinaryNodeTree.h
+*@date    ?
+*@brief   Header file for the BinaryNodeTree class. Creates and maintains a
+*         binary tree of nodes.
+*******************************************************************************/
+
 #ifndef _BINARY_NODE_TREE
 #define _BINARY_NODE_TREE
 
