@@ -23,11 +23,11 @@ Executive::Executive(std::string type, std::string fileName)
     newArray = new std::string[i];
     inFile >> newArray[expLength];
     expression = newArray;
-    expLength++;
     i++;
     newArray = nullptr;
     while (!inFile.eof())
     {
+      expLength++;
       newArray = new std::string[i];
       for (int j = 0; j < expLength; j++)
       {
@@ -36,7 +36,6 @@ Executive::Executive(std::string type, std::string fileName)
       inFile >> newArray[expLength]; //New array is complete
       delete[] expression;
       expression = newArray;
-      expLength++;
       i++;
       newArray = nullptr;
     }
@@ -75,7 +74,8 @@ BinaryNodeTree<std::string>* Executive::prefixTreeMaker()
   {
     if (expression[pos] == "+" || expression[pos] == "-" || expression[pos] == "*" || expression[pos] == "/")
     {
-      BinaryNodeTree<std::string>* newTree = new BinaryNodeTree<std::string>(expression[pos], prefixTreeMaker(), prefixTreeMaker());
+      std::string data = expression[pos];
+      BinaryNodeTree<std::string>* newTree = new BinaryNodeTree<std::string>(data, prefixTreeMaker(), prefixTreeMaker());
       return newTree;
     }
     else

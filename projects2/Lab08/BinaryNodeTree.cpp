@@ -106,7 +106,7 @@ BinaryNodeTree<ItemType>::BinaryNodeTree() : rootPtr(nullptr)
 template<class ItemType>
 BinaryNodeTree<ItemType>::BinaryNodeTree(const ItemType& rootItem)
 {
-  rootPtr = new BinaryNode<ItemType>(rootItem, nullptr, nullptr);
+  rootPtr = new BinaryNode<ItemType>(rootItem, nullptr, nullptr); //CAN probably remove nullptrs
 }
 
 template<class ItemType>
