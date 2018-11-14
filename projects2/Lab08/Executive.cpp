@@ -10,16 +10,32 @@
 Executive::Executive(std::string type, std::string fileName)
 {
   expLength = 0;
+  expression = nullptr;
+  int* newArray = nullptr;
   std::ifstream inFile;
   inFile.open(fileName);
   if (inFile.is_open())
   {
+    int i = 1;
+    newArray = new std::string[i];
+    inFile >> newArray[expLength];
+    expression = newArray;
+    expLength++;
+    i++;
+    newArray = nullptr;
     while (!inFile.eof())
     {
-      std::string temp;
-      inFile >> temp;
-      expression += temp;
+      newArray = new std::string[i]
+      for (int j = 0; j < expLength; j++);
+      {
+        newArray[j] = expression[j];
+      }
+      inFile >> newArray[expLength]; //New array is complete
+      delete[] expression;
+      expression = newArray;
       expLength++;
+      i++;
+      newArray = nullptr;
     }
   }
   inFile.close();
@@ -34,9 +50,17 @@ Executive::Executive(std::string type, std::string fileName)
   else throw std::runtime_error("Invalid expression type");
 }
 
-void Executive::prefixTreeMaker(int pos) //Supposed to be recurisve
+BinaryNodeTree* Executive::prefixTreeMaker(int pos) //Supposed to be recurisve
 {
-  if (expre)
+  if (expression[pos] == '+' || expression[pos] == '-' || expression[pos] == '*' || expression[pos] == '/')
+  {
+    BinaryNodeTree* newTree = BinaryNodeTree(expression[pos], prefixTreeMaker(pos+1), prefixTreeMaker(pos+2));
+  }
+  else
+  {
+    BinaryNodeTree* newTree = BinaryNodeTree(expression[pos]);
+  }
+  return newTree;
 }
 
 void Executive::postfixTreeMaker() //Supposed to be non-recursive, uses Stack ADT

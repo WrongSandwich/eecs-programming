@@ -6,7 +6,7 @@
 class Executive
 {
 private:
-  std::string expression;
+  std::string* expression;
   int expLength;
 public:
   Executive(std::string type, std::string fileName);
