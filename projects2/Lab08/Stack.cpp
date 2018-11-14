@@ -11,7 +11,6 @@
 
 #include "PrecondViolationExcep.h"
 #include "StackInterface.h"
-#include "Stack.h"
 
 template<class ItemType>
 Stack<ItemType>::Stack() : topPtr(nullptr)

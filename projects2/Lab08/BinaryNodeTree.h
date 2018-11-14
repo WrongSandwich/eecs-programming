@@ -3,8 +3,7 @@
 
 #include "BinaryTreeInterface.h"
 #include "BinaryNode.h"
-#include "PrecondViolatedExcep.h"
-#include "NotFoundException.h"
+#include "PrecondViolationExcep.h"
 
 template<class ItemType>
 class BinaryNodeTree : public BinaryTreeInterface<ItemType>
@@ -51,7 +50,7 @@ public:
    bool isEmpty() const;
    int getHeight() const;
    int getNumberOfNodes() const;
-   ItemType getRootData() const throw(PrecondViolatedExcep);
+   ItemType getRootData() const throw(PrecondViolationExcep);
    void setRootData(const ItemType& newData);
    void clear();
 
@@ -65,7 +64,7 @@ public:
    //------------------------------------------------------------
    // Overloaded Operator Section.
    //------------------------------------------------------------
-   BinaryNodeTree& operator=(const BinaryNodeTree& rightHandSide);
+   BinaryNodeTree<ItemType>& operator=(const BinaryNodeTree<ItemType>& rightHandSide);
 }; // end BinaryNodeTree
 #include "BinaryNodeTree.cpp"
 #endif

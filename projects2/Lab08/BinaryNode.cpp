@@ -1,9 +1,8 @@
-#include "BinaryNode.h"
 
 //CONSTRUCTORS
 
 template<class ItemType>
-BinaryNode<ItemType>::BinaryNode() : leftchildPtr(nullptr), rightChildPtr(nullptr)
+BinaryNode<ItemType>::BinaryNode() : leftChildPtr(nullptr), rightChildPtr(nullptr)
 {}
 
 template<class ItemType>
@@ -36,7 +35,7 @@ ItemType BinaryNode<ItemType>::getItem() const
 template<class ItemType>
 bool BinaryNode<ItemType>::isLeaf() const //Determines if this node is a dead end
 {
-  return ((leftChildPtr == nullptr) && (rightChildPtr == nullptr))
+  return ((leftChildPtr == nullptr) && (rightChildPtr == nullptr));
 }
 
 template<class ItemType>

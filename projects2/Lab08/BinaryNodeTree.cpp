@@ -1,5 +1,6 @@
-#include "BinaryNodeTree.h"
 #include "BinaryNode.h"
+#include "BinaryTreeInterface.h"
+#include "PrecondViolationExcep.h"
 
 #include <iostream>
 
@@ -7,6 +8,32 @@
 // Protected Utility Methods Section:
 // Recursive helper methods for the public methods.
 //------------------------------------------------------------
+
+template <class ItemType>
+int BinaryNodeTree<ItemType>::getHeightHelper(BinaryNode<ItemType>* subTreePtr) const
+{
+  if (subTreePtr == nullptr)
+  {
+    return 0;
+  }
+  else
+  {
+    return (1 + max(getHeightHelper(subTreePtr->getLeftChildPtr()), getHeightHelper(subTreePtr->getRightChildPtr())));
+  }
+}
+
+template <class ItemType>
+int BinaryNodeTree<ItemType>::getNumberOfNodesHelper(BinaryNode<ItemType>* subTreePtr) const
+{
+  if (subTreePtr == nullptr)
+  {
+    return 0;
+  }
+  else
+  {
+    return (1 + getNumberOfNodesHelper(subTreePtr->getLeftChildPtr()) + getNumberOfNodesHelper(subTreePtr -> getRightChildPtr()));
+  }
+}
 
 template <class ItemType>
 void BinaryNodeTree<ItemType>::destroyTree(BinaryNode<ItemType>* subTreePtr)
@@ -88,13 +115,13 @@ BinaryNodeTree<ItemType>::BinaryNodeTree(const ItemType& rootItem,
                                          const BinaryNodeTree<ItemType>* rightTreePtr)
 {
   rootPtr = new BinaryNode<ItemType>(rootItem, copyTree(leftTreePtr->rootPtr),
-                                               copyTree(rightTreePtr->rootPtr);
+                                              copyTree(rightTreePtr->rootPtr));
 }
 
 template<class ItemType>
 BinaryNodeTree<ItemType>::BinaryNodeTree(const BinaryNodeTree<ItemType>& tree)
 {
-  rootPtr = copyTree(treePtr.rootPtr);
+  rootPtr = copyTree(tree.rootPtr);
 }
 
 template<class ItemType>
@@ -103,7 +130,48 @@ BinaryNodeTree<ItemType>::~BinaryNodeTree()
   destroyTree(rootPtr);
 }
 
+//------------------------------------------------------------
+// Public BinaryTreeInterface Methods Section.
+//------------------------------------------------------------
+template<class ItemType>
+bool BinaryNodeTree<ItemType>::isEmpty() const
+{
+  return (rootPtr == nullptr);
+}
 
+template<class ItemType>
+int BinaryNodeTree<ItemType>::getHeight() const
+{
+  return getHeightHelper(rootPtr);
+}
+
+template<class ItemType>
+int BinaryNodeTree<ItemType>::getNumberOfNodes() const
+{
+  return getNumberOfNodesHelper(rootPtr);
+}
+
+template<class ItemType>
+ItemType BinaryNodeTree<ItemType>::getRootData() const throw(PrecondViolationExcep)
+{
+  if (!isEmpty())
+  {
+    return rootPtr->getItem();
+  }
+  else throw PrecondViolationExcep ("Tree is empty");
+}
+
+template<class ItemType>
+void BinaryNodeTree<ItemType>::setRootData(const ItemType& newData)
+{
+  rootPtr->setItem(newData);
+}
+
+template<class ItemType>
+void BinaryNodeTree<ItemType>::clear()
+{
+  destroyTree(rootPtr);
+}
 
 //------------------------------------------------------------
 // Public Traversals Section.
@@ -122,7 +190,18 @@ void BinaryNodeTree<ItemType>::inorderTraverse(void visit(ItemType&)) const
 }
 
 template<class ItemType>
-void postorderTraverse(void visit(ItemType&)) const
+void BinaryNodeTree<ItemType>::postorderTraverse(void visit(ItemType&)) const
 {
   postorder(visit, rootPtr);
+}
+
+//------------------------------------------------------------
+// Overloaded Operator Section.
+//------------------------------------------------------------
+template<class ItemType>
+BinaryNodeTree<ItemType>& BinaryNodeTree<ItemType>::operator=(const BinaryNodeTree<ItemType>& rightHandSide)
+{
+  this->clear();
+  copyTree(rightHandSide);
+  return *this;
 }

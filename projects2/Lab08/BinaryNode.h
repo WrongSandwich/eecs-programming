@@ -17,6 +17,7 @@ private:
    BinaryNode<ItemType>* rightChildPtr;  // Pointer to right child
 
 public:
+   BinaryNode();
    BinaryNode(const ItemType& anItem);
    BinaryNode(const ItemType& anItem,
               BinaryNode<ItemType>* leftPtr,
@@ -36,4 +37,4 @@ public:
 
 #include "BinaryNode.cpp"
 
-#endif 
+#endif

@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "Executive.h"
+#include "PrecondViolationExcep.h"
 #include <string>
 #include <stdexcept>
 
@@ -20,7 +21,6 @@ int main(int argc, char* argv[])
   {
     try {
       Executive ex(argv[1], argv[2]); //creation of executive object
-      ex.run(); //handles the calling of all other member methods
     }
     catch(std::exception const& e)
     {
