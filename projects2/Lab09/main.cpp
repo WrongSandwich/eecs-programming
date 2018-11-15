@@ -14,14 +14,14 @@
 
 int main(int argc, char* argv[])
 {
-  if(argc < 3)
+  if(argc < 2)
   {
     std::cout << "Incorrect number of parameters!\n";
   }
   else
   {
     try {
-      Executive ex(argv[1], argv[2]); //creation of executive object
+      Executive ex(argv[1]); //creation of executive object
     }
     catch(std::exception const& e)
     {
