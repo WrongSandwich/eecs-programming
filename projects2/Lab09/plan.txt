@@ -1,0 +1,3 @@
+Must implement BinarySearchTree exactly how its listed in the header
+
+BinarySearchTree.cpp: https://github.com/thefinn93/CSS342-Lab5/blob/master/files%20from%20Shields/BinarySearchTree.cpp
