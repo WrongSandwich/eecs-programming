@@ -1,4 +1,14 @@
+/*******************************************************************************
+*@author  Evan Trout
+*@file    Task.cpp
+*@date    11/27/18
+*@brief   Implementation file for Task class, which is used to store an individual
+*         task's multiple variable values for use in a BinarySearchTree.
+*******************************************************************************/
 
+#include <iostream>
+#include "Task.h"
+#include <string>
 
 Task::Task(int newID, std::string newName, int newEstimate, int currentTime)
 {
