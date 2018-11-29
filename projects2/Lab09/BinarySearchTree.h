@@ -5,7 +5,7 @@
 
 /** Link-based implementation of the ADT binary search tree.
  @file BinarySearchTree.h */
- 
+
 #ifndef _BINARY_SEARCH_TREE
 #define _BINARY_SEARCH_TREE
 
@@ -27,7 +27,7 @@ class BinarySearchTree
 {
 private:
    BinaryNode<ItemType>* rootPtr;
-   
+
 protected:
    //------------------------------------------------------------
    // Protected Utility Methods Section:
@@ -37,29 +37,33 @@ protected:
    // inserts it in a leaf at that point.
    BinaryNode<ItemType>* insertInorder(BinaryNode<ItemType>* subTreePtr,
                                        BinaryNode<ItemType>* newNode);
-   
+
    // Removes the given target value from the tree while maintaining a
    // binary search tree.
    BinaryNode<ItemType>* removeValue(BinaryNode<ItemType>* subTreePtr,
                                      KeyType aKey,
                                      bool& success);
-   
+
    // Removes a given node from a tree while maintaining a
    // binary search tree.
    BinaryNode<ItemType>* removeNode(BinaryNode<ItemType>* nodePtr);
-   
+
    // Removes the leftmost node in the left subtree of the node
    // pointed to by nodePtr.
    // Sets inorderSuccessor to the value in this node.
    // Returns a pointer to the revised subtree.
    BinaryNode<ItemType>* removeLeftmostNode(BinaryNode<ItemType>* subTreePtr,
                                             ItemType& inorderSuccessor);
-   
+
    // Returns a pointer to the node containing the given value,
    // or nullptr if not found.
    BinaryNode<ItemType>* findNode(BinaryNode<ItemType>* treePtr,
 		KeyType aKey) const;
 
+   //Recursively helps the getHeight method
+   int getHeightHelper(BinaryNode<ItemType>* subTreePtr) const
+   //Recursively helps the getNumberOfNodes method 
+   int getNumberOfNodesHelper(BinaryNode<ItemType>* subTreePtr) const
    // Recursive traversal helper methods:
    void preorder(void visit(ItemType&), BinaryNode<ItemType>* treePtr) const;
    void inorder(void visit(ItemType&), BinaryNode<ItemType>* treePtr) const;
@@ -73,7 +77,7 @@ public:
    BinarySearchTree(const ItemType& rootItem);
    BinarySearchTree(const BinarySearchTree<ItemType>& tree);
    virtual ~BinarySearchTree();
-   
+
    //------------------------------------------------------------
    // Public Methods Section.
    //------------------------------------------------------------
@@ -90,18 +94,18 @@ public:
 		throw(NotFoundException, InvalidSetEntryRequest);
    bool contains(const KeyType& aKey) const;
    void clear();
-   
+
    //------------------------------------------------------------
    // Public Traversals Section.
    //------------------------------------------------------------
    void preorderTraverse(void visit(ItemType&)) const;
    void inorderTraverse(void visit(ItemType&)) const;
    void postorderTraverse(void visit(ItemType&)) const;
-   
+
    //------------------------------------------------------------
    // Overloaded Operator Section.
    //------------------------------------------------------------
-   BinarySearchTree& operator=(const BinarySearchTree& rightHandSide);   
+   BinarySearchTree& operator=(const BinarySearchTree& rightHandSide);
 }; // end BinarySearchTree
 
 #include "BinarySearchTree.cpp"
