@@ -48,6 +48,15 @@ void Task::startTask(int currentTime)
   timeStarted = currentTime;
 }
 
+bool Task::hasStarted()
+{
+  if (timeStarted == -1)
+  {
+    return false;
+  }
+  else return true;
+}
+
 Task& Task::operator==(const int& rightHandSide)
 {
   if (taskID == rightHandSide)

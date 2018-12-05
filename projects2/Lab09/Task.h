@@ -48,6 +48,8 @@ public:
   **/
   void startTask(int currentTime);
 
+  bool hasStarted();
+
   Task& operator==(const int& rightHandSide);
 };
 #endif
