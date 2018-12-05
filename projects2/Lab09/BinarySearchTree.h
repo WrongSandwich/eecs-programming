@@ -62,7 +62,7 @@ protected:
 
    //Recursively helps the getHeight method
    int getHeightHelper(BinaryNode<ItemType>* subTreePtr) const
-   //Recursively helps the getNumberOfNodes method 
+   //Recursively helps the getNumberOfNodes method
    int getNumberOfNodesHelper(BinaryNode<ItemType>* subTreePtr) const
    // Recursive traversal helper methods:
    void preorder(void visit(ItemType&), BinaryNode<ItemType>* treePtr) const;
@@ -105,7 +105,7 @@ public:
    //------------------------------------------------------------
    // Overloaded Operator Section.
    //------------------------------------------------------------
-   BinarySearchTree& operator=(const BinarySearchTree& rightHandSide);
+   BinarySearchTree& operator=(const BinarySearchTree& rightHandSide); //MAY NEED TO ADD TEMPLATE
 }; // end BinarySearchTree
 
 #include "BinarySearchTree.cpp"
