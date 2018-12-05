@@ -11,8 +11,8 @@ private:
   std::string* inputData;
   int dataLength;
   int pos;
-  int time;
-  BinarySearchTree<taskID, Task>* taskTree;
+  int execTime;
+  BinarySearchTree<taskID, Task> taskTree;
 public:
   Executive(std::string fileName);
 };
