@@ -1,10 +1,14 @@
-TreeLab: main.o Executive.o PrecondViolationExcep.o
-				g++ -std=c++11 -g -o TreeLab main.o Executive.o PrecondViolationExcep.o
-main.o: Executive.h PrecondViolationExcep.h main.cpp
+SearchTreeLab: main.o Executive.o NotFoundException.o InvalidSetEntryRequest.o Task.o
+				g++ -std=c++11 -g -o SearchTreeLab main.o Executive.o NotFoundException.o InvalidSetEntryRequest.o Task.o
+main.o: Executive.h main.cpp
 				g++ -std=c++11 -c -g main.cpp
-Executive.o: PrecondViolationExcep.h BinaryNode.h BinaryNode.cpp BinaryTreeInterface.h BinaryNodeTree.cpp BinaryNodeTree.h StackInterface.h Stack.h Stack.cpp Node.h Node.cpp Executive.h Executive.cpp
+Executive.o: Task.h  InvalidSetEntryRequest.h NotFoundException.h Executive.h Executive.cpp BinaryNode.h BinaryNode.cpp BinarySearchTree.h BinarySearchTree.cpp
 				g++ -std=c++11 -c -g Executive.cpp
-PrecondViolationExcep.o: PrecondViolationExcep.h PrecondViolationExcep.cpp
-				g++ -std=c++11 -c -g PrecondViolationExcep.cpp
+NotFoundException.o: NotFoundException.h NotFoundException.cpp
+				g++ -std=c++11 -c -g NotFoundException.cpp
+InvalidSetEntryRequest.o: InvalidSetEntryRequest.h InvalidSetEntryRequest.cpp
+				g++ -std=c++11 -c -g InvalidSetEntryRequest.cpp
+Task.o: Task.h Task.cpp
+				g++ -std=c++11 -c -g Task.cpp
 clean:
-	rm *.o TreeLab
+	rm *.o SearchTreeLab
