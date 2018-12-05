@@ -13,18 +13,20 @@
 //------------------------------------------------------------
 // Recursively finds where the given node should be placed and
 // inserts it in a leaf at that point.
-BinaryNode<ItemType>* BinarySearchTree<ItemType>::insertInorder(BinaryNode<ItemType>* subTreePtr,
+template<typename KeyType, typename ItemType>
+BinaryNode<ItemType>* BinarySearchTree<KeyType, ItemType>::insertInorder(BinaryNode<ItemType>* subTreePtr,
                                     BinaryNode<ItemType>* newNode)
 {
   if (subTreePtr == nullptr)
   {
-    
+
   }
 }
 
 // Removes the given target value from the tree while maintaining a
 // binary search tree.
-BinaryNode<ItemType>* BinarySearchTree<ItemType>::removeValue(BinaryNode<ItemType>* subTreePtr,
+template<typename KeyType, typename ItemType>
+BinaryNode<ItemType>* BinarySearchTree<KeyType, ItemType>::removeValue(BinaryNode<ItemType>* subTreePtr,
                                   KeyType aKey,
                                   bool& success)
 {
@@ -33,7 +35,8 @@ BinaryNode<ItemType>* BinarySearchTree<ItemType>::removeValue(BinaryNode<ItemTyp
 
 // Removes a given node from a tree while maintaining a
 // binary search tree.
-BinaryNode<ItemType>* BinarySearchTree<ItemType>::removeNode(BinaryNode<ItemType>* nodePtr)
+template<typename KeyType, typename ItemType>
+BinaryNode<ItemType>* BinarySearchTree<KeyType, ItemType>::removeNode(BinaryNode<ItemType>* nodePtr)
 {
 
 }
@@ -42,7 +45,8 @@ BinaryNode<ItemType>* BinarySearchTree<ItemType>::removeNode(BinaryNode<ItemType
 // pointed to by nodePtr.
 // Sets inorderSuccessor to the value in this node.
 // Returns a pointer to the revised subtree.
-BinaryNode<ItemType>* BinarySearchTree<ItemType>::removeLeftmostNode(BinaryNode<ItemType>* subTreePtr,
+template<typename KeyType, typename ItemType>
+BinaryNode<ItemType>* BinarySearchTree<KeyType, ItemType>::removeLeftmostNode(BinaryNode<ItemType>* subTreePtr,
                                          ItemType& inorderSuccessor)
 {
 
@@ -50,7 +54,8 @@ BinaryNode<ItemType>* BinarySearchTree<ItemType>::removeLeftmostNode(BinaryNode<
 
 // Returns a pointer to the node containing the given value,
 // or nullptr if not found.
-BinaryNode<ItemType>* BinarySearchTree<ItemType>::findNode(BinaryNode<ItemType>* treePtr, KeyType aKey) const
+template<typename KeyType, typename ItemType>
+BinaryNode<ItemType>* BinarySearchTree<KeyType, ItemType>::findNode(BinaryNode<ItemType>* treePtr, KeyType aKey) const
 {
   if treePtr == nullptr
   {
@@ -70,8 +75,8 @@ BinaryNode<ItemType>* BinarySearchTree<ItemType>::findNode(BinaryNode<ItemType>*
   }
 }
 
-template <class ItemType>
-int BinarySearchTree<ItemType>::getHeightHelper(BinaryNode<ItemType>* subTreePtr) const
+template<typename KeyType, typename ItemType>
+int BinarySearchTree<KeyType, ItemType>::getHeightHelper(BinaryNode<ItemType>* subTreePtr) const
 {
  if (subTreePtr == nullptr)
  {
@@ -83,8 +88,8 @@ int BinarySearchTree<ItemType>::getHeightHelper(BinaryNode<ItemType>* subTreePtr
  }
 }
 
-template <class ItemType>
-int BinarySearchTree<ItemType>::getNumberOfNodesHelper(BinaryNode<ItemType>* subTreePtr) const
+template<typename KeyType, typename ItemType>
+int BinarySearchTree<KeyType, ItemType>::getNumberOfNodesHelper(BinaryNode<ItemType>* subTreePtr) const
 {
   if (subTreePtr == nullptr)
   {
@@ -96,8 +101,8 @@ int BinarySearchTree<ItemType>::getNumberOfNodesHelper(BinaryNode<ItemType>* sub
   }
 }
 
-template <class ItemType>
-void BinarySearchTree<ItemType>::destroyTree(BinaryNode<ItemType>* subTreePtr)
+template<typename KeyType, typename ItemType>
+void BinarySearchTree<KeyType, ItemType>::destroyTree(BinaryNode<ItemType>* subTreePtr)
 {
   if (subTreePtr != nullptr)
   {
@@ -107,8 +112,8 @@ void BinarySearchTree<ItemType>::destroyTree(BinaryNode<ItemType>* subTreePtr)
   }
 }
 
-<template <class ItemType>
-BinaryNode<ItemType>* BinarySearchTree<ItemType>::copyTree(const BinaryNode<ItemType>* treePtr)
+template<typename KeyType, typename ItemType>
+BinaryNode<ItemType>* BinarySearchTree<KeyType, ItemType>::copyTree(const BinaryNode<ItemType>* treePtr)
 {
   BinaryNode<ItemType>* newTreePtr = nullptr;
   if (treePtr != nullptr)
@@ -121,8 +126,8 @@ BinaryNode<ItemType>* BinarySearchTree<ItemType>::copyTree(const BinaryNode<Item
 }
 
 // Recursive traversal helper methods:
-template <class ItemType>
-void BinarySearchTree<ItemType>::preorder(void visit(ItemType&), BinaryNode<ItemType>* treePtr) const
+template<typename KeyType, typename ItemType>
+void BinarySearchTree<KeyType, ItemType>::preorder(void visit(ItemType&), BinaryNode<ItemType>* treePtr) const
 {
   if (treePtr != nullptr)
   {
@@ -133,8 +138,8 @@ void BinarySearchTree<ItemType>::preorder(void visit(ItemType&), BinaryNode<Item
   }
 }
 
-template <class ItemType>
-void BinarySearchTree<ItemType>::inorder(void visit(ItemType&), BinaryNode<ItemType>* treePtr) const
+template<typename KeyType, typename ItemType>
+void BinarySearchTree<KeyType, ItemType>::inorder(void visit(ItemType&), BinaryNode<ItemType>* treePtr) const
 {
   if (treePtr != nullptr)
   {
@@ -145,8 +150,8 @@ void BinarySearchTree<ItemType>::inorder(void visit(ItemType&), BinaryNode<ItemT
   }
 }
 
-template <class ItemType>
-void BinarySearchTree<ItemType>::postorder(void visit(ItemType&), BinaryNode<ItemType>* treePtr) const
+template<typename KeyType, typename ItemType>
+void BinarySearchTree<KeyType, ItemType>::postorder(void visit(ItemType&), BinaryNode<ItemType>* treePtr) const
 {
   if (treePtr != nullptr)
   {
@@ -160,25 +165,25 @@ void BinarySearchTree<ItemType>::postorder(void visit(ItemType&), BinaryNode<Ite
 //------------------------------------------------------------
 // Constructor and Destructor Section.
 //------------------------------------------------------------
-template <class ItemType>
-BinarySearchTree<ItemType>::BinarySearchTree() : rootPtr(nullptr)
+template<typename KeyType, typename ItemType>
+BinarySearchTree<KeyType, ItemType>::BinarySearchTree() : rootPtr(nullptr)
 {
 }
 
-template <class ItemType>
-BinarySearchTree<ItemType>::BinarySearchTree(const ItemType& rootItem)
+template<typename KeyType, typename ItemType>
+BinarySearchTree<KeyType, ItemType>::BinarySearchTree(const ItemType& rootItem)
 {
   rootPtr = new BinaryNode<ItemType>(rootItem, nullptr, nullptr);
 }
 
-template <class ItemType>
-BinarySearchTree<ItemType>::BinarySearchTree(const BinarySearchTree<ItemType>& tree)
+template<typename KeyType, typename ItemType>
+BinarySearchTree<KeyType, ItemType>::BinarySearchTree(const BinarySearchTree<KeyType, ItemType>& tree)
 {
   rootPtr = copyTree(tree.rootPtr);
 }
 
-template <class ItemType>
-BinarySearchTree<ItemType>::~BinarySearchTree()
+template<typename KeyType, typename ItemType>
+BinarySearchTree<KeyType, ItemType>::~BinarySearchTree()
 {
   destroyTree(rootPtr);
 }
@@ -186,26 +191,26 @@ BinarySearchTree<ItemType>::~BinarySearchTree()
 //------------------------------------------------------------
 // Public Methods Section.
 //------------------------------------------------------------
-template <class ItemType>
-bool BinarySearchTree<ItemType>::isEmpty() const
+template<typename KeyType, typename ItemType>
+bool BinarySearchTree<KeyType, ItemType>::isEmpty() const
 {
   return (rootPtr == nullptr);
 }
 
-template <class ItemType>
-int BinarySearchTree<ItemType>::getHeight() const
+template<typename KeyType, typename ItemType>
+int BinarySearchTree<KeyType, ItemType>::getHeight() const
 {
   return getHeightHelper(rootPtr);
 }
 
-template <class ItemType>
-int BinarySearchTree<ItemType>::getNumberOfNodes() const
+template<typename KeyType, typename ItemType>
+int BinarySearchTree<KeyType, ItemType>::getNumberOfNodes() const
 {
   return getNumberOfNodesHelper(rootPtr);
 }
 
-template <class ItemType>
-bool BinarySearchTree<ItemType>::add(const ItemType& newEntry)
+template<typename KeyType, typename ItemType>
+bool BinarySearchTree<KeyType, ItemType>::add(const ItemType& newEntry)
 {
   newTreePtr = new BinaryNode<ItemType>(newEntry, nullptr, nullptr)
   insertInorder(rootPtr, newTreePtr);
@@ -213,14 +218,14 @@ bool BinarySearchTree<ItemType>::add(const ItemType& newEntry)
 }
 
 template<typename KeyType, typename ItemType>
-bool BinarySearchTree<ItemType>::remove(const KeyType& aKey)
+bool BinarySearchTree<KeyType, ItemType>::remove(const KeyType& aKey)
 {
   findNode(rootPtr, aKey);
-  removeValue(BinaryNode<ItemType>* subTreePtr, KeyType aKey, bool& success);
+  removeValue(BinaryNode<ItemType>* subTreePtr, KeyType aKey, bool& success); //FIX FORMATTING ON THIS
 }
 
 template<typename KeyType, typename ItemType>
-ItemType BinarySearchTree<ItemType>::getEntry(const KeyType& aKey) const throw(NotFoundException)
+ItemType BinarySearchTree<KeyType, ItemType>::getEntry(const KeyType& aKey) const throw(NotFoundException)
 {
 
 }
@@ -229,20 +234,20 @@ ItemType BinarySearchTree<ItemType>::getEntry(const KeyType& aKey) const throw(N
 // If this is not the case, throw InvalidSetEntryRequest.
 // If "aKey" does not exist in the tree, throw NotFoundException.
 template<typename KeyType, typename ItemType>
-void BinarySearchTree<ItemType>::setEntry(const KeyType& aKey, const ItemType& item) const
+void BinarySearchTree<KeyType, ItemType>::setEntry(const KeyType& aKey, const ItemType& item) const
  throw(NotFoundException, InvalidSetEntryRequest)
 {
 
 }
 
 template <typename KeyType, typename ItemType>
-bool BinarySearchTree<ItemType>::contains(const KeyType& aKey) const
+bool BinarySearchTree<KeyType, ItemType>::contains(const KeyType& aKey) const
 {
 
 }
 
-template <class ItemType>
-void BinarySearchTree<ItemType>::clear()
+template<typename KeyType, typename ItemType>
+void BinarySearchTree<KeyType, ItemType>::clear()
 {
   destroyTree(rootPtr);
 }
@@ -250,20 +255,20 @@ void BinarySearchTree<ItemType>::clear()
 //------------------------------------------------------------
 // Public Traversals Section.
 //------------------------------------------------------------
-template <class ItemType>
-void BinarySearchTree<ItemType>::preorderTraverse(void visit(ItemType&)) const
+template<typename KeyType, typename ItemType>
+void BinarySearchTree<KeyType, ItemType>::preorderTraverse(void visit(ItemType&)) const
 {
   preorder(visit, rootPtr);
 }
 
-template <class ItemType>
-void BinarySearchTree<ItemType>::inorderTraverse(void visit(ItemType&)) const
+template<typename KeyType, typename ItemType>
+void BinarySearchTree<KeyType, ItemType>::inorderTraverse(void visit(ItemType&)) const
 {
   inorder(visit, rootPtr);
 }
 
-template <class ItemType>
-void BinarySearchTree<ItemType>::postorderTraverse(void visit(ItemType&)) const
+template<typename KeyType, typename ItemType>
+void BinarySearchTree<KeyType, ItemType>::postorderTraverse(void visit(ItemType&)) const
 {
   postorder(visit, rootPtr);
 }
@@ -271,8 +276,8 @@ void BinarySearchTree<ItemType>::postorderTraverse(void visit(ItemType&)) const
 //------------------------------------------------------------
 // Overloaded Operator Section.
 //------------------------------------------------------------
-template <class ItemType>
-BinarySearchTree& BinarySearchTree<ItemType>::operator=(const BinarySearchTree& rightHandSide)
+template<typename KeyType, typename ItemType>
+BinarySearchTree& BinarySearchTree<KeyType, ItemType>::operator=(const BinarySearchTree& rightHandSide)
 {
 
 }
