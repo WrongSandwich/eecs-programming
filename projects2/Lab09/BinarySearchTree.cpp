@@ -319,7 +319,7 @@ ItemType BinarySearchTree<KeyType, ItemType>::getEntry(const KeyType& aKey) cons
   {
     return (searchNode->getItem());
   }
-  else throw NotFoundException();
+  else throw NotFoundException("getEntry could not find a matching task.");
 }
 
 // An entry in a BST can be set if and only if "item == aKey".
@@ -336,9 +336,9 @@ void BinarySearchTree<KeyType, ItemType>::setEntry(const KeyType& aKey, const It
     {
       searchNode->setItem(item);
     }
-    else throw NotFoundException();
+    else throw NotFoundException("setEntry could not find a matching task.");
   }
-  else throw InvalidSetEntryRequest();
+  else throw InvalidSetEntryRequest("setEntry called with non-matching item and key");
 }
 
 template <typename KeyType, typename ItemType>
