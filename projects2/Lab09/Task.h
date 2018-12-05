@@ -44,8 +44,10 @@ public:
   /**
   * @pre Task has not yet started (timeStarted = -1)
   * @post Starts task by setting startTime to currentTime
-  * @param currentTime: int that represents the current time 
+  * @param currentTime: int that represents the current time
   **/
   void startTask(int currentTime);
+
+  Task& operator==(const int& rightHandSide);
 };
 #endif

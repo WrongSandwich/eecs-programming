@@ -47,3 +47,12 @@ void Task::startTask(int currentTime)
 {
   timeStarted = currentTime;
 }
+
+Task& Task::operator==(const int& rightHandSide)
+{
+  if (taskID == rightHandSide)
+  {
+    return true;
+  }
+  else return false;
+}
