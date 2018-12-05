@@ -16,7 +16,10 @@
 BinaryNode<ItemType>* BinarySearchTree<ItemType>::insertInorder(BinaryNode<ItemType>* subTreePtr,
                                     BinaryNode<ItemType>* newNode)
 {
-
+  if (subTreePtr == nullptr)
+  {
+    
+  }
 }
 
 // Removes the given target value from the tree while maintaining a
@@ -48,9 +51,24 @@ BinaryNode<ItemType>* BinarySearchTree<ItemType>::removeLeftmostNode(BinaryNode<
 // Returns a pointer to the node containing the given value,
 // or nullptr if not found.
 BinaryNode<ItemType>* BinarySearchTree<ItemType>::findNode(BinaryNode<ItemType>* treePtr, KeyType aKey) const
- {
-
- }
+{
+  if treePtr == nullptr
+  {
+    return nullptr;
+  }
+  else if (treePtr->getItem().getID() == target)
+  {
+    return subTreePtr;
+  }
+  else if (treePtr->getItem().getID() < target)
+  {
+    return (findNode(treePtr->getLeftChildPtr(), aKey));
+  }
+  else
+  {
+    return (findNode(treePtr->getRightChildPtr(), aKey));
+  }
+}
 
 template <class ItemType>
 int BinarySearchTree<ItemType>::getHeightHelper(BinaryNode<ItemType>* subTreePtr) const
@@ -150,7 +168,7 @@ BinarySearchTree<ItemType>::BinarySearchTree() : rootPtr(nullptr)
 template <class ItemType>
 BinarySearchTree<ItemType>::BinarySearchTree(const ItemType& rootItem)
 {
-
+  rootPtr = new BinaryNode<ItemType>(rootItem, nullptr, nullptr);
 }
 
 template <class ItemType>
@@ -189,13 +207,16 @@ int BinarySearchTree<ItemType>::getNumberOfNodes() const
 template <class ItemType>
 bool BinarySearchTree<ItemType>::add(const ItemType& newEntry)
 {
-
+  newTreePtr = new BinaryNode<ItemType>(newEntry, nullptr, nullptr)
+  insertInorder(rootPtr, newTreePtr);
+  //WHAT THE FUCK DO I RETURN
 }
 
 template<typename KeyType, typename ItemType>
 bool BinarySearchTree<ItemType>::remove(const KeyType& aKey)
 {
-
+  findNode(rootPtr, aKey);
+  removeValue(BinaryNode<ItemType>* subTreePtr, KeyType aKey, bool& success);
 }
 
 template<typename KeyType, typename ItemType>
