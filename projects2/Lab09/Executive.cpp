@@ -1,6 +1,10 @@
 #include "Executive.h"
 #include "BinarySearchTree.h"
+#include "NotFoundException.h"
+#include "InvalidSetEntryRequest.h"
+#include "Task.h"
 #include <string>
+#include <stdexcept>
 #include <fstream>
 #include <iostream>
 
@@ -62,7 +66,11 @@ Executive::treeMaker()
       addAttempt = taskTree.add(newTask);
       if (addAttempt == false)
       {
-        //THROW SOME KIND OF ERROR
+        std::cout << "Runtime Error: Add attempt failed (task already exists)\n";
+      }
+      else
+      {
+        std::cout << "Task " << ID << " successfully added to tree\n";
       }
     }
     else if (inputData[pos] == "finish")
@@ -74,11 +82,18 @@ Executive::treeMaker()
       ID = std::stoi(inputData[pos]);
       if (taskTree.contains(ID))
       {
-        taskTree.getEntry(ID).printStats();
-        std::cout << "Time removed: " << execTime << '\n';
-        taskTree.remove(ID);
+        if (taskTree.getEntry(ID).hasStarted())
+        {
+          taskTree.getEntry(ID).printStats();
+          std::cout << "Time removed: " << execTime << '\n';
+          taskTree.remove(ID);
+        ]
+        else
+        {
+          std::cout << "Runtime Error: Finish attempt failed (task not yet started)\n";
+        }
       }
-      //else throw some sort of error
+      std::cout << "Not Found Exception: Finish attempt failed (task cannot be found)\n";
     }
     else if (inputData[pos] == "started")
     {
@@ -117,9 +132,15 @@ Executive::treeMaker()
           std::cout << "Task " << ID << "was successfully started\n";
           taskTree.getEntry(ID).printStats();
         }
-        //else report an error
+        else
+        {
+          std::cout << "Runtime Error: Start attempt failed (task already started)\n";
+        }
       }
-      //else report an error
+      else
+      {
+        std::cout << "Not Found Exception: Start attempt failed (task not found)\n";
+      }
     }
     else if (inputData[pos] == "taskPresent")
     {
@@ -148,7 +169,12 @@ Executive::treeMaker()
     {
       //Postorder traverse and either start task if not started
       //Or finish it if it has been started
+      std::cout << "Flushing tree\n";
       taskTree.postorderTraverse(flush);
+    }
+    else
+    {
+      std::cout << "Input Error: Invalid command call\n";
     }
   }
 }
@@ -157,10 +183,14 @@ static void flush(Task& target)
 {
   if (target.hasStarted())
   {
-    //HOW THE FUCK DO I DO THIS
+    target.printStats();
+    std::cout << "Time removed: " << execTime << '\n';
+    taskTree.remove(target.getID());
   }
   else
   {
     target.startTask(execTime);
+    std::cout << "Task " << ID << "was successfully started\n";
+    taskTree.getEntry(ID).printStats();
   }
 }

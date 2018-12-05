@@ -7,6 +7,12 @@
 *         Carrano and Henry.
 *******************************************************************************/
 
+#include <stdexcept>
+#include <iostream>
+#include "BinaryNode.h"
+#include "InvalidSetEntryRequest.h"
+#include "NotFoundException.h"
+
 //------------------------------------------------------------
 // Protected Utility Methods Section:
 // Recursive helper methods for the public methods.

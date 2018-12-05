@@ -3,6 +3,9 @@
 
 #include "Task.h"
 #include "BinarySearchTree.h"
+#include <stdexcept>
+#include "NotFoundException.h"
+#include "InvalidSetEntryRequest.h"
 #include <string>
 
 class Executive
@@ -12,8 +15,9 @@ private:
   int dataLength;
   int pos;
   int execTime;
-  BinarySearchTree<taskID, Task> taskTree;
+  BinarySearchTree<int, Task> taskTree;
 public:
   Executive(std::string fileName);
+  ~Executive();
 };
 #endif
