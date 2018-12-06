@@ -22,5 +22,4 @@ add 71328 Even_More 42
 finish 61342
 add 62432 OffByOne 43
 finish 61342
-flush
 numberNodes height
