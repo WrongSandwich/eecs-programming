@@ -75,7 +75,7 @@ BinaryNode<ItemType>* BinarySearchTree<KeyType, ItemType>::removeValue(BinaryNod
     subTreePtr = removeNode(subTreePtr);
     success = true;
   }
-  else if (subTreePtr->getItem() < aKey)
+  else if (subTreePtr->getItem() > aKey)
   {
     BinaryNode<ItemType>* tempPtr = removeValue(subTreePtr->getLeftChildPtr(), aKey, success);
     subTreePtr->setLeftChildPtr(tempPtr);
