@@ -1,3 +1,12 @@
+/*******************************************************************************
+*@author  Evan Trout
+*@file    Executive.cpp
+*@date    12/06/18
+*@brief   Implementation file for Executive class, which stores input commands
+*         in an array then uses them to build and modify a binary search tree.
+*******************************************************************************/
+
+
 #include "Executive.h"
 #include "BinarySearchTree.h"
 #include "NotFoundException.h"

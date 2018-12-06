@@ -50,6 +50,26 @@ int Task::getID()
   return taskID;
 }
 
+int Task::getTimeStarted()
+{
+  return timeStarted;
+}
+
+int Task::getTimeAdded()
+{
+  return timeAddedToBST;
+}
+
+std::string Task::getName()
+{
+  return taskName;
+}
+
+int Task::getEstimate()
+{
+  return estimatedTimeToComplete;
+}
+
 void Task::startTask(int currentTime)
 {
   timeStarted = currentTime;

@@ -40,9 +40,13 @@ public:
   void printStats();
 
   /**
-  * @return taskID
+  * @return each function's respective private class member
   **/
   int getID();
+  int getTimeStarted();
+  int getTimeAdded();
+  std::string getName();
+  int getEstimate();
 
   /**
   * @pre Task has not yet started (timeStarted = -1)
@@ -51,12 +55,19 @@ public:
   **/
   void startTask(int currentTime);
 
+  /**
+  * @return true if task has been started, false if not
+  **/
   bool hasStarted();
 
+  /**
+  * @pre task instance is compared with an int using one of these operators
+  * @param rightHandSide: an int to compare with this task's taskID
+  * @return the appropriate boolean response for each operator when comparing
+  *         rightHandSide with this task's taskID
+  **/
   bool operator==(const int& rightHandSide);
-
   bool operator>(const int& rightHandSide);
-
   bool operator<(const int& rightHandSide);
 };
 #endif
