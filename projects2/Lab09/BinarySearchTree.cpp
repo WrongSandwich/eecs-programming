@@ -12,6 +12,7 @@
 #include "BinaryNode.h"
 #include "InvalidSetEntryRequest.h"
 #include "NotFoundException.h"
+#include "Executive.h"
 
 //------------------------------------------------------------
 // Protected Utility Methods Section:
@@ -23,7 +24,12 @@ template<typename KeyType, typename ItemType>
 BinaryNode<ItemType>* BinarySearchTree<KeyType, ItemType>::insertInorder(BinaryNode<ItemType>* subTreePtr,
                                     BinaryNode<ItemType>* newNode)
 {
-  if (newNode->getItem().getID() < subTreePtr->getItem().getID())
+  if (subTreePtr == nullptr)
+  {
+    rootPtr = newNode;
+    return rootPtr;
+  }
+  else if (newNode->getItem() < subTreePtr->getItem().getID())
   {
     if (subTreePtr->getLeftChildPtr() == nullptr)
     {
@@ -35,7 +41,7 @@ BinaryNode<ItemType>* BinarySearchTree<KeyType, ItemType>::insertInorder(BinaryN
       insertInorder(subTreePtr->getLeftChildPtr(), newNode);
     }
   }
-  else if (newNode->getItem().getID() > subTreePtr->getItem().getID())
+  else if (newNode->getItem() > subTreePtr->getItem().getID())
   {
     if (subTreePtr->getRightChildPtr() == nullptr)
     {
@@ -132,7 +138,7 @@ BinaryNode<ItemType>* BinarySearchTree<KeyType, ItemType>::removeLeftmostNode(Bi
   }
   else
   {
-    Binarynode<ItemType>* tempPtr = removeLeftmostNode(subTreePtr->getLeftChildPtr(), inorderSuccessor);
+    BinaryNode<ItemType>* tempPtr = removeLeftmostNode(subTreePtr->getLeftChildPtr(), inorderSuccessor);
     subTreePtr->setLeftChildPtr(tempPtr);
     return subTreePtr;
   }
@@ -143,21 +149,21 @@ BinaryNode<ItemType>* BinarySearchTree<KeyType, ItemType>::removeLeftmostNode(Bi
 template<typename KeyType, typename ItemType>
 BinaryNode<ItemType>* BinarySearchTree<KeyType, ItemType>::findNode(BinaryNode<ItemType>* treePtr, KeyType aKey) const
 {
-  if treePtr == nullptr
+  if (treePtr == nullptr)
   {
     return nullptr;
   }
-  else if (treePtr->getItem() == target)
+  else if (treePtr->getItem() == aKey)
   {
     return treePtr;
   }
-  else if (treePtr->getItem() < target)
+  else if (treePtr->getItem() < aKey)
   {
-    return (findNode(treePtr->getLeftChildPtr(), aKey));
+    return (findNode(treePtr->getRightChildPtr(), aKey));
   }
   else
   {
-    return (findNode(treePtr->getRightChildPtr(), aKey));
+    return (findNode(treePtr->getLeftChildPtr(), aKey));
   }
 }
 
@@ -204,7 +210,7 @@ BinaryNode<ItemType>* BinarySearchTree<KeyType, ItemType>::copyTree(const Binary
   BinaryNode<ItemType>* newTreePtr = nullptr;
   if (treePtr != nullptr)
   {
-    newTreePtr = new BinaryNode<ItemType>(treePtr->getItem(), nullptr, nullptr)
+    newTreePtr = new BinaryNode<ItemType>(treePtr->getItem(), nullptr, nullptr);
     newTreePtr->setLeftChildPtr(copyTree(treePtr->getLeftChildPtr()));
     newTreePtr->setRightChildPtr(copyTree(treePtr->getRightChildPtr()));
   }
@@ -298,9 +304,8 @@ int BinarySearchTree<KeyType, ItemType>::getNumberOfNodes() const
 template<typename KeyType, typename ItemType>
 bool BinarySearchTree<KeyType, ItemType>::add(const ItemType& newEntry)
 {
-  BinaryNode<ItemType>* newTreePtr = nullptr;
+  BinaryNode<ItemType>* newTreePtr = new BinaryNode<ItemType>(newEntry);
   BinaryNode<ItemType>* inorderPtr = nullptr;
-  newTreePtr = new BinaryNode<ItemType>(newEntry, nullptr, nullptr)
   inorderPtr = insertInorder(rootPtr, newTreePtr);
   if (inorderPtr == nullptr)
   {
@@ -321,7 +326,7 @@ template<typename KeyType, typename ItemType>
 ItemType BinarySearchTree<KeyType, ItemType>::getEntry(const KeyType& aKey) const throw(NotFoundException)
 {
   BinaryNode<ItemType>* searchNode = findNode(rootPtr, aKey);
-  if searchNode != nullptr
+  if (searchNode != nullptr)
   {
     return (searchNode->getItem());
   }
@@ -351,11 +356,11 @@ template <typename KeyType, typename ItemType>
 bool BinarySearchTree<KeyType, ItemType>::contains(const KeyType& aKey) const
 {
   BinaryNode<ItemType>* searchNode = findNode(rootPtr, aKey);
-  if (searchNode != nullptr)
+  if (searchNode == nullptr)
   {
-    return true;
+    return false;
   }
-  else return false;
+  else return true;
 }
 
 template<typename KeyType, typename ItemType>

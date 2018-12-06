@@ -44,12 +44,17 @@ Executive::Executive(std::string fileName)
   treeMaker();
 }
 
-Executive::treeMaker()
+Executive::~Executive()
 {
-  execTime++;
-  pos++;
-  if (pos < dataLength)
+  delete[] inputData;
+}
+
+void Executive::treeMaker()
+{
+  while (pos < (dataLength-1))
   {
+    execTime++;
+    pos++;
     if (inputData[pos] == "add")
     {
       //Add a task if it's not already been added to the tree
@@ -61,7 +66,7 @@ Executive::treeMaker()
       name = inputData[pos];
       pos++;
       estimatedTime = std::stoi(inputData[pos]);
-      Task newTask = new Task(ID, name, estimatedTime, execTime);
+      Task newTask(ID, name, estimatedTime, execTime);
       bool addAttempt;
       addAttempt = taskTree.add(newTask);
       if (addAttempt == false)
@@ -87,13 +92,16 @@ Executive::treeMaker()
           taskTree.getEntry(ID).printStats();
           std::cout << "Time removed: " << execTime << '\n';
           taskTree.remove(ID);
-        ]
+        }
         else
         {
           std::cout << "Runtime Error: Finish attempt failed (task not yet started)\n";
         }
       }
-      std::cout << "Not Found Exception: Finish attempt failed (task cannot be found)\n";
+      else
+      {
+        std::cout << "Not Found Exception: Finish attempt failed (task cannot be found)\n";
+      }
     }
     else if (inputData[pos] == "started")
     {
@@ -126,11 +134,9 @@ Executive::treeMaker()
       ID = std::stoi(inputData[pos]);
       if (taskTree.contains(ID))
       {
-        if (!taskTree.getEntry(ID).hasStarted())
+        if (taskTree.getEntry(ID).hasStarted() == false)
         {
           taskTree.getEntry(ID).startTask(execTime);
-          std::cout << "Task " << ID << "was successfully started\n";
-          taskTree.getEntry(ID).printStats();
         }
         else
         {
@@ -154,7 +160,7 @@ Executive::treeMaker()
       }
       else
       {
-        std::cout << "Task " << ID << "has not been added\n";
+        std::cout << "Task " << ID << " has not been added\n";
       }
     }
     else if (inputData[pos] == "height")
@@ -169,8 +175,12 @@ Executive::treeMaker()
     {
       //Postorder traverse and either start task if not started
       //Or finish it if it has been started
-      std::cout << "Flushing tree\n";
-      taskTree.postorderTraverse(flush);
+      //std::cout << "Flushing tree\n";
+      //taskTree.postorderTraverse(flush);
+      //So I know this has to be postorder but I cannot for the life of me figure
+      //out how to write the visit function correctly...
+      std::cout << "Warning: I couldn't figure out how to implement flush\n";
+      std::cout << "All flushes will be skipped :/\n";
     }
     else
     {
@@ -179,18 +189,18 @@ Executive::treeMaker()
   }
 }
 
+/*************************
 static void flush(Task& target)
 {
   if (target.hasStarted())
   {
     target.printStats();
     std::cout << "Time removed: " << execTime << '\n';
-    taskTree.remove(target.getID());
+    remove(target.getID());
   }
   else
   {
     target.startTask(execTime);
-    std::cout << "Task " << ID << "was successfully started\n";
-    taskTree.getEntry(ID).printStats();
   }
 }
+*******************/

@@ -9,6 +9,13 @@
 #include <iostream>
 #include "Task.h"
 #include <string>
+#include "Executive.h"
+#include "BinarySearchTree.h"
+
+Task::Task()
+{
+
+}
 
 Task::Task(int newID, std::string newName, int newEstimate, int currentTime)
 {
@@ -46,6 +53,8 @@ int Task::getID()
 void Task::startTask(int currentTime)
 {
   timeStarted = currentTime;
+  std::cout << "Task " << taskID << " successfully started\n";
+  printStats();
 }
 
 bool Task::hasStarted()
@@ -57,9 +66,27 @@ bool Task::hasStarted()
   else return true;
 }
 
-Task& Task::operator==(const int& rightHandSide)
+bool Task::operator==(const int& rightHandSide)
 {
   if (taskID == rightHandSide)
+  {
+    return true;
+  }
+  else return false;
+}
+
+bool Task::operator>(const int& rightHandSide)
+{
+  if (taskID > rightHandSide)
+  {
+    return true;
+  }
+  else return false;
+}
+
+bool Task::operator<(const int& rightHandSide)
+{
+  if (taskID < rightHandSide)
   {
     return true;
   }

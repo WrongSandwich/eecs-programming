@@ -20,6 +20,9 @@ private:
   int timeAddedToBST;
   int timeStarted;
 public:
+
+  Task();
+
   /**
   * @pre Constructor is called with valid arguments
   * @post Task is created with given arguments
@@ -39,7 +42,7 @@ public:
   /**
   * @return taskID
   **/
-  void getID();
+  int getID();
 
   /**
   * @pre Task has not yet started (timeStarted = -1)
@@ -50,6 +53,10 @@ public:
 
   bool hasStarted();
 
-  Task& operator==(const int& rightHandSide);
+  bool operator==(const int& rightHandSide);
+
+  bool operator>(const int& rightHandSide);
+
+  bool operator<(const int& rightHandSide);
 };
 #endif

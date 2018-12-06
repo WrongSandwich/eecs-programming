@@ -61,9 +61,12 @@ protected:
 		KeyType aKey) const;
 
    //Recursively helps the getHeight method
-   int getHeightHelper(BinaryNode<ItemType>* subTreePtr) const
+   int getHeightHelper(BinaryNode<ItemType>* subTreePtr) const;
    //Recursively helps the getNumberOfNodes method
-   int getNumberOfNodesHelper(BinaryNode<ItemType>* subTreePtr) const
+   int getNumberOfNodesHelper(BinaryNode<ItemType>* subTreePtr) const;
+
+   void destroyTree(BinaryNode<ItemType>* subTreePtr);
+   BinaryNode<ItemType>* copyTree(const BinaryNode<ItemType>* treePtr);
    // Recursive traversal helper methods:
    void preorder(void visit(ItemType&), BinaryNode<ItemType>* treePtr) const;
    void inorder(void visit(ItemType&), BinaryNode<ItemType>* treePtr) const;
@@ -75,7 +78,7 @@ public:
    //------------------------------------------------------------
    BinarySearchTree();
    BinarySearchTree(const ItemType& rootItem);
-   BinarySearchTree(const BinarySearchTree<ItemType>& tree);
+   BinarySearchTree(const BinarySearchTree<KeyType, ItemType>& tree);
    virtual ~BinarySearchTree();
 
    //------------------------------------------------------------

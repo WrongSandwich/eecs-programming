@@ -19,5 +19,7 @@ private:
 public:
   Executive(std::string fileName);
   ~Executive();
+  void treeMaker();
+  //static void flush(Task& target);
 };
 #endif
