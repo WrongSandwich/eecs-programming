@@ -148,7 +148,10 @@ void Executive::treeMaker()
       {
         if (taskTree.getEntry(ID).hasStarted() == false)
         {
-          taskTree.getEntry(ID).startTask(execTime);
+          //taskTree.getEntry(ID).startTask(execTime);
+          Task tempTask = taskTree.getEntry(ID);
+          tempTask.startTask(execTime);
+          taskTree.setEntry(ID, tempTask);
         }
         else
         {

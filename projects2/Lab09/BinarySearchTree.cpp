@@ -340,7 +340,7 @@ template<typename KeyType, typename ItemType>
 void BinarySearchTree<KeyType, ItemType>::setEntry(const KeyType& aKey, const ItemType& item) const
  throw(NotFoundException, InvalidSetEntryRequest)
 {
-  if (item == aKey)
+  if (item.getID() == aKey)
   {
     BinaryNode<ItemType>* searchNode = findNode(rootPtr, aKey);
     if (searchNode != nullptr)

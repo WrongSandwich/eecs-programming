@@ -45,27 +45,27 @@ void Task::printStats()
   }
 }
 
-int Task::getID()
+int Task::getID() const
 {
   return taskID;
 }
 
-int Task::getTimeStarted()
+int Task::getTimeStarted() const
 {
   return timeStarted;
 }
 
-int Task::getTimeAdded()
+int Task::getTimeAdded() const
 {
   return timeAddedToBST;
 }
 
-std::string Task::getName()
+std::string Task::getName() const
 {
   return taskName;
 }
 
-int Task::getEstimate()
+int Task::getEstimate() const 
 {
   return estimatedTimeToComplete;
 }

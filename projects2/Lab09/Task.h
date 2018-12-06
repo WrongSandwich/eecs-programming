@@ -42,11 +42,11 @@ public:
   /**
   * @return each function's respective private class member
   **/
-  int getID();
-  int getTimeStarted();
-  int getTimeAdded();
-  std::string getName();
-  int getEstimate();
+  int getID() const;
+  int getTimeStarted() const;
+  int getTimeAdded() const;
+  std::string getName() const;
+  int getEstimate() const;
 
   /**
   * @pre Task has not yet started (timeStarted = -1)
