@@ -1,10 +1,10 @@
 /*******************************************************************************
 *@author  Evan Trout
 *@file    Node.h
-*@date    09/19/2018
+*@date    8/26/2019
 *@brief   Header file for the Node class. Template class that creates
-*         a single node with an item of ItemType and a pointer to the next item
-*         in the chain. Used by LinkedList class.
+*         a single node with an item of ItemType and pointers to the next and
+*         previous items in the chain. Used by DoublyLinkedList class.
 *******************************************************************************/
 
 #ifndef NODE_H
@@ -16,6 +16,7 @@ class Node
 private:
   ItemType item;
   Node<ItemType>* next;
+  Node<ItemType>* prev;
 public:
   /**
   * @post creates a Node and initializes next to nullptr
@@ -31,12 +32,13 @@ public:
   Node(const ItemType& anItem);
 
   /**
-  * @param anItem (see constructor above) and nextNodePtr, a pointer to a node
-  *        that will be used as next
-  * @post creates a Node, with next set to nextNodePtr and anItem as item
+  * @param anItem (see constructor above)
+  * @param nextNodePtr, a pointer to a node that will be used as next
+  * @param prevNodePtr, a pointer to a node that will be used as prev
+  * @post creates a Node, with pointers set and anItem as item
   * @return returns the node
   */
-  Node(const ItemType& anItem, Node<ItemType>* nextNodePtr);
+  Node(const ItemType& anItem, Node<ItemType>* nextNodePtr, Node<ItemType>* prevNodePtr);
 
   /**
   * @param anItem, an object of some class that will be put in the node
@@ -51,6 +53,12 @@ public:
   void setNext(Node<ItemType>* nextNodePtr);
 
   /**
+  * @param prevNodePtr, a pointer to a node that will be placed previous in the chain
+  * @post prev will point to the same node as prevNodePtr
+  */
+  void setPrev(Node<ItemType>* prevNodePtr);
+
+  /**
   * @return returns item for the current node
   */
   ItemType getItem() const;
@@ -59,6 +67,11 @@ public:
   * @return returns a pointer to the destination of next
   */
   Node<ItemType>* getNext() const;
+
+  /**
+  * @return returns a pointer to the destination of prev
+  */
+  Node<ItemType>* getPrev() const;
 };
 
 #include "Node.cpp"
