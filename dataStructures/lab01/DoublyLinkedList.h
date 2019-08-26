@@ -28,6 +28,8 @@ private:
    // @return  A pointer to the node at the given position.
    Node<int>* getNodeAt(int position) const;
 
+   Node<int>* search(int search) const;
+
 public:
   /**
   * @post creates a LinkedList and sets headPtr to nullptr, tailPtr to nullptr, and itemCount to 0
@@ -61,14 +63,14 @@ public:
    * @param newEntry: A new entry to put in the list
    * @post A new node is inserted into the list at the tail.
    */
-   void insert(const int& newEntry) throw (std::runtime_error);
+   void insert(const int& newEntry);
 
    /**
    * @param search: a value the user wants to remove
    * @post If found, the first node containing the given value is removed
    * @return True if node deleted, False if no match found
    */
-   bool remove(int& search) throw (std::runtime_error);
+   bool remove(int search) throw (std::runtime_error);
 
    /**
    * @post Removes all entries in the list
