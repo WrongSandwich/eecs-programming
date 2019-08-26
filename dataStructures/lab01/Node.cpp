@@ -1,10 +1,10 @@
 /*******************************************************************************
 *@author  Evan Trout
 *@file    Node.cpp
-*@date    09/19/2018
+*@date    8/26/2019
 *@brief   Implementation file for the Node class. Template class that creates
-*         a single node with an item of ItemType and a pointer to the next item
-*         in the chain. Used by LinkedList class.
+*         a single node with an item of ItemType and pointers to the next and
+*         previous items in the chain. Used by DoublyLinkedList class.
 *******************************************************************************/
 
 #include "Node.h"
