@@ -10,7 +10,6 @@
 #define DOUBLY_LINKED_LIST_H
 
 #include "Node.h"
-#include <string>
 #include <stdexcept>
 
 class DoublyLinkedList
@@ -125,5 +124,4 @@ public:
    void reverseList();
 };
 
-#include "LinkedList.cpp"
 #endif

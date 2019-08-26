@@ -2,16 +2,15 @@
 *@author  Evan Trout
 *@file    LinkedList.cpp
 *@date    09/19/2018
-*@brief   Implementation file for LinkedList class. Creates and maintains a
-*         linked list of nodes that is used by the WebBrowser class. Derived
-*         from ListInterface class.
+*@brief   Implementation file for DoublyLinkedList class. Creates and maintains a
+*         doubly linked list of nodes containing ints.
 *******************************************************************************/
 
 #include <iostream>
-#include <string>
 #include <stdexcept>
 
 #include "Node.h"
+#include "DoublyLinkedList.h"
 
 Node<int>* DoublyLinkedList::getNodeAt(int position) const
 {
@@ -38,6 +37,7 @@ Node<int>* DoublyLinkedList::search(int search) const
     {
       return ptr;
     }
+    ptr = ptr->getNext();
   }
   return nullptr;
 }
@@ -113,6 +113,7 @@ bool DoublyLinkedList::remove(int search)
     if (prevNode != nullptr)
     {
       prevNode->setNext(nextNode);
+      target->setPrev(nullptr);
     }
     else
     {
@@ -121,6 +122,7 @@ bool DoublyLinkedList::remove(int search)
     if (nextNode != nullptr)
     {
       nextNode->setPrev(prevNode);
+      target->setNext(nullptr);
     }
     else
     {
@@ -131,10 +133,9 @@ bool DoublyLinkedList::remove(int search)
   }
 }
 
-template <class ItemType>
-void LinkedList<ItemType>::clear() //Removes all entries in the list
+void DoublyLinkedList::clear() //Removes all entries in the list
 {
-  Node<ItemType>* nodeToDeletePtr = headPtr;
+  Node<int>* nodeToDeletePtr = headPtr;
   while (headPtr != nullptr)
   {
     headPtr = headPtr->getNext(); //Move headPtr to next node
@@ -145,25 +146,97 @@ void LinkedList<ItemType>::clear() //Removes all entries in the list
   itemCount = 0;
 }
 
-template <class ItemType>
-ItemType LinkedList<ItemType>::getEntry(int position) const throw (std::runtime_error)
+int DoublyLinkedList::getEntry(int position) const throw (std::runtime_error)
 {
   if ((position > 0) && (position <= itemCount))
   {
-    Node<ItemType>* targetNode = getNodeAt(position);
+    Node<int>* targetNode = getNodeAt(position);
     return targetNode->getItem();
   }
   else throw std::runtime_error("error");
 }
 
-template <class ItemType>
-void LinkedList<ItemType>::setEntry(int position, const ItemType& newEntry)
+void DoublyLinkedList::setEntry(int position, const int& newEntry)
                                     throw (std::runtime_error)
 {
   if ((position > 0) && (position <= itemCount))
   {
-    Node<ItemType>* targetNode = getNodeAt(position);
+    Node<int>* targetNode = getNodeAt(position);
     targetNode->setItem(newEntry);
   }
   else throw std::runtime_error("error");
+}
+
+int DoublyLinkedList::smallest()
+{
+  Node<int>* ptr = headPtr;
+  if (ptr == nullptr)
+  {
+    return -1;
+  }
+  int smallest = ptr->getItem();
+  while (ptr != nullptr)
+  {
+    int cur = ptr->getItem()
+    if (cur < smallest)
+    {
+      smallest = cur;
+    }
+  }
+  return smallest;
+}
+
+int DoublyLinkedList::largest()
+{
+  Node<int>* ptr = headPtr;
+  if (ptr == nullptr)
+  {
+    return -1;
+  }
+  int largest = ptr->getItem();
+  while (ptr != nullptr)
+  {
+    int cur = ptr->getItem()
+    if (cur > largest)
+    {
+      largest = cur;
+    }
+  }
+  return largest;
+}
+
+double DoublyLinkedList::average()
+{
+  Node<int>* ptr = headPtr;
+  if (ptr == nullptr)
+  {
+    return 0.0;
+  }
+  int total = 0;
+  while (ptr != nullptr)
+  {
+    total += ptr->getItem();
+  }
+  double average = (double)total/(double)itemCount;
+  return average;
+}
+
+void DoublyLinkedList::merge(const DoublyLinkedList& aList)
+{
+  // TODO: Write merge
+}
+
+void DoublyLinkedList::print()
+{
+  Node<int>* ptr = headPtr;
+  while (ptr != nullptr)
+  {
+    int cur = ptr->getItem()
+    std::cout << cur << " ";
+  }
+}
+
+void DoublyLinkedList::reverseList()
+{
+  // TODO: Write reverseList
 }
