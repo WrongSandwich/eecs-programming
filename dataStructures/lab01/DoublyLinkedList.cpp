@@ -1,7 +1,7 @@
 /*******************************************************************************
 *@author  Evan Trout
-*@file    LinkedList.cpp
-*@date    09/19/2018
+*@file    DoublyLinkedList.cpp
+*@date    08/26/2019
 *@brief   Implementation file for DoublyLinkedList class. Creates and maintains a
 *         doubly linked list of nodes containing ints.
 *******************************************************************************/

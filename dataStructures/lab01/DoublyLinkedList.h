@@ -1,7 +1,7 @@
 /*******************************************************************************
 *@author  Evan Trout
-*@file    LinkedList.h
-*@date    09/19/2018
+*@file    DoublyLinkedList.h
+*@date    08/26/2019
 *@brief   Header file for the DoublyLinkedList class. Creates and maintains a
 *         doubly linked list of nodes containing ints.
 *******************************************************************************/
