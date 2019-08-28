@@ -17,7 +17,7 @@ Node<int>* DoublyLinkedList::getNodeAt(int position) const
   if ((position>0) && (position<=itemCount))
   {
     int p = 1;
-    Node<ItemType>* ptr = headPtr;
+    Node<int>* ptr = headPtr;
     while(p!=position)
     {
       p++;
@@ -57,7 +57,7 @@ DoublyLinkedList::DoublyLinkedList(const DoublyLinkedList& aList)
   for (int i = 1; i <= itemCount; i++)
   {
     copyValue = aList.getEntry(i);
-    insert(i, copyValue);
+    insert(copyValue);
   }
 }
 
@@ -177,7 +177,7 @@ int DoublyLinkedList::smallest()
   int smallest = ptr->getItem();
   while (ptr != nullptr)
   {
-    int cur = ptr->getItem()
+    int cur = ptr->getItem();
     if (cur < smallest)
     {
       smallest = cur;
@@ -231,7 +231,7 @@ void DoublyLinkedList::print()
   Node<int>* ptr = headPtr;
   while (ptr != nullptr)
   {
-    int cur = ptr->getItem()
+    int cur = ptr->getItem();
     std::cout << cur << " ";
   }
 }
