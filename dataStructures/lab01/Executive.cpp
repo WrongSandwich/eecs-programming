@@ -8,10 +8,7 @@
 
 
 #include "Executive.h"
-#include "BinarySearchTree.h"
-#include "NotFoundException.h"
-#include "InvalidSetEntryRequest.h"
-#include "Task.h"
+#include "DoublyLinkedList.h"
 #include <string>
 #include <stdexcept>
 #include <fstream>
@@ -19,209 +16,94 @@
 
 Executive::Executive(std::string fileName)
 {
-  
-
-
-
-  dataLength = 0;
-  pos = -1;
-  execTime = 0;
-  inputData = nullptr;
-  std::string* newArray = nullptr;
   std::ifstream inFile;
   inFile.open(fileName);
   if (inFile.is_open())
   {
-    int i = 1;
-    newArray = new std::string[i];
-    inFile >> newArray[dataLength];
-    inputData = newArray;
-    i++;
-    newArray = nullptr;
+    int temp;
     while (!inFile.eof())
     {
-      dataLength++;
-      newArray = new std::string[i];
-      for (int j = 0; j < dataLength; j++)
-      {
-        newArray[j] = inputData[j];
-      }
-      inFile >> newArray[dataLength]; //New array is complete
-      delete[] inputData;
-      inputData = newArray;
-      i++;
-      newArray = nullptr;
+      inFile >> temp;
+      dll.insert(temp);
     }
   }
   inFile.close();
-  treeMaker();
+  userInterface();
 }
 
 Executive::~Executive()
-{
-  delete[] inputData;
-}
+{}
 
-void Executive::treeMaker()
+void Executive::userInterface()
 {
-  while (pos < (dataLength-1))
-  {
-    std::cout << "===============\n";
-    execTime++;
-    pos++;
-    if (inputData[pos] == "add")
+  int userInput = 0;
+  while (userInput != 9) {
+    std::cout << "Choose from one of the options below:\n";
+    std::cout << "1. Insert\n2. Delete\n3. Find smallest number\n4. Find largest number\n";
+    std::cout << "5. Average\n6. Merge 2 lists\n7. Print\n8. Reverse list\n9. Exit\n";
+    std::cin >> userInput;
+    if (userInput == 1) //Insert
     {
-      //Add a task if it's not already been added to the tree
-      std::string name;
-      int ID, estimatedTime;
-      pos++;
-      ID = std::stoi(inputData[pos]);
-      pos++;
-      name = inputData[pos];
-      pos++;
-      estimatedTime = std::stoi(inputData[pos]);
-      Task newTask(ID, name, estimatedTime, execTime);
-      bool addAttempt;
-      addAttempt = taskTree.add(newTask);
-      if (addAttempt == false)
+      int temp;
+      std::cout << "Enter element to be inserted in list: ";
+      std::cin >> temp;
+      dll.insert(temp);
+    }
+    else if (userInput == 2) //Delete
+    {
+      int temp;
+      std::cout << "Enter the number to be deleted: ";
+      std::cin >> temp;
+      bool success = dll.remove(temp);
+      if (success)
       {
-        std::cout << "Runtime Error: Add attempt failed (task already exists)\n";
+        std::cout << "Delete was successful\n";
       }
       else
       {
-        std::cout << "ADD: Task " << ID << " successfully added to tree\n";
+        std::cout << "Delete failed. Number was not found in the list\n";
       }
     }
-    else if (inputData[pos] == "finish")
+    else if (userInput == 3) //Find smallest number
     {
-      //Remove task from BST and report its statistics and time finishing
-      //Or throw error if it cannot be found
-      int ID;
-      pos++;
-      ID = std::stoi(inputData[pos]);
-      if (taskTree.contains(ID))
-      {
-        if (taskTree.getEntry(ID).hasStarted())
-        {
-          std::cout << "FINISH: ";
-          taskTree.getEntry(ID).printStats();
-          std::cout << "Time removed: " << execTime << '\n';
-          taskTree.remove(ID);
-        }
-        else
-        {
-          std::cout << "FINISH: Runtime Error: Finish attempt failed (task not yet started)\n";
-        }
-      }
-      else
-      {
-        std::cout << "FINISH: Not Found Exception: Finish attempt failed (task cannot be found)\n";
-      }
+      std::cout << "Smallest number: " << dll.smallest() << '\n';
     }
-    else if (inputData[pos] == "started")
+    else if (userInput == 4) //Find largest number
     {
-      //Report if task has started or not, and if it is not present.
-      int ID;
-      pos++;
-      ID = std::stoi(inputData[pos]);
-      if (taskTree.contains(ID))
-      {
-        if (!taskTree.getEntry(ID).hasStarted())
-        {
-          std::cout << "STARTED: Task " << ID << " has not yet started\n";
-        }
-        else
-        {
-          std::cout << "STARTED: Task " << ID << " has started\n";
-        }
-      }
-      else
-      {
-        std::cout << "STARTED: Task " << ID << " has not been added\n";
-      }
+      std::cout << "Largest number: " << dll.largest() << '\n';
     }
-    else if (inputData[pos] == "start")
+    else if (userInput == 5) //Average
     {
-      //Locate and start task, then print its statistics
-      //Report error if not found or already started
-      int ID;
-      pos++;
-      ID = std::stoi(inputData[pos]);
-      std::cout << "START: ";
-      if (taskTree.contains(ID))
-      {
-        if (taskTree.getEntry(ID).hasStarted() == false)
-        {
-          //taskTree.getEntry(ID).startTask(execTime);
-          Task tempTask = taskTree.getEntry(ID);
-          tempTask.startTask(execTime);
-          taskTree.setEntry(ID, tempTask);
-        }
-        else
-        {
-          std::cout << "Runtime Error: Start attempt failed (task already started)\n";
-        }
-      }
-      else
-      {
-        std::cout << "Not Found Exception: Start attempt failed (task not found)\n";
-      }
+      std::cout << "List average: " << dll.average() << '\n';
     }
-    else if (inputData[pos] == "taskPresent")
+    else if (userInput == 6) //Merge 2 lists
     {
-      //If task is present, print its statistics, if not print a message
-      int ID;
-      pos++;
-      ID = std::stoi(inputData[pos]);
-      std::cout << "TASK PRESENT: ";
-      if (taskTree.contains(ID))
-      {
-        taskTree.getEntry(ID).printStats();
-      }
-      else
-      {
-        std::cout << "Task " << ID << " has not been added\n";
-      }
+      std::string userList;
+      std::cout << "Enter new list to be merged: \n";
+      std::cin >> userList;
+      DoublyLinkedList userLinkedList;
+      // TODO: convert input list into actual dll
+      dll.merge(userLinkedList);
+      dll.print();
     }
-    else if (inputData[pos] == "height")
+    else if (userInput == 7) //Print
     {
-      std::cout << "HEIGHT: Current tree height: " << taskTree.getHeight() << '\n';
+      std::cout << "List: ";
+      dll.print();
+      std::cout << '\n';
     }
-    else if (inputData[pos] == "numberNodes")
+    else if (userInput == 8) //Reverse list
     {
-      std::cout << "NUMBER OF NODES: Current tree node count: " << taskTree.getNumberOfNodes() << '\n';
+      dll.reverseList();
+      dll.print();
     }
-    else if (inputData[pos] == "flush")
+    else if (userInput == 9) //Exit
     {
-      //Postorder traverse and either start task if not started
-      //Or finish it if it has been started
-      //std::cout << "Flushing tree\n";
-      //taskTree.postorderTraverse(flush);
-      //So I know this has to be postorder but I cannot for the life of me figure
-      //out how to write the visit function correctly...
-      std::cout << "FLUSH: Warning: I couldn't figure out how to implement flush\n";
-      std::cout << "All flushes will be skipped :/\n";
+      std::cout << "Exiting\n";
     }
-    else
+    else //Invalid input
     {
-      std::cout << "Input Error: Invalid command call\n";
+      std::cout << "Please enter a valid menu option\n";
     }
-  }
-  std::cout << "===============\n";
-}
-
-/*************************
-static void flush(Task& target)
-{
-  if (target.hasStarted())
-  {
-    target.printStats();
-    std::cout << "Time removed: " << execTime << '\n';
-    remove(target.getID());
-  }
-  else
-  {
-    target.startTask(execTime);
   }
 }
-*******************/
