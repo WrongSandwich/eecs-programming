@@ -81,9 +81,7 @@ void Executive::userInterface()
       std::string userList;
       std::cout << "Enter new list to be merged: \n";
       std::cin >> userList;
-      DoublyLinkedList userLinkedList;
-      // TODO: convert input list into actual dll
-      dll.merge(userLinkedList);
+      dll.merge(userList);
       dll.print();
     }
     else if (userInput == 7) //Print

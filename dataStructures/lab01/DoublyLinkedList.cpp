@@ -221,7 +221,7 @@ double DoublyLinkedList::average()
   return average;
 }
 
-void DoublyLinkedList::merge(const DoublyLinkedList& aList)
+void DoublyLinkedList::merge(const std::string& aList)
 {
   // TODO: Write merge
 }
@@ -238,5 +238,12 @@ void DoublyLinkedList::print()
 
 void DoublyLinkedList::reverseList()
 {
-  // TODO: Write reverseList
+  Node<int>* ptr = tailPtr->getPrev();
+  while (ptr != nullptr)
+  {
+    int temp = ptr->getItem();
+    insert(temp);
+    ptr = ptr->getPrev();
+    remove(temp);
+  }
 }

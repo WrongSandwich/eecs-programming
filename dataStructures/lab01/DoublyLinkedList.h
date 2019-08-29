@@ -111,7 +111,7 @@ public:
    * @post The provided list is merged with this list in an ascending list
    * @param aList: a list to be merged with this one
    **/
-   void merge(const DoublyLinkedList& aList);
+   void merge(const std::string& aList);
 
    /**
    * @post prints the contents of the list
