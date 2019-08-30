@@ -238,6 +238,7 @@ void DoublyLinkedList::print()
   {
     int cur = ptr->getItem();
     std::cout << cur << " ";
+    ptr = ptr->getNext();
   }
 }
 

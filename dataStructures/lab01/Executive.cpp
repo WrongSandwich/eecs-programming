@@ -26,6 +26,8 @@ Executive::Executive(std::string fileName)
     {
       inFile >> temp;
       dll.insert(temp);
+      std::cout << "inserted " << temp << '\n';
+      // TODO: stop repeat of last item
     }
   }
   inFile.close();
@@ -44,6 +46,7 @@ void Executive::userInterface()
     std::cout << "5. Average\n6. Merge 2 lists\n7. Print\n8. Reverse list\n9. Exit\n";
     std::cout << "Enter your selection: ";
     std::cin >> userInput;
+    std::cout << '\n';
     if (userInput == 1) //Insert
     {
       int temp;
@@ -85,17 +88,19 @@ void Executive::userInterface()
       std::cin >> userList;
       merge(userList);
       dll.print();
+      std::cout << "\n\n";
     }
     else if (userInput == 7) //Print
     {
       std::cout << "List: ";
       dll.print();
-      std::cout << '\n';
+      std::cout << "\n\n";
     }
     else if (userInput == 8) //Reverse list
     {
       dll.reverseList();
       dll.print();
+      std::cout << "\n\n";
     }
     else if (userInput == 9) //Exit
     {
