@@ -100,9 +100,9 @@ void DoublyLinkedList::insert(const int& newEntry)
   }
 }
 
-bool DoublyLinkedList::remove(int search)
+bool DoublyLinkedList::remove(int searchInt)
 {
-  Node<int>* target = search(search);
+  Node<int>* target = search(searchInt);
   if (target == nullptr)
   {
     return false;
@@ -148,25 +148,22 @@ void DoublyLinkedList::clear() //Removes all entries in the list
   itemCount = 0;
 }
 
-int DoublyLinkedList::getEntry(int position) const throw (std::runtime_error)
+int DoublyLinkedList::getEntry(int position) const
 {
   if ((position > 0) && (position <= itemCount))
   {
     Node<int>* targetNode = getNodeAt(position);
     return targetNode->getItem();
   }
-  else throw std::runtime_error("error");
 }
 
 void DoublyLinkedList::setEntry(int position, const int& newEntry)
-                                    throw (std::runtime_error)
 {
   if ((position > 0) && (position <= itemCount))
   {
     Node<int>* targetNode = getNodeAt(position);
     targetNode->setItem(newEntry);
   }
-  else throw std::runtime_error("error");
 }
 
 int DoublyLinkedList::smallest()
@@ -198,7 +195,7 @@ int DoublyLinkedList::largest()
   int largest = ptr->getItem();
   while (ptr != nullptr)
   {
-    int cur = ptr->getItem()
+    int cur = ptr->getItem();
     if (cur > largest)
     {
       largest = cur;

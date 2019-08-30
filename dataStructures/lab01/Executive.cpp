@@ -42,6 +42,7 @@ void Executive::userInterface()
     std::cout << "Choose from one of the options below:\n";
     std::cout << "1. Insert\n2. Delete\n3. Find smallest number\n4. Find largest number\n";
     std::cout << "5. Average\n6. Merge 2 lists\n7. Print\n8. Reverse list\n9. Exit\n";
+    std::cout << "Enter your selection: ";
     std::cin >> userInput;
     if (userInput == 1) //Insert
     {

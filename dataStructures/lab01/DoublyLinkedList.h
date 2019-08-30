@@ -69,7 +69,7 @@ public:
    * @post If found, the first node containing the given value is removed
    * @return True if node deleted, False if no match found
    */
-   bool remove(int search) throw (std::runtime_error);
+   bool remove(int searchInt);
 
    /**
    * @post Removes all entries in the list
@@ -81,7 +81,7 @@ public:
    *                  contents of
    * @return the object in the node of type ItemType
    */
-   int getEntry(int position) const throw(std::runtime_error);
+   int getEntry(int position) const;
 
    /**
    * @pre The position is between 1 and the list's length
@@ -89,7 +89,7 @@ public:
    * @param position:  1<= position <= length
    * @param newEntry: A new entry to put in the list
    **/
-   void setEntry(int position, const int& newEntry) throw(std::runtime_error);
+   void setEntry(int position, const int& newEntry);
 
    /**
    * @return the smallest element from the list
