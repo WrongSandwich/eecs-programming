@@ -53,6 +53,7 @@ void Executive::userInterface()
       std::cout << "Enter element to be inserted in list: ";
       std::cin >> temp;
       dll.insert(temp);
+      std::cout << '\n';
     }
     else if (userInput == 2) //Delete
     {
@@ -99,6 +100,7 @@ void Executive::userInterface()
     else if (userInput == 8) //Reverse list
     {
       dll.reverseList();
+      std::cout << "List: ";
       dll.print();
       std::cout << "\n\n";
     }

@@ -181,6 +181,7 @@ int DoublyLinkedList::smallest()
     {
       smallest = cur;
     }
+    ptr = ptr->getNext();
   }
   return smallest;
 }
@@ -200,6 +201,7 @@ int DoublyLinkedList::largest()
     {
       largest = cur;
     }
+    ptr = ptr->getNext();
   }
   return largest;
 }
@@ -215,6 +217,7 @@ double DoublyLinkedList::average()
   while (ptr != nullptr)
   {
     total += ptr->getItem();
+    ptr = ptr->getNext();
   }
   double average = (double)total/(double)itemCount;
   return average;
@@ -244,12 +247,15 @@ void DoublyLinkedList::print()
 
 void DoublyLinkedList::reverseList()
 {
-  Node<int>* ptr = tailPtr->getPrev();
+  Node<int>* tempPtr = headPtr;
+  headPtr = tailPtr;
+  tailPtr = tempPtr;
+  Node<int>* ptr = tailPtr;
   while (ptr != nullptr)
   {
-    int temp = ptr->getItem();
-    insert(temp);
+    tempPtr = ptr->getNext();
+    ptr->setNext(ptr->getPrev());
+    ptr->setPrev(tempPtr);
     ptr = ptr->getPrev();
-    remove(temp);
   }
 }
