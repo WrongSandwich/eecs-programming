@@ -10,6 +10,7 @@
 #include "Executive.h"
 #include "DoublyLinkedList.h"
 #include <string>
+#include <sstream>
 #include <stdexcept>
 #include <fstream>
 #include <iostream>
@@ -81,7 +82,7 @@ void Executive::userInterface()
       std::string userList;
       std::cout << "Enter new list to be merged: \n";
       std::cin >> userList;
-      dll.merge(userList);
+      merge(userList);
       dll.print();
     }
     else if (userInput == 7) //Print
@@ -104,4 +105,31 @@ void Executive::userInterface()
       std::cout << "Please enter a valid menu option\n";
     }
   }
+}
+
+void Executive::merge(const std::string& aList)
+{
+  DoublyLinkedList tempList;
+  std::stringstream in(aList);
+  int temp;
+  while(in >> temp) {
+    tempList.insert(temp);
+  }
+  DoublyLinkedList mergeList;
+  while (!dll.isEmpty() && !tempList.isEmpty())
+  {
+    int small1 = dll.smallest();
+    int small2 = tempList.smallest();
+    if (small1 < small2)
+    {
+      mergeList.insert(small1);
+      dll.remove(small1);
+    }
+    else
+    {
+      mergeList.insert(small2);
+      tempList.remove(small2);
+    }
+  }
+  dll = mergeList;
 }

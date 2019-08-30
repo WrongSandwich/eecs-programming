@@ -8,6 +8,8 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <string>
+#include <sstream>
 
 #include "Node.h"
 #include "DoublyLinkedList.h"
@@ -223,7 +225,13 @@ double DoublyLinkedList::average()
 
 void DoublyLinkedList::merge(const std::string& aList)
 {
-  // TODO: Write merge
+  // Convert string to a second dll
+  DoublyLinkedList tempList;
+  std::stringstream in(aList);
+  int temp;
+  while(in >> temp) {
+    tempList.insert(temp);
+  }
 }
 
 void DoublyLinkedList::print()

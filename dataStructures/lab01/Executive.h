@@ -39,6 +39,7 @@ public:
         taskTree
 **/
   void userInterface();
+  void merge(const std::string& aList);
   //static void flush(Task& target);
 };
 #endif
