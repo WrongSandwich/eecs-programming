@@ -2,8 +2,8 @@
 *@author  Evan Trout
 *@file    Executive.h
 *@date    08/30/19
-*@brief   Header file for Executive class, which stores input commands
-*         in an array then uses them to build and modify a binary search tree.
+*@brief   Header file for Executive class, which creates and modifies a
+*         DoublyLinkedList based on user input
 *******************************************************************************/
 
 
@@ -21,9 +21,8 @@ private:
 public:
   /**
 * @pre constructor is called with valid file name
-* @post constructs an instance of Executive and populates inputData with the
-*       contents of fileName, then calls treeMaker
-* @param fileName: fileName to be opened that contains the commands
+* @post constructs an instance of Executive and populates dll with data, then calls userInterface
+* @param fileName: fileName to be opened that contains the data
 **/
   Executive(std::string fileName);
 
@@ -33,13 +32,10 @@ public:
 **/
   ~Executive();
 
-  /**
-* @pre Executive constructor finishes successfully and calls treeMaker
-* @post reads the commands from inputData and  calls the appropriate commands on
-        taskTree
+/**
+* @pre Executive constructor finishes successfully and calls userInterface
+* @post Runs the user interface and interacts with dll based on user input
 **/
   void userInterface();
-  void merge(const std::string& aList);
-  //static void flush(Task& target);
 };
 #endif

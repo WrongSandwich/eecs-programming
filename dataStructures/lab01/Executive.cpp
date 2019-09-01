@@ -2,8 +2,8 @@
 *@author  Evan Trout
 *@file    Executive.cpp
 *@date    08/30/19
-*@brief   Implementation file for Executive class, which stores input commands
-*         in an array then uses them to build and modify a binary search tree.
+*@brief   Implementation file for Executive class, which creates and modifies a
+*         DoublyLinkedList based on user input
 *******************************************************************************/
 
 #include "Executive.h"
@@ -66,22 +66,40 @@ void Executive::userInterface()
       int temp;
       std::cout << "Enter element to be inserted in list: ";
       std::cin >> temp;
-      dll.insert(temp);
-      std::cout << '\n';
+      if (std::cin.fail())
+      {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Sorry, your input did not seem to be an int. Returning to main menu...\n";
+      }
+      else
+      {
+        dll.insert(temp);
+        std::cout << '\n';
+      }
     }
     else if (userInput == 2) //Delete
     {
       int temp;
       std::cout << "Enter the number to be deleted: ";
       std::cin >> temp;
-      bool success = dll.remove(temp);
-      if (success)
+      if (std::cin.fail())
       {
-        std::cout << "Delete was successful\n";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Sorry, your input did not seem to be an int. Returning to main menu...\n";
       }
       else
       {
-        std::cout << "Delete failed. Number was not found in the list\n";
+        bool success = dll.remove(temp);
+        if (success)
+        {
+          std::cout << "Delete was successful\n";
+        }
+        else
+        {
+          std::cout << "Delete failed. Number was not found in the list\n";
+        }
       }
     }
     else if (userInput == 3) //Find smallest number
@@ -100,7 +118,7 @@ void Executive::userInterface()
     {
       std::string userList;
       std::cout << "Enter new list of space-separated ints to be merged:\n";
-      std::cin.ignore();
+      // std::cin.ignore();
       std::getline(std::cin, userList);
       std::stringstream in(userList);
       int temp;
