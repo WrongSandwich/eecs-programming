@@ -1,9 +1,8 @@
 /*******************************************************************************
 *@author  Evan Trout
 *@file    main.cpp
-*@date    09/21/2018
-*@brief   Main file, calls the executive class's constructor and handles any
-*         catches any exceptions.
+*@date    08/30/19
+*@brief   Main file, calls the executive class's constructor and catches exceptions
 *******************************************************************************/
 
 #include <iostream>

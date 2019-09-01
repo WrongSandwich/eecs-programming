@@ -83,6 +83,7 @@ void Executive::userInterface()
       int temp;
       std::cout << "Enter the number to be deleted: ";
       std::cin >> temp;
+      std::cout << '\n';
       if (std::cin.fail())
       {
         std::cin.clear();
@@ -94,25 +95,25 @@ void Executive::userInterface()
         bool success = dll.remove(temp);
         if (success)
         {
-          std::cout << "Delete was successful\n";
+          std::cout << "Delete was successful\n\n";
         }
         else
         {
-          std::cout << "Delete failed. Number was not found in the list\n";
+          std::cout << "Delete failed. Number was not found in the list\n\n";
         }
       }
     }
     else if (userInput == 3) //Find smallest number
     {
-      std::cout << "Smallest number: " << dll.smallest() << '\n';
+      std::cout << "Smallest number: " << dll.smallest() << "\n\n";
     }
     else if (userInput == 4) //Find largest number
     {
-      std::cout << "Largest number: " << dll.largest() << '\n';
+      std::cout << "Largest number: " << dll.largest() << "\n\n";
     }
     else if (userInput == 5) //Average
     {
-      std::cout << "List average: " << dll.average() << '\n';
+      std::cout << "List average: " << dll.average() << "\n\n";
     }
     else if (userInput == 6) //Merge 2 lists
     {

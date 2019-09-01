@@ -223,17 +223,6 @@ double DoublyLinkedList::average()
   return average;
 }
 
-void DoublyLinkedList::merge(const std::string& aList)
-{
-  // Convert string to a second dll
-  DoublyLinkedList tempList;
-  std::stringstream in(aList);
-  int temp;
-  while(in >> temp) {
-    tempList.insert(temp);
-  }
-}
-
 void DoublyLinkedList::print()
 {
   Node<int>* ptr = headPtr;
