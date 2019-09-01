@@ -21,12 +21,9 @@ Executive::Executive(std::string fileName)
   if (inFile.is_open())
   {
     int temp;
-    while (!inFile.eof())
+    while (inFile >> temp)
     {
-      inFile >> temp;
       dll.insert(temp);
-      std::cout << "inserted " << temp << '\n';
-      // TODO: stop repeat of last item
     }
   }
   inFile.close();
