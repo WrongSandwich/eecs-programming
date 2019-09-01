@@ -259,3 +259,29 @@ void DoublyLinkedList::reverseList()
     ptr = ptr->getPrev();
   }
 }
+
+void DoublyLinkedList::sort()
+{
+  int min = smallest();
+  Node<int>* newHeadPtr = new Node<int>(min);
+  itemCount++;
+  remove(min);
+  Node<int>* ptr = newHeadPtr;
+  Node<int>* newNode;
+  while (!isEmpty())
+  {
+    min = smallest();
+    newNode = new Node<int>(min);
+    itemCount++;
+    newNode->setPrev(ptr);
+    ptr->setNext(newNode);
+    remove(min);
+    newNode = nullptr;
+    ptr = ptr->getNext();
+  }
+  headPtr = newHeadPtr;
+  newHeadPtr = nullptr;
+  tailPtr = ptr;
+  ptr = nullptr;
+  newNode = nullptr;
+}

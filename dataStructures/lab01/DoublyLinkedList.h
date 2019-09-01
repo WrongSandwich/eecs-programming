@@ -122,6 +122,11 @@ public:
    * @post returns the reversed list of the original list
    **/
    void reverseList();
+
+   /**
+   * @post sorts the list in ascending order
+   **/
+   void sort();
 };
 
 #endif

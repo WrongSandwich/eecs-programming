@@ -6,7 +6,6 @@
 *         in an array then uses them to build and modify a binary search tree.
 *******************************************************************************/
 
-
 #include "Executive.h"
 #include "DoublyLinkedList.h"
 #include <string>
@@ -35,12 +34,14 @@ Executive::Executive(std::string fileName)
 }
 
 Executive::~Executive()
-{}
+{
+}
 
 void Executive::userInterface()
 {
   int userInput = 0;
-  while (userInput != 9) {
+  while (userInput != 9)
+  {
     std::cout << "Choose from one of the options below:\n";
     std::cout << "1. Insert\n2. Delete\n3. Find smallest number\n4. Find largest number\n";
     std::cout << "5. Average\n6. Merge 2 lists\n7. Print\n8. Reverse list\n9. Exit\n";
@@ -85,9 +86,18 @@ void Executive::userInterface()
     else if (userInput == 6) //Merge 2 lists
     {
       std::string userList;
-      std::cout << "Enter new list to be merged: \n";
-      std::cin >> userList;
-      merge(userList);
+      std::cout << "Enter new list of space-separated ints to be merged:\n";
+      std::cin.ignore();
+      std::getline(std::cin, userList);
+      std::stringstream in(userList);
+      int temp;
+      while (in >> temp)
+      {
+        dll.insert(temp);
+      }
+      std::cout << '\n';
+      dll.sort();
+      std::cout << "Merged and sorted list: ";
       dll.print();
       std::cout << "\n\n";
     }
@@ -113,31 +123,4 @@ void Executive::userInterface()
       std::cout << "Please enter a valid menu option\n";
     }
   }
-}
-
-void Executive::merge(const std::string& aList)
-{
-  DoublyLinkedList tempList;
-  std::stringstream in(aList);
-  int temp;
-  while(in >> temp) {
-    tempList.insert(temp);
-  }
-  DoublyLinkedList mergeList;
-  while (!dll.isEmpty() && !tempList.isEmpty())
-  {
-    int small1 = dll.smallest();
-    int small2 = tempList.smallest();
-    if (small1 < small2)
-    {
-      mergeList.insert(small1);
-      dll.remove(small1);
-    }
-    else
-    {
-      mergeList.insert(small2);
-      tempList.remove(small2);
-    }
-  }
-  dll = mergeList;
 }
