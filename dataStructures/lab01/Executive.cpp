@@ -11,6 +11,7 @@
 #include <string>
 #include <sstream>
 #include <stdexcept>
+#include <limits>
 #include <fstream>
 #include <iostream>
 
@@ -45,6 +46,21 @@ void Executive::userInterface()
     std::cout << "Enter your selection: ";
     std::cin >> userInput;
     std::cout << '\n';
+    
+    //Validation of user input.
+    
+    while (std::cin.fail())
+    {
+      std::cin.clear(); // unset failbit
+      // skip bad input up to the next newline
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      std::cout << "Sorry, your input did not seem to be an int. Try again: ";
+      std::cin >> userInput;
+    }
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    //END OF VALIDATION
+
     if (userInput == 1) //Insert
     {
       int temp;
