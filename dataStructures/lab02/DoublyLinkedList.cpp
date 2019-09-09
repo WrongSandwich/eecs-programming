@@ -1,25 +1,25 @@
 /*******************************************************************************
 *@author  Evan Trout
-*@file    DoublyLinkedList.cpp
-*@date    08/26/2019
-*@brief   Implementation file for DoublyLinkedList class. Creates and maintains a
-*         doubly linked list of nodes containing ints.
+*@file    LinkedList.cpp
+*@date    09/19/2018
+*@brief   Implementation file for LinkedList class. Creates and maintains a
+*         linked list of nodes that is used by the WebBrowser class. Derived
+*         from ListInterface class.
 *******************************************************************************/
 
 #include <iostream>
-#include <stdexcept>
 #include <string>
-#include <sstream>
+#include <stdexcept>
 
 #include "Node.h"
-#include "DoublyLinkedList.h"
 
-Node<int>* DoublyLinkedList::getNodeAt(int position) const
+template<class ItemType>
+Node<ItemType>* LinkedList<ItemType>::getNodeAt(int position) const
 {
   if ((position>0) && (position<=itemCount))
   {
     int p = 1;
-    Node<int>* ptr = headPtr;
+    Node<ItemType>* ptr = headPtr;
     while(p!=position)
     {
       p++;
@@ -30,45 +30,33 @@ Node<int>* DoublyLinkedList::getNodeAt(int position) const
   else return nullptr;
 }
 
-Node<int>* DoublyLinkedList::search(int search) const
-{
-  Node<int>* ptr = headPtr;
-  while (ptr != nullptr)
-  {
-    if (ptr->getItem() == search)
-    {
-      return ptr;
-    }
-    ptr = ptr->getNext();
-  }
-  return nullptr;
-}
-
-DoublyLinkedList::DoublyLinkedList()
+template <class ItemType>
+LinkedList<ItemType>::LinkedList()
 {
   headPtr = nullptr;
-  tailPtr = nullptr;
   itemCount = 0;
 }
 
-//Create a deep copy of a linked list
-DoublyLinkedList::DoublyLinkedList(const DoublyLinkedList& aList)
+template <class ItemType> //Create a deep copy of a linked list
+LinkedList<ItemType>::LinkedList(const LinkedList<ItemType>& aList)
 {
   itemCount = aList.getLength();
-  int copyValue;
+  ItemType copyItem;
   for (int i = 1; i <= itemCount; i++)
   {
-    copyValue = aList.getEntry(i);
-    insert(copyValue);
+    copyItem = aList.getEntry(i);
+    insert(i, copyItem);
   }
 }
 
-DoublyLinkedList::~DoublyLinkedList()
+template <class ItemType>
+LinkedList<ItemType>::~LinkedList()
 {
   clear();
 }
 
-bool DoublyLinkedList::isEmpty() const
+template <class ItemType>
+bool LinkedList<ItemType>::isEmpty() const
 {
   if (headPtr == nullptr) //If headPtr is nullptr then list is empty
   {
@@ -77,67 +65,76 @@ bool DoublyLinkedList::isEmpty() const
   else return false;
 }
 
-int DoublyLinkedList::getLength() const
+template <class ItemType>
+int LinkedList<ItemType>::getLength() const
 {
   return itemCount;
 }
 
-void DoublyLinkedList::insert(const int& newEntry)
+template <class ItemType>
+void LinkedList<ItemType>::insert(int newPosition, const ItemType& newEntry) throw (std::runtime_error)
 {
-  Node<int>* n = new Node<int>(newEntry);
-  if (headPtr == nullptr)
+  //Must first confirm that insertion is valid (pos is not too high or low)
+  //Main has this list start at pos 1 which is why 0 is not allowed
+  if ((newPosition > 0) && (newPosition <= (itemCount + 1)))
   {
-    headPtr = n;
-    tailPtr = n;
-    itemCount = 1;
-  }
-  else
-  {
-    n->setPrev(tailPtr);
-    tailPtr->setNext(n);
-    tailPtr = n;
-    itemCount++;
-  }
-}
-
-bool DoublyLinkedList::remove(int searchInt)
-{
-  Node<int>* target = search(searchInt);
-  if (target == nullptr)
-  {
-    return false;
-  }
-  else
-  {
-    Node<int>* prevNode = target->getPrev();
-    Node<int>* nextNode = target->getNext();
-    // No adjacent nodes -> now an empty list
-    if (prevNode != nullptr)
+    Node<ItemType>* n = new Node<ItemType>(newEntry);
+    if (headPtr == nullptr) //Checking if list is empty, also could check itemCount
     {
-      prevNode->setNext(nextNode);
-      target->setPrev(nullptr);
+      headPtr = n; //Make this node the new head
+      itemCount = 1;
+    }
+    else if (newPosition == 1) //Adding something to head of list
+    {
+      n->setNext(headPtr);
+      headPtr = n;
+      itemCount++;
     }
     else
     {
-      headPtr = nextNode;
+      Node<ItemType>* prev = getNodeAt(newPosition-1);
+      n->setNext(prev->getNext()); //Setting n's pointer to next item in list
+      prev->setNext(n);//Setting prev's pointer to point to new addition
+      itemCount++;
     }
-    if (nextNode != nullptr)
+  }
+  else throw std::runtime_error("error");
+}
+
+template <class ItemType>
+void LinkedList<ItemType>::remove(int position) throw (std::runtime_error)
+{
+  if ((position > 0) && (position <= itemCount)) //Checking that position is valid
+  {
+    if (isEmpty() == true) //List is empty
     {
-      nextNode->setPrev(prevNode);
-      target->setNext(nullptr);
+      throw std::runtime_error("error");
+    }
+    else if (position == 1)
+    {
+      Node<ItemType>* newHead = getNodeAt(position+1); //getNode in position 2
+      delete headPtr;
+      headPtr = nullptr; //delete current head
+      headPtr = newHead; //Make second position new head
+      itemCount = itemCount - 1;
     }
     else
     {
-      tailPtr = prevNode;
+      Node<ItemType>* prev = getNodeAt(position-1);
+      Node<ItemType>* next = getNodeAt(position+1);
+      Node<ItemType>* target = getNodeAt(position);
+      delete target;
+      prev->setNext(next);
+      itemCount = itemCount - 1;
     }
-    delete target;
-    itemCount--;
   }
+  else throw std::runtime_error("error");
 }
 
-void DoublyLinkedList::clear() //Removes all entries in the list
+template <class ItemType>
+void LinkedList<ItemType>::clear() //Removes all entries in the list
 {
-  Node<int>* nodeToDeletePtr = headPtr;
+  Node<ItemType>* nodeToDeletePtr = headPtr;
   while (headPtr != nullptr)
   {
     headPtr = headPtr->getNext(); //Move headPtr to next node
@@ -148,129 +145,25 @@ void DoublyLinkedList::clear() //Removes all entries in the list
   itemCount = 0;
 }
 
-int DoublyLinkedList::getEntry(int position) const
+template <class ItemType>
+ItemType LinkedList<ItemType>::getEntry(int position) const throw (std::runtime_error)
 {
   if ((position > 0) && (position <= itemCount))
   {
-    Node<int>* targetNode = getNodeAt(position);
+    Node<ItemType>* targetNode = getNodeAt(position);
     return targetNode->getItem();
   }
+  else throw std::runtime_error("error");
 }
 
-void DoublyLinkedList::setEntry(int position, const int& newEntry)
+template <class ItemType>
+void LinkedList<ItemType>::setEntry(int position, const ItemType& newEntry)
+                                    throw (std::runtime_error)
 {
   if ((position > 0) && (position <= itemCount))
   {
-    Node<int>* targetNode = getNodeAt(position);
+    Node<ItemType>* targetNode = getNodeAt(position);
     targetNode->setItem(newEntry);
   }
-}
-
-int DoublyLinkedList::smallest()
-{
-  Node<int>* ptr = headPtr;
-  if (ptr == nullptr)
-  {
-    return -1;
-  }
-  int smallest = ptr->getItem();
-  while (ptr != nullptr)
-  {
-    int cur = ptr->getItem();
-    if (cur < smallest)
-    {
-      smallest = cur;
-    }
-    ptr = ptr->getNext();
-  }
-  return smallest;
-}
-
-int DoublyLinkedList::largest()
-{
-  Node<int>* ptr = headPtr;
-  if (ptr == nullptr)
-  {
-    return -1;
-  }
-  int largest = ptr->getItem();
-  while (ptr != nullptr)
-  {
-    int cur = ptr->getItem();
-    if (cur > largest)
-    {
-      largest = cur;
-    }
-    ptr = ptr->getNext();
-  }
-  return largest;
-}
-
-double DoublyLinkedList::average()
-{
-  Node<int>* ptr = headPtr;
-  if (ptr == nullptr)
-  {
-    return 0.0;
-  }
-  int total = 0;
-  while (ptr != nullptr)
-  {
-    total += ptr->getItem();
-    ptr = ptr->getNext();
-  }
-  double average = (double)total/(double)itemCount;
-  return average;
-}
-
-void DoublyLinkedList::print()
-{
-  Node<int>* ptr = headPtr;
-  while (ptr != nullptr)
-  {
-    int cur = ptr->getItem();
-    std::cout << cur << " ";
-    ptr = ptr->getNext();
-  }
-}
-
-void DoublyLinkedList::reverseList()
-{
-  Node<int>* tempPtr = headPtr;
-  headPtr = tailPtr;
-  tailPtr = tempPtr;
-  Node<int>* ptr = tailPtr;
-  while (ptr != nullptr)
-  {
-    tempPtr = ptr->getNext();
-    ptr->setNext(ptr->getPrev());
-    ptr->setPrev(tempPtr);
-    ptr = ptr->getPrev();
-  }
-}
-
-void DoublyLinkedList::sort()
-{
-  int min = smallest();
-  Node<int>* newHeadPtr = new Node<int>(min);
-  itemCount++;
-  remove(min);
-  Node<int>* ptr = newHeadPtr;
-  Node<int>* newNode;
-  while (!isEmpty())
-  {
-    min = smallest();
-    newNode = new Node<int>(min);
-    itemCount++;
-    newNode->setPrev(ptr);
-    ptr->setNext(newNode);
-    remove(min);
-    newNode = nullptr;
-    ptr = ptr->getNext();
-  }
-  headPtr = newHeadPtr;
-  newHeadPtr = nullptr;
-  tailPtr = ptr;
-  ptr = nullptr;
-  newNode = nullptr;
+  else throw std::runtime_error("error");
 }
