@@ -146,6 +146,16 @@ void LinkedList<ItemType>::clear() //Removes all entries in the list
 }
 
 template <class ItemType>
+void LinkedList<ItemType>::print()
+{
+  Node<ItemType>* ptr = headPtr;
+  while (ptr != nullptr)
+  {
+    std::cout << " -> " << ptr->getItem();
+  }
+}
+
+template <class ItemType>
 ItemType LinkedList<ItemType>::getEntry(int position) const throw (std::runtime_error)
 {
   if ((position > 0) && (position <= itemCount))

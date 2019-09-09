@@ -60,6 +60,12 @@ public:
    int getLength() const;
 
    /**
+   * @param target: Item used as search query
+   * @return the index of the item, or 0 if no item could be found
+   */
+   int search(const ItemType& target);
+
+   /**
    * @param position: 1 <= position <= length, a place to insert a new node
    * @param newEntry: A new entry to put in the list
    * @post A new node is inserted into the list at the given position.
@@ -76,6 +82,11 @@ public:
    * @post Removes all entries in the list
    */
    void clear();
+
+   /**
+   * @post Prints the contents of the LinkedList
+   */
+   void print();
 
    /**
    * @param position: 1 <= position <= length, a node the user wants to learn the

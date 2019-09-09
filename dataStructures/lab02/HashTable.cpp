@@ -61,12 +61,11 @@ bool HashTable::delete(std::string target)
   }
 }
 
-//TODO: write linkedlist printing
 void HashTable::print()
 {
   for (int i = 0; i < table.size(); i++)
   {
-    std::cout << i << ": ";
+    std::cout << i << ":";
     table[i].print();
     std::endl;
   }
