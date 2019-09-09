@@ -19,10 +19,8 @@ private:
   int numEntries;
   int bucketSize;
 public:
-  HashTable();
   HashTable(std::string[] entries, int n);
   ~HashTable();
-
   bool insert(std::string newEntry);
   bool delete(std::string target);
   void print();
