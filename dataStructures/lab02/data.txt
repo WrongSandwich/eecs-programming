@@ -1,1 +1,1 @@
-snowhall, stronghall, wescoe, eaton
+snowhall stronghall wescoe eaton

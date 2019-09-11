@@ -7,7 +7,6 @@
 *******************************************************************************/
 
 #include "Executive.h"
-#include "DoublyLinkedList.h"
 #include <string>
 #include <sstream>
 #include <stdexcept>
@@ -21,10 +20,10 @@ Executive::Executive(std::string fileName)
   inFile.open(fileName);
   if (inFile.is_open())
   {
-    int temp;
+    std::string temp;
     while (inFile >> temp)
     {
-      dll.insert(temp);
+      hashTable.insert(temp);
     }
   }
   inFile.close();
