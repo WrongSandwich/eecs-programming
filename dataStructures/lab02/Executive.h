@@ -12,12 +12,12 @@
 
 #include <stdexcept>
 #include <string>
-#include "DoublyLinkedList.h"
+#include "HashTable.h"
 
 class Executive
 {
 private:
-  DoublyLinkedList dll;
+  HashTable hashTable;
 public:
   /**
 * @pre constructor is called with valid file name
