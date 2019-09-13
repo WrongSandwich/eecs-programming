@@ -12,13 +12,17 @@
 #include <iostream>
 #include <string>
 
+HashTable::HashTable()
+{
+  table = nullptr;
+}
 
-HashTable::HashTable(std::string[] entries, int n)
+HashTable::HashTable(std::string *entries, int n)
 {
   bucketSize = (int)((double)n * 1.25);
   bucketSize = getNextPrime(bucketSize);
   table = new LinkedList<std::string>[bucketSize];
-  for (int i = 0; i < entries.size(); i++)
+  for (int i = 0; i < n; i++)
   {
     insert(entries[i]);
   }
@@ -30,12 +34,13 @@ HashTable::~HashTable()
   table = nullptr;
 }
 
-//TODO: add search function
 bool HashTable::insert(std::string newEntry)
 {
   int address = hashFunction(newEntry);
-  if (table[address].search(newEntry))
+  int position = table[address].search(newEntry);
+  if (position != 0)
   {
+    // Item was found, can't add duplicate
     return false;
   }
   else
@@ -46,18 +51,20 @@ bool HashTable::insert(std::string newEntry)
   }
 }
 
-//TODO: alter remove to be search-based
-bool HashTable::delete(std::string target)
+bool HashTable::remove(std::string target)
 {
   int address = hashFunction(target);
-  if (table[address].remove(newEntry))
+  int position = table[address].search(target);
+  if (position == 0)
   {
-    numEntries--;
-    return true;
+    // item not found, can't remove
+    return false;
   }
   else
   {
-    return false;
+    table[address].remove(position);
+    numEntries--;
+    return true;
   }
 }
 
@@ -106,7 +113,16 @@ void HashTable::rehash()
 
 int HashTable::find(std::string key)
 {
-
+  for (int i = 0; i < bucketSize; i++)
+  {
+    if (table[i].search(key))
+    {
+      // key is found, return location
+      return (i+1);
+    }
+  }
+  // return 0 bc key could not be found
+  return 0;
 }
 
 int HashTable::getNextPrime(int n)

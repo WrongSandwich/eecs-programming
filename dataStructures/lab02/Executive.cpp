@@ -13,6 +13,7 @@
 #include <limits>
 #include <fstream>
 #include <iostream>
+#include "HashTable.h"
 
 Executive::Executive(std::string fileName)
 {

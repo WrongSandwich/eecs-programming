@@ -12,20 +12,25 @@
 #include <string>
 #include <stdexcept>
 
+#include "LinkedList.h"
+
 class HashTable
 {
 private:
-  LinkedList<std::string>* table;
+  LinkedList<std::string> *table;
   int numEntries;
   int bucketSize;
 public:
-  HashTable(std::string[] entries, int n);
+  HashTable();
+  HashTable(std::string* entries, int n);
   ~HashTable();
   bool insert(std::string newEntry);
-  bool delete(std::string target);
+  bool remove(std::string target);
   void print();
   int hashFunction(std::string target);
   void rehash();
   int find(std::string key);
   int getNextPrime(int n);
-}
+};
+
+#endif

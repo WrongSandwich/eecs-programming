@@ -72,6 +72,28 @@ int LinkedList<ItemType>::getLength() const
 }
 
 template <class ItemType>
+int LinkedList<ItemType>::search(const ItemType& target)
+{
+  Node<ItemType>* ptr = headPtr;
+  int cur = 1;
+  while (ptr != nullptr)
+  {
+    if (ptr->getItem() == target)
+    {
+      // Target found, return current position
+      return cur;
+    }
+    else
+    {
+      ptr = ptr->getNext();
+      cur++;
+    }
+  }
+  // couldn't find target, return 0
+  return 0;
+}
+
+template <class ItemType>
 void LinkedList<ItemType>::insert(int newPosition, const ItemType& newEntry) throw (std::runtime_error)
 {
   //Must first confirm that insertion is valid (pos is not too high or low)
