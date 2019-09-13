@@ -1,10 +1,10 @@
-dll: main.o Executive.o DoublyLinkedList.o
-	g++ -std=c++11 -g -o dll main.o Executive.o DoublyLinkedList.o
-main.o: DoublyLinkedList.h Executive.h main.cpp
+lab2: main.o Executive.o HashTable.o
+	g++ -std=c++11 -g -o dll main.o Executive.o HashTable.o
+main.o: HashTable.h Executive.h main.cpp
 	g++ -std=c++11 -c -g main.cpp
-Executive.o: DoublyLinkedList.h Executive.h Executive.cpp
+Executive.o: HashTable.h Executive.h Executive.cpp
 	g++ -std=c++11 -c -g Executive.cpp
-DoublyLinkedList.o: Node.h Node.cpp DoublyLinkedList.h DoublyLinkedList.cpp
-	g++ -std=c++11 -c -g DoublyLinkedList.cpp
+HashTable.o: Node.h Node.cpp LinkedList.h LinkedList.cpp HashTable.h HashTable.cpp
+	g++ -std=c++11 -c -g HashTable.cpp
 clean:
-	rm *.o dll
+	rm *.o lab2
