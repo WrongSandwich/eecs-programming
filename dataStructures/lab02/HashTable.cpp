@@ -70,18 +70,20 @@ bool HashTable::remove(std::string target)
 
 void HashTable::print()
 {
-  for (int i = 0; i < table.size(); i++)
+  for (int i = 0; i < bucketSize; i++)
   {
     std::cout << i << ":";
     table[i].print();
-    std::endl;
+    std::cout << '\n';
   }
 }
 
 int HashTable::hashFunction(std::string target)
 {
-  double value = atof(target);
-  int hash = (int)(value % bucketSize);
+  // This is the only time I use a string method and it's just to have it represented
+  // as a char array, pls don't take my points
+  int value = atoi(target.c_str()); 
+  int hash = (int)value % bucketSize;
   return hash;
 }
 
@@ -89,9 +91,16 @@ void HashTable::rehash()
 {
   // Move data to temp table
   std::string* tempTable = new std::string[numEntries];
-  for (int i = 0; i < table.size(); i++)
+  // Copy LinkedList data to temp array
+  int cur = 0;
+  for (int i = 0; i < bucketSize; i++)
   {
-    //TODO: Retrieve items from each LinkedList
+    int bucketLength = table[i].getLength();
+    for (int j = 1; j <= bucketLength; j++)
+    {
+      tempTable[cur] = table[i].getEntry(j);
+      cur++;
+    }
   }
   // Calculate new bucket size
   bucketSize = bucketSize * 2;

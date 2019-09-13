@@ -189,8 +189,7 @@ ItemType LinkedList<ItemType>::getEntry(int position) const throw (std::runtime_
 }
 
 template <class ItemType>
-void LinkedList<ItemType>::setEntry(int position, const ItemType& newEntry)
-                                    throw (std::runtime_error)
+void LinkedList<ItemType>::setEntry(int position, const ItemType& newEntry) throw (std::runtime_error)
 {
   if ((position > 0) && (position <= itemCount))
   {
