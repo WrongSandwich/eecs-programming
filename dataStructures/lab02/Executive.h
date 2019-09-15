@@ -3,7 +3,7 @@
 *@file    Executive.h
 *@date    08/30/19
 *@brief   Header file for Executive class, which creates and modifies a
-*         DoublyLinkedList based on user input
+*         HashTable based on user input
 *******************************************************************************/
 
 
@@ -21,7 +21,7 @@ private:
 public:
   /**
 * @pre constructor is called with valid file name
-* @post constructs an instance of Executive and populates dll with data, then calls userInterface
+* @post constructs an instance of Executive and calls HashTable constructor with data, then calls userInterface
 * @param fileName: fileName to be opened that contains the data
 **/
   Executive(std::string fileName);
@@ -34,7 +34,7 @@ public:
 
 /**
 * @pre Executive constructor finishes successfully and calls userInterface
-* @post Runs the user interface and interacts with dll based on user input
+* @post Runs the user interface and interacts with HashTable based on user input
 **/
   void userInterface();
 };
