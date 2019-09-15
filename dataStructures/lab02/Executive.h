@@ -17,7 +17,7 @@
 class Executive
 {
 private:
-  HashTable hashTable;
+  HashTable* hashTable;
 public:
   /**
 * @pre constructor is called with valid file name

@@ -15,18 +15,27 @@
 #include <iostream>
 #include "HashTable.h"
 
+//TODO: Make the hash table something passed from the constructor to the userInteface
+// Caues righ tnow you hvsae a gross empty hash table
+
 Executive::Executive(std::string fileName)
 {
+  hashTable = nullptr;
   std::ifstream inFile;
   inFile.open(fileName);
   if (inFile.is_open())
   {
-    std::string temp;
+    std::string temp, storage;
+    int count = 0;
     while (inFile >> temp)
     {
-      hashTable.insert(temp);
+      storage.append(temp);
+      storage.append(" ");
+      count++;
     }
+    hashTable = new HashTable(storage, count);
   }
+  //TODO: throw error if file won't open
   inFile.close();
   userInterface();
 }
@@ -41,12 +50,12 @@ void Executive::userInterface()
   while (userInput != 5)
   {
     std::cout << "Please choose one of the following commands:\n";
-    std::cout << "1- Insert\n2- Delete\n3- Find\n4- Print\n5- Exit\n";
+    std::cout << "1- Insert\n2- Delete\n3- Find\n4- Print\n5- Exit\n>";
     std::cin >> userInput;
     std::cout << '\n';
-    
+
     //Validation of user input.
-    
+
     while (std::cin.fail())
     {
       std::cin.clear(); // unset failbit
@@ -64,6 +73,7 @@ void Executive::userInterface()
       std::string temp;
       std::cout << "Enter an element to be inserted: ";
       std::cin >> temp;
+      std::cout << '\n';
       if (std::cin.fail())
       {
         std::cin.clear();
@@ -72,16 +82,15 @@ void Executive::userInterface()
       }
       else
       {
-        bool success = hashTable.insert(temp);
+        bool success = hashTable->insert(temp);
         if (success)
         {
           std::cout << temp << " is added to the hash table.\n";
         }
         else
         {
-          std::cout << temp << " was not added successfully.\n"
+          std::cout << temp << " was not added successfully.\n";
         }
-        
       }
     }
     else if (userInput == 2) //Delete
@@ -98,7 +107,7 @@ void Executive::userInterface()
       }
       else
       {
-        bool success = hashTable.remove(temp);
+        bool success = hashTable->remove(temp);
         if (success)
         {
           std::cout << temp << " is removed from the hash table.\n";
@@ -123,7 +132,7 @@ void Executive::userInterface()
       }
       else
       {
-        int location = hashTable.find(temp);
+        int location = hashTable->find(temp);
         if (location != -1)
         {
           std::cout << temp << " is found at location " << location << ".\n";
@@ -132,19 +141,20 @@ void Executive::userInterface()
         {
           std::cout << temp << " is not found.\n";
         }
-      }    
+      }
     }
     else if (userInput == 4) //Print
     {
-      hashTable.print();
+      hashTable->print();
     }
     else if (userInput == 5) //Exit
     {
-      std::cout << "Exiting";
+      std::cout << "Exiting\n";
     }
     else //Invalid input
     {
       std::cout << "Please enter a valid menu option\n";
     }
+    std::cout << "------------------------------------------------------\n";
   }
 }

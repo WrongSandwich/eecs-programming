@@ -1,5 +1,5 @@
 lab2: main.o Executive.o HashTable.o
-	g++ -std=c++11 -g -o dll main.o Executive.o HashTable.o
+	g++ -std=c++11 -g -o lab2 main.o Executive.o HashTable.o
 main.o: HashTable.h Executive.h main.cpp
 	g++ -std=c++11 -c -g main.cpp
 Executive.o: HashTable.h Executive.h Executive.cpp

@@ -20,9 +20,10 @@ private:
   LinkedList<std::string> *table;
   int numEntries;
   int bucketSize;
+  double loadFactor;
 public:
   HashTable();
-  HashTable(std::string* entries, int n);
+  HashTable(std::string entries, int n);
   ~HashTable();
   bool insert(std::string newEntry);
   bool remove(std::string target);
@@ -31,6 +32,7 @@ public:
   void rehash();
   int find(std::string key);
   int getNextPrime(int n);
+  void updateLoadFactor();
 };
 
 #endif

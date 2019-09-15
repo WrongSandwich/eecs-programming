@@ -11,20 +11,26 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 
 HashTable::HashTable()
 {
-  table = nullptr;
+  numEntries = 0;
+  bucketSize = 1;
+  table = new LinkedList<std::string>[bucketSize];
+  updateLoadFactor();
 }
 
-HashTable::HashTable(std::string *entries, int n)
+HashTable::HashTable(std::string entries, int n)
 {
   bucketSize = (int)((double)n * 1.25);
   bucketSize = getNextPrime(bucketSize);
   table = new LinkedList<std::string>[bucketSize];
-  for (int i = 0; i < n; i++)
+  std::stringstream in(entries);
+  std::string temp;
+  while (in >> temp)
   {
-    insert(entries[i]);
+    insert(temp);
   }
 }
 
@@ -47,6 +53,11 @@ bool HashTable::insert(std::string newEntry)
   {
     table[address].insert(1, newEntry);
     numEntries++;
+    updateLoadFactor();
+    if(loadFactor > 1)
+    {
+      rehash();
+    }
     return true;
   }
 }
@@ -82,7 +93,11 @@ int HashTable::hashFunction(std::string target)
 {
   // This is the only time I use a string method and it's just to have it represented
   // as a char array, pls don't take my points
-  int value = atoi(target.c_str()); 
+  int value = 0;
+  for (int i = 0; i < target.length(); i++)
+  {
+    value += int(target[i]);
+  }
   int hash = (int)value % bucketSize;
   return hash;
 }
@@ -107,15 +122,18 @@ void HashTable::rehash()
   bucketSize = getNextPrime(bucketSize);
   // Create new table using bucket size
   delete [] table;
+  table = nullptr;
   table = new LinkedList<std::string>[bucketSize];
-  // Move in stored elements
-  for (int i = 0; i < numEntries; i++)
+  int newEntries = numEntries;
+  numEntries = 0;
+  for (int i = 0; i < newEntries; i++)
   {
     insert(tempTable[i]);
   }
   // Delete tempTable
   delete [] tempTable;
   tempTable = nullptr;
+  updateLoadFactor();
   // Report success
   std::cout << "Hash table is rehashed.\n";
 }
@@ -127,11 +145,11 @@ int HashTable::find(std::string key)
     if (table[i].search(key))
     {
       // key is found, return location
-      return (i+1);
+      return (i);
     }
   }
   // return 0 bc key could not be found
-  return 0;
+  return -1;
 }
 
 int HashTable::getNextPrime(int n)
@@ -158,4 +176,9 @@ int HashTable::getNextPrime(int n)
       return n;
     }
   }
+}
+
+void HashTable::updateLoadFactor()
+{
+  loadFactor = (double)numEntries/(double)bucketSize;
 }

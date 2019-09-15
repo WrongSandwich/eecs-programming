@@ -174,6 +174,7 @@ void LinkedList<ItemType>::print()
   while (ptr != nullptr)
   {
     std::cout << " -> " << ptr->getItem();
+    ptr = ptr->getNext();
   }
 }
 
