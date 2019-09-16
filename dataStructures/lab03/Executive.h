@@ -10,14 +10,15 @@
 #ifndef EXECUTIVE
 #define EXECUTIVE
 
-#include <stdexcept>
 #include <string>
-#include "HashTable.h"
+#include "QuadHashTable.h"
+#include "DoubleHashTable.h"
 
 class Executive
 {
 private:
-  HashTable* hashTable;
+  QuadHashTable quad;
+  DoubleHashTable double;
 public:
   /**
 * @pre constructor is called with valid file name

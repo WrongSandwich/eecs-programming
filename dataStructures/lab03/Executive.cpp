@@ -13,27 +13,16 @@
 #include <limits>
 #include <fstream>
 #include <iostream>
-#include "HashTable.h"
-
-//TODO: Make the hash table something passed from the constructor to the userInteface
-// Caues righ tnow you hvsae a gross empty hash table
+#include "QuadHashTable.h"
+#include "DoubleHashTable.h"
 
 Executive::Executive(std::string fileName)
 {
-  hashTable = nullptr;
   std::ifstream inFile;
   inFile.open(fileName);
   if (inFile.is_open())
   {
-    std::string temp, storage;
-    int count = 0;
-    while (inFile >> temp)
-    {
-      storage.append(temp);
-      storage.append(" ");
-      count++;
-    }
-    hashTable = new HashTable(storage, count);
+    //TODO: Correctly populate hash tables
   }
   //TODO: throw error if file won't open
   inFile.close();
@@ -47,10 +36,11 @@ Executive::~Executive()
 void Executive::userInterface()
 {
   int userInput = 0;
-  while (userInput != 5)
+  while (userInput != 7)
   {
     std::cout << "Please choose one of the following commands:\n";
-    std::cout << "1- Insert\n2- Delete\n3- Find\n4- Print\n5- Exit\n>";
+    std::cout << "1- Insert\n2- Delete\n3- FindByRating\n4- SearchByRating\n";
+    std::cout << "5- SearchByPrice\n6- Print\n7- Exit\n>";
     std::cin >> userInput;
     std::cout << '\n';
 
@@ -71,9 +61,9 @@ void Executive::userInterface()
     if (userInput == 1) //Insert
     {
       std::string temp;
-      std::cout << "Enter an element to be inserted: ";
+      std::cout << "Enter the data to be inserted: "\n\n>;
       std::cin >> temp;
-      std::cout << '\n';
+      std::cout << '\n\n';
       if (std::cin.fail())
       {
         std::cin.clear();
@@ -82,23 +72,49 @@ void Executive::userInterface()
       }
       else
       {
-        bool success = hashTable->insert(temp);
-        if (success)
+        // Move data into appropriate variables
+        std::stringstream in(temp);
+        std::string name, price;
+        int rating;
+        in >> name;
+        in >> rating;
+        in >> price;
+        // Attempt to insert into quad
+        std::cout << "Quadratic probing: " << name;
+        if (quad.findByName(name) != -1)
         {
-          std::cout << temp << " is added to the hash table.\n";
+          std::cout << " is duplicated, can't be added to the hash table.\n\n";
+        }
+        else if (quad.insert(name, rating, price))
+        {
+          std::cout << " is inserted into the hash table.\n\n";
         }
         else
         {
-          std::cout << temp << " was not added successfully.\n";
+          std::cout << " could not be inserted into the hash table.\n\n";
+        }
+        // Attempt to insert into double
+        std::cout << "Double hashing: " << name;
+        if (double.findByName(name) != -1)
+        {
+          std::cout << " is duplicated, can't be added to the hash table.\n\n";
+        }
+        else if (double.insert(name, rating, price))
+        {
+          std::cout << " is inserted into the hash table.\n\n";
+        }
+        else
+        {
+          std::cout << " could not be inserted into the hash table.\n\n";
         }
       }
     }
     else if (userInput == 2) //Delete
     {
       std::string temp;
-      std::cout << "Enter an element to be removed: ";
+      std::cout << "Enter a restauraunt to be deleted:\n\n>";
       std::cin >> temp;
-      std::cout << '\n';
+      std::cout << '\n\n';
       if (std::cin.fail())
       {
         std::cin.clear();
@@ -107,14 +123,25 @@ void Executive::userInterface()
       }
       else
       {
-        bool success = hashTable->remove(temp);
-        if (success)
+        // Remove from quad
+        std::cout << "Quadratic probing: " << temp;
+        if (quad.remove(temp))
         {
-          std::cout << temp << " is removed from the hash table.\n";
+          std::cout << " is deleted from the hash table";
         }
         else
         {
-          std::cout << temp << " could not be found in the hash table.\n";
+          std::cout << " could not be found in the hash table";
+        }
+        // Remove from double
+        std::cout << "Double hashing: " << temp;
+        if (double.remove(temp))
+        {
+          std::cout << " is deleted from the hash table";
+        }
+        else
+        {
+          std::cout << " could not be found in the hash table";
         }
       }
     }
