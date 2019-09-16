@@ -1,9 +1,9 @@
 /*******************************************************************************
 *@author  Evan Trout
 *@file    Executive.h
-*@date    08/30/19
+*@date    09/16/19
 *@brief   Header file for Executive class, which creates and modifies a
-*         HashTable based on user input
+*         DoubleHashTable and QuadHashTable
 *******************************************************************************/
 
 
@@ -18,7 +18,7 @@ class Executive
 {
 private:
   QuadHashTable quad;
-  DoubleHashTable double;
+  DoubleHashTable dbl;
 public:
   /**
 * @pre constructor is called with valid file name

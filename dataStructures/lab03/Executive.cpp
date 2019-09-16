@@ -1,9 +1,9 @@
 /*******************************************************************************
 *@author  Evan Trout
 *@file    Executive.cpp
-*@date    08/30/19
+*@date    09/16/19
 *@brief   Implementation file for Executive class, which creates and modifies a
-*         DoublyLinkedList based on user input
+*         DoubleHashTable and QuadHashTable
 *******************************************************************************/
 
 #include "Executive.h"
@@ -61,9 +61,9 @@ void Executive::userInterface()
     if (userInput == 1) //Insert
     {
       std::string temp;
-      std::cout << "Enter the data to be inserted: "\n\n>;
+      std::cout << "Enter the data to be inserted: \n\n">;
       std::cin >> temp;
-      std::cout << '\n\n';
+      std::cout << '\n';
       if (std::cin.fail())
       {
         std::cin.clear();
@@ -93,13 +93,13 @@ void Executive::userInterface()
         {
           std::cout << " could not be inserted into the hash table.\n\n";
         }
-        // Attempt to insert into double
+        // Attempt to insert into dbl
         std::cout << "Double hashing: " << name;
-        if (double.findByName(name) != -1)
+        if (dbl.findByName(name) != -1)
         {
           std::cout << " is duplicated, can't be added to the hash table.\n\n";
         }
-        else if (double.insert(name, rating, price))
+        else if (dbl.insert(name, rating, price))
         {
           std::cout << " is inserted into the hash table.\n\n";
         }
@@ -114,7 +114,7 @@ void Executive::userInterface()
       std::string temp;
       std::cout << "Enter a restauraunt to be deleted:\n\n>";
       std::cin >> temp;
-      std::cout << '\n\n';
+      std::cout << '\n';
       if (std::cin.fail())
       {
         std::cin.clear();
@@ -127,28 +127,66 @@ void Executive::userInterface()
         std::cout << "Quadratic probing: " << temp;
         if (quad.remove(temp))
         {
-          std::cout << " is deleted from the hash table";
+          std::cout << " is deleted from the hash table\n\n";
         }
         else
         {
-          std::cout << " could not be found in the hash table";
+          std::cout << " could not be found in the hash table\n\n";
         }
-        // Remove from double
+        // Remove from dbl
         std::cout << "Double hashing: " << temp;
-        if (double.remove(temp))
+        if (dbl.remove(temp))
         {
-          std::cout << " is deleted from the hash table";
+          std::cout << " is deleted from the hash table\n\n";
         }
         else
         {
-          std::cout << " could not be found in the hash table";
+          std::cout << " could not be found in the hash table\n\n";
         }
       }
     }
-    else if (userInput == 3) //Find
+    else if (userInput == 3) //Find by name
     {
       std::string temp;
-      std::cout << "Enter an element to be found: ";
+      std::cout << "Enter a restaurant name to search for: \n\n>";
+      std::cin >> temp;
+      std::cout << '\n';
+      if (std::cin.fail())
+      {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Sorry, your input did not seem to be a string. Returning to main menu...\n";
+      }
+      else
+      {
+        // Search in quad
+        std::cout << "Quadratic probing: " << temp;
+        int quadAddress = quad.findByName(temp);
+        if (quadAddress == -1)
+        {
+          std::cout << " could not be found\n\n";
+        }
+        else
+        {
+          std::cout << " has been found at location " << quadAddress << "\n\n";
+        }
+        // Search in dbl
+        std::cout << "Double hashing: " << temp;
+        int dblAddress = dbl.findByName(temp);
+        if (dblAddress == -1)
+        {
+          std::cout << " could not be found\n\n";
+        }
+        else
+        {
+          std::cout << " has been found at location " << dblAddress << "\n\n";
+        }
+      }
+    }
+    else if (userInput == 4) //Search by rating
+    {
+      int temp;
+      std::cout << "Enter a rating from 1-5 to search for: \n\n>";
       std::cin >> temp;
       std::cout << '\n';
       if (std::cin.fail())
@@ -157,26 +195,56 @@ void Executive::userInterface()
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "Sorry, your input did not seem to be an int. Returning to main menu...\n";
       }
+      else if (temp < 1 || temp > 5)
+      {
+        std::cout << "Please enter a valid rating from 1-5. Returning to main menu...\n\n";
+      }
       else
       {
-        int location = hashTable->find(temp);
-        if (location != -1)
-        {
-          std::cout << temp << " is found at location " << location << ".\n";
-        }
-        else
-        {
-          std::cout << temp << " is not found.\n";
-        }
+        // Search in quad
+        std::cout << "Quadratic probing: " << temp;
+        quad.searchByRating(temp);
+        // Search in dbl
+        std::cout << "Double hashing: " << temp;
+        dbl.searchByRating(temp);
       }
     }
-    else if (userInput == 4) //Print
+    else if (userInput == 5) //Search by price
     {
-      hashTable->print();
+      std::string temp;
+      std::cout << "Enter your price range: \n\n>";
+      std::cin >> temp;
+      std::cout << '\n';
+      if (std::cin.fail())
+      {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Sorry, your input did not seem to be a string. Returning to main menu...\n";
+      }
+      else
+      {
+        // Search in quad
+        std::cout << "Quadratic probing: " << temp;
+        quad.searchByPrice(temp);
+        // Search in dbl
+        std::cout << "Double hashing: " << temp;
+        dbl.searchByPrice(temp);
+      }
     }
-    else if (userInput == 5) //Exit
+    else if (userInput == 6)
     {
-      std::cout << "Exiting\n";
+      // Search in quad
+      std::cout << "Quadratic probing: ";
+      quad.print();
+      std::cout << "\n\n";
+      // Search in dbl
+      std::cout << "Double hashing: ";
+      dbl.print();
+      std::cout << "\n\n";
+    }
+    else if (userInput == 7)
+    {
+      std::cout << "Exiting...\n";
     }
     else //Invalid input
     {
