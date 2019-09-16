@@ -1,10 +1,12 @@
-lab2: main.o Executive.o HashTable.o
-	g++ -std=c++11 -g -o lab2 main.o Executive.o HashTable.o
-main.o: HashTable.h Executive.h main.cpp
+lab3: main.o Executive.o QuadHashTable.o DoubleHashTable.o
+	g++ -std=c++11 -g -o lab3 main.o Executive.o QuadHashTable.o DoubleHashTable.o
+main.o: DoubleHashTable.h QuadHashTable.h Executive.h main.cpp
 	g++ -std=c++11 -c -g main.cpp
-Executive.o: HashTable.h Executive.h Executive.cpp
+Executive.o: Executive.h Executive.cpp QuadHashTable.h DoubleHashTable.h
 	g++ -std=c++11 -c -g Executive.cpp
-HashTable.o: Node.h Node.cpp LinkedList.h LinkedList.cpp HashTable.h HashTable.cpp
-	g++ -std=c++11 -c -g HashTable.cpp
+DoubleHashTable.o: DoubleHashTable.h DoubleHashTable.cpp Review.h
+	g++ -std=c++11 -c -g DoubleHashTable.cpp
+QuadHashTable.o: QuadHashTable.h QuadHashTable.cpp Review.h
+	g++ -std=c++11 -c -g QuadHashTable.cpp
 clean:
-	rm *.o lab2
+	rm *.o lab3
