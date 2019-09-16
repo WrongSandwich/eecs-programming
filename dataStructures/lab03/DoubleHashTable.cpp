@@ -105,24 +105,36 @@ int DoubleHashTable::findByName(std::string target)
 
 void DoubleHashTable::searchByRating(int rating)
 {
+  bool found = false;
   for (int i = 0; i < bucketSize; i++)
   {
     if (table[i].rating == rating)
     {
       std::cout << table[i].name << " ";
+      found = true;
     }
   }
-  std::cout << '\n';
+  if (!found)
+  {
+    std::cout << "No restaurants could be found with this rating.";
+  }
+  std::cout << '\n\n';
 }
 
 void DoubleHashTable::searchByPrice(std::string price)
 {
+  bool found = false;
   for (int i = 0; i < bucketSize; i++)
   {
     if (table[i].price == price)
     {
       std::cout << table[i].name << " ";
+      found = true;
     }
   }
-  std::cout << '\n';
+  if (!found)
+  {
+    std::cout << "No restauraunts could be found with this price.";
+  }
+  std::cout << '\n\n';
 }
