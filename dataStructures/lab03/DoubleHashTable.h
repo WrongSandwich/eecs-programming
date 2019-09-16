@@ -1,34 +1,35 @@
 /*******************************************************************************
 *@author  Evan Trout
-*@file    QuadHashTable.h
+*@file    DoubleHashTable.h
 *@date    09/16/2019
-*@brief   Header file for QuadHashTable class. Creates and maintains a
+*@brief   Header file for DoubleHashTable class. Creates and maintains a
 *         hash table of Reviews with quadratic hashing.
 *******************************************************************************/
 
-#ifndef QUAD_HASH_TABLE_H
-#define QUAD_HASH_TABLE_H
+#ifndef DOUBLE_HASH_TABLE_H
+#define DOUBLE_HASH_TABLE_H
 
 #include <string>
 #include "Review.h"
 
-class QuadHashTable
+class DoubleHashTable
 {
 private:
   Review *table; //Pointer to array of Reviews
   int bucketSize; //Tracks the number of buckets
   int probeCount; //Tracks the probe count when hashing
+  int constR; //Value of the constant R, used in hPlus
 public:
   /**
   * @post creates a Review table with bucketSize 31, initializes all ratings and bools
-  * @return the initialized QuadHashTable
+  * @return the initialized DoubleHashTable
   */
-  QuadHashTable();
+  DoubleHashTable();
 
   /**
   * @post deallocates memory so hash table can close successfully
   */
-  ~QuadHashTable();
+  ~DoubleHashTable();
 
   /**
   * @params name, rating, price: the fields of the new Review for the hash table

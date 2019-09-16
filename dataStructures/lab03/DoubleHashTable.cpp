@@ -1,20 +1,21 @@
 /*******************************************************************************
 *@author  Evan Trout
-*@file    QuadHashTable.cpp
+*@file    DoubleHashTable.cpp
 *@date    09/16/2019
-*@brief   Implementation file for QuadHashTable class. Creates and maintains a
+*@brief   Implementation file for DoubleHashTable class. Creates and maintains a
 *         hash table of Reviews with quadratic hashing.
 *******************************************************************************/
 
-#include "QuadHashTable.h"
+#include "DoubleHashTable.h"
 #include "Review.h"
 
 #include <iostream>
 #include <string>
 
-QuadHashTable::QuadHashTable()
+DoubleHashTable::DoubleHashTable()
 {
   bucketSize = 31;
+  constR = 29;
   table = new Review[31];
   for (int i = 0; i < bucketSize; i++)
   {
@@ -23,13 +24,13 @@ QuadHashTable::QuadHashTable()
   }
 }
 
-QuadHashTable::~QuadHashTable()
+DoubleHashTable::~DoubleHashTable()
 {
   delete [] table;
   table = nullptr;
 }
 
-bool QuadHashTable::insert(std::string name, int rating, std::string price)
+bool DoubleHashTable::insert(std::string name, int rating, std::string price)
 {
   for (probeCount = 0; probeCount < 31; probeCount++)
   {
@@ -45,7 +46,7 @@ bool QuadHashTable::insert(std::string name, int rating, std::string price)
   return false; //No empty spots
 }
 
-bool QuadHashTable::remove(std::string target)
+bool DoubleHashTable::remove(std::string target)
 {
   int address = findByName(target);
   if (address == -1)
@@ -62,7 +63,7 @@ bool QuadHashTable::remove(std::string target)
   }
 }
 
-void QuadHashTable::print()
+void DoubleHashTable::print()
 {
   for (int i = 0; i < bucketSize; i++)
   {
@@ -71,18 +72,20 @@ void QuadHashTable::print()
   }
 }
 
-int QuadHashTable::hashFunction(std::string target)
+int DoubleHashTable::hashFunction(std::string target)
 {
   int value = 0;
   for (int i = 0; i < target.length(); i++)
   {
     value += int(target[i]); // Calculating ascii value of name
   }
-  int hash = (value + probeCount^2) % bucketSize;
+  int h = value % bucketSize;
+  int hPlus = constR - (value % constR);
+  int hash = (h + probeCount*hPlus) % bucketSize;
   return hash;
 }
 
-int QuadHashTable::findByName(std::string target)
+int DoubleHashTable::findByName(std::string target)
 {
   for (probeCount = 0; probeCount < 31; probeCount++)
   {
@@ -100,7 +103,7 @@ int QuadHashTable::findByName(std::string target)
   return -1;
 }
 
-void QuadHashTable::searchByRating(int rating)
+void DoubleHashTable::searchByRating(int rating)
 {
   for (int i = 0; i < bucketSize; i++)
   {
@@ -112,7 +115,7 @@ void QuadHashTable::searchByRating(int rating)
   std::cout << '\n';
 }
 
-void QuadHashTable::searchByPrice(std::string price)
+void DoubleHashTable::searchByPrice(std::string price)
 {
   for (int i = 0; i < bucketSize; i++)
   {
