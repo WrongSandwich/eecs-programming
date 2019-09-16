@@ -8,6 +8,7 @@ struct Review
   std::string name;
   int rating;
   std::string price;
+  bool deleted;
 };
 
 #endif
