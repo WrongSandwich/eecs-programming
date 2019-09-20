@@ -9,6 +9,10 @@ struct Review
   int rating;
   std::string price;
   bool deleted;
+
+  // std::string toString() {
+  //   return ("name = " + name + ", rating = " + std::to_string(rating) + ", price = " + price + '\n');
+  // }
 };
 
 #endif

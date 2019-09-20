@@ -22,11 +22,55 @@ Executive::Executive(std::string fileName)
   inFile.open(fileName);
   if (inFile.is_open())
   {
-    //TODO: Correctly populate hash tables
+    std::string temp = "";
+    std::string storage = "";
+    int count = 0;
+    while (inFile >> temp)
+    {
+      storage.append(temp);
+      storage.pop_back(); // removes last char in string (a comma)
+      storage.append(" ");
+      count++;
+    }
+    if (count % 3 == 0) // make sure there's a proper number of elements
+    {
+      // use a stringstream to read in the items one by one
+      // then add each set of three to the array
+      std::stringstream in(storage);
+      std::string temp, name, price;
+      int rating = 0;
+      int tracker = 1;
+      while (in >> temp)
+      {
+        if (tracker == 1)
+        {
+          name = temp;
+        }
+        if (tracker == 2)
+        {
+          rating = stoi(temp);
+        }
+        if (tracker == 3)
+        {
+          price = temp;
+          quad.insert(name, rating, price);
+          dbl.insert(name, rating, price);
+          tracker = 0;
+        }
+        tracker++;
+      }
+      inFile.close();
+      userInterface();
+    }
+    else
+    {
+      std::cout << "ERROR: Input file contains incorrect number of elements\n\n";
+    }
   }
-  //TODO: throw error if file won't open
-  inFile.close();
-  userInterface();
+  else 
+  {
+    std::cout << "ERROR: Could not open file\n\n";
+  }
 }
 
 Executive::~Executive()
