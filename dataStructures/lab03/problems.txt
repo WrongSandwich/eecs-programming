@@ -1,0 +1,5 @@
+Insert currently not working
+Need to specify formatting on insert request
+After insert, given rating is triggering corresponding menu option
+
+Still need to test delete method
