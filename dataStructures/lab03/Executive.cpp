@@ -123,33 +123,45 @@ void Executive::userInterface()
         in >> name;
         in >> rating;
         in >> price;
-        // Attempt to insert into quad
-        std::cout << "Quadratic probing: " << name;
-        if (quad.findByName(name) != -1)
+        // Check to make sure that formatting rules are followed
+        if (rating > 5 || rating < 1)
         {
-          std::cout << " is duplicated, can't be added to the hash table.\n\n";
+          std::cout << "ERROR: Not a valid rating (1 to 5)\nReturning to menu...\n";
         }
-        else if (quad.insert(name, rating, price))
+        else if (price != "$" && price != "$$" && price != "$$$")
         {
-          std::cout << " is inserted into the hash table.\n\n";
-        }
-        else
-        {
-          std::cout << " could not be inserted into the hash table.\n\n";
-        }
-        // Attempt to insert into dbl
-        std::cout << "Double hashing: " << name;
-        if (dbl.findByName(name) != -1)
-        {
-          std::cout << " is duplicated, can't be added to the hash table.\n\n";
-        }
-        else if (dbl.insert(name, rating, price))
-        {
-          std::cout << " is inserted into the hash table.\n\n";
+          std::cout << "ERROR: Not a valid price range ($, $$, or $$$)\nReturning to menu...\n";
         }
         else
         {
-          std::cout << " could not be inserted into the hash table.\n\n";
+          // Attempt to insert into quad
+          std::cout << "Quadratic probing: " << name;
+          if (quad.findByName(name) != -1)
+          {
+            std::cout << " is duplicated, can't be added to the hash table.\n\n";
+          }
+          else if (quad.insert(name, rating, price))
+          {
+            std::cout << " is inserted into the hash table.\n\n";
+          }
+          else
+          {
+            std::cout << " could not be inserted into the hash table.\n\n";
+          }
+          // Attempt to insert into dbl
+          std::cout << "Double hashing: " << name;
+          if (dbl.findByName(name) != -1)
+          {
+            std::cout << " is duplicated, can't be added to the hash table.\n\n";
+          }
+          else if (dbl.insert(name, rating, price))
+          {
+            std::cout << " is inserted into the hash table.\n\n";
+          }
+          else
+          {
+            std::cout << " could not be inserted into the hash table.\n\n";
+          }
         }
       }
     }
