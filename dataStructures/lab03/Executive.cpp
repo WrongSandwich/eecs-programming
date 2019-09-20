@@ -83,7 +83,7 @@ void Executive::userInterface()
   while (userInput != 7)
   {
     std::cout << "Please choose one of the following commands:\n";
-    std::cout << "1- Insert\n2- Delete\n3- FindByRating\n4- SearchByRating\n";
+    std::cout << "1- Insert\n2- Delete\n3- FindByName\n4- SearchByRating\n";
     std::cout << "5- SearchByPrice\n6- Print\n7- Exit\n>";
     std::cin >> userInput;
     std::cout << '\n';
@@ -246,10 +246,10 @@ void Executive::userInterface()
       else
       {
         // Search in quad
-        std::cout << "Quadratic probing: " << temp;
+        std::cout << "Quadratic probing: ";
         quad.searchByRating(temp);
         // Search in dbl
-        std::cout << "Double hashing: " << temp;
+        std::cout << "Double hashing: ";
         dbl.searchByRating(temp);
       }
     }
@@ -268,21 +268,21 @@ void Executive::userInterface()
       else
       {
         // Search in quad
-        std::cout << "Quadratic probing: " << temp;
+        std::cout << "Quadratic probing: ";
         quad.searchByPrice(temp);
         // Search in dbl
-        std::cout << "Double hashing: " << temp;
+        std::cout << "Double hashing: ";
         dbl.searchByPrice(temp);
       }
     }
-    else if (userInput == 6)
+    else if (userInput == 6) // print
     {
-      // Search in quad
-      std::cout << "Quadratic probing: ";
+      // Print in quad
+      std::cout << "Quadratic probing: \n";
       quad.print();
       std::cout << "\n\n";
-      // Search in dbl
-      std::cout << "Double hashing: ";
+      // Print in dbl
+      std::cout << "Double hashing: \n";
       dbl.print();
       std::cout << "\n\n";
     }

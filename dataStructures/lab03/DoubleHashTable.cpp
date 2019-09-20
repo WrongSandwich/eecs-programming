@@ -123,7 +123,7 @@ void DoubleHashTable::searchByRating(int rating)
   {
     std::cout << "No restaurants could be found with this rating.";
   }
-  std::cout << '\n\n';
+  std::cout << "\n\n";
 }
 
 void DoubleHashTable::searchByPrice(std::string price)
@@ -141,5 +141,5 @@ void DoubleHashTable::searchByPrice(std::string price)
   {
     std::cout << "No restauraunts could be found with this price.";
   }
-  std::cout << '\n\n';
+  std::cout << "\n\n";
 }

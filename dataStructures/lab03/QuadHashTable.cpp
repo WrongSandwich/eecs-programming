@@ -120,7 +120,7 @@ void QuadHashTable::searchByRating(int rating)
   {
     std::cout << "No restaurants could be found with this rating.";
   }
-  std::cout << '\n\n';
+  std::cout << "\n\n";
 }
 
 void QuadHashTable::searchByPrice(std::string price)
@@ -138,5 +138,5 @@ void QuadHashTable::searchByPrice(std::string price)
   {
     std::cout << "No restauraunts could be found with this price.";
   }
-  std::cout << '\n\n';
+  std::cout << "\n\n";
 }
