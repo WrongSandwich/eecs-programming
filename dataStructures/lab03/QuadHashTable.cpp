@@ -66,8 +66,13 @@ void QuadHashTable::print()
 {
   for (int i = 0; i < bucketSize; i++)
   {
-    std::cout << i << ": " << table[i].name << ", " << table[i].rating;
-    std::cout << ", " << table[i].price << '\n';
+    std::cout << i << ": ";
+    if (table[i].rating != 0)
+    {
+      std::cout << table[i].name << ", " << table[i].rating;
+      std::cout << ", " << table[i].price;
+    }
+    std::cout << '\n';
   }
 }
 
