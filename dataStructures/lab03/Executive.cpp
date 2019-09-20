@@ -105,8 +105,8 @@ void Executive::userInterface()
     if (userInput == 1) //Insert
     {
       std::string temp;
-      std::cout << "Enter the data to be inserted: \n\n>";
-      std::cin >> temp;
+      std::cout << "Enter the data to be inserted in the following format: name rating price \n\n>";
+      std::getline(std::cin, temp);
       std::cout << '\n';
       if (std::cin.fail())
       {
