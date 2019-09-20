@@ -1,0 +1,1 @@
+mcdonalds, 3, $, chipotle, 4, $$, pizzahut, 5, $$$, starbucks, 4, $$$
