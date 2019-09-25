@@ -7,7 +7,7 @@ BinarySearchTree::BinarySearchTree()
   rootPtr = nullptr;
 }
 
-// TODO: Create a constructor
+// TODO: Create a destructor
 
 bool BinarySearchTree::isEmpty() const
 {
@@ -46,10 +46,58 @@ bool BinarySearchTree::fullHelper(BinaryNode<int>* subTreePtr)
 
 bool BinarySearchTree::addItem(int x)
 {
-
+  if (rootPtr = nullptr)
+  {
+    rootPtr = new BinaryNode<int>(x);
+  }
+  else
+  {
+    int height = heightHelper(rootPtr);
+    return addLevelOrder(rootPtr, x, height-1);
+  }
 }
 
-int BinarySearchTree::delete()
+bool BinarySearchTree::addLevelOrder(BinaryNode<int>* subTreePtr, int x, int level)
+{
+  if (level == 1)
+  {
+    if (subTreePtr->getLeftChildPtr() == nullptr)
+    {
+      BinaryNode<int>* tempPtr = new BinaryNode<int>(x);
+      subTreePtr->setLeftChildPtr(tempPtr);
+      tempPtr = nullptr;
+      return true;
+    }
+    else if (subTreePtr->getRightChildPtr() == nullptr)
+    {
+      BinaryNode<int>* tempPtr = new BinaryNode<int>(x);
+      subTreePtr->setRightChildPtr(tempPtr);
+      tempPtr = nullptr;
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+  if (level > 1)
+  {
+    if (addLevelOrder(subTreePtr->getLeftChildPtr(), x, level-1))
+    {
+      return true;
+    }
+    else if (addLevelOrder(subTreePtr->getRightChildPtr(), x, level-1))
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+}
+
+int BinarySearchTree::remove()
 {
 
 }
@@ -88,7 +136,7 @@ void BinarySearchTree::printTreeHeight() const
   std::cout << height;
 }
 
-int BinarySearchTree::heightHelper(BinaryNode<int>* subTreePtr)
+int BinarySearchTree::heightHelper(BinaryNode<int>* subTreePtr) const
 {
   if (subTreePtr == nullptr)
   {
@@ -155,5 +203,26 @@ void BinarySearchTree::inorderHelper(void visit(int&), BinaryNode<int>* treePtr)
 
 void BinarySearchTree::levelorder() const
 {
+  int height = heightHelper(rootPtr);
+  for (int i = 1; i <= height; i++)
+  {
+    printLevel(rootPtr, i);
+  }
+}
 
+void BinarySearchTree::printLevel(BinaryNode<int>* subTreePtr, int level) const
+{
+  if (subTreePtr == nullptr)
+  {
+    return;
+  }
+  if (level == 1)
+  {
+    std::cout << subTreePtr->getItem() << ' ';
+  }
+  else if (level > 1)
+  {
+    printLevel(subTreePtr->getLeftChildPtr(), level-1);
+    printLevel(subTreePtr->getRightChildPtr(), level-1);
+  }
 }
