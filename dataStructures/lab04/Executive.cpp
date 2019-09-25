@@ -1,9 +1,9 @@
 /*******************************************************************************
 *@author  Evan Trout
 *@file    Executive.cpp
-*@date    09/16/19
+*@date    09/25/19
 *@brief   Implementation file for Executive class, which creates and modifies a
-*         DoubleHashTable and QuadHashTable
+*         BinarySearchTree
 *******************************************************************************/
 
 #include "Executive.h"
@@ -13,8 +13,7 @@
 #include <limits>
 #include <fstream>
 #include <iostream>
-#include "QuadHashTable.h"
-#include "DoubleHashTable.h"
+#include "BinarySearchTree.h"
 
 Executive::Executive(std::string fileName)
 {
@@ -22,54 +21,20 @@ Executive::Executive(std::string fileName)
   inFile.open(fileName);
   if (inFile.is_open())
   {
-    std::string temp = "";
-    std::string storage = "";
-    int count = 0;
+    int temp;
     while (inFile >> temp)
     {
-      storage.append(temp);
-      storage.pop_back(); // removes last char in string (a comma)
-      storage.append(" ");
-      count++;
-    }
-    if (count % 3 == 0) // make sure there's a proper number of elements
-    {
-      // use a stringstream to read in the items one by one
-      // then add each set of three to the array
-      std::stringstream in(storage);
-      std::string temp, name, price;
-      int rating = 0;
-      int tracker = 1;
-      while (in >> temp)
+      if (!tree.addItem(temp))
       {
-        if (tracker == 1)
-        {
-          name = temp;
-        }
-        if (tracker == 2)
-        {
-          rating = stoi(temp);
-        }
-        if (tracker == 3)
-        {
-          price = temp;
-          quad.insert(name, rating, price);
-          dbl.insert(name, rating, price);
-          tracker = 0;
-        }
-        tracker++;
+        throw std::runtime_error("ERROR: Invalid item in data file, please fix and run again");
       }
-      inFile.close();
-      userInterface();
     }
-    else
-    {
-      std::cout << "ERROR: Input file contains incorrect number of elements\n\n";
-    }
+    inFile.close();
+    userInterface();
   }
-  else 
+  else
   {
-    std::cout << "ERROR: Could not open file\n\n";
+    throw std::runtime_error("ERROR: Could not open file");
   }
 }
 
@@ -80,11 +45,12 @@ Executive::~Executive()
 void Executive::userInterface()
 {
   int userInput = 0;
-  while (userInput != 7)
+  while (userInput != 11)
   {
     std::cout << "Please choose one of the following commands:\n";
-    std::cout << "1- Insert\n2- Delete\n3- FindByName\n4- SearchByRating\n";
-    std::cout << "5- SearchByPrice\n6- Print\n7- Exit\n>";
+    std::cout << "1- Is tree full?\n2- Add item\n3- Delete\n4- Check if leaf\n";
+    std::cout << "5- Print leaves\n6- Print tree height\n7- Preorder\n";
+    std::cout << "8- Postorder\n9- Inorder\n10- Levelorder\n11- Exit\n>";
     std::cin >> userInput;
     std::cout << '\n';
 
@@ -102,203 +68,109 @@ void Executive::userInterface()
 
     //END OF VALIDATION
 
-    if (userInput == 1) //Insert
+    if (userInput == 1) //IsFull
     {
-      std::string temp;
-      std::cout << "Enter the data to be inserted in the following format: name rating price \n\n>";
-      std::getline(std::cin, temp);
-      std::cout << '\n';
-      if (std::cin.fail())
+      if (tree.isFull())
       {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Sorry, your input did not seem to be a valid string. Returning to main menu...\n";
+        std::cout << "True\n\n";
       }
       else
       {
-        // Move data into appropriate variables
-        std::stringstream in(temp);
-        std::string name, price;
-        int rating;
-        in >> name;
-        in >> rating;
-        in >> price;
-        // Check to make sure that formatting rules are followed
-        if (rating > 5 || rating < 1)
-        {
-          std::cout << "ERROR: Not a valid rating (1 to 5)\nReturning to menu...\n";
-        }
-        else if (price != "$" && price != "$$" && price != "$$$")
-        {
-          std::cout << "ERROR: Not a valid price range ($, $$, or $$$)\nReturning to menu...\n";
-        }
-        else
-        {
-          // Attempt to insert into quad
-          std::cout << "Quadratic probing: " << name;
-          if (quad.findByName(name) != -1)
-          {
-            std::cout << " is duplicated, can't be added to the hash table.\n\n";
-          }
-          else if (quad.insert(name, rating, price))
-          {
-            std::cout << " is inserted into the hash table.\n\n";
-          }
-          else
-          {
-            std::cout << " could not be inserted into the hash table.\n\n";
-          }
-          // Attempt to insert into dbl
-          std::cout << "Double hashing: " << name;
-          if (dbl.findByName(name) != -1)
-          {
-            std::cout << " is duplicated, can't be added to the hash table.\n\n";
-          }
-          else if (dbl.insert(name, rating, price))
-          {
-            std::cout << " is inserted into the hash table.\n\n";
-          }
-          else
-          {
-            std::cout << " could not be inserted into the hash table.\n\n";
-          }
-        }
+        std::cout << "False\n\n";
       }
     }
-    else if (userInput == 2) //Delete
-    {
-      std::string temp;
-      std::cout << "Enter a restauraunt to be deleted:\n\n>";
-      std::cin >> temp;
-      std::cout << '\n';
-      if (std::cin.fail())
-      {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Sorry, your input did not seem to be an int. Returning to main menu...\n";
-      }
-      else
-      {
-        // Remove from quad
-        std::cout << "Quadratic probing: " << temp;
-        if (quad.remove(temp))
-        {
-          std::cout << " is deleted from the hash table\n\n";
-        }
-        else
-        {
-          std::cout << " could not be found in the hash table\n\n";
-        }
-        // Remove from dbl
-        std::cout << "Double hashing: " << temp;
-        if (dbl.remove(temp))
-        {
-          std::cout << " is deleted from the hash table\n\n";
-        }
-        else
-        {
-          std::cout << " could not be found in the hash table\n\n";
-        }
-      }
-    }
-    else if (userInput == 3) //Find by name
-    {
-      std::string temp;
-      std::cout << "Enter a restaurant name to search for: \n\n>";
-      std::cin >> temp;
-      std::cout << '\n';
-      if (std::cin.fail())
-      {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Sorry, your input did not seem to be a string. Returning to main menu...\n";
-      }
-      else
-      {
-        // Search in quad
-        std::cout << "Quadratic probing: " << temp;
-        int quadAddress = quad.findByName(temp);
-        if (quadAddress == -1)
-        {
-          std::cout << " could not be found\n\n";
-        }
-        else
-        {
-          std::cout << " has been found at location " << quadAddress << "\n\n";
-        }
-        // Search in dbl
-        std::cout << "Double hashing: " << temp;
-        int dblAddress = dbl.findByName(temp);
-        if (dblAddress == -1)
-        {
-          std::cout << " could not be found\n\n";
-        }
-        else
-        {
-          std::cout << " has been found at location " << dblAddress << "\n\n";
-        }
-      }
-    }
-    else if (userInput == 4) //Search by rating
+    else if (userInput == 2) //AddItem
     {
       int temp;
-      std::cout << "Enter a rating from 1-5 to search for: \n\n>";
+      std::cout << "Please enter the value which you want to enter into the tree:\n>";
       std::cin >> temp;
-      std::cout << '\n';
-      if (std::cin.fail())
+
+      while (std::cin.fail())
       {
-        std::cin.clear();
+        std::cin.clear(); // unset failbit
+        // skip bad input up to the next newline
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Sorry, your input did not seem to be an int. Returning to main menu...\n";
+        std::cout << "Sorry, your input did not seem to be an int. Try again: ";
+        std::cin >> userInput;
       }
-      else if (temp < 1 || temp > 5)
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+      if (tree.addItem(temp))
       {
-        std::cout << "Please enter a valid rating from 1-5. Returning to main menu...\n\n";
+        std::cout << "Value inserted successfully!\n\n";
       }
       else
       {
-        // Search in quad
-        std::cout << "Quadratic probing: ";
-        quad.searchByRating(temp);
-        // Search in dbl
-        std::cout << "Double hashing: ";
-        dbl.searchByRating(temp);
+        std::cout << "Failed to insert value\n\n";
       }
     }
-    else if (userInput == 5) //Search by price
+    else if (userInput == 3) //Delete
     {
-      std::string temp;
-      std::cout << "Enter your price range: \n\n>";
+      int pop = tree.remove();
+      std::cout << "The last value is " << pop << ", and it has been deleted\n\n";
+    }
+    else if (userInput == 4) //Leaf
+    {
+      int temp;
+      std::cout << "Please enter the value which you want to test as a leaf node:\n>";
       std::cin >> temp;
-      std::cout << '\n';
-      if (std::cin.fail())
+
+      while (std::cin.fail())
       {
-        std::cin.clear();
+        std::cin.clear(); // unset failbit
+        // skip bad input up to the next newline
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Sorry, your input did not seem to be a string. Returning to main menu...\n";
+        std::cout << "Sorry, your input did not seem to be an int. Try again: ";
+        std::cin >> userInput;
+      }
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+      if (tree.leaf(temp))
+      {
+        std::cout << "The node with value " << temp << " is a leaf node\n\n";
       }
       else
       {
-        // Search in quad
-        std::cout << "Quadratic probing: ";
-        quad.searchByPrice(temp);
-        // Search in dbl
-        std::cout << "Double hashing: ";
-        dbl.searchByPrice(temp);
+        std::cout << "The node with value " << temp << " is not a leaf node\n\n";
       }
     }
-    else if (userInput == 6) // print
+    else if (userInput == 5) //PrintLeaf
     {
-      // Print in quad
-      std::cout << "Quadratic probing: \n";
-      quad.print();
-      std::cout << "\n\n";
-      // Print in dbl
-      std::cout << "Double hashing: \n";
-      dbl.print();
+      std::cout << "The leaf nodes are: ";
+      tree.printLeaf();
       std::cout << "\n\n";
     }
-    else if (userInput == 7)
+    else if (userInput == 6) //PrintTreeHeight
+    {
+      std::cout << "The height of the tree is ";
+      tree.printTreeHeight();
+      std::cout << "\n\n";
+    }
+    else if (userInput == 7) //Preorder
+    {
+      std::cout << "Printing the tree in preorder: ";
+      tree.preorder();
+      std::cout << "\n\n";
+    }
+    else if (userInput == 8) //Postorder
+    {
+      std::cout << "Printing the tree in postorder: ";
+      tree.postorder();
+      std::cout << "\n\n";
+    }
+    else if (userInput == 9) //Inorder
+    {
+      std::cout << "Printing the tree in inorder: ";
+      tree.inorder();
+      std::cout << "\n\n";
+    }
+    else if (userInput == 10) //Levelorder
+    {
+      std::cout << "Printing the tree in levelorder: ";
+      tree.levelorder();
+      std::cout << "\n\n";
+    }
+    else if (userInput == 11) //Exit
     {
       std::cout << "Exiting...\n";
     }

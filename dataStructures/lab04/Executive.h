@@ -1,9 +1,9 @@
 /*******************************************************************************
 *@author  Evan Trout
 *@file    Executive.h
-*@date    09/16/19
+*@date    09/25/19
 *@brief   Header file for Executive class, which creates and modifies a
-*         DoubleHashTable and QuadHashTable
+*         BinarySearchTree
 *******************************************************************************/
 
 
@@ -11,14 +11,12 @@
 #define EXECUTIVE
 
 #include <string>
-#include "QuadHashTable.h"
-#include "DoubleHashTable.h"
+#include "BinarySearchTree.h"
 
 class Executive
 {
 private:
-  QuadHashTable quad;
-  DoubleHashTable dbl;
+  BinarySearchTree tree;
 public:
   /**
 * @pre constructor is called with valid file name
