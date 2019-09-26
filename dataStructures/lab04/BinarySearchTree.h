@@ -13,6 +13,7 @@ public:
   bool fullHelper(BinaryNode<int>* subTreePtr);
   bool addItem(int x);
   bool addLevelOrder(BinaryNode<int>* subTreePtr, int x, int level);
+  void addFarLeft(BinaryNode<int>* treePtr, int x);
   int remove();
   bool leaf(int x) const;
   void printLeaf() const;
@@ -30,4 +31,4 @@ public:
   void printLevel(BinaryNode<int>* subTreePtr, int level) const;
 };
 
-#endif;
+#endif

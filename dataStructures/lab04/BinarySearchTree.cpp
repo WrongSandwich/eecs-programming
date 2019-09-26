@@ -53,7 +53,15 @@ bool BinarySearchTree::addItem(int x)
   else
   {
     int height = heightHelper(rootPtr);
-    return addLevelOrder(rootPtr, x, height-1);
+    if (addLevelOrder(rootPtr, x, height-1))
+    {
+      return true;
+    }
+    else
+    {
+      addFarLeft(rootPtr, x);
+      return true;
+    }
   }
 }
 
@@ -97,9 +105,24 @@ bool BinarySearchTree::addLevelOrder(BinaryNode<int>* subTreePtr, int x, int lev
   }
 }
 
+void BinarySearchTree::addFarLeft(BinaryNode<int>* treePtr, int x)
+{
+  if (treePtr->getLeftChildPtr() == nullptr)
+  {
+    BinaryNode<int>* tempPtr = new BinaryNode<int>(x);
+    treePtr->setLeftChildPtr(tempPtr);
+    tempPtr = nullptr;
+    return;
+  }
+  else
+  {
+    addFarLeft(treePtr->getLeftChildPtr(), x);
+  }
+}
+
 int BinarySearchTree::remove()
 {
-
+  return 0;
 }
 
 bool BinarySearchTree::leaf(int x) const
