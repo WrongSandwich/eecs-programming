@@ -46,7 +46,6 @@ bool BinaryTree::fullHelper(BinaryNode<int> *subTreePtr) const
 
 bool BinaryTree::addItem(int x)
 {
-  
   if (rootPtr == nullptr)
   {
     rootPtr = new BinaryNode<int>(x);
@@ -111,7 +110,51 @@ bool BinaryTree::addLevelOrder(BinaryNode<int> *subTreePtr, int x, int level)
 
 int BinaryTree::remove()
 {
-  return 0;
+  int level = heightHelper(rootPtr) - 1;
+  return removeHelper(rootPtr, level);
+}
+
+int BinaryTree::removeHelper(BinaryNode<int>* subTreePtr, int level)
+{
+  if (level == 1)
+  {
+    if (subTreePtr->getRightChildPtr() != nullptr)
+    {
+      BinaryNode<int>* tempPtr = subTreePtr->getRightChildPtr();
+      int target = tempPtr->getItem();
+      delete [] tempPtr;
+      subTreePtr->setRightChildPtr(nullptr);
+      tempPtr = nullptr;
+      return target;
+    }
+    else if (subTreePtr->getLeftChildPtr() != nullptr)
+    {
+      BinaryNode<int>* tempPtr = subTreePtr->getLeftChildPtr();
+      int target = tempPtr->getItem();
+      delete [] tempPtr;
+      subTreePtr->setLeftChildPtr(nullptr);
+      tempPtr = nullptr;
+      return target;
+    }
+    else
+    {
+      return -1;
+    }
+  }
+  if (level > 1)
+  {
+    int result = removeHelper(subTreePtr->getRightChildPtr(), level - 1);
+    if (result != -1)
+    {
+      return result;
+    }
+    result = removeHelper(subTreePtr->getLeftChildPtr(), level - 1);
+    if (result != -1)
+    {
+      return result;
+    }
+    return -1;
+  }
 }
 
 bool BinaryTree::leaf(int x) const

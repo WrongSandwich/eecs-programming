@@ -14,6 +14,7 @@ public:
   bool addItem(int x);
   bool addLevelOrder(BinaryNode<int>* subTreePtr, int x, int level);
   int remove();
+  int removeHelper(BinaryNode<int>* subTreePtr, int level);
   bool leaf(int x) const;
   BinaryNode<int>* findNode(BinaryNode<int>* subTreePtr, int x) const;
   void printLeaf() const;
