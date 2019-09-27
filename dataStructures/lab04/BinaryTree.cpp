@@ -7,7 +7,20 @@ BinaryTree::BinaryTree()
   rootPtr = nullptr;
 }
 
-// TODO: Create a destructor
+BinaryTree::~BinaryTree()
+{
+  destroyTree(rootPtr);
+}
+
+void BinaryTree::destroyTree(BinaryNode<int>* subTreePtr)
+{
+  if (subTreePtr != nullptr)
+  {
+    destroyTree(subTreePtr->getLeftChildPtr());
+    destroyTree(subTreePtr->getRightChildPtr());
+    delete subTreePtr;
+  }
+}
 
 bool BinaryTree::isEmpty() const
 {
@@ -126,7 +139,7 @@ int BinaryTree::removeHelper(BinaryNode<int>* subTreePtr, int level)
     {
       BinaryNode<int>* tempPtr = subTreePtr->getRightChildPtr();
       int target = tempPtr->getItem();
-      delete [] tempPtr;
+      delete tempPtr;
       subTreePtr->setRightChildPtr(nullptr);
       tempPtr = nullptr;
       return target;
@@ -135,7 +148,7 @@ int BinaryTree::removeHelper(BinaryNode<int>* subTreePtr, int level)
     {
       BinaryNode<int>* tempPtr = subTreePtr->getLeftChildPtr();
       int target = tempPtr->getItem();
-      delete [] tempPtr;
+      delete tempPtr;
       subTreePtr->setLeftChildPtr(nullptr);
       tempPtr = nullptr;
       return target;

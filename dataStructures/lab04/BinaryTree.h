@@ -8,6 +8,8 @@ private:
   BinaryNode<int>* rootPtr;
 public:
   BinaryTree();
+  ~BinaryTree();
+  void destroyTree(BinaryNode<int>* subTreePtr);
   bool isEmpty() const;
   bool isFull() const;
   bool fullHelper(BinaryNode<int>* subTreePtr) const;
