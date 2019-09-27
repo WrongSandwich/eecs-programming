@@ -108,7 +108,14 @@ void Executive::userInterface()
     else if (userInput == 3) //Delete
     {
       int pop = tree.remove();
-      std::cout << "The last value is " << pop << ", and it has been deleted\n\n";
+      if (pop == -1)
+      {
+        std::cout << "ERROR: Cannot delete root node, please insert more values before calling delete\n\n";
+      }
+      else
+      {
+        std::cout << "The last value is " << pop << ", and it has been deleted\n\n";
+      }
     }
     else if (userInput == 4) //Leaf
     {

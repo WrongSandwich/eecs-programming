@@ -111,6 +111,10 @@ bool BinaryTree::addLevelOrder(BinaryNode<int> *subTreePtr, int x, int level)
 int BinaryTree::remove()
 {
   int level = heightHelper(rootPtr) - 1;
+  if (level == 0)
+  {
+    return -1;
+  }
   return removeHelper(rootPtr, level);
 }
 
