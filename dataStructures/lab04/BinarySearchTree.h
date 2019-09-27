@@ -13,7 +13,6 @@ public:
   bool fullHelper(BinaryNode<int>* subTreePtr) const;
   bool addItem(int x);
   bool addLevelOrder(BinaryNode<int>* subTreePtr, int x, int level);
-  void addFarLeft(BinaryNode<int>* treePtr, int x);
   int remove();
   bool leaf(int x) const;
   BinaryNode<int>* findNode(BinaryNode<int>* subTreePtr, int x) const;
