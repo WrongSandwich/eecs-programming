@@ -167,7 +167,7 @@ void BinarySearchTree::leafPrinter(BinaryNode<int> *treePtr) const
 
 void BinarySearchTree::printTreeHeight() const
 {
-  int height = heightHelper(rootPtr);
+  int height = heightHelper(rootPtr) - 1;
   std::cout << height;
 }
 
