@@ -26,7 +26,7 @@ bool BinarySearchTree::isFull() const
   }
 }
 
-bool BinarySearchTree::fullHelper(BinaryNode<int>* subTreePtr)
+bool BinarySearchTree::fullHelper(BinaryNode<int>* subTreePtr) const
 {
   if ((subTreePtr->getLeftChildPtr() == nullptr) && (subTreePtr->getRightChildPtr() == nullptr))
   {
@@ -46,14 +46,18 @@ bool BinarySearchTree::fullHelper(BinaryNode<int>* subTreePtr)
 
 bool BinarySearchTree::addItem(int x)
 {
-  if (rootPtr = nullptr)
+  if (rootPtr == nullptr)
   {
     rootPtr = new BinaryNode<int>(x);
+    std::cout << x << " added as root\n";
+    return true;
   }
   else
   {
     int height = heightHelper(rootPtr);
-    if (addLevelOrder(rootPtr, x, height-1))
+    std::cout << "height is " << height << '\n';
+    bool success = addLevelOrder(rootPtr, x, height);
+    if (success)
     {
       return true;
     }
@@ -127,8 +131,36 @@ int BinarySearchTree::remove()
 
 bool BinarySearchTree::leaf(int x) const
 {
-  BinaryNode<int>* target = findNode(x);
+  BinaryNode<int>* target = findNode(rootPtr, x);
   return ((target->getLeftChildPtr() == nullptr) && (target->getRightChildPtr() == nullptr));
+}
+
+BinaryNode<int>* BinarySearchTree::findNode(BinaryNode<int>* subTreePtr, int x) const
+{
+  if (subTreePtr->getItem() == x)
+  {
+    return subTreePtr;
+  }
+  else if (subTreePtr->getRightChildPtr() == nullptr && subTreePtr->getLeftChildPtr() == nullptr)
+  {
+    return nullptr;
+  }
+  else
+  {
+    BinaryNode<int>* temp = findNode(subTreePtr->getLeftChildPtr(), x);
+    if (temp != nullptr)
+    {
+      return temp;
+    }
+    else if (subTreePtr->getRightChildPtr() != nullptr)
+    {
+      return findNode(subTreePtr->getRightChildPtr(), x);
+    }
+    else
+    {
+      return nullptr;
+    }
+  }
 }
 
 void BinarySearchTree::printLeaf() const
@@ -167,11 +199,11 @@ int BinarySearchTree::heightHelper(BinaryNode<int>* subTreePtr) const
   }
   else
   {
-    return (1 + max(heightHelper(subTreePtr->getLeftChildPtr()), heightHelper(subTreePtr->getRightChildPtr())));
+    return (1 + std::max(heightHelper(subTreePtr->getLeftChildPtr()), heightHelper(subTreePtr->getRightChildPtr())));
   }
 }
 
-static void BinarySearchTree::printNode(int x)
+void BinarySearchTree::printNode(int& x)
 {
   std::cout << x << ' ';
 }

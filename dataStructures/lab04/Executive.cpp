@@ -24,7 +24,8 @@ Executive::Executive(std::string fileName)
     int temp;
     while (inFile >> temp)
     {
-      if (!tree.addItem(temp))
+      bool success = tree.addItem(temp);
+      if (!success)
       {
         throw std::runtime_error("ERROR: Invalid item in data file, please fix and run again");
       }
