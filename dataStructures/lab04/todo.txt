@@ -1,0 +1,3 @@
+Write remove function
+Rename BinarySearchTree to BinaryTree
+Add documentation
