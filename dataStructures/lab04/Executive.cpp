@@ -3,7 +3,7 @@
 *@file    Executive.cpp
 *@date    09/25/19
 *@brief   Implementation file for Executive class, which creates and modifies a
-*         BinarySearchTree
+*         BinaryTree
 *******************************************************************************/
 
 #include "Executive.h"
@@ -13,7 +13,7 @@
 #include <limits>
 #include <fstream>
 #include <iostream>
-#include "BinarySearchTree.h"
+#include "BinaryTree.h"
 
 Executive::Executive(std::string fileName)
 {

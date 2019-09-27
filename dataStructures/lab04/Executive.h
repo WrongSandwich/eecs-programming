@@ -3,7 +3,7 @@
 *@file    Executive.h
 *@date    09/25/19
 *@brief   Header file for Executive class, which creates and modifies a
-*         BinarySearchTree
+*         BinaryTree
 *******************************************************************************/
 
 
@@ -11,12 +11,12 @@
 #define EXECUTIVE
 
 #include <string>
-#include "BinarySearchTree.h"
+#include "BinaryTree.h"
 
 class Executive
 {
 private:
-  BinarySearchTree tree;
+  BinaryTree tree;
 public:
   /**
 * @pre constructor is called with valid file name

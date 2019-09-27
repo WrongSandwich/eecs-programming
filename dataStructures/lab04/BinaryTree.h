@@ -1,13 +1,13 @@
-#ifndef _BINARY_SEARCH_TREE
-#define _BINARY_SEARCH_TREE
+#ifndef _BINARY_TREE
+#define _BINARY_TREE
 
 #include "BinaryNode.h"
 
-class BinarySearchTree {
+class BinaryTree {
 private:
   BinaryNode<int>* rootPtr;
 public:
-  BinarySearchTree();
+  BinaryTree();
   bool isEmpty() const;
   bool isFull() const;
   bool fullHelper(BinaryNode<int>* subTreePtr) const;
