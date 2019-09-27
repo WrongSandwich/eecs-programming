@@ -46,11 +46,16 @@ bool BinarySearchTree::fullHelper(BinaryNode<int> *subTreePtr) const
 
 bool BinarySearchTree::addItem(int x)
 {
+  
   if (rootPtr == nullptr)
   {
     rootPtr = new BinaryNode<int>(x);
     std::cout << x << " added as root\n";
     return true;
+  }
+  else if (findNode(rootPtr, x) != nullptr)
+  {
+    return false;
   }
   else
   {
