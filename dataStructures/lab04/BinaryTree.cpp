@@ -1,3 +1,11 @@
+/*******************************************************************************
+*@author  Evan Trout
+*@file    BinaryTree.cpp
+*@date    09/25/19
+*@brief   Implementation file for BinaryTree class, which controls a tree of linked
+*         BinaryNodes and allows for various operations on them.
+*******************************************************************************/
+
 #include <iostream>
 #include "BinaryNode.h"
 #include "BinaryTree.h"
@@ -31,7 +39,7 @@ bool BinaryTree::isFull() const
 {
   if (isEmpty())
   {
-    return true;
+    return false;
   }
   else
   {
