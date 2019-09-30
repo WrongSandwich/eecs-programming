@@ -20,7 +20,7 @@ BinarySearchTree::~BinarySearchTree()
   destroyTree(rootPtr);
 }
 
-void BinarySearchTree::destroyTree(BinaryNode<int>* subTreePtr)
+void BinarySearchTree::destroyTree(BinaryNode<char>* subTreePtr)
 {
   if (subTreePtr != nullptr)
   {
@@ -35,160 +35,29 @@ bool BinarySearchTree::isEmpty() const
   return (rootPtr == nullptr);
 }
 
-bool BinarySearchTree::isFull() const
+bool BinarySearchTree::addItem(char x)
 {
-  if (isEmpty())
-  {
-    return false;
-  }
-  else
-  {
-    return fullHelper(rootPtr);
-  }
 }
 
-bool BinarySearchTree::fullHelper(BinaryNode<int> *subTreePtr) const
+bool BinarySearchTree::remove(char x)
 {
-  if ((subTreePtr->getLeftChildPtr() == nullptr) && (subTreePtr->getRightChildPtr() == nullptr))
-  {
-    return true;
-  }
-  else if ((subTreePtr->getLeftChildPtr() != nullptr) && (subTreePtr->getRightChildPtr() != nullptr))
-  {
-    bool leftFull = fullHelper(subTreePtr->getLeftChildPtr());
-    bool rightFull = fullHelper(subTreePtr->getRightChildPtr());
-    return (leftFull && rightFull);
-  }
-  else
-  {
-    return false;
-  }
 }
 
-bool BinarySearchTree::addItem(int x)
+bool BinarySearchTree::removeMin()
+{
+}
+
+bool BinarySearchTree::leaf(char x) const
 {
   if (rootPtr == nullptr)
   {
-    rootPtr = new BinaryNode<int>(x);
-    std::cout << x << " added as root\n";
-    return true;
-  }
-  else if (findNode(rootPtr, x) != nullptr)
-  {
     return false;
   }
-  else
-  {
-    bool success = false;
-    int level = 0;
-    while (!success)
-    {
-      level++;
-      success = addLevelOrder(rootPtr, x, level);
-    }
-  }
-}
-
-bool BinarySearchTree::addLevelOrder(BinaryNode<int> *subTreePtr, int x, int level)
-{
-  if (level == 1)
-  {
-    if (subTreePtr->getLeftChildPtr() == nullptr)
-    {
-      BinaryNode<int> *tempPtr = new BinaryNode<int>(x);
-      subTreePtr->setLeftChildPtr(tempPtr);
-      tempPtr = nullptr;
-      return true;
-    }
-    else if (subTreePtr->getRightChildPtr() == nullptr)
-    {
-      BinaryNode<int> *tempPtr = new BinaryNode<int>(x);
-      subTreePtr->setRightChildPtr(tempPtr);
-      tempPtr = nullptr;
-      return true;
-    }
-    else
-    {
-      return false;
-    }
-  }
-  if (level > 1)
-  {
-    if (addLevelOrder(subTreePtr->getLeftChildPtr(), x, level - 1))
-    {
-      return true;
-    }
-    else if (addLevelOrder(subTreePtr->getRightChildPtr(), x, level - 1))
-    {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
-  }
-}
-
-int BinarySearchTree::remove()
-{
-  int level = heightHelper(rootPtr) - 1;
-  if (level == 0)
-  {
-    return -1;
-  }
-  return removeHelper(rootPtr, level);
-}
-
-int BinarySearchTree::removeHelper(BinaryNode<int>* subTreePtr, int level)
-{
-  if (level == 1)
-  {
-    if (subTreePtr->getRightChildPtr() != nullptr)
-    {
-      BinaryNode<int>* tempPtr = subTreePtr->getRightChildPtr();
-      int target = tempPtr->getItem();
-      delete tempPtr;
-      subTreePtr->setRightChildPtr(nullptr);
-      tempPtr = nullptr;
-      return target;
-    }
-    else if (subTreePtr->getLeftChildPtr() != nullptr)
-    {
-      BinaryNode<int>* tempPtr = subTreePtr->getLeftChildPtr();
-      int target = tempPtr->getItem();
-      delete tempPtr;
-      subTreePtr->setLeftChildPtr(nullptr);
-      tempPtr = nullptr;
-      return target;
-    }
-    else
-    {
-      return -1;
-    }
-  }
-  if (level > 1)
-  {
-    int result = removeHelper(subTreePtr->getRightChildPtr(), level - 1);
-    if (result != -1)
-    {
-      return result;
-    }
-    result = removeHelper(subTreePtr->getLeftChildPtr(), level - 1);
-    if (result != -1)
-    {
-      return result;
-    }
-    return -1;
-  }
-}
-
-bool BinarySearchTree::leaf(int x) const
-{
-  BinaryNode<int> *target = findNode(rootPtr, x);
+  BinaryNode<char> *target = findNode(rootPtr, x);
   return ((target->getLeftChildPtr() == nullptr) && (target->getRightChildPtr() == nullptr));
 }
 
-BinaryNode<int> *BinarySearchTree::findNode(BinaryNode<int> *subTreePtr, int x) const
+BinaryNode<char> *BinarySearchTree::findNode(BinaryNode<char> *subTreePtr, char x) const
 {
   if (subTreePtr->getItem() == x)
   {
@@ -200,7 +69,7 @@ BinaryNode<int> *BinarySearchTree::findNode(BinaryNode<int> *subTreePtr, int x) 
   }
   else
   {
-    BinaryNode<int> *temp = findNode(subTreePtr->getLeftChildPtr(), x);
+    BinaryNode<char> *temp = findNode(subTreePtr->getLeftChildPtr(), x);
     if (temp != nullptr)
     {
       return temp;
@@ -221,7 +90,7 @@ void BinarySearchTree::printLeaf() const
   leafPrinter(rootPtr);
 }
 
-void BinarySearchTree::leafPrinter(BinaryNode<int> *treePtr) const
+void BinarySearchTree::leafPrinter(BinaryNode<char> *treePtr) const
 {
   if (treePtr != nullptr)
   {
@@ -244,7 +113,7 @@ void BinarySearchTree::printTreeHeight() const
   std::cout << height;
 }
 
-int BinarySearchTree::heightHelper(BinaryNode<int> *subTreePtr) const
+int BinarySearchTree::heightHelper(BinaryNode<char> *subTreePtr) const
 {
   if (subTreePtr == nullptr)
   {
@@ -256,7 +125,7 @@ int BinarySearchTree::heightHelper(BinaryNode<int> *subTreePtr) const
   }
 }
 
-void BinarySearchTree::printNode(int &x)
+void BinarySearchTree::printNode(char &x)
 {
   std::cout << x << ' ';
 }
@@ -266,7 +135,7 @@ void BinarySearchTree::preorder() const
   preorderHelper(printNode, rootPtr);
 }
 
-void BinarySearchTree::preorderHelper(void visit(int &), BinaryNode<int> *treePtr) const
+void BinarySearchTree::preorderHelper(void visit(char &), BinaryNode<char> *treePtr) const
 {
   if (treePtr != nullptr)
   {
@@ -282,7 +151,7 @@ void BinarySearchTree::postorder() const
   postorderHelper(printNode, rootPtr);
 }
 
-void BinarySearchTree::postorderHelper(void visit(int &), BinaryNode<int> *treePtr) const
+void BinarySearchTree::postorderHelper(void visit(char &), BinaryNode<char> *treePtr) const
 {
   if (treePtr != nullptr)
   {
@@ -298,7 +167,7 @@ void BinarySearchTree::inorder() const
   inorderHelper(printNode, rootPtr);
 }
 
-void BinarySearchTree::inorderHelper(void visit(int &), BinaryNode<int> *treePtr) const
+void BinarySearchTree::inorderHelper(void visit(char &), BinaryNode<char> *treePtr) const
 {
   if (treePtr != nullptr)
   {
@@ -318,7 +187,7 @@ void BinarySearchTree::levelorder() const
   }
 }
 
-void BinarySearchTree::printLevel(BinaryNode<int> *subTreePtr, int level) const
+void BinarySearchTree::printLevel(BinaryNode<char> *subTreePtr, int level) const
 {
   if (subTreePtr == nullptr)
   {
@@ -333,4 +202,9 @@ void BinarySearchTree::printLevel(BinaryNode<int> *subTreePtr, int level) const
     printLevel(subTreePtr->getLeftChildPtr(), level - 1);
     printLevel(subTreePtr->getRightChildPtr(), level - 1);
   }
+}
+
+bool searchElement(char x) const
+{
+  
 }
