@@ -41,9 +41,14 @@ public:
 
   bool addItem(char x);
 
-  bool remove(char x);
+  bool recursiveAdd(BinaryNode<char>* subTreePtr, char x);
 
-  bool removeMin();
+  bool remove(char x); // need to keep parent and child nodes tracked here
+  // actually jk that's in a sub function
+
+  bool recursiveDelete(BinaryNode<char>* subTreePtr, char x);
+
+  BinaryNode<char>* findMin(BinaryNode<char>* subTreePtr);
 
   /**
   * @param x: char being searched for and checked

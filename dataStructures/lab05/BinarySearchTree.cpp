@@ -37,14 +37,95 @@ bool BinarySearchTree::isEmpty() const
 
 bool BinarySearchTree::addItem(char x)
 {
+  if (isEmpty())
+  {
+    rootPtr = new BinaryNode<char>(x);
+    return true;
+  }
+  else
+  {
+    return recursiveAdd(rootPtr, x);
+  }
+}
+
+bool BinarySearchTree::recursiveAdd(BinaryNode<char>* subTreePtr, char x)
+{
+  int target = int(x);
+  if (target < subTreePtr->getKey())
+  {
+    if (subTreePtr->getLeftChildPtr() == nullptr)
+    {
+      BinaryNode<char>* tempPtr = new BinaryNode<char>(x);
+      subTreePtr->setLeftChildPtr(tempPtr);
+      tempPtr = nullptr;
+      return true;
+    }
+    else
+    {
+      return recursiveAdd(subTreePtr->getLeftChildPtr(), x);
+    }
+  }
+  else if (target >= subTreePtr->getKey())
+  {
+    if (subTreePtr->getRightChildPtr() == nullptr)
+    {
+      BinaryNode<char>* tempPtr = new BinaryNode<char>(x);
+      subTreePtr->setRightChildPtr(tempPtr);
+      tempPtr = nullptr;
+      return true;
+    }
+    else
+    {
+      return recursiveAdd(subTreePtr->getRightChildPtr(), x);
+    }
+  }
+  else
+  {
+    return false; // could throw error instead?
+  }
 }
 
 bool BinarySearchTree::remove(char x)
 {
+  if (isEmpty())
+  {
+    return false;
+  }
+  else
+  {
+    BinaryNode<char>* target = findNode(x);
+    if (target == nullptr)
+    {
+      return false; //Could not find target
+    }
+    // target has no children
+    else if (target->getLeftChildPtr() == nullptr && target->getRightChildPtr() == nullptr)
+    {
+      
+    }
+  }
 }
 
-bool BinarySearchTree::removeMin()
+bool BinarySearchTree::recursiveDelete(BinaryNode<char>* subTreePtr, char x)
 {
+  if (subTreePtr == nullptr)
+  {
+    return false;
+  }
+  else
+  {
+
+  }
+}
+
+BinaryNode<char>* BinarySearchTree::findMin(BinaryNode<char>* subTreePtr)
+{
+  BinaryNode<char>* current = subTreePtr;
+  while (current->getLeftChildPtr() != nullptr)
+  {
+    current = current->getLeftChildPtr();
+  }
+  return current;
 }
 
 bool BinarySearchTree::leaf(char x) const
@@ -61,7 +142,20 @@ BinaryNode<char> *BinarySearchTree::findNode(BinaryNode<char> *subTreePtr, char 
 {
   if (subTreePtr->getItem() == x)
   {
-    return subTreePtr;
+    // Confirm that this is the lowest instance of this item
+    if (subTreePtr->getRightChildPtr() != nullptr)
+    {
+      BinaryNode<char>* doubleCheck = nullptr;
+      doubleCheck = findNode(subTreePtr->getRightChildPtr(), x);
+      if (doubleCheck != nullptr)
+      {
+        return doubleCheck;
+      }
+      else
+      {
+        return subTreePtr;
+      }
+    }
   }
   else if (subTreePtr->getRightChildPtr() == nullptr && subTreePtr->getLeftChildPtr() == nullptr)
   {
@@ -206,5 +300,5 @@ void BinarySearchTree::printLevel(BinaryNode<char> *subTreePtr, int level) const
 
 bool searchElement(char x) const
 {
-  
+
 }
