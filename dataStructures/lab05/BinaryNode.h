@@ -25,6 +25,7 @@ public:
 
    void setItem(const ItemType& anItem);
    ItemType getItem() const;
+   int getKey() const;
 
    bool isLeaf() const;
 

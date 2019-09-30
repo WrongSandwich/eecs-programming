@@ -41,6 +41,12 @@ ItemType BinaryNode<ItemType>::getItem() const
 }
 
 template<class ItemType>
+int BinaryNode<ItemType>::getKey() const
+{
+  return int(item);
+}
+
+template<class ItemType>
 bool BinaryNode<ItemType>::isLeaf() const //Determines if this node is a dead end
 {
   return ((leftChildPtr == nullptr) && (rightChildPtr == nullptr));
