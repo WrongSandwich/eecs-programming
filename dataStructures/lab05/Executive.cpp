@@ -182,9 +182,7 @@ void Executive::userInterface()
     }
     else if (userInput == 10) //Search item
     {
-      std::cout << "Printing the tree in levelorder: ";
-      tree.levelorder();
-      std::cout << "\n\n";
+      //TODO: write this one and stuff
     }
     else if (userInput == 11) //Exit
     {

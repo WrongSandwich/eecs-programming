@@ -100,13 +100,16 @@ bool BinarySearchTree::remove(char x)
     // target has no children
     else
     {
+      std::cout << "Element found, would delete here\n";
       if (int(x) >= rootPtr->getKey())
       {
-        recursiveDelete(rootPtr, rootPtr->getRightChildPtr(), x);
+        std::cout << "Item is on left side of tree\n";
+        return recursiveDelete(rootPtr, rootPtr->getRightChildPtr(), x);
       }
       else
       {
-        recursiveDelete(rootPtr, rootPtr->getLeftChildPtr(), x);
+        std::cout << "Item is on left side of tree\n";
+        return recursiveDelete(rootPtr, rootPtr->getLeftChildPtr(), x);
       }
     }
   }
@@ -210,8 +213,13 @@ bool BinarySearchTree::leaf(char x) const
   return ((target->getLeftChildPtr() == nullptr) && (target->getRightChildPtr() == nullptr));
 }
 
+//TODO: fix this function
 BinaryNode<char> *BinarySearchTree::findNode(BinaryNode<char> *subTreePtr, char x) const
 {
+  if (subTreePtr == nullptr)
+  {
+    return nullptr;
+  }
   if (subTreePtr->getItem() == x)
   {
     // Confirm that this is the lowest instance of this item
