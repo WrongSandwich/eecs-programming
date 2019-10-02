@@ -21,7 +21,7 @@ Executive::Executive(std::string fileName)
   inFile.open(fileName);
   if (inFile.is_open())
   {
-    int temp;
+    char temp;
     while (inFile >> temp)
     {
       bool success = tree.addItem(temp);
@@ -49,9 +49,9 @@ void Executive::userInterface()
   while (userInput != 11)
   {
     std::cout << "Please choose one of the following commands:\n";
-    std::cout << "1- Is tree full?\n2- Add item\n3- Delete\n4- Check if leaf\n";
-    std::cout << "5- Print leaves\n6- Print tree height\n7- Preorder\n";
-    std::cout << "8- Postorder\n9- Inorder\n10- Levelorder\n11- Exit\n>";
+    std::cout << "1- Add item\n2- Delete\n3- Check if leaf\n4- Print leaves\n";
+    std::cout << "5- Print tree height\n6- Preorder\n7- Postorder\n";
+    std::cout << "8- Inorder\n9- Levelorder\n10- Search for an item\n11- Exit\n>";
     std::cin >> userInput;
     std::cout << '\n';
 
@@ -69,21 +69,10 @@ void Executive::userInterface()
 
     //END OF VALIDATION
 
-    if (userInput == 1) //IsFull
+    if (userInput == 1) //AddItem
     {
-      if (tree.isFull())
-      {
-        std::cout << "True\n\n";
-      }
-      else
-      {
-        std::cout << "False\n\n";
-      }
-    }
-    else if (userInput == 2) //AddItem
-    {
-      int temp;
-      std::cout << "Please enter the value which you want to enter into the tree:\n>";
+      char temp;
+      std::cout << "Please enter the character which you want to enter into the tree:\n>";
       std::cin >> temp;
 
       while (std::cin.fail())
@@ -91,7 +80,7 @@ void Executive::userInterface()
         std::cin.clear(); // unset failbit
         // skip bad input up to the next newline
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Sorry, your input did not seem to be an int. Try again: ";
+        std::cout << "Sorry, your input did not seem to be an char. Try again: ";
         std::cin >> userInput;
       }
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -105,21 +94,34 @@ void Executive::userInterface()
         std::cout << "Failed to insert value\n\n";
       }
     }
-    else if (userInput == 3) //Delete
+    else if (userInput == 2) //Delete
     {
-      int pop = tree.remove();
-      if (pop == -1)
+      char temp;
+      std::cout << "Please enter the character which you want to delete from the tree:\n>";
+      std::cin >> temp;
+
+      while (std::cin.fail())
       {
-        std::cout << "ERROR: Cannot delete root node, please insert more values before calling delete\n\n";
+        std::cin.clear(); // unset failbit
+        // skip bad input up to the next newline
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Sorry, your input did not seem to be an char. Try again: ";
+        std::cin >> userInput;
+      }
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+      if (tree.remove(temp))
+      {
+        std::cout << "Value deleted successfully!\n\n";
       }
       else
       {
-        std::cout << "The last value is " << pop << ", and it has been deleted\n\n";
+        std::cout << "Failed to delete value. The character is not present in the tree\n\n";
       }
     }
-    else if (userInput == 4) //Leaf
+    else if (userInput == 3) //Leaf
     {
-      int temp;
+      char temp;
       std::cout << "Please enter the value which you want to test as a leaf node:\n>";
       std::cin >> temp;
 
@@ -128,7 +130,7 @@ void Executive::userInterface()
         std::cin.clear(); // unset failbit
         // skip bad input up to the next newline
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Sorry, your input did not seem to be an int. Try again: ";
+        std::cout << "Sorry, your input did not seem to be a char. Try again: ";
         std::cin >> userInput;
       }
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -142,37 +144,43 @@ void Executive::userInterface()
         std::cout << "The node with value " << temp << " is not a leaf node\n\n";
       }
     }
-    else if (userInput == 5) //PrintLeaf
+    else if (userInput == 4) //PrintLeaf
     {
       std::cout << "The leaf nodes are: ";
       tree.printLeaf();
       std::cout << "\n\n";
     }
-    else if (userInput == 6) //PrintTreeHeight
+    else if (userInput == 5) //PrintTreeHeight
     {
       std::cout << "The height of the tree is ";
       tree.printTreeHeight();
       std::cout << "\n\n";
     }
-    else if (userInput == 7) //Preorder
+    else if (userInput == 6) //Preorder
     {
       std::cout << "Printing the tree in preorder: ";
       tree.preorder();
       std::cout << "\n\n";
     }
-    else if (userInput == 8) //Postorder
+    else if (userInput == 7) //Postorder
     {
       std::cout << "Printing the tree in postorder: ";
       tree.postorder();
       std::cout << "\n\n";
     }
-    else if (userInput == 9) //Inorder
+    else if (userInput == 8) //Inorder
     {
       std::cout << "Printing the tree in inorder: ";
       tree.inorder();
       std::cout << "\n\n";
     }
-    else if (userInput == 10) //Levelorder
+    else if (userInput == 9) //Levelorder
+    {
+      std::cout << "Printing the tree in levelorder: ";
+      tree.levelorder();
+      std::cout << "\n\n";
+    }
+    else if (userInput == 10) //Search item
     {
       std::cout << "Printing the tree in levelorder: ";
       tree.levelorder();
