@@ -213,14 +213,13 @@ bool BinarySearchTree::leaf(char x) const
   return ((target->getLeftChildPtr() == nullptr) && (target->getRightChildPtr() == nullptr));
 }
 
-//TODO: fix this function
 BinaryNode<char> *BinarySearchTree::findNode(BinaryNode<char> *subTreePtr, char x) const
 {
   if (subTreePtr == nullptr)
   {
     return nullptr;
   }
-  if (subTreePtr->getItem() == x)
+  else if (subTreePtr->getItem() == x) // item was found
   {
     // Confirm that this is the lowest instance of this item
     if (subTreePtr->getRightChildPtr() != nullptr)
@@ -236,26 +235,22 @@ BinaryNode<char> *BinarySearchTree::findNode(BinaryNode<char> *subTreePtr, char 
         return subTreePtr;
       }
     }
+    else
+    {
+      return subTreePtr;
+    }
   }
-  else if (subTreePtr->getRightChildPtr() == nullptr && subTreePtr->getLeftChildPtr() == nullptr)
+  else if (subTreePtr->getRightChildPtr() == nullptr && subTreePtr->getLeftChildPtr() == nullptr) // item not found and no children
   {
     return nullptr;
   }
+  else if ((int)x >= subTreePtr->getKey())
+  {
+    return findNode(subTreePtr->getRightChildPtr(), x);
+  }
   else
   {
-    BinaryNode<char> *temp = findNode(subTreePtr->getLeftChildPtr(), x);
-    if (temp != nullptr)
-    {
-      return temp;
-    }
-    else if (subTreePtr->getRightChildPtr() != nullptr)
-    {
-      return findNode(subTreePtr->getRightChildPtr(), x);
-    }
-    else
-    {
-      return nullptr;
-    }
+    return findNode(subTreePtr->getLeftChildPtr(), x);
   }
 }
 
