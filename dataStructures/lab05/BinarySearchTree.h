@@ -46,9 +46,9 @@ public:
   bool remove(char x); // need to keep parent and child nodes tracked here
   // actually jk that's in a sub function
 
-  bool recursiveDelete(BinaryNode<char>* subTreePtr, char x);
+  bool recursiveDelete(BinaryNode<char>* parentPtr, BinaryNode<char>* childPtr, char x);
 
-  BinaryNode<char>* findMin(BinaryNode<char>* subTreePtr);
+  char deleteMin(BinaryNode<char>* subTreePtr);
 
   /**
   * @param x: char being searched for and checked
@@ -149,4 +149,6 @@ public:
   void printLevel(BinaryNode<char>* subTreePtr, int level) const;
 
   bool searchElement(char x) const;
+};
+
 #endif
