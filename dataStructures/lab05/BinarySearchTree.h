@@ -48,7 +48,7 @@ public:
 
   bool recursiveDelete(BinaryNode<char>* parentPtr, BinaryNode<char>* childPtr, char x);
 
-  char deleteMin(BinaryNode<char>* subTreePtr);
+  char deleteMin(BinaryNode<char>* currentParent, BinaryNode<char>* currentChild);
 
   /**
   * @param x: char being searched for and checked

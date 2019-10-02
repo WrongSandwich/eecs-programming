@@ -97,18 +97,22 @@ bool BinarySearchTree::remove(char x)
     {
       return false; //Could not find target
     }
+    else if (rootPtr->getItem() == x)
+    {
+      //special case where rootPtr is target
+      char newItem = deleteMin(rootPtr, rootPtr->getRightChildPtr());
+      rootPtr->setItem(newItem);
+      return true;
+    }
     // target has no children
     else
     {
-      std::cout << "Element found, would delete here\n";
       if (int(x) >= rootPtr->getKey())
       {
-        std::cout << "Item is on left side of tree\n";
         return recursiveDelete(rootPtr, rootPtr->getRightChildPtr(), x);
       }
       else
       {
-        std::cout << "Item is on left side of tree\n";
         return recursiveDelete(rootPtr, rootPtr->getLeftChildPtr(), x);
       }
     }
@@ -117,7 +121,11 @@ bool BinarySearchTree::remove(char x)
 
 bool BinarySearchTree::recursiveDelete(BinaryNode<char>* parentPtr, BinaryNode<char>* childPtr, char x)
 {
-  if (childPtr->getItem() == x) // item has been found
+  if (childPtr == nullptr)
+  {
+    return false;
+  }
+  else if (childPtr->getItem() == x) // item has been found
   {
     // First check if there's another instance lower in the tree
     if (recursiveDelete(childPtr, childPtr->getRightChildPtr(), x))
@@ -144,7 +152,7 @@ bool BinarySearchTree::recursiveDelete(BinaryNode<char>* parentPtr, BinaryNode<c
         BinaryNode<char>* tempPtr = childPtr->getLeftChildPtr();
         delete childPtr;
         childPtr = nullptr;
-        left ? (parentPtr->setLeftChildPtr(childPtr)) : (parentPtr->setRightChildPtr(childPtr));
+        left ? (parentPtr->setLeftChildPtr(tempPtr)) : (parentPtr->setRightChildPtr(tempPtr));
         return true;
       }
       else if (childPtr->getLeftChildPtr() == nullptr && childPtr->getRightChildPtr() != nullptr) // right child
@@ -152,12 +160,12 @@ bool BinarySearchTree::recursiveDelete(BinaryNode<char>* parentPtr, BinaryNode<c
         BinaryNode<char>* tempPtr = childPtr->getRightChildPtr();
         delete childPtr;
         childPtr = nullptr;
-        left ? (parentPtr->setLeftChildPtr(childPtr)) : (parentPtr->setRightChildPtr(childPtr));
+        left ? (parentPtr->setLeftChildPtr(tempPtr)) : (parentPtr->setRightChildPtr(tempPtr));
         return true;
       }
       else if (childPtr->getLeftChildPtr() != nullptr && childPtr->getRightChildPtr() != nullptr) // two children
       {
-        char newItem = deleteMin(childPtr->getRightChildPtr());
+        char newItem = deleteMin(childPtr, childPtr->getRightChildPtr());
         childPtr->setItem(newItem);
         return true;
       }
@@ -178,12 +186,12 @@ bool BinarySearchTree::recursiveDelete(BinaryNode<char>* parentPtr, BinaryNode<c
   }
 }
 
-char BinarySearchTree::deleteMin(BinaryNode<char>* subTreePtr)
+char BinarySearchTree::deleteMin(BinaryNode<char>* currentParent, BinaryNode<char>* currentChild)
 {
-  BinaryNode<char>* currentChild = subTreePtr->getLeftChildPtr();
-  BinaryNode<char>* currentParent = subTreePtr;
+  bool left = false;
   while (currentChild->getLeftChildPtr() != nullptr)
   {
+    left = true;
     currentParent = currentChild;
     currentChild = currentChild->getLeftChildPtr();
   }
@@ -192,11 +200,11 @@ char BinarySearchTree::deleteMin(BinaryNode<char>* subTreePtr)
   {
     delete currentChild;
     currentChild = nullptr;
-    currentParent->setLeftChildPtr(nullptr);
+    left ? currentParent->setLeftChildPtr(nullptr) : currentParent->setRightChildPtr(nullptr);
   }
   else
   {
-    currentParent->setLeftChildPtr(currentChild->getRightChildPtr());
+    left ? currentParent->setLeftChildPtr(currentChild->getRightChildPtr()) : currentParent->setRightChildPtr(currentChild->getRightChildPtr());
     delete currentChild;
     currentChild = nullptr;
   }
