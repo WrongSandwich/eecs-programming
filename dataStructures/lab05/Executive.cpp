@@ -182,7 +182,28 @@ void Executive::userInterface()
     }
     else if (userInput == 10) //Search item
     {
-      //TODO: write this one and stuff
+      char temp;
+      std::cout << "Please enter the character which you want to search for:\n>";
+      std::cin >> temp;
+
+      while (std::cin.fail())
+      {
+        std::cin.clear(); // unset failbit
+        // skip bad input up to the next newline
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Sorry, your input did not seem to be an char. Try again: ";
+        std::cin >> userInput;
+      }
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+      if (tree.searchElement(temp))
+      {
+        std::cout << temp << " has been found in the tree\n\n";
+      }
+      else
+      {
+        std::cout << temp << " could not be found in the tree\n\n";
+      }
     }
     else if (userInput == 11) //Exit
     {
