@@ -39,15 +39,47 @@ public:
   **/
   bool isEmpty() const;
 
+  /**
+  * @pre called by executive
+  * @post adds x to the tree as a new node, either itself or by calling recursiveAdd
+  * @param x: char to be added as an item in the tree
+  * @return true if successful, otherwise false
+  **/
   bool addItem(char x);
 
+  /**
+  * @pre called by addItem
+  * @post recursively adds x as a node in the appropriate location
+  * @param subTreePtr: current location in tree
+  * @param x: char to be added to to the tree
+  * @return true if successful, otherwise false
+  **/
   bool recursiveAdd(BinaryNode<char>* subTreePtr, char x);
 
-  bool remove(char x); // need to keep parent and child nodes tracked here
-  // actually jk that's in a sub function
+  /**
+  * @pre called by executive
+  * @post removes the node containing x, either itself or by calling helpers
+  * @param x: target for removal
+  * @return true if successful, otherwise false
+  **/
+  bool remove(char x);
 
+  /**
+  * @pre called by remove()
+  * @post recursively finds target and then deletes it appropriately
+  * @param currentParent and currentChild: nodes needed for proper removal
+  * @param x: target for removal
+  * @return true if successful, otherwise false
+  **/
   bool recursiveDelete(BinaryNode<char>* parentPtr, BinaryNode<char>* childPtr, char x);
 
+  /**
+  * @pre called by recursiveDelete
+  * @post finds the minimum node of the subtree, removes it, and returns its item
+  * @param currentParent and currentChild: nodes needed for proper removal
+  * @param x: target for removal
+  * @return true if successful, otherwise false
+  **/
   char deleteMin(BinaryNode<char>* currentParent, BinaryNode<char>* currentChild);
 
   /**
@@ -148,6 +180,12 @@ public:
   **/
   void printLevel(BinaryNode<char>* subTreePtr, int level) const;
 
+  /**
+  * @pre called by executive or remove()
+  * @post uses findNode() to determine if target is present in tree
+  * @param x: target being searched for
+  * @return true if target found, otherwise false
+  **/
   bool searchElement(char x) const;
 };
 
