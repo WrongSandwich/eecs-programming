@@ -93,28 +93,83 @@ bool BinarySearchTree::remove(char x)
   }
   else
   {
-    BinaryNode<char>* target = findNode(x);
-    if (target == nullptr)
+    if (searchElement(x) == false)
     {
       return false; //Could not find target
     }
     // target has no children
-    else if (target->getLeftChildPtr() == nullptr && target->getRightChildPtr() == nullptr)
+    else
     {
-      
+      if (int(x) >= rootPtr->getKey())
+      {
+        recursiveDelete(rootPtr, rootPtr->getRightChildPtr(), x);
+      }
+      else
+      {
+        recursiveDelete(rootPtr, rootPtr->getLeftChildPtr(), x);
+      }
     }
   }
 }
 
-bool BinarySearchTree::recursiveDelete(BinaryNode<char>* subTreePtr, char x)
+bool BinarySearchTree::recursiveDelete(BinaryNode<char>* parentPtr, BinaryNode<char>* childPtr, char x)
 {
-  if (subTreePtr == nullptr)
+  if (childPtr->getItem() == x) // item has been found
   {
-    return false;
+    // First check if there's another instance lower in the tree
+    if (recursiveDelete(childPtr, childPtr->getRightChildPtr(), x))
+    {
+      return true;
+    }
+    else // only instance, delete this node
+    {
+      // track which child the childptr is
+      bool left = false;
+      if (childPtr == parentPtr->getLeftChildPtr())
+      {
+        left = true;
+      }
+      if (childPtr->getLeftChildPtr() == nullptr && childPtr->getRightChildPtr() == nullptr) // no children
+      {
+        delete childPtr;
+        childPtr = nullptr;
+        left ? (parentPtr->setLeftChildPtr(nullptr)) : (parentPtr->setRightChildPtr(nullptr));
+        return true;
+      }
+      else if (childPtr->getLeftChildPtr() != nullptr && childPtr->getRightChildPtr() == nullptr) // left child
+      {
+        BinaryNode<char>* tempPtr = childPtr->getLeftChildPtr();
+        delete childPtr;
+        childPtr = nullptr;
+        left ? (parentPtr->setLeftChildPtr(childPtr)) : (parentPtr->setRightChildPtr(childPtr));
+        return true;
+      }
+      else if (childPtr->getLeftChildPtr() == nullptr && childPtr->getRightChildPtr() != nullptr) // right child
+      {
+        BinaryNode<char>* tempPtr = childPtr->getRightChildPtr();
+        delete childPtr;
+        childPtr = nullptr;
+        left ? (parentPtr->setLeftChildPtr(childPtr)) : (parentPtr->setRightChildPtr(childPtr));
+        return true;
+      }
+      else if (childPtr->getLeftChildPtr() != nullptr && childPtr->getRightChildPtr() != nullptr) // two children
+      {
+        //TODO: write this algorithm
+      }
+    }
   }
   else
   {
-
+    parentPtr = childPtr;
+    if (int(x) >= parentPtr->getKey())
+    {
+      childPtr = parentPtr->getRightChildPtr();
+    }
+    else
+    {
+      childPtr = parentPtr->getLeftChildPtr();
+    }
+    return recursiveDelete(parentPtr, childPtr, x);
   }
 }
 
@@ -233,7 +288,7 @@ void BinarySearchTree::preorderHelper(void visit(char &), BinaryNode<char> *tree
 {
   if (treePtr != nullptr)
   {
-    int item = treePtr->getItem();
+    char item = treePtr->getItem();
     visit(item);
     preorderHelper(visit, treePtr->getLeftChildPtr());
     preorderHelper(visit, treePtr->getRightChildPtr());
@@ -251,7 +306,7 @@ void BinarySearchTree::postorderHelper(void visit(char &), BinaryNode<char> *tre
   {
     postorderHelper(visit, treePtr->getLeftChildPtr());
     postorderHelper(visit, treePtr->getRightChildPtr());
-    int item = treePtr->getItem();
+    char item = treePtr->getItem();
     visit(item);
   }
 }
@@ -266,7 +321,7 @@ void BinarySearchTree::inorderHelper(void visit(char &), BinaryNode<char> *treeP
   if (treePtr != nullptr)
   {
     inorderHelper(visit, treePtr->getLeftChildPtr());
-    int item = treePtr->getItem();
+    char item = treePtr->getItem();
     visit(item);
     inorderHelper(visit, treePtr->getRightChildPtr());
   }
@@ -298,7 +353,15 @@ void BinarySearchTree::printLevel(BinaryNode<char> *subTreePtr, int level) const
   }
 }
 
-bool searchElement(char x) const
+bool BinarySearchTree::searchElement(char x) const
 {
-
+  BinaryNode<char>* target = findNode(rootPtr, x);
+  if (target == nullptr)
+  {
+    return false;
+  }
+  else
+  {
+    return true;
+  }
 }
