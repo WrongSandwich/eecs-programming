@@ -13,16 +13,18 @@
 class MinHeap
 {
 private:
-    int heap[15000];
+    int* heap;
+    int curSize;
+    int maxSize;
 public:
-    MinHeap();
+    MinHeap(int size);
     ~MinHeap();
     // Build using top-down approach. Should also print time taken to built
-    void heapify();
+    void heapify(int* inputs, int size);
     bool insert(int x);
-    void remove();
-    void pq_highest();
-    void pq_lowest();
+    int remove();
+    int pq_highest();
+    int pq_lowest();
     void levelorder();
     void time_lowest_pq();
 };
