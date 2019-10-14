@@ -8,6 +8,7 @@
 
 #include "Executive.h"
 #include "MinHeap.h"
+#include "MaxHeap.h"
 #include <string>
 #include <sstream>
 #include <stdexcept>
