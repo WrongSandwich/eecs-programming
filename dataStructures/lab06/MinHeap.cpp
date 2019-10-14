@@ -10,12 +10,14 @@
 #include <math.h>
 #include <chrono>
 #include <iostream>
+#include <string>
+#include <fstream>
 
-MinHeap::MinHeap(int size)
+MinHeap::MinHeap()
 {
-    heap = new int[size];
+    heap = new int[15000];
     curSize = 0;
-    MAX_SIZE = size;
+    MAX_SIZE = 15000;
 }
 
 MinHeap::~MinHeap()
@@ -23,17 +25,29 @@ MinHeap::~MinHeap()
     delete [] heap;
 }
 
-void MinHeap::buildHeap(int* inputs, int size)
+void MinHeap::buildHeap(std::string fileName)
 {
-    bool temp = false;
-    auto t1 = std::chrono::high_resolution_clock::now();
-    for (int i = 0; i < size; i++)
+    std::ifstream inFile;
+    inFile.open(fileName);
+    if (inFile.is_open())
     {
-        temp = insert(inputs[i]);
+        int temp;
+        auto t1 = std::chrono::high_resolution_clock::now();
+        while (inFile >> temp)
+        {
+            if (!insert(temp))
+            {
+                throw std::runtime_error("ERROR: Invalid item in data file, please fix and run again");
+            }
+        }
+        auto t2 = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
+        std::cout << "Minheap build completed in " << duration << " microseconds\n";
     }
-    auto t2 = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
-    std::cout << "Heapify completed in " << duration << " microseconds\n";
+    else
+    {
+        throw std::runtime_error("ERROR: Could not open file");
+    }
 }
 
 bool MinHeap::insert(int x)

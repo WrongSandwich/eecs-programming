@@ -6,6 +6,7 @@
 *         contains methods for organizing and modifying that array as a a minheap
 *******************************************************************************/
 
+#include <string>
 
 #ifndef MIN_HEAP
 #define MIN_HEAP
@@ -17,10 +18,10 @@ private:
     int curSize;
     int MAX_SIZE;
 public:
-    MinHeap(int size);
+    MinHeap();
     ~MinHeap();
     // Build using top-down approach. Should also print time taken to built
-    void buildHeap(int* inputs, int size);
+    void buildHeap(std::string fileName);
     bool insert(int x);
     int remove();
     void heapify(int i);

@@ -17,21 +17,13 @@
 
 Executive::Executive(std::string fileName)
 {
-  //TODO: Update infiling
+
   std::ifstream inFile;
   inFile.open(fileName);
   if (inFile.is_open())
   {
-    char temp;
-    while (inFile >> temp)
-    {
-      bool success = tree.addItem(temp);
-      if (!success)
-      {
-        throw std::runtime_error("ERROR: Invalid item in data file, please fix and run again");
-      }
-    }
     inFile.close();
+    minHeap.buildHeap(fileName);
     userInterface();
   }
   else
