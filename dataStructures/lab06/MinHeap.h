@@ -27,9 +27,9 @@ public:
     int pq_highest();
     int pq_lowest();
     void levelorder();
-    void time_lowest_pq();
-    void time_highest_pq();
-    void time_delete_pq();
+    int time_lowest_pq();
+    int time_highest_pq();
+    int time_delete_pq();
     int left(int parent);
     int middle(int parent);
     int right(int parent);
