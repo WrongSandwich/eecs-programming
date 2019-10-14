@@ -52,7 +52,6 @@ void MinHeap::buildHeap(std::string fileName)
 
 bool MinHeap::insert(int x)
 {
-    // TODO: guard against duplicates?
     if (curSize == MAX_SIZE || x < 1)
     {
         return false;
