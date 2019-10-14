@@ -52,7 +52,6 @@ void MaxHeap::buildHeap(std::string fileName)
 
 bool MaxHeap::insert(int x)
 {
-    // TODO: guard against duplicates?
     if (curSize == MAX_SIZE || x < 1)
     {
         return false;
