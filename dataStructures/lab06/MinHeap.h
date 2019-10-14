@@ -31,5 +31,6 @@ public:
     int middle(int parent);
     int right(int parent);
     int parent(int child);
+    void swap(int *x, int *y);
 };
 #endif

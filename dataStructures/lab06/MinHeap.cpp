@@ -137,3 +137,10 @@ int MinHeap::parent(int child)
 {
     return floor((child - 1) / 3);
 }
+
+void MinHeap::swap(int *x, int *y)
+{
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+}
