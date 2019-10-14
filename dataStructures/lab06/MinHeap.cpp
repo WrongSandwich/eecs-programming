@@ -38,7 +38,8 @@ void MinHeap::buildHeap(int* inputs, int size)
 
 bool MinHeap::insert(int x)
 {
-    if (curSize == MAX_SIZE)
+    // TODO: guard against duplicates?
+    if (curSize == MAX_SIZE || x < 1)
     {
         return false;
     }

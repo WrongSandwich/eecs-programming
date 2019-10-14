@@ -3,10 +3,11 @@
 *@file    Executive.cpp
 *@date    09/25/19
 *@brief   Implementation file for Executive class, which creates and modifies a
-*         BinarySearchTree
+*         MinHeap and MaxHeap
 *******************************************************************************/
 
 #include "Executive.h"
+#include "MinHeap.h"
 #include <string>
 #include <sstream>
 #include <stdexcept>
@@ -16,6 +17,7 @@
 
 Executive::Executive(std::string fileName)
 {
+  //TODO: Update infiling
   std::ifstream inFile;
   inFile.open(fileName);
   if (inFile.is_open())
@@ -45,12 +47,12 @@ Executive::~Executive()
 void Executive::userInterface()
 {
   int userInput = 0;
-  while (userInput != 11)
+  while (userInput != 9)
   {
     std::cout << "Please choose one of the following commands:\n";
-    std::cout << "1- Add item\n2- Delete\n3- Check if leaf\n4- Print leaves\n";
-    std::cout << "5- Print tree height\n6- Preorder\n7- Postorder\n";
-    std::cout << "8- Inorder\n9- Levelorder\n10- Search for an item\n11- Exit\n>";
+    std::cout << "1- Insert\n2- Delete\n3- PQ_Highest\n4- PQ_Lowest\n";
+    std::cout << "5- Level_Order\n6- Time_Delete\n7- Time_HighestPQ\n";
+    std::cout << "8- Time_LowestPQ\n9- Exit\n>";
     std::cin >> userInput;
     std::cout << '\n';
 
@@ -68,10 +70,10 @@ void Executive::userInterface()
 
     //END OF VALIDATION
 
-    if (userInput == 1) //AddItem
+    if (userInput == 1) //Insert
     {
-      char temp;
-      std::cout << "Please enter the character which you want to enter into the tree:\n>";
+      int temp;
+      std::cout << "Please enter the integer which you want to enter into the tree:\n>";
       std::cin >> temp;
 
       while (std::cin.fail())
@@ -79,132 +81,98 @@ void Executive::userInterface()
         std::cin.clear(); // unset failbit
         // skip bad input up to the next newline
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Sorry, your input did not seem to be an char. Try again: ";
+        std::cout << "Sorry, your input did not seem to be an int. Try again: ";
         std::cin >> userInput;
       }
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-      if (tree.addItem(temp))
+      if (minHeap.insert(temp))
       {
-        std::cout << "Value inserted successfully!\n\n";
+        std::cout << temp << "has been inserted successfully!\n\n";
       }
       else
       {
-        std::cout << "Failed to insert value\n\n";
+        std::cout << "Failed to insert value " << temp << "\n\n";
       }
     }
     else if (userInput == 2) //Delete
     {
-      char temp;
-      std::cout << "Please enter the character which you want to delete from the tree:\n>";
-      std::cin >> temp;
-
-      while (std::cin.fail())
+      int temp = minHeap.remove();
+      if (temp == -1)
       {
-        std::cin.clear(); // unset failbit
-        // skip bad input up to the next newline
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Sorry, your input did not seem to be an char. Try again: ";
-        std::cin >> userInput;
-      }
-      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-      if (tree.remove(temp))
-      {
-        std::cout << "Value deleted successfully!\n\n";
+        std::cout << "ERROR: Heap is empty, cannot remove\n\n";
       }
       else
       {
-        std::cout << "Failed to delete value. The character is not present in the tree\n\n";
+        std::cout << "The highest priority element is " << temp << " and it has been deleted\n\n";
       }
     }
-    else if (userInput == 3) //Leaf
+    else if (userInput == 3) //PQ_Highest
     {
-      char temp;
-      std::cout << "Please enter the value which you want to test as a leaf node:\n>";
-      std::cin >> temp;
-
-      while (std::cin.fail())
+      int temp = minHeap.pq_highest();
+      if (temp == -1)
       {
-        std::cin.clear(); // unset failbit
-        // skip bad input up to the next newline
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Sorry, your input did not seem to be a char. Try again: ";
-        std::cin >> userInput;
-      }
-      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-      if (tree.leaf(temp))
-      {
-        std::cout << "The node with value " << temp << " is a leaf node\n\n";
+        std::cout << "ERROR: Heap is empty\n\n";
       }
       else
       {
-        std::cout << "The node with value " << temp << " is not a leaf node\n\n";
+        std::cout << "The highest priority element is " << temp << "\n\n";
       }
     }
-    else if (userInput == 4) //PrintLeaf
+    else if (userInput == 4) //PQ_Lowest
     {
-      std::cout << "The leaf nodes are: ";
-      tree.printLeaf();
-      std::cout << "\n\n";
-    }
-    else if (userInput == 5) //PrintTreeHeight
-    {
-      std::cout << "The height of the tree is ";
-      tree.printTreeHeight();
-      std::cout << "\n\n";
-    }
-    else if (userInput == 6) //Preorder
-    {
-      std::cout << "Printing the tree in preorder: ";
-      tree.preorder();
-      std::cout << "\n\n";
-    }
-    else if (userInput == 7) //Postorder
-    {
-      std::cout << "Printing the tree in postorder: ";
-      tree.postorder();
-      std::cout << "\n\n";
-    }
-    else if (userInput == 8) //Inorder
-    {
-      std::cout << "Printing the tree in inorder: ";
-      tree.inorder();
-      std::cout << "\n\n";
-    }
-    else if (userInput == 9) //Levelorder
-    {
-      std::cout << "Printing the tree in levelorder: ";
-      tree.levelorder();
-      std::cout << "\n\n";
-    }
-    else if (userInput == 10) //Search item
-    {
-      char temp;
-      std::cout << "Please enter the character which you want to search for:\n>";
-      std::cin >> temp;
-
-      while (std::cin.fail())
+      int temp = minHeap.pq_lowest();
+      if (temp == -1)
       {
-        std::cin.clear(); // unset failbit
-        // skip bad input up to the next newline
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Sorry, your input did not seem to be an char. Try again: ";
-        std::cin >> userInput;
-      }
-      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-      if (tree.searchElement(temp))
-      {
-        std::cout << temp << " has been found in the tree\n\n";
+        std::cout << "ERROR: Heap is empty\n\n";
       }
       else
       {
-        std::cout << temp << " could not be found in the tree\n\n";
+        std::cout << "The lowest priority element is " << temp << "\n\n";
       }
     }
-    else if (userInput == 11) //Exit
+    else if (userInput == 5) //Level_Order
+    {
+      minHeap.levelorder();
+      std::cout << "\n\n";
+    }
+    else if (userInput == 6) //Time_Delete
+    {
+      int temp = minHeap.time_delete_pq();
+      if (temp == -1)
+      {
+        std::cout << "ERROR: Heap is empty, cannot remove\n\n";
+      }
+      else
+      {
+        std::cout << "The highest priority element is " << temp << " and it has been deleted\n\n";
+      }
+    }
+    else if (userInput == 7) //Time_HighestPQ
+    {
+      int temp = minHeap.time_highest_pq();
+      if (temp == -1)
+      {
+        std::cout << "ERROR: Heap is empty\n\n";
+      }
+      else
+      {
+        std::cout << "The highest priority element is " << temp << "\n\n";
+      }
+    }
+    else if (userInput == 8) //Time_LowestPQ
+    {
+      int temp = minHeap.time_lowest_pq();
+      if (temp == -1)
+      {
+        std::cout << "ERROR: Heap is empty\n\n";
+      }
+      else
+      {
+        std::cout << "The lowest priority element is " << temp << "\n\n";
+      }
+    }
+    else if (userInput == 9) //Exit
     {
       std::cout << "Exiting...\n";
     }

@@ -3,7 +3,7 @@
 *@file    Executive.h
 *@date    09/25/19
 *@brief   Header file for Executive class, which creates and modifies a
-*         BinarySearchTree
+*         MinHeap and MaxHeap
 *******************************************************************************/
 
 
