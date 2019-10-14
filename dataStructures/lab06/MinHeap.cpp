@@ -47,7 +47,9 @@ bool MinHeap::insert(int x)
 
 int MinHeap::remove()
 {
-
+    int lastElement = heap[curSize - 1];
+    int pop = heap[0];
+    heap[0] = lastElement;
 }
 
 int MinHeap::pq_highest()
@@ -71,7 +73,7 @@ int MinHeap::pq_lowest()
 {
     if (curSize > 0)
     {
-        auto t1 = std::chrono::high_resolution_clock::now();
+        // auto t1 = std::chrono::high_resolution_clock::now();
         int i = curSize - 1;
         int max = heap[i];
         int searchBoundary = floor((i-1)/3);
@@ -84,9 +86,9 @@ int MinHeap::pq_lowest()
             }
             i--;
         }
-        auto t2 = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
-        std::cout << "Pq_lowest completed in " << duration << " microseconds\n";
+        // auto t2 = std::chrono::high_resolution_clock::now();
+        // auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
+        // std::cout << "Pq_lowest completed in " << duration << " microseconds\n";
         return max;
     }
     else
@@ -105,5 +107,9 @@ void MinHeap::levelorder()
 
 void MinHeap::time_lowest_pq()
 {
-
+    auto t1 = std::chrono::high_resolution_clock::now();
+    int temp = pq_lowest();
+    auto t2 = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
+    std::cout << "Pq_lowest completed in " << duration << " microseconds\n";
 }
