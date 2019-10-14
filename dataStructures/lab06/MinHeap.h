@@ -27,5 +27,9 @@ public:
     int pq_lowest();
     void levelorder();
     void time_lowest_pq();
+    int left(int parent);
+    int middle(int parent);
+    int right(int parent);
+    int parent(int child);
 };
 #endif

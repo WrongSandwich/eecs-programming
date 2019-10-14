@@ -15,17 +15,17 @@ MinHeap::~MinHeap()
     delete [] heap;
 }
 
-void MinHeap::heapify(int* inputs, int size)
-{
-    auto t1 = std::chrono::high_resolution_clock::now();
-    for (int i = 0; i < size; i++)
-    {
-        insert(inputs[i]);
-    }
-    auto t2 = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
-    std::cout << "Heapify completed in " << duration << " microseconds\n";
-}
+// void MinHeap::heapify(int* inputs, int size)
+// {
+//     auto t1 = std::chrono::high_resolution_clock::now();
+//     for (int i = 0; i < size; i++)
+//     {
+//         insert(inputs[i]);
+//     }
+//     auto t2 = std::chrono::high_resolution_clock::now();
+//     auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
+//     std::cout << "Heapify completed in " << duration << " microseconds\n";
+// }
 
 bool MinHeap::insert(int x)
 {
@@ -112,4 +112,28 @@ void MinHeap::time_lowest_pq()
     auto t2 = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
     std::cout << "Pq_lowest completed in " << duration << " microseconds\n";
+}
+
+//////////////////////////////////
+///// Index Helper Functions /////
+//////////////////////////////////
+
+int MinHeap::left(int parent)
+{
+    return 3 * parent + 1;
+}
+
+int MinHeap::middle(int parent)
+{
+    return 3 * parent + 2;
+}
+
+int MinHeap::right(int parent)
+{
+    return 3 * parent + 3;
+}
+
+int MinHeap::parent(int child)
+{
+    return floor((child - 1) / 3);
 }
