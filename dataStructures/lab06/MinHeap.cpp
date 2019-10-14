@@ -1,3 +1,11 @@
+/*******************************************************************************
+*@author  Evan Trout
+*@file    MinHeap.cpp
+*@date    10/14/19
+*@brief   Implementation file for MinHeap class, which stores an array of integers and
+*         contains methods for organizing and modifying that array as a a minheap
+*******************************************************************************/
+
 #include "MinHeap.h"
 #include <math.h>
 #include <chrono>

@@ -1,9 +1,9 @@
 /*******************************************************************************
 *@author  Evan Trout
-*@file    Executive.h
-*@date    09/25/19
-*@brief   Header file for Executive class, which creates and modifies a
-*         BinarySearchTree
+*@file    MinHeap.h
+*@date    10/14/19
+*@brief   Header file for MinHeap class, which stores an array of integers and
+*         contains methods for organizing and modifying that array as a a minheap
 *******************************************************************************/
 
 
