@@ -41,8 +41,8 @@ void MaxHeap::buildHeap(std::string fileName)
             }
         }
         auto t2 = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
-        std::cout << "MaxHeap build completed in " << duration << " microseconds\n";
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>( t2 - t1 ).count();
+        std::cout << "MaxHeap build completed in " << duration << " nanoseconds\n";
     }
     else
     {
@@ -166,8 +166,8 @@ int MaxHeap::time_highest_pq()
     auto t1 = std::chrono::high_resolution_clock::now();
     int temp = pq_highest();
     auto t2 = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
-    std::cout << "Pq_highest completed in " << duration << " microseconds\n";
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>( t2 - t1 ).count();
+    std::cout << "Pq_highest completed in " << duration << " nanoseconds\n";
     return temp;
 }
 
@@ -176,8 +176,8 @@ int MaxHeap::time_lowest_pq()
     auto t1 = std::chrono::high_resolution_clock::now();
     int temp = pq_lowest();
     auto t2 = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
-    std::cout << "Pq_lowest completed in " << duration << " microseconds\n";
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>( t2 - t1 ).count();
+    std::cout << "Pq_lowest completed in " << duration << " nanoseconds\n";
     return temp;
 }
 
@@ -186,8 +186,8 @@ int MaxHeap::time_delete_pq()
     auto t1 = std::chrono::high_resolution_clock::now();
     int temp = remove();
     auto t2 = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
-    std::cout << "Remove completed in " << duration << " microseconds\n";
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>( t2 - t1 ).count();
+    std::cout << "Remove completed in " << duration << " nanoseconds\n";
     return temp;
 }
 
