@@ -80,7 +80,7 @@ void Executive::userInterface()
 
       if (minHeap.insert(temp))
       {
-        std::cout << temp << "has been inserted successfully!\n\n";
+        std::cout << temp << " has been inserted successfully!\n\n";
       }
       else
       {

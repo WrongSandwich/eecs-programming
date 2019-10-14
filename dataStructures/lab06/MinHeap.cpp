@@ -86,7 +86,7 @@ int MinHeap::remove()
     else
     {
         int pop = heap[0];
-        int lastElement = heap[curSize - 1];
+        heap[0] = heap[curSize - 1];
         curSize--;
         heapify(0);
         return pop;
