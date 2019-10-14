@@ -149,7 +149,7 @@ void MinHeap::time_highest_pq()
     int temp = pq_highest();
     auto t2 = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
-    std::cout << "Pq_lowest completed in " << duration << " microseconds\n";
+    std::cout << "Pq_highest completed in " << duration << " microseconds\n";
 }
 
 void MinHeap::time_lowest_pq()
@@ -159,6 +159,15 @@ void MinHeap::time_lowest_pq()
     auto t2 = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
     std::cout << "Pq_lowest completed in " << duration << " microseconds\n";
+}
+
+void MinHeap::time_delete_pq()
+{
+    auto t1 = std::chrono::high_resolution_clock::now();
+    int temp = remove();
+    auto t2 = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
+    std::cout << "Remove completed in " << duration << " microseconds\n";
 }
 
 //////////////////////////////////
