@@ -43,6 +43,12 @@ public:
     **/    
     bool insert(int x);
 
+    bool isMinLevel(int index);
+
+    void checkMin(int index);
+
+    void checkMax(int index);
+
     /**
     * @post Removes the root and returns it, then calls heapify to maintain heap conditions
     * @return int value of root, or -1 if heap is empty
@@ -80,12 +86,6 @@ public:
     
     /**
     * @param parent: index value of parent
-    * @return index of middle child of parent
-    **/
-    int middle(int parent);
-    
-    /**
-    * @param parent: index value of parent
     * @return index of right child of parent
     **/
     int right(int parent);
@@ -95,6 +95,18 @@ public:
     * @return index value of parent of child
     **/
     int parent(int child);
+
+    /**
+    * @param child: index value of child
+    * @return index value of grandparent of child
+    **/
+    int grand(int child);
+
+    /**
+    * @param index: index value being checked
+    * @return current level of the array
+    **/
+    int level(int index);
     
     /**
     * @post swaps values of two locations in array

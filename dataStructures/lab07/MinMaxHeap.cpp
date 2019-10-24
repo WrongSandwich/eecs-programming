@@ -53,17 +53,69 @@ bool MinMaxHeap::insert(int x)
     }
     // insert x into end of heap
     heap[curSize] = x;
-    // do swaps until heap satisfies requirements
+    // satisfy heap requirement
     int child = curSize;
-    int par = parent(child);
-    while (child != 0 && heap[par] > heap[child])
-    {
-        swap(&heap[par], &heap[child]);
-        child = par;
-        par = parent(child);
-    }
     curSize++;
+    int par = parent(child);
+    if (isMinLevel(child)) // child is on a min level
+    { 
+        if (heap[child] > heap[par])
+        {
+            swap(&heap[par], &heap[child]);
+            checkMax(par);
+        }
+        else
+        {
+            checkMin(child);
+        }
+    } 
+    else
+    {
+        if (heap[par] > heap[child])
+        {
+            swap(&heap[par], &heap[child]);
+            checkMin(par);
+        }
+        else
+        {
+            checkMax(child);
+        }
+    }
     return true;
+}
+
+bool MinMaxHeap::isMinLevel(int index)
+{
+    int curLevel = level(index);
+    return ((curLevel % 2) == 0);
+}
+
+void MinMaxHeap::checkMin(int index)
+{
+    if (index > 2)
+    {
+        int gp = grand(index);
+        if (heap[gp] > heap[index])
+        {
+            swap(&heap[gp], &heap[index]);
+            checkMin(gp);
+        }
+    }
+
+}
+
+void MinMaxHeap::checkMax(int index)
+{
+    if (index > 2)
+    {
+        int gp = grand(index);
+        if (heap[gp] < heap[index])
+        {
+            swap(&heap[gp], &heap[index]);
+            checkMax(gp);
+        }
+    }
+
 }
 
 int MinMaxHeap::remove()
@@ -162,22 +214,28 @@ void MinMaxHeap::levelorder()
 
 int MinMaxHeap::left(int parent)
 {
-    return 3 * parent + 1;
-}
-
-int MinMaxHeap::middle(int parent)
-{
-    return 3 * parent + 2;
+    return 2 * parent + 1;
 }
 
 int MinMaxHeap::right(int parent)
 {
-    return 3 * parent + 3;
+    return 2 * parent + 2;
 }
 
 int MinMaxHeap::parent(int child)
 {
-    return floor((child - 1) / 3);
+    return floor((child - 1) / 2);
+}
+
+int MinMaxHeap::grand(int child)
+{
+    return parent(parent(child));
+}
+
+int MinMaxHeap::level(int index)
+{
+    index++;
+    return floor(log2(index));
 }
 
 void MinMaxHeap::swap(int *x, int *y)
