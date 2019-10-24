@@ -88,14 +88,27 @@ void Executive::userInterface()
     }
     else if (userInput == 2) //Delete
     {
-      int temp = mmHeap.remove();
-      if (temp == -1)
+      int temp;
+      std::cout << "Please enter the integer which you want to enter into the tree:\n>";
+      std::cin >> temp;
+
+      while (std::cin.fail())
       {
-        std::cout << "ERROR: Heap is empty, cannot remove\n";
+        std::cin.clear(); // unset failbit
+        // skip bad input up to the next newline
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Sorry, your input did not seem to be an int. Try again: ";
+        std::cin >> userInput;
+      }
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      
+      if (mmHeap.remove(temp))
+      {
+        std::cout << temp << " has been removed successfully!\n";
       }
       else
       {
-        std::cout << "The highest priority element is " << temp << " and it has been deleted\n";
+        std::cout << "Failed to remove value " << temp << "\n";
       }
     }
     else if (userInput == 3) //MinLevel

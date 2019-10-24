@@ -128,7 +128,7 @@ bool MinMaxHeap::remove(int target)
     {
         return false;
     }
-    heap[index] == heap[curSize - 1];
+    heap[index] = heap[curSize - 1];
     curSize--;
     if (isMinLevel(index))
     {
@@ -190,7 +190,7 @@ void MinMaxHeap::trickleDownMax(int index)
 {
     if (left(index) < curSize)
     {
-        // Find smallest child
+        // Find largest child
         int maxAncestor = left(index);
         int check = right(index);
         if (check < curSize && heap[check] > heap[maxAncestor])
