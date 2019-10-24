@@ -1,7 +1,7 @@
 /*******************************************************************************
 *@author  Evan Trout
 *@file    MinMaxHeap.cpp
-*@date    10/14/19
+*@date    10/24/19
 *@brief   Implementation file for MinMaxHeap class, which stores an array of integers and
 *         contains methods for organizing and modifying that array as a a MinMaxHeap
 *******************************************************************************/

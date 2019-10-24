@@ -1,9 +1,9 @@
 /*******************************************************************************
 *@author  Evan Trout
 *@file    Executive.cpp
-*@date    09/25/19
+*@date    10/24/19
 *@brief   Implementation file for Executive class, which creates and modifies a
-*         MinHeap and MaxHeap
+*         MinMaxHeap
 *******************************************************************************/
 
 #include "Executive.h"
