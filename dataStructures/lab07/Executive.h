@@ -11,14 +11,12 @@
 #define EXECUTIVE
 
 #include <string>
-#include "MinHeap.h"
-#include "MaxHeap.h"
+#include "MinMaxHeap.h"
 
 class Executive
 {
 private:
-  MinHeap minHeap;
-  MaxHeap maxHeap;
+  MinMaxHeap mmHeap;
 public:
   /**
 * @pre constructor is called with valid file name
