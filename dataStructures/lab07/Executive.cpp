@@ -89,7 +89,7 @@ void Executive::userInterface()
     else if (userInput == 2) //Delete
     {
       int temp;
-      std::cout << "Please enter the integer which you want to enter into the tree:\n>";
+      std::cout << "Please enter the integer which you want removed from the tree:\n>";
       std::cin >> temp;
 
       while (std::cin.fail())
