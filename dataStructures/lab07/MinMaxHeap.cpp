@@ -115,7 +115,6 @@ void MinMaxHeap::checkMax(int index)
             checkMax(gp);
         }
     }
-
 }
 
 int MinMaxHeap::remove()
@@ -142,16 +141,11 @@ int MinMaxHeap::remove()
 void MinMaxHeap::heapify(int i)
 {
     int l = left(i);
-    int m = middle(i);
     int r = right(i);
     int smallest = i;
     if (l < curSize && heap[l] < heap[i])
     {
         smallest = l;
-    }
-    if (m < curSize && heap[m] < heap[smallest])
-    {
-        smallest = m;
     }
     if (r < curSize && heap[r] < heap[smallest])
     {
