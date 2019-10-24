@@ -1,38 +1,36 @@
 /*******************************************************************************
 *@author  Evan Trout
-*@file    MinHeap.cpp
+*@file    MinMaxHeap.cpp
 *@date    10/14/19
-*@brief   Implementation file for MinHeap class, which stores an array of integers and
-*         contains methods for organizing and modifying that array as a a minheap
+*@brief   Implementation file for MinMaxHeap class, which stores an array of integers and
+*         contains methods for organizing and modifying that array as a a MinMaxHeap
 *******************************************************************************/
 
-#include "MinHeap.h"
+#include "MinMaxHeap.h"
 #include <math.h>
-#include <chrono>
 #include <iostream>
 #include <string>
 #include <fstream>
 
-MinHeap::MinHeap()
+MinMaxHeap::MinMaxHeap()
 {
     heap = new int[15000];
     curSize = 0;
     MAX_SIZE = 15000;
 }
 
-MinHeap::~MinHeap()
+MinMaxHeap::~MinMaxHeap()
 {
     delete [] heap;
 }
 
-void MinHeap::buildHeap(std::string fileName)
+void MinMaxHeap::buildHeap(std::string fileName)
 {
     std::ifstream inFile;
     inFile.open(fileName);
     if (inFile.is_open())
     {
         int temp;
-        auto t1 = std::chrono::high_resolution_clock::now();
         while (inFile >> temp)
         {
             if (!insert(temp))
@@ -40,9 +38,6 @@ void MinHeap::buildHeap(std::string fileName)
                 throw std::runtime_error("ERROR: Invalid item in data file, please fix and run again");
             }
         }
-        auto t2 = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>( t2 - t1 ).count();
-        std::cout << "Minheap build completed in " << duration << " nanoseconds\n";
     }
     else
     {
@@ -50,7 +45,7 @@ void MinHeap::buildHeap(std::string fileName)
     }
 }
 
-bool MinHeap::insert(int x)
+bool MinMaxHeap::insert(int x)
 {
     if (curSize == MAX_SIZE || x < 1)
     {
@@ -71,7 +66,7 @@ bool MinHeap::insert(int x)
     return true;
 }
 
-int MinHeap::remove()
+int MinMaxHeap::remove()
 {
     if (curSize == 0)
     {
@@ -92,7 +87,7 @@ int MinHeap::remove()
     }
 }
 
-void MinHeap::heapify(int i)
+void MinMaxHeap::heapify(int i)
 {
     int l = left(i);
     int m = middle(i);
@@ -117,7 +112,7 @@ void MinHeap::heapify(int i)
     }
 }
 
-int MinHeap::pq_highest()
+int MinMaxHeap::pq_highest()
 {
     if (curSize > 0)
     {
@@ -129,7 +124,7 @@ int MinHeap::pq_highest()
     }
 }
 
-int MinHeap::pq_lowest()
+int MinMaxHeap::pq_lowest()
 {
     if (curSize > 0)
     {
@@ -153,7 +148,7 @@ int MinHeap::pq_lowest()
     }
 }
 
-void MinHeap::levelorder()
+void MinMaxHeap::levelorder()
 {
     for (int i = 0; i < curSize; i++)
     {
@@ -161,61 +156,31 @@ void MinHeap::levelorder()
     }
 }
 
-int MinHeap::time_highest_pq()
-{
-    auto t1 = std::chrono::high_resolution_clock::now();
-    int temp = pq_highest();
-    auto t2 = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>( t2 - t1 ).count();
-    std::cout << "Pq_highest completed in " << duration << " nanoseconds\n";
-    return temp;
-}
-
-int MinHeap::time_lowest_pq()
-{
-    auto t1 = std::chrono::high_resolution_clock::now();
-    int temp = pq_lowest();
-    auto t2 = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>( t2 - t1 ).count();
-    std::cout << "Pq_lowest completed in " << duration << " nanoseconds\n";
-    return temp;
-}
-
-int MinHeap::time_delete_pq()
-{
-    auto t1 = std::chrono::high_resolution_clock::now();
-    int temp = remove();
-    auto t2 = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>( t2 - t1 ).count();
-    std::cout << "Remove completed in " << duration << " nanoseconds\n";
-    return temp;
-}
-
 //////////////////////////////////
 ///// Index Helper Functions /////
 //////////////////////////////////
 
-int MinHeap::left(int parent)
+int MinMaxHeap::left(int parent)
 {
     return 3 * parent + 1;
 }
 
-int MinHeap::middle(int parent)
+int MinMaxHeap::middle(int parent)
 {
     return 3 * parent + 2;
 }
 
-int MinHeap::right(int parent)
+int MinMaxHeap::right(int parent)
 {
     return 3 * parent + 3;
 }
 
-int MinHeap::parent(int child)
+int MinMaxHeap::parent(int child)
 {
     return floor((child - 1) / 3);
 }
 
-void MinHeap::swap(int *x, int *y)
+void MinMaxHeap::swap(int *x, int *y)
 {
     int temp = *x;
     *x = *y;

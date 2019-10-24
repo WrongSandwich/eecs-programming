@@ -1,17 +1,17 @@
 /*******************************************************************************
 *@author  Evan Trout
-*@file    MinHeap.h
+*@file    MinMaxHeap.h
 *@date    10/14/19
-*@brief   Header file for MinHeap class, which stores an array of integers and
-*         contains methods for organizing and modifying that array as a a minheap
+*@brief   Header file for MinMaxHeap class, which stores an array of integers and
+*         contains methods for organizing and modifying that array as a a MinMaxHeap
 *******************************************************************************/
 
 #include <string>
 
-#ifndef MIN_HEAP
-#define MIN_HEAP
+#ifndef MINMAX_HEAP
+#define MINMAX_HEAP
 
-class MinHeap
+class MinMaxHeap
 {
 private:
     int* heap; // contents of heap stored as array of integers
@@ -19,16 +19,16 @@ private:
     int MAX_SIZE; // maximum capacity of the heap
 public:
     /**
-    * @pre MinHeap constructor is called
-    * @return MinHeap with heap initialized to array of 15000
+    * @pre MinMaxHeap constructor is called
+    * @return MinMaxHeap with heap initialized to array of 15000
     **/
-    MinHeap();
+    MinMaxHeap();
 
     /**
-    * @pre MinHeap destructor is called
+    * @pre MinMaxHeap destructor is called
     * @post Deallocates all memory used by class instance
     **/
-    ~MinHeap();
+    ~MinMaxHeap();
     
     /**
     * @post builds initial heap from file of values, and reports time taken
@@ -71,25 +71,7 @@ public:
     * @post prints contents of heap in levelorder
     **/
     void levelorder();
-    
-    /**
-    * @post calls pq_highest and prints the amount of time it takes
-    * @return value from pq_highest
-    **/
-    int time_highest_pq();
-
-    /**
-    * @post calls pq_lowest and prints the amount of time it takes
-    * @return value from pq_lowest
-    **/
-    int time_lowest_pq();
-    
-    /**
-    * @post calls remove and prints the amount of time it takes
-    * @return value from remove
-    **/
-    int time_delete_pq();
-    
+        
     /**
     * @param parent: index value of parent
     * @return index of left child of parent
