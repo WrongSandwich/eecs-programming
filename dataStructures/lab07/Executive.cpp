@@ -113,12 +113,12 @@ void Executive::userInterface()
     }
     else if (userInput == 3) //MinLevel
     {
-      mmHeap.levelorder();
+      mmHeap.printMinElements();
       std::cout << "\n";
     }
     else if (userInput == 4) //MaxLevel
     {
-      mmHeap.levelorder();
+      mmHeap.printMaxElements();
       std::cout << "\n";
     }
     else if (userInput == 5) //Level_Order

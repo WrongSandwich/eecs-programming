@@ -60,18 +60,15 @@ public:
     void trickleDownMax(int index);
 
     int findElement(int search);
-    
-    /**
-    * @pre called by remove
-    * @post recursively maintains heap conditions
-    * @param i: current index in heap
-    **/    
-    void heapify(int i);
-        
+            
     /**
     * @post prints contents of heap in levelorder
     **/
     void levelorder();
+
+    void printMinElements();
+
+    void printMaxElements();
         
     /**
     * @param parent: index value of parent

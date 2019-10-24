@@ -243,31 +243,57 @@ int MinMaxHeap::findElement(int search)
     return -1;
 }
 
-void MinMaxHeap::heapify(int i)
+void MinMaxHeap::levelorder()
 {
-    int l = left(i);
-    int r = right(i);
-    int smallest = i;
-    if (l < curSize && heap[l] < heap[i])
+    int prev = 0;
+    int cur;
+    for (int i = 0; i < curSize; i++)
     {
-        smallest = l;
-    }
-    if (r < curSize && heap[r] < heap[smallest])
-    {
-        smallest = r;
-    }
-    if (smallest != i)
-    {
-        swap(&heap[i], &heap[smallest]);
-        heapify(smallest);
+        cur = level(i);
+        if (cur != prev)
+        {
+            std::cout << '\n';
+        }
+        prev = cur;
+        std::cout << heap[i] << " ";
     }
 }
 
-void MinMaxHeap::levelorder()
+void MinMaxHeap::printMinElements()
 {
+    int prev = 0;
+    int cur;
     for (int i = 0; i < curSize; i++)
     {
-        std::cout << heap[i] << " ";
+        cur = level(i);
+        if (!(cur % 2))
+        {
+            if (cur != prev)
+            {
+                std::cout << '\n';
+            }
+            prev = cur;
+            std::cout << heap[i] << " ";
+        }
+    }
+}
+
+void MinMaxHeap::printMaxElements()
+{
+    int prev = 0;
+    int cur;
+    for (int i = 0; i < curSize; i++)
+    {
+        cur = level(i);
+        if (cur % 2)
+        {
+            if (cur != prev)
+            {
+                std::cout << '\n';
+            }
+            prev = cur;
+            std::cout << heap[i] << " ";
+        }
     }
 }
 
