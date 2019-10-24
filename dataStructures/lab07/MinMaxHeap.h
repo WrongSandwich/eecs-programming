@@ -53,7 +53,13 @@ public:
     * @post Removes the root and returns it, then calls heapify to maintain heap conditions
     * @return int value of root, or -1 if heap is empty
     **/
-    int remove();
+    bool remove(int target);
+
+    void trickleDownMin(int index);
+
+    void trickleDownMax(int index);
+
+    int findElement(int search);
     
     /**
     * @pre called by remove
@@ -61,18 +67,7 @@ public:
     * @param i: current index in heap
     **/    
     void heapify(int i);
-    
-    /**
-    * @return -1 if tree is empty, otherwise root value
-    **/
-    int pq_highest();
-    
-    /**
-    * @post searches leaves for lowest priority value
-    * @return -1 iof tree is empty, otherwise lowest priority value
-    **/
-    int pq_lowest();
-    
+        
     /**
     * @post prints contents of heap in levelorder
     **/

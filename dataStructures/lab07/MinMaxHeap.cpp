@@ -47,7 +47,7 @@ void MinMaxHeap::buildHeap(std::string fileName)
 
 bool MinMaxHeap::insert(int x)
 {
-    if (curSize == MAX_SIZE || x < 1)
+    if (curSize == MAX_SIZE || x < 1 || findElement(x) != -1)
     {
         return false;
     }
@@ -117,25 +117,130 @@ void MinMaxHeap::checkMax(int index)
     }
 }
 
-int MinMaxHeap::remove()
+bool MinMaxHeap::remove(int target)
 {
     if (curSize == 0)
     {
-        return -1;
+        return false;
     }
-    else if (curSize == 1)
+    int index = findElement(target);
+    if (index == -1)
     {
-        curSize--;
-        return heap[0];
+        return false;
+    }
+    heap[index] == heap[curSize - 1];
+    curSize--;
+    if (isMinLevel(index))
+    {
+        trickleDownMin(index);
     }
     else
     {
-        int pop = heap[0];
-        heap[0] = heap[curSize - 1];
-        curSize--;
-        heapify(0);
-        return pop;
+        trickleDownMax(index);
     }
+    return true;
+}
+
+void MinMaxHeap::trickleDownMin(int index)
+{
+    if (left(index) < curSize)
+    {
+        // Find smallest child
+        int minAncestor = left(index);
+        int check = right(index);
+        if (check < curSize && heap[check] < heap[minAncestor])
+        {
+            minAncestor = check;
+        }
+        // Check against smallest grandchild
+        check = left(left(index));
+        bool grandChild = false;
+        for (int max = check + 4; check < curSize && check < max; check++)
+        {
+            if (heap[check] < heap[minAncestor])
+            {
+                minAncestor = check;
+                grandChild = true;
+            }
+        }
+        if (grandChild)
+        {
+            if (heap[minAncestor] < heap[index])
+            {
+                swap(&heap[minAncestor], &heap[index]);
+                int par = parent(minAncestor);
+                if (heap[minAncestor] > heap[par])
+                {
+                    swap(&heap[minAncestor], &heap[par]);
+                }
+                trickleDownMin(minAncestor);
+            }
+        }
+        else
+        {
+            if (heap[minAncestor] < heap[index])
+            {
+                swap(&heap[minAncestor], &heap[index]);
+            }
+        }
+    }
+}
+
+void MinMaxHeap::trickleDownMax(int index)
+{
+    if (left(index) < curSize)
+    {
+        // Find smallest child
+        int maxAncestor = left(index);
+        int check = right(index);
+        if (check < curSize && heap[check] > heap[maxAncestor])
+        {
+            maxAncestor = check;
+        }
+        // Check against largest grandchild
+        check = left(left(index));
+        bool grandChild = false;
+        for (int max = check + 4; check < curSize && check < max; check++)
+        {
+            if (heap[check] > heap[maxAncestor])
+            {
+                maxAncestor = check;
+                grandChild = true;
+            }
+        }
+        if (grandChild)
+        {
+            if (heap[maxAncestor] > heap[index])
+            {
+                swap(&heap[maxAncestor], &heap[index]);
+                int par = parent(maxAncestor);
+                if (heap[maxAncestor] < heap[par])
+                {
+                    swap(&heap[maxAncestor], &heap[par]);
+                }
+                trickleDownMin(maxAncestor);
+            }
+        }
+        else
+        {
+            if (heap[maxAncestor] > heap[index])
+            {
+                swap(&heap[maxAncestor], &heap[index]);
+            }
+        }
+    }
+}
+
+int MinMaxHeap::findElement(int search)
+{
+    for (int i = 0; i < curSize; i++)
+    {
+        if (heap[i] == search)
+        {
+            return i;
+        }
+    }
+    return -1;
 }
 
 void MinMaxHeap::heapify(int i)
@@ -155,42 +260,6 @@ void MinMaxHeap::heapify(int i)
     {
         swap(&heap[i], &heap[smallest]);
         heapify(smallest);
-    }
-}
-
-int MinMaxHeap::pq_highest()
-{
-    if (curSize > 0)
-    {
-        return heap[0];
-    }
-    else
-    {
-        return -1;
-    }
-}
-
-int MinMaxHeap::pq_lowest()
-{
-    if (curSize > 0)
-    {
-        int i = curSize - 1;
-        int max = heap[i];
-        int searchBoundary = parent(i);
-        i--;
-        while (i >= searchBoundary)
-        {
-            if (heap[i] > max)
-            {
-                max = heap[i];
-            }
-            i--;
-        }
-        return max;
-    }
-    else
-    {
-        return -1;
     }
 }
 
