@@ -50,6 +50,11 @@ int LeftistHeap::deleteMin()
   return x;
 }
 
+int LeftistHeap::findMin()
+{
+  return rootPtr->getItem();
+}
+
 BinaryNode<int>* LeftistHeap::merge(BinaryNode<int> *heap1, BinaryNode<int> *heap2)
 {
   if (heap1 == nullptr)

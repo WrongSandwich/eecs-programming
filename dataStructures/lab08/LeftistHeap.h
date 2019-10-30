@@ -34,6 +34,8 @@ public:
 
   int deleteMin();
 
+  int findMin();
+
   BinaryNode<int>* merge(BinaryNode<int>* heap1, BinaryNode<int>* heap2);
 
   /**
