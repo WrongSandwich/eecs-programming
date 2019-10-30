@@ -10,12 +10,12 @@
 //CONSTRUCTORS
 
 template<class ItemType>
-BinaryNode<ItemType>::BinaryNode() : leftChildPtr(nullptr), rightChildPtr(nullptr)
+BinaryNode<ItemType>::BinaryNode() : leftChildPtr(nullptr), rightChildPtr(nullptr), rank(1)
 {}
 
 template<class ItemType>
 BinaryNode<ItemType>::BinaryNode(const ItemType& anItem) : item(anItem),
-                                leftChildPtr(nullptr), rightChildPtr(nullptr)
+                                leftChildPtr(nullptr), rightChildPtr(nullptr), rank(1)
 {}
 
 template<class ItemType>
@@ -25,6 +25,7 @@ BinaryNode<ItemType>::BinaryNode(const ItemType& anItem, BinaryNode<ItemType>* l
   item = anItem;
   leftChildPtr = leftPtr;
   rightChildPtr = rightPtr;
+  rank = 1;
 }
 
 //OTHER METHODS
@@ -47,7 +48,7 @@ void BinaryNode<ItemType>::setRank(const int newRank)
 }
 
 template<class ItemType>
-ItemType BinaryNode<ItemType>::getRank() const
+int BinaryNode<ItemType>::getRank() const
 {
   return rank;
 }
