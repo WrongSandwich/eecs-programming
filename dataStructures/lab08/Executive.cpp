@@ -1,9 +1,9 @@
 /*******************************************************************************
 *@author  Evan Trout
 *@file    Executive.cpp
-*@date    10/24/19
+*@date    10/29/19
 *@brief   Implementation file for Executive class, which creates and modifies a
-*         MinMaxHeap
+*         Leftist Heap
 *******************************************************************************/
 
 #include "Executive.h"

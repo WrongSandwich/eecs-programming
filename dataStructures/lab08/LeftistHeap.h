@@ -1,7 +1,7 @@
 /*******************************************************************************
 *@author  Evan Trout
 *@file    LeftistHeap.h
-*@date    09/25/19
+*@date    10/29/19
 *@brief   Header file for LeftistHeap class, which controls a tree of linked
 *         BinaryNodes and allows for various operations on them.
 *******************************************************************************/
@@ -29,14 +29,36 @@ public:
   **/
   ~LeftistHeap();
 
+  /**
+  * @pre called by exec after checking for valid file name
+  * @param fileName: name of file to be opened containing data
+  * @post opens and reads in from given file and inserts data into leftist heap
+  **/  
   void buildHeap(std::string fileName);
 
+  /**
+  * @param x: element to be inserted into heap
+  * @post checks to make sure element isn't duplicate then enters it
+  * @return true if inserted, otherwise false
+  **/
   bool insert(int x);
 
+  /**
+  * @post calls merge on the root's two subtrees and returns the roots value
+  * @return minimum value being deleted
+  **/
   int deleteMin();
 
+  /**
+  * @return the value stored at the root
+  **/
   int findMin();
 
+  /**
+  * @param heap1/heap2: two leftist heaps being merged
+  * @post merges the two heaps using recursive calls
+  * @return pointer to the root node of the merged heap
+  **/
   BinaryNode<int>* merge(BinaryNode<int>* heap1, BinaryNode<int>* heap2);
 
   /**
@@ -51,6 +73,10 @@ public:
   **/
   bool isEmpty() const;
 
+  /**
+  * @param subTreePtr: current location in heap
+  * @return height of subtree
+  **/
   int heightHelper(BinaryNode<int> *subTreePtr) const;
 
   /**
@@ -112,10 +138,26 @@ public:
   **/
   void printLevel(BinaryNode<int>* subTreePtr, int level) const;
 
+  /**
+  * @post returns value of swapped, then sets it to false
+  * @return the current value of swapped
+  **/
   bool isSwapped();
 
+  /**
+  * @param curPtr: current location in tree
+  * @param x: value being searched for
+  * @post recursively traverses tree searching for a matching value
+  * @return true if duplicate found, otherwise false
+  **/
   bool isDuplicate(BinaryNode<int>* curPtr, int x);
   
+  /**
+  * @pre called by exec with valid ints
+  * @param x/y/z: three values to be inserted as a subheap
+  * @post creates a valid heap, then merges it with the existing heap
+  * @return true if sucessful, otherwise false
+  **/
   bool showMerge(int x, int y, int z);
 };
 
