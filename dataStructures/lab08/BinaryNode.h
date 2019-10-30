@@ -13,6 +13,7 @@ class BinaryNode
 {
 private:
    ItemType              item;           // Data portion
+   int                   rank;
    BinaryNode<ItemType>* leftChildPtr;   // Pointer to left child
    BinaryNode<ItemType>* rightChildPtr;  // Pointer to right child
 
@@ -25,6 +26,9 @@ public:
 
    void setItem(const ItemType& anItem);
    ItemType getItem() const;
+
+   void setRank(const int rank);
+   int getRank() const;
 
    bool isLeaf() const;
 

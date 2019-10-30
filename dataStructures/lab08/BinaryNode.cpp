@@ -41,6 +41,18 @@ ItemType BinaryNode<ItemType>::getItem() const
 }
 
 template<class ItemType>
+void BinaryNode<ItemType>::setRank(const int newRank)
+{
+  rank = newRank;
+}
+
+template<class ItemType>
+ItemType BinaryNode<ItemType>::getRank() const
+{
+  return rank;
+}
+
+template<class ItemType>
 bool BinaryNode<ItemType>::isLeaf() const //Determines if this node is a dead end
 {
   return ((leftChildPtr == nullptr) && (rightChildPtr == nullptr));
