@@ -15,6 +15,7 @@
 LeftistHeap::LeftistHeap()
 {
   rootPtr = nullptr;
+  swapped = false;
 }
 
 LeftistHeap::~LeftistHeap()
@@ -29,18 +30,28 @@ void LeftistHeap::buildHeap(std::string fileName)
   if (inFile.is_open())
   {
     int temp;
+    bool success = true;
     while (inFile >> temp)
     {
-      insert(temp);
+      success = insert(temp);
+      if (!success)
+      {
+        throw std::runtime_error("Heap building failed -> please remove duplicate/invalid elements from input file");
+      }
     }
     inFile.close();
   }
 }
 
-void LeftistHeap::insert(int x)
+bool LeftistHeap::insert(int x)
 {
+  if (isDuplicate(rootPtr, x))
+  {
+    return false;
+  }
   BinaryNode<int>* newNode = new BinaryNode<int>(x);
   rootPtr = merge(rootPtr, newNode);
+  return true;
 }
 
 int LeftistHeap::deleteMin()
@@ -87,6 +98,7 @@ BinaryNode<int>* LeftistHeap::merge(BinaryNode<int> *heap1, BinaryNode<int> *hea
       heap1->setLeftChildPtr(heap1->getRightChildPtr());
       heap1->setRightChildPtr(tempNode);
       tempNode = nullptr;
+      swapped = true;
     }
     heap1->setRank(heap1->getRightChildPtr()->getRank() + 1);
   }
@@ -197,4 +209,24 @@ void LeftistHeap::printLevel(BinaryNode<int> *subTreePtr, int level) const
     printLevel(subTreePtr->getLeftChildPtr(), level - 1);
     printLevel(subTreePtr->getRightChildPtr(), level - 1);
   }
+}
+
+bool LeftistHeap::isSwapped()
+{
+  bool temp = swapped;
+  swapped = false;
+  return temp;
+}
+
+bool LeftistHeap::isDuplicate(BinaryNode<int>* curPtr, int x)
+{
+  if (curPtr == nullptr || curPtr->getItem() > x)
+  {
+    return false;
+  }
+  if (curPtr->getItem() == x)
+  {
+    return true;
+  }
+  return (isDuplicate(curPtr->getLeftChildPtr(), x) || isDuplicate(curPtr->getRightChildPtr(), x));
 }

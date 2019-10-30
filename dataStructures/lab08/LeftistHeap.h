@@ -15,6 +15,7 @@
 class LeftistHeap {
 private:
   BinaryNode<int>* rootPtr;
+  bool swapped;
 public:
   /**
   * @pre constructor is called
@@ -30,7 +31,7 @@ public:
 
   void buildHeap(std::string fileName);
 
-  void insert(int x);
+  bool insert(int x);
 
   int deleteMin();
 
@@ -110,6 +111,10 @@ public:
   * @param level: current level
   **/
   void printLevel(BinaryNode<int>* subTreePtr, int level) const;
+
+  bool isSwapped();
+
+  bool isDuplicate(BinaryNode<int>* curPtr, int x);
 };
 
 #endif

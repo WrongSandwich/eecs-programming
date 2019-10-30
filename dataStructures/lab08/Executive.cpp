@@ -7,7 +7,7 @@
 *******************************************************************************/
 
 #include "Executive.h"
-#include "MinMaxHeap.h"
+#include "LeftistHeap.h"
 #include <string>
 #include <sstream>
 #include <stdexcept>
@@ -23,7 +23,7 @@ Executive::Executive(std::string fileName)
   if (inFile.is_open())
   {
     inFile.close();
-    mmHeap.buildHeap(fileName);
+    lheap.buildHeap(fileName);
     userInterface();
   }
   else
@@ -39,11 +39,12 @@ Executive::~Executive()
 void Executive::userInterface()
 {
   int userInput = 0;
-  while (userInput != 6)
+  while (userInput != 9)
   {
     std::cout << "Please choose one of the following commands:\n";
-    std::cout << "1- Insert\n2- Delete\n3- MinLevels\n4- MaxLevels\n";
-    std::cout << "5- PrintHeap\n6- Exit\n>";
+    std::cout << "1- Insert\n2- Merge\n3- Deletemin\n4- Findmin\n";
+    std::cout << "5- Preorder\n6- Inorder\n7- Postorder\n";
+    std::cout << "8- Levelorder\n9- Exit\n>";
     std::cin >> userInput;
     std::cout << '\n';
 
@@ -64,7 +65,7 @@ void Executive::userInterface()
     if (userInput == 1) //Insert
     {
       int temp;
-      std::cout << "Please enter the integer which you want to enter into the tree:\n>";
+      std::cout << "Enter an integer value to be inserted into the leftist heap:\n>";
       std::cin >> temp;
 
       while (std::cin.fail())
@@ -73,60 +74,93 @@ void Executive::userInterface()
         // skip bad input up to the next newline
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "Sorry, your input did not seem to be an int. Try again: ";
-        std::cin >> userInput;
+        std::cin >> temp;
       }
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-      if (mmHeap.insert(temp))
+      if (lheap.insert(temp))
       {
         std::cout << temp << " has been inserted successfully!\n";
+        if (lheap.isSwapped())
+        {
+          std::cout << "Subtrees have been swapped. The new level order traversal is:\n";
+          lheap.levelorder();
+          std::cout << "\n";
+        }
       }
       else
       {
         std::cout << "Failed to insert value " << temp << "\n";
       }
     }
-    else if (userInput == 2) //Delete
+    else if (userInput == 2) //Merge
     {
-      int temp;
-      std::cout << "Please enter the integer which you want removed from the tree:\n>";
-      std::cin >> temp;
-
+      int temp1, temp2, temp3;
+      std::cout << "Enter the three elements for the tree H2:\n";
+      std::cin >> temp1;
       while (std::cin.fail())
       {
         std::cin.clear(); // unset failbit
         // skip bad input up to the next newline
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "Sorry, your input did not seem to be an int. Try again: ";
-        std::cin >> userInput;
+        std::cin >> temp1;
       }
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-      
-      if (mmHeap.remove(temp))
+      std::cin >> temp2;
+      while (std::cin.fail())
       {
-        std::cout << temp << " has been removed successfully!\n";
+        std::cin.clear(); // unset failbit
+        // skip bad input up to the next newline
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Sorry, your input did not seem to be an int. Try again: ";
+        std::cin >> temp2;
       }
-      else
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      std::cin >> temp3;
+      while (std::cin.fail())
       {
-        std::cout << "Failed to remove value " << temp << "\n";
+        std::cin.clear(); // unset failbit
+        // skip bad input up to the next newline
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Sorry, your input did not seem to be an int. Try again: ";
+        std::cin >> temp3;
       }
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
-    else if (userInput == 3) //MinLevel
+    else if (userInput == 3) //Deletemin
     {
-      mmHeap.printMinElements();
+      int temp = lheap.deleteMin();
+      std::cout << "The minimum value " << temp << " has been deleted, and the tree has been rearranged.\n";
+      lheap.levelorder();
       std::cout << "\n";
     }
-    else if (userInput == 4) //MaxLevel
+    else if (userInput == 4) //Findmin
     {
-      mmHeap.printMaxElements();
+      int temp = lheap.findMin();
+      std::cout << "The minimum element is " << temp << "\n";
+    }
+    else if (userInput == 5) //Preorder
+    {
+      lheap.preorder();
       std::cout << "\n";
     }
-    else if (userInput == 5) //Level_Order
+    else if (userInput == 6) //Inorder
     {
-      mmHeap.levelorder();
+      lheap.inorder();
       std::cout << "\n";
     }
-    else if (userInput == 6) //Exit
+    else if (userInput == 7) //Postorder
+    {
+      lheap.postorder();
+      std::cout << "\n";
+    }
+    else if (userInput == 8) //Levelorder
+    {
+      lheap.levelorder();
+      std::cout << "\n";
+    }
+    else if (userInput == 9) //Exit
     {
       std::cout << "Exiting...\n";
     }
