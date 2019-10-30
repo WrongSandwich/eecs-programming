@@ -1,26 +1,26 @@
 /*******************************************************************************
 *@author  Evan Trout
-*@file    BinarySearchTree.cpp
+*@file    LeftistHeap.cpp
 *@date    09/25/19
-*@brief   Implementation file for BinarySearchTree class, which controls a tree of linked
+*@brief   Implementation file for LeftistHeap class, which controls a tree of linked
 *         BinaryNodes and allows for various operations on them.
 *******************************************************************************/
 
 #include <iostream>
 #include "BinaryNode.h"
-#include "BinarySearchTree.h"
+#include "LeftistHeap.h"
 
-BinarySearchTree::BinarySearchTree()
+LeftistHeap::LeftistHeap()
 {
   rootPtr = nullptr;
 }
 
-BinarySearchTree::~BinarySearchTree()
+LeftistHeap::~LeftistHeap()
 {
   destroyTree(rootPtr);
 }
 
-void BinarySearchTree::destroyTree(BinaryNode<char>* subTreePtr)
+void LeftistHeap::destroyTree(BinaryNode<int>* subTreePtr)
 {
   if (subTreePtr != nullptr)
   {
@@ -30,16 +30,16 @@ void BinarySearchTree::destroyTree(BinaryNode<char>* subTreePtr)
   }
 }
 
-bool BinarySearchTree::isEmpty() const
+bool LeftistHeap::isEmpty() const
 {
   return (rootPtr == nullptr);
 }
 
-bool BinarySearchTree::addItem(char x)
+bool LeftistHeap::addItem(char x)
 {
   if (isEmpty())
   {
-    rootPtr = new BinaryNode<char>(x);
+    rootPtr = new BinaryNode<int>(x);
     return true;
   }
   else
@@ -48,14 +48,14 @@ bool BinarySearchTree::addItem(char x)
   }
 }
 
-bool BinarySearchTree::recursiveAdd(BinaryNode<char>* subTreePtr, char x)
+bool LeftistHeap::recursiveAdd(BinaryNode<int>* subTreePtr, char x)
 {
   int target = int(x);
   if (target < subTreePtr->getKey())
   {
     if (subTreePtr->getLeftChildPtr() == nullptr)
     {
-      BinaryNode<char>* tempPtr = new BinaryNode<char>(x);
+      BinaryNode<int>* tempPtr = new BinaryNode<int>(x);
       subTreePtr->setLeftChildPtr(tempPtr);
       tempPtr = nullptr;
       return true;
@@ -69,7 +69,7 @@ bool BinarySearchTree::recursiveAdd(BinaryNode<char>* subTreePtr, char x)
   {
     if (subTreePtr->getRightChildPtr() == nullptr)
     {
-      BinaryNode<char>* tempPtr = new BinaryNode<char>(x);
+      BinaryNode<int>* tempPtr = new BinaryNode<int>(x);
       subTreePtr->setRightChildPtr(tempPtr);
       tempPtr = nullptr;
       return true;
@@ -85,7 +85,7 @@ bool BinarySearchTree::recursiveAdd(BinaryNode<char>* subTreePtr, char x)
   }
 }
 
-bool BinarySearchTree::remove(char x)
+bool LeftistHeap::remove(char x)
 {
   if (isEmpty())
   {
@@ -119,7 +119,7 @@ bool BinarySearchTree::remove(char x)
   }
 }
 
-bool BinarySearchTree::recursiveDelete(BinaryNode<char>* parentPtr, BinaryNode<char>* childPtr, char x)
+bool LeftistHeap::recursiveDelete(BinaryNode<int>* parentPtr, BinaryNode<int>* childPtr, char x)
 {
   if (childPtr == nullptr)
   {
@@ -149,7 +149,7 @@ bool BinarySearchTree::recursiveDelete(BinaryNode<char>* parentPtr, BinaryNode<c
       }
       else if (childPtr->getLeftChildPtr() != nullptr && childPtr->getRightChildPtr() == nullptr) // left child
       {
-        BinaryNode<char>* tempPtr = childPtr->getLeftChildPtr();
+        BinaryNode<int>* tempPtr = childPtr->getLeftChildPtr();
         delete childPtr;
         childPtr = nullptr;
         left ? (parentPtr->setLeftChildPtr(tempPtr)) : (parentPtr->setRightChildPtr(tempPtr));
@@ -157,7 +157,7 @@ bool BinarySearchTree::recursiveDelete(BinaryNode<char>* parentPtr, BinaryNode<c
       }
       else if (childPtr->getLeftChildPtr() == nullptr && childPtr->getRightChildPtr() != nullptr) // right child
       {
-        BinaryNode<char>* tempPtr = childPtr->getRightChildPtr();
+        BinaryNode<int>* tempPtr = childPtr->getRightChildPtr();
         delete childPtr;
         childPtr = nullptr;
         left ? (parentPtr->setLeftChildPtr(tempPtr)) : (parentPtr->setRightChildPtr(tempPtr));
@@ -186,7 +186,7 @@ bool BinarySearchTree::recursiveDelete(BinaryNode<char>* parentPtr, BinaryNode<c
   }
 }
 
-char BinarySearchTree::deleteMin(BinaryNode<char>* currentParent, BinaryNode<char>* currentChild)
+char LeftistHeap::deleteMin(BinaryNode<int>* currentParent, BinaryNode<int>* currentChild)
 {
   bool left = false;
   while (currentChild->getLeftChildPtr() != nullptr)
@@ -211,17 +211,17 @@ char BinarySearchTree::deleteMin(BinaryNode<char>* currentParent, BinaryNode<cha
   return targetItem;
 }
 
-bool BinarySearchTree::leaf(char x) const
+bool LeftistHeap::leaf(char x) const
 {
   if (rootPtr == nullptr)
   {
     return false;
   }
-  BinaryNode<char> *target = findNode(rootPtr, x);
+  BinaryNode<int> *target = findNode(rootPtr, x);
   return ((target->getLeftChildPtr() == nullptr) && (target->getRightChildPtr() == nullptr));
 }
 
-BinaryNode<char> *BinarySearchTree::findNode(BinaryNode<char> *subTreePtr, char x) const
+BinaryNode<int> *LeftistHeap::findNode(BinaryNode<int> *subTreePtr, char x) const
 {
   if (subTreePtr == nullptr)
   {
@@ -232,7 +232,7 @@ BinaryNode<char> *BinarySearchTree::findNode(BinaryNode<char> *subTreePtr, char 
     // Confirm that this is the lowest instance of this item
     if (subTreePtr->getRightChildPtr() != nullptr)
     {
-      BinaryNode<char>* doubleCheck = nullptr;
+      BinaryNode<int>* doubleCheck = nullptr;
       doubleCheck = findNode(subTreePtr->getRightChildPtr(), x);
       if (doubleCheck != nullptr)
       {
@@ -262,12 +262,12 @@ BinaryNode<char> *BinarySearchTree::findNode(BinaryNode<char> *subTreePtr, char 
   }
 }
 
-void BinarySearchTree::printLeaf() const
+void LeftistHeap::printLeaf() const
 {
   leafPrinter(rootPtr);
 }
 
-void BinarySearchTree::leafPrinter(BinaryNode<char> *treePtr) const
+void LeftistHeap::leafPrinter(BinaryNode<int> *treePtr) const
 {
   if (treePtr != nullptr)
   {
@@ -284,13 +284,13 @@ void BinarySearchTree::leafPrinter(BinaryNode<char> *treePtr) const
   }
 }
 
-void BinarySearchTree::printTreeHeight() const
+void LeftistHeap::printTreeHeight() const
 {
   int height = heightHelper(rootPtr) - 1;
   std::cout << height;
 }
 
-int BinarySearchTree::heightHelper(BinaryNode<char> *subTreePtr) const
+int LeftistHeap::heightHelper(BinaryNode<int> *subTreePtr) const
 {
   if (subTreePtr == nullptr)
   {
@@ -302,17 +302,17 @@ int BinarySearchTree::heightHelper(BinaryNode<char> *subTreePtr) const
   }
 }
 
-void BinarySearchTree::printNode(char &x)
+void LeftistHeap::printNode(char &x)
 {
   std::cout << x << ' ';
 }
 
-void BinarySearchTree::preorder() const
+void LeftistHeap::preorder() const
 {
   preorderHelper(printNode, rootPtr);
 }
 
-void BinarySearchTree::preorderHelper(void visit(char &), BinaryNode<char> *treePtr) const
+void LeftistHeap::preorderHelper(void visit(char &), BinaryNode<int> *treePtr) const
 {
   if (treePtr != nullptr)
   {
@@ -323,12 +323,12 @@ void BinarySearchTree::preorderHelper(void visit(char &), BinaryNode<char> *tree
   }
 }
 
-void BinarySearchTree::postorder() const
+void LeftistHeap::postorder() const
 {
   postorderHelper(printNode, rootPtr);
 }
 
-void BinarySearchTree::postorderHelper(void visit(char &), BinaryNode<char> *treePtr) const
+void LeftistHeap::postorderHelper(void visit(char &), BinaryNode<int> *treePtr) const
 {
   if (treePtr != nullptr)
   {
@@ -339,12 +339,12 @@ void BinarySearchTree::postorderHelper(void visit(char &), BinaryNode<char> *tre
   }
 }
 
-void BinarySearchTree::inorder() const
+void LeftistHeap::inorder() const
 {
   inorderHelper(printNode, rootPtr);
 }
 
-void BinarySearchTree::inorderHelper(void visit(char &), BinaryNode<char> *treePtr) const
+void LeftistHeap::inorderHelper(void visit(char &), BinaryNode<int> *treePtr) const
 {
   if (treePtr != nullptr)
   {
@@ -355,7 +355,7 @@ void BinarySearchTree::inorderHelper(void visit(char &), BinaryNode<char> *treeP
   }
 }
 
-void BinarySearchTree::levelorder() const
+void LeftistHeap::levelorder() const
 {
   int height = heightHelper(rootPtr);
   for (int i = 1; i <= height; i++)
@@ -364,7 +364,7 @@ void BinarySearchTree::levelorder() const
   }
 }
 
-void BinarySearchTree::printLevel(BinaryNode<char> *subTreePtr, int level) const
+void LeftistHeap::printLevel(BinaryNode<int> *subTreePtr, int level) const
 {
   if (subTreePtr == nullptr)
   {
@@ -381,9 +381,9 @@ void BinarySearchTree::printLevel(BinaryNode<char> *subTreePtr, int level) const
   }
 }
 
-bool BinarySearchTree::searchElement(char x) const
+bool LeftistHeap::searchElement(char x) const
 {
-  BinaryNode<char>* target = findNode(rootPtr, x);
+  BinaryNode<int>* target = findNode(rootPtr, x);
   if (target == nullptr)
   {
     return false;
