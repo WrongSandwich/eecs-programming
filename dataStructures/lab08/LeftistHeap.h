@@ -10,6 +10,7 @@
 #define LEFTIST_HEAP
 
 #include "BinaryNode.h"
+#include <string>
 
 class LeftistHeap {
 private:
@@ -27,6 +28,14 @@ public:
   **/
   ~LeftistHeap();
 
+  void buildHeap(std::string fileName);
+
+  void insert(int x);
+
+  int deleteMin();
+
+  BinaryNode<int>* merge(BinaryNode<int>* heap1, BinaryNode<int>* heap2);
+
   /**
   * @pre called by destructor
   * @post Recursively deletes all nodes
@@ -39,24 +48,7 @@ public:
   **/
   bool isEmpty() const;
 
-  /**
-  * @param x: char being searched for and checked
-  * @return true if found node is leaf, otherwise false
-  **/
-  bool leaf(char x) const;
-
-  /**
-  * @pre is called by another LeftistHeap function
-  * @param subTreePtr: current node
-  * @param x: char being searched for
-  * @return pointer to found node, otherwise nullptr
-  **/
-  BinaryNode<int>* findNode(BinaryNode<int>* subTreePtr, char x) const;
-
-  /**
-  * @post calls leafPrinter on rootPtr
-  **/
-  void printLeaf() const;
+  int heightHelper(BinaryNode<int> *subTreePtr) const;
 
   /**
   * @pre called in a traversal
@@ -116,14 +108,6 @@ public:
   * @param level: current level
   **/
   void printLevel(BinaryNode<int>* subTreePtr, int level) const;
-
-  /**
-  * @pre called by executive or remove()
-  * @post uses findNode() to determine if target is present in tree
-  * @param x: target being searched for
-  * @return true if target found, otherwise false
-  **/
-  bool searchElement(char x) const;
 };
 
 #endif
