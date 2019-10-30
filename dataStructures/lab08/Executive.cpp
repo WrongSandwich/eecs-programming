@@ -131,14 +131,28 @@ void Executive::userInterface()
     else if (userInput == 3) //Deletemin
     {
       int temp = lheap.deleteMin();
-      std::cout << "The minimum value " << temp << " has been deleted, and the tree has been rearranged.\n";
-      lheap.levelorder();
-      std::cout << "\n";
+      if (temp == -1)
+      {
+        std::cout << "Tree is empty; cannot delete an element\n";
+      }
+      else
+      {
+        std::cout << "The minimum value " << temp << " has been deleted, and the tree has been rearranged.\n";
+        lheap.levelorder();
+        std::cout << "\n";
+      }   
     }
     else if (userInput == 4) //Findmin
     {
       int temp = lheap.findMin();
-      std::cout << "The minimum element is " << temp << "\n";
+      if (temp == -1)
+      {
+        std::cout << "Tree is empty; cannot find an element\n";
+      }
+      else
+      {
+        std::cout << "The minimum element is " << temp << "\n";
+      }
     }
     else if (userInput == 5) //Preorder
     {

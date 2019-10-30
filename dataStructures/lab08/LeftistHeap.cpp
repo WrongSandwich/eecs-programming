@@ -56,6 +56,10 @@ bool LeftistHeap::insert(int x)
 
 int LeftistHeap::deleteMin()
 {
+  if (rootPtr == nullptr)
+  {
+    return -1;
+  }
   int x = rootPtr->getItem();
   rootPtr = merge(rootPtr->getLeftChildPtr(), rootPtr->getRightChildPtr());
   return x;
@@ -63,6 +67,10 @@ int LeftistHeap::deleteMin()
 
 int LeftistHeap::findMin()
 {
+  if (rootPtr == nullptr)
+  {
+    return -1;
+  }
   return rootPtr->getItem();
 }
 
@@ -132,7 +140,7 @@ int LeftistHeap::heightHelper(BinaryNode<int> *subTreePtr) const
   }
 }
 
-void LeftistHeap::printNode(char &x)
+void LeftistHeap::printNode(int &x)
 {
   std::cout << x << ' ';
 }
@@ -142,11 +150,11 @@ void LeftistHeap::preorder() const
   preorderHelper(printNode, rootPtr);
 }
 
-void LeftistHeap::preorderHelper(void visit(char &), BinaryNode<int> *treePtr) const
+void LeftistHeap::preorderHelper(void visit(int &), BinaryNode<int> *treePtr) const
 {
   if (treePtr != nullptr)
   {
-    char item = treePtr->getItem();
+    int item = treePtr->getItem();
     visit(item);
     preorderHelper(visit, treePtr->getLeftChildPtr());
     preorderHelper(visit, treePtr->getRightChildPtr());
@@ -158,13 +166,13 @@ void LeftistHeap::postorder() const
   postorderHelper(printNode, rootPtr);
 }
 
-void LeftistHeap::postorderHelper(void visit(char &), BinaryNode<int> *treePtr) const
+void LeftistHeap::postorderHelper(void visit(int &), BinaryNode<int> *treePtr) const
 {
   if (treePtr != nullptr)
   {
     postorderHelper(visit, treePtr->getLeftChildPtr());
     postorderHelper(visit, treePtr->getRightChildPtr());
-    char item = treePtr->getItem();
+    int item = treePtr->getItem();
     visit(item);
   }
 }
@@ -174,12 +182,12 @@ void LeftistHeap::inorder() const
   inorderHelper(printNode, rootPtr);
 }
 
-void LeftistHeap::inorderHelper(void visit(char &), BinaryNode<int> *treePtr) const
+void LeftistHeap::inorderHelper(void visit(int &), BinaryNode<int> *treePtr) const
 {
   if (treePtr != nullptr)
   {
     inorderHelper(visit, treePtr->getLeftChildPtr());
-    char item = treePtr->getItem();
+    int item = treePtr->getItem();
     visit(item);
     inorderHelper(visit, treePtr->getRightChildPtr());
   }

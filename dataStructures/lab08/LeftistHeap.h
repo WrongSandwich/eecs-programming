@@ -58,7 +58,7 @@ public:
   * @post prints the value of x
   * @param x: value to be printed
   **/
-  static void printNode(char& x);
+  static void printNode(int& x);
 
   /**
   * @post calls preorderHelper and passes printNode function and rootPtr
@@ -71,7 +71,7 @@ public:
   * @param visit: function that will be run on the node
   * @param treePtr: current node
   **/
-  void preorderHelper(void visit(char&), BinaryNode<int>* treePtr) const;
+  void preorderHelper(void visit(int&), BinaryNode<int>* treePtr) const;
 
   /**
   * @post calls postorderHelper and passes printNode function and rootPtr
@@ -84,7 +84,7 @@ public:
   * @param visit: function that will be run on the node
   * @param treePtr: current node
   **/
-  void postorderHelper(void visit(char&), BinaryNode<int>* treePtr) const;
+  void postorderHelper(void visit(int&), BinaryNode<int>* treePtr) const;
 
   /**
   * @post calls inorderHelper and passes printNode function and rootPtr
@@ -97,7 +97,7 @@ public:
   * @param visit: function that will be run on the node
   * @param treePtr: current node
   **/
-  void inorderHelper(void visit(char&), BinaryNode<int>* treePtr) const;
+  void inorderHelper(void visit(int&), BinaryNode<int>* treePtr) const;
 
   /**
   * @post calls levelorderHelper and passes printNode function and rootPtr
