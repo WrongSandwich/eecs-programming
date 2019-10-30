@@ -238,3 +238,48 @@ bool LeftistHeap::isDuplicate(BinaryNode<int>* curPtr, int x)
   }
   return (isDuplicate(curPtr->getLeftChildPtr(), x) || isDuplicate(curPtr->getRightChildPtr(), x));
 }
+
+bool LeftistHeap::showMerge(int x, int y, int z)
+{
+  if (x == y || y == z || x == z)
+  {
+    return false;
+  }
+  if (isDuplicate(rootPtr, x) || isDuplicate(rootPtr, y) || isDuplicate(rootPtr, z))
+  {
+    return false;
+  }
+  // create appropriate new heap
+  int smallest = x;
+  if (y < smallest)
+  {
+    smallest = y;
+  }
+  if (z < smallest)
+  {
+    smallest = z;
+  }
+  BinaryNode<int>* newRoot = new BinaryNode<int>(smallest);
+  BinaryNode<int>* leftChild = nullptr;
+  BinaryNode<int>* rightChild = nullptr;
+  if (smallest == x)
+  {
+    leftChild = new BinaryNode<int>(y);
+    rightChild = new BinaryNode<int>(z);
+  }
+  else if (smallest == y)
+  {
+    leftChild = new BinaryNode<int>(x);
+    rightChild = new BinaryNode<int>(z);
+  }
+  else if (smallest == z)
+  {
+    leftChild = new BinaryNode<int>(y);
+    rightChild = new BinaryNode<int>(x);
+  }
+  newRoot->setLeftChildPtr(leftChild);
+  newRoot->setRightChildPtr(rightChild);
+  newRoot->setRank(2);
+  rootPtr = merge(rootPtr, newRoot);
+  return true;
+}

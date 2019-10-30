@@ -127,6 +127,17 @@ void Executive::userInterface()
         std::cin >> temp3;
       }
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      bool success = lheap.showMerge(temp1, temp2, temp3);
+      if (success)
+      {
+        std::cout << "Trees H1 and H2 have been merged to form new tree H3. The new level order traversal for tree H3 is:\n";
+        lheap.levelorder();
+        std::cout << "\n";
+      }
+      else
+      {
+        std::cout << "Merge was unsuccessful. Make sure none of your elements are already present in the tree.\n";
+      }
     }
     else if (userInput == 3) //Deletemin
     {
