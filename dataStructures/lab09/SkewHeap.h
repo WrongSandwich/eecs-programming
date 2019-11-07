@@ -1,33 +1,33 @@
 /*******************************************************************************
 *@author  Evan Trout
-*@file    LeftistHeap.h
+*@file    SkewHeap.h
 *@date    09/25/19
-*@brief   Header file for LeftistHeap class, which controls a tree of linked
+*@brief   Header file for SkewHeap class, which controls a tree of linked
 *         BinaryNodes and allows for various operations on them.
 *******************************************************************************/
 
-#ifndef LEFTIST_HEAP
-#define LEFTIST_HEAP
+#ifndef SKEW_HEAP
+#define SKEW_HEAP
 
 #include "BinaryNode.h"
 #include <string>
 
-class LeftistHeap {
+class SkewHeap {
 private:
   BinaryNode<int>* rootPtr;
   bool swapped;
 public:
   /**
   * @pre constructor is called
-  * @return initalized LeftistHeap
+  * @return initalized SkewHeap
   **/
-  LeftistHeap();
+  SkewHeap();
 
   /**
   * @pre Destructor is called
   * @post Calls destroyTree on rootPtr
   **/
-  ~LeftistHeap();
+  ~SkewHeap();
 
   void buildHeap(std::string fileName);
 

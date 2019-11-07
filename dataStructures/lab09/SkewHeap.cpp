@@ -1,8 +1,8 @@
 /*******************************************************************************
 *@author  Evan Trout
-*@file    LeftistHeap.cpp
+*@file    SkewHeap.cpp
 *@date    09/25/19
-*@brief   Implementation file for LeftistHeap class, which controls a tree of linked
+*@brief   Implementation file for SkewHeap class, which controls a tree of linked
 *         BinaryNodes and allows for various operations on them.
 *******************************************************************************/
 
@@ -10,20 +10,20 @@
 #include <fstream>
 #include <string>
 #include "BinaryNode.h"
-#include "LeftistHeap.h"
+#include "SkewHeap.h"
 
-LeftistHeap::LeftistHeap()
+SkewHeap::SkewHeap()
 {
   rootPtr = nullptr;
   swapped = false;
 }
 
-LeftistHeap::~LeftistHeap()
+SkewHeap::~SkewHeap()
 {
   destroyTree(rootPtr);
 }
 
-void LeftistHeap::buildHeap(std::string fileName)
+void SkewHeap::buildHeap(std::string fileName)
 {
   std::ifstream inFile;
   inFile.open(fileName);
@@ -43,7 +43,7 @@ void LeftistHeap::buildHeap(std::string fileName)
   }
 }
 
-bool LeftistHeap::insert(int x)
+bool SkewHeap::insert(int x)
 {
   if (isDuplicate(rootPtr, x))
   {
@@ -54,7 +54,7 @@ bool LeftistHeap::insert(int x)
   return true;
 }
 
-int LeftistHeap::deleteMin()
+int SkewHeap::deleteMin()
 {
   if (rootPtr == nullptr)
   {
@@ -65,7 +65,7 @@ int LeftistHeap::deleteMin()
   return x;
 }
 
-int LeftistHeap::findMin()
+int SkewHeap::findMin()
 {
   if (rootPtr == nullptr)
   {
@@ -74,7 +74,7 @@ int LeftistHeap::findMin()
   return rootPtr->getItem();
 }
 
-BinaryNode<int>* LeftistHeap::merge(BinaryNode<int> *heap1, BinaryNode<int> *heap2)
+BinaryNode<int>* SkewHeap::merge(BinaryNode<int> *heap1, BinaryNode<int> *heap2)
 {
   if (heap1 == nullptr)
   {
@@ -113,7 +113,7 @@ BinaryNode<int>* LeftistHeap::merge(BinaryNode<int> *heap1, BinaryNode<int> *hea
   return heap1;
 }
 
-void LeftistHeap::destroyTree(BinaryNode<int> *subTreePtr)
+void SkewHeap::destroyTree(BinaryNode<int> *subTreePtr)
 {
   if (subTreePtr != nullptr)
   {
@@ -123,12 +123,12 @@ void LeftistHeap::destroyTree(BinaryNode<int> *subTreePtr)
   }
 }
 
-bool LeftistHeap::isEmpty() const
+bool SkewHeap::isEmpty() const
 {
   return (rootPtr == nullptr);
 }
 
-int LeftistHeap::heightHelper(BinaryNode<int> *subTreePtr) const
+int SkewHeap::heightHelper(BinaryNode<int> *subTreePtr) const
 {
   if (subTreePtr == nullptr)
   {
@@ -140,17 +140,17 @@ int LeftistHeap::heightHelper(BinaryNode<int> *subTreePtr) const
   }
 }
 
-void LeftistHeap::printNode(int &x)
+void SkewHeap::printNode(int &x)
 {
   std::cout << x << ' ';
 }
 
-void LeftistHeap::preorder() const
+void SkewHeap::preorder() const
 {
   preorderHelper(printNode, rootPtr);
 }
 
-void LeftistHeap::preorderHelper(void visit(int &), BinaryNode<int> *treePtr) const
+void SkewHeap::preorderHelper(void visit(int &), BinaryNode<int> *treePtr) const
 {
   if (treePtr != nullptr)
   {
@@ -161,12 +161,12 @@ void LeftistHeap::preorderHelper(void visit(int &), BinaryNode<int> *treePtr) co
   }
 }
 
-void LeftistHeap::postorder() const
+void SkewHeap::postorder() const
 {
   postorderHelper(printNode, rootPtr);
 }
 
-void LeftistHeap::postorderHelper(void visit(int &), BinaryNode<int> *treePtr) const
+void SkewHeap::postorderHelper(void visit(int &), BinaryNode<int> *treePtr) const
 {
   if (treePtr != nullptr)
   {
@@ -177,12 +177,12 @@ void LeftistHeap::postorderHelper(void visit(int &), BinaryNode<int> *treePtr) c
   }
 }
 
-void LeftistHeap::inorder() const
+void SkewHeap::inorder() const
 {
   inorderHelper(printNode, rootPtr);
 }
 
-void LeftistHeap::inorderHelper(void visit(int &), BinaryNode<int> *treePtr) const
+void SkewHeap::inorderHelper(void visit(int &), BinaryNode<int> *treePtr) const
 {
   if (treePtr != nullptr)
   {
@@ -193,7 +193,7 @@ void LeftistHeap::inorderHelper(void visit(int &), BinaryNode<int> *treePtr) con
   }
 }
 
-void LeftistHeap::levelorder() const
+void SkewHeap::levelorder() const
 {
   int height = heightHelper(rootPtr);
   for (int i = 1; i <= height; i++)
@@ -202,7 +202,7 @@ void LeftistHeap::levelorder() const
   }
 }
 
-void LeftistHeap::printLevel(BinaryNode<int> *subTreePtr, int level) const
+void SkewHeap::printLevel(BinaryNode<int> *subTreePtr, int level) const
 {
   if (subTreePtr == nullptr)
   {
@@ -219,14 +219,14 @@ void LeftistHeap::printLevel(BinaryNode<int> *subTreePtr, int level) const
   }
 }
 
-bool LeftistHeap::isSwapped()
+bool SkewHeap::isSwapped()
 {
   bool temp = swapped;
   swapped = false;
   return temp;
 }
 
-bool LeftistHeap::isDuplicate(BinaryNode<int>* curPtr, int x)
+bool SkewHeap::isDuplicate(BinaryNode<int>* curPtr, int x)
 {
   if (curPtr == nullptr || curPtr->getItem() > x)
   {
@@ -239,7 +239,7 @@ bool LeftistHeap::isDuplicate(BinaryNode<int>* curPtr, int x)
   return (isDuplicate(curPtr->getLeftChildPtr(), x) || isDuplicate(curPtr->getRightChildPtr(), x));
 }
 
-bool LeftistHeap::showMerge(int x, int y, int z)
+bool SkewHeap::showMerge(int x, int y, int z)
 {
   if (x == y || y == z || x == z)
   {
