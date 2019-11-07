@@ -90,26 +90,16 @@ BinaryNode<int>* SkewHeap::merge(BinaryNode<int> *heap1, BinaryNode<int> *heap2)
     heap1 = heap2;
     heap2 = tempNode;
     tempNode = nullptr;
+    swapped = true;
   }
-  heap1->setRightChildPtr(merge(heap1->getRightChildPtr(), heap2));
+  
+  BinaryNode<int>* tempNode = heap1->getLeftChildPtr();
+  heap1->setLeftChildPtr(heap1->getRightChildPtr());
+  heap1->setRightChildPtr(tempNode);
+  tempNode = nullptr;
 
-  if (heap1->getLeftChildPtr() == nullptr)
-  {
-    heap1->setLeftChildPtr(heap1->getRightChildPtr());
-    heap1->setRightChildPtr(nullptr);
-  }
-  else 
-  {
-    if (heap1->getLeftChildPtr()->getRank() < heap1->getRightChildPtr()->getRank())
-    {
-      BinaryNode<int>* tempNode = heap1->getLeftChildPtr();
-      heap1->setLeftChildPtr(heap1->getRightChildPtr());
-      heap1->setRightChildPtr(tempNode);
-      tempNode = nullptr;
-      swapped = true;
-    }
-    heap1->setRank(heap1->getRightChildPtr()->getRank() + 1);
-  }
+  heap1->setLeftChildPtr(merge(heap2, heap1->getLeftChildPtr()));
+
   return heap1;
 }
 
@@ -250,36 +240,29 @@ bool SkewHeap::showMerge(int x, int y, int z)
     return false;
   }
   // create appropriate new heap
-  int smallest = x;
-  if (y < smallest)
+  if (x > y)
   {
-    smallest = y;
+    int temp = x;
+    x = y;
+    y = temp;
   }
-  if (z < smallest)
+  if (y > z)
   {
-    smallest = z;
+    int temp = y;
+    y = z;
+    z = temp;
   }
-  BinaryNode<int>* newRoot = new BinaryNode<int>(smallest);
-  BinaryNode<int>* leftChild = nullptr;
-  BinaryNode<int>* rightChild = nullptr;
-  if (smallest == x)
+  if (x > y)
   {
-    leftChild = new BinaryNode<int>(y);
-    rightChild = new BinaryNode<int>(z);
+    int temp = x;
+    x = y;
+    y = temp;
   }
-  else if (smallest == y)
-  {
-    leftChild = new BinaryNode<int>(x);
-    rightChild = new BinaryNode<int>(z);
-  }
-  else if (smallest == z)
-  {
-    leftChild = new BinaryNode<int>(y);
-    rightChild = new BinaryNode<int>(x);
-  }
+  BinaryNode<int>* newRoot = new BinaryNode<int>(x);
+  BinaryNode<int>* leftChild = new BinaryNode<int>(z);
+  BinaryNode<int>* rightChild = new BinaryNode<int>(y);
   newRoot->setLeftChildPtr(leftChild);
   newRoot->setRightChildPtr(rightChild);
-  newRoot->setRank(2);
   rootPtr = merge(rootPtr, newRoot);
   return true;
 }

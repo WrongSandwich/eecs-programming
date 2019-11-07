@@ -7,7 +7,7 @@
 *******************************************************************************/
 
 #include "Executive.h"
-#include "LeftistHeap.h"
+#include "SkewHeap.h"
 #include <string>
 #include <sstream>
 #include <stdexcept>
@@ -23,7 +23,7 @@ Executive::Executive(std::string fileName)
   if (inFile.is_open())
   {
     inFile.close();
-    lheap.buildHeap(fileName);
+    skew.buildHeap(fileName);
     userInterface();
   }
   else
@@ -78,13 +78,13 @@ void Executive::userInterface()
       }
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-      if (lheap.insert(temp))
+      if (skew.insert(temp))
       {
         std::cout << temp << " has been inserted successfully!\n";
-        if (lheap.isSwapped())
+        if (skew.isSwapped())
         {
           std::cout << "Subtrees have been swapped. The new level order traversal is:\n";
-          lheap.levelorder();
+          skew.levelorder();
           std::cout << "\n";
         }
       }
@@ -127,11 +127,11 @@ void Executive::userInterface()
         std::cin >> temp3;
       }
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-      bool success = lheap.showMerge(temp1, temp2, temp3);
+      bool success = skew.showMerge(temp1, temp2, temp3);
       if (success)
       {
         std::cout << "Trees H1 and H2 have been merged to form new tree H3. The new level order traversal for tree H3 is:\n";
-        lheap.levelorder();
+        skew.levelorder();
         std::cout << "\n";
       }
       else
@@ -141,7 +141,7 @@ void Executive::userInterface()
     }
     else if (userInput == 3) //Deletemin
     {
-      int temp = lheap.deleteMin();
+      int temp = skew.deleteMin();
       if (temp == -1)
       {
         std::cout << "Tree is empty; cannot delete an element\n";
@@ -149,13 +149,13 @@ void Executive::userInterface()
       else
       {
         std::cout << "The minimum value " << temp << " has been deleted, and the tree has been rearranged.\n";
-        lheap.levelorder();
+        skew.levelorder();
         std::cout << "\n";
       }   
     }
     else if (userInput == 4) //Findmin
     {
-      int temp = lheap.findMin();
+      int temp = skew.findMin();
       if (temp == -1)
       {
         std::cout << "Tree is empty; cannot find an element\n";
@@ -167,22 +167,22 @@ void Executive::userInterface()
     }
     else if (userInput == 5) //Preorder
     {
-      lheap.preorder();
+      skew.preorder();
       std::cout << "\n";
     }
     else if (userInput == 6) //Inorder
     {
-      lheap.inorder();
+      skew.inorder();
       std::cout << "\n";
     }
     else if (userInput == 7) //Postorder
     {
-      lheap.postorder();
+      skew.postorder();
       std::cout << "\n";
     }
     else if (userInput == 8) //Levelorder
     {
-      lheap.levelorder();
+      skew.levelorder();
       std::cout << "\n";
     }
     else if (userInput == 9) //Exit

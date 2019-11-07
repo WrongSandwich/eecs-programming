@@ -11,12 +11,12 @@
 #define EXECUTIVE
 
 #include <string>
-#include "LeftistHeap.h"
+#include "SkewHeap.h"
 
 class Executive
 {
 private:
-  LeftistHeap lheap;
+  SkewHeap skew;
 public:
   /**
 * @pre constructor is called with valid file name
