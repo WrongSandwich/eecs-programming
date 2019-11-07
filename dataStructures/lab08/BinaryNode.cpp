@@ -1,10 +1,10 @@
 /*******************************************************************************
 *@author  Evan Trout
 *@file    BinaryNode.cpp
-*@date    11/14/2018
+*@date    10/29/2019
 *@brief   Implementation file for the BinaryNode class. Creates a special type
 *         of node used for the BinaryNodeTree class. Header created by Carrano
-*         and Henry.
+*         and Henry. Updated to include Rank for LeftistHeaps.
 *******************************************************************************/
 
 //CONSTRUCTORS

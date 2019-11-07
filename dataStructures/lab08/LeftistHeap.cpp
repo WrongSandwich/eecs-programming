@@ -1,7 +1,7 @@
 /*******************************************************************************
 *@author  Evan Trout
 *@file    LeftistHeap.cpp
-*@date    09/25/19
+*@date    10/29/19
 *@brief   Implementation file for LeftistHeap class, which controls a tree of linked
 *         BinaryNodes and allows for various operations on them.
 *******************************************************************************/

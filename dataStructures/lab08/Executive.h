@@ -1,9 +1,9 @@
 /*******************************************************************************
 *@author  Evan Trout
 *@file    Executive.h
-*@date    10/24/19
+*@date    10/29/19
 *@brief   Header file for Executive class, which creates and modifies a
-*         MinMaxHeap
+*         Leftist Heap
 *******************************************************************************/
 
 
