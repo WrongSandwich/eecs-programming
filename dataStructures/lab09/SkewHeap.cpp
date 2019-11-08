@@ -45,7 +45,7 @@ void SkewHeap::buildHeap(std::string fileName)
 
 bool SkewHeap::insert(int x)
 {
-  if (isDuplicate(rootPtr, x))
+  if (isPresent(x))
   {
     return false;
   }
@@ -216,17 +216,36 @@ bool SkewHeap::isSwapped()
   return temp;
 }
 
-bool SkewHeap::isDuplicate(BinaryNode<int>* curPtr, int x)
+BinaryNode<int>* SkewHeap::findElement(BinaryNode<int>* curPtr, int x)
 {
   if (curPtr == nullptr || curPtr->getItem() > x)
   {
-    return false;
+    return nullptr;
   }
   if (curPtr->getItem() == x)
   {
+    return curPtr;
+  }
+  if (findElement(curPtr->getLeftChildPtr(), x) != nullptr)
+  {
+    return findElement(curPtr->getLeftChildPtr(), x);
+  }
+  else
+  {
+    return findElement(curPtr->getRightChildPtr(), x);
+  }
+}
+
+bool SkewHeap::isPresent(int x)
+{
+  if(findElement(rootPtr, x))
+  {
     return true;
   }
-  return (isDuplicate(curPtr->getLeftChildPtr(), x) || isDuplicate(curPtr->getRightChildPtr(), x));
+  else 
+  {
+    return false;
+  }
 }
 
 bool SkewHeap::showMerge(int x, int y, int z)
@@ -235,7 +254,7 @@ bool SkewHeap::showMerge(int x, int y, int z)
   {
     return false;
   }
-  if (isDuplicate(rootPtr, x) || isDuplicate(rootPtr, y) || isDuplicate(rootPtr, z))
+  if (isPresent(x) || isPresent(y) || isPresent(z))
   {
     return false;
   }

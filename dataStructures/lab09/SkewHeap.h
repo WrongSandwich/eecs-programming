@@ -114,7 +114,9 @@ public:
 
   bool isSwapped();
 
-  bool isDuplicate(BinaryNode<int>* curPtr, int x);
+  BinaryNode<int>* findElement(BinaryNode<int>* curPtr, int x);
+
+  bool isPresent(int x);
   
   bool showMerge(int x, int y, int z);
 };
