@@ -54,24 +54,31 @@ bool SkewHeap::insert(int x)
   return true;
 }
 
-int SkewHeap::deleteMin()
+bool SkewHeap::remove(int x)
 {
-  if (rootPtr == nullptr)
+  BinaryNode<int>* targetParent = findElement(rootPtr, x);
+  if (targetParent == nullptr)
   {
-    return -1;
+    return false;
   }
-  int x = rootPtr->getItem();
-  rootPtr = merge(rootPtr->getLeftChildPtr(), rootPtr->getRightChildPtr());
-  return x;
-}
-
-int SkewHeap::findMin()
-{
-  if (rootPtr == nullptr)
+  if (targetParent == rootPtr && targetParent->getItem() == x)
   {
-    return -1;
+    rootPtr = merge(rootPtr->getLeftChildPtr(), rootPtr->getRightChildPtr());
+    delete [] targetParent;
   }
-  return rootPtr->getItem();
+  else if (targetParent->getLeftChildPtr()->getItem() == x)
+  {
+    BinaryNode<int>* target = targetParent->getLeftChildPtr();
+    targetParent->setLeftChildPtr(merge(target->getLeftChildPtr(), target->getRightChildPtr()));
+    delete [] target;
+  }
+  else
+  {
+    BinaryNode<int>* target = targetParent->getRightChildPtr();
+    targetParent->setRightChildPtr(merge(target->getLeftChildPtr(), target->getRightChildPtr()));
+    delete [] target;
+  }
+  return true;
 }
 
 BinaryNode<int>* SkewHeap::merge(BinaryNode<int> *heap1, BinaryNode<int> *heap2)
@@ -222,7 +229,17 @@ BinaryNode<int>* SkewHeap::findElement(BinaryNode<int>* curPtr, int x)
   {
     return nullptr;
   }
-  if (curPtr->getItem() == x)
+  else if (curPtr == rootPtr && curPtr->getItem() == x)
+  {
+    return curPtr;
+  }
+  bool leftSide = false;
+  bool rightSide = false;
+  if (curPtr->getLeftChildPtr() != nullptr && curPtr->getLeftChildPtr()->getItem() == x)
+  {
+    return curPtr;
+  }
+  if (curPtr->getRightChildPtr() != nullptr && curPtr->getRightChildPtr()->getItem() == x)
   {
     return curPtr;
   }
@@ -238,13 +255,13 @@ BinaryNode<int>* SkewHeap::findElement(BinaryNode<int>* curPtr, int x)
 
 bool SkewHeap::isPresent(int x)
 {
-  if(findElement(rootPtr, x))
+  if(findElement(rootPtr, x) == nullptr)
   {
-    return true;
+    return false;
   }
   else 
   {
-    return false;
+    return true;
   }
 }
 

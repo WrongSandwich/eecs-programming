@@ -139,30 +139,54 @@ void Executive::userInterface()
         std::cout << "Merge was unsuccessful. Make sure none of your elements are already present in the tree.\n";
       }
     }
-    else if (userInput == 3) //Deletemin
+    else if (userInput == 3) //Delete
     {
-      int temp = skew.deleteMin();
-      if (temp == -1)
+      int temp;
+      std::cout << "Enter the element to be deleted:\n>";
+      std::cin >> temp;
+
+      while (std::cin.fail())
       {
-        std::cout << "Tree is empty; cannot delete an element\n";
+        std::cin.clear(); // unset failbit
+        // skip bad input up to the next newline
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Sorry, your input did not seem to be an int. Try again: ";
+        std::cin >> temp;
+      }
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+      if (skew.remove(temp))
+      {
+        std::cout << "The element " << temp << " was successfully deleted from the min-skew heap\n";
       }
       else
       {
-        std::cout << "The minimum value " << temp << " has been deleted, and the tree has been rearranged.\n";
-        skew.levelorder();
-        std::cout << "\n";
-      }   
+        std::cout << "Failed to delete the element " << temp << " from the min-skew heap\n";
+      }
     }
-    else if (userInput == 4) //Findmin
+    else if (userInput == 4) //Find
     {
-      int temp = skew.findMin();
-      if (temp == -1)
+      int temp;
+      std::cout << "Enter the element to search for:\n>";
+      std::cin >> temp;
+
+      while (std::cin.fail())
       {
-        std::cout << "Tree is empty; cannot find an element\n";
+        std::cin.clear(); // unset failbit
+        // skip bad input up to the next newline
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Sorry, your input did not seem to be an int. Try again: ";
+        std::cin >> temp;
+      }
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+      if (skew.isPresent(temp))
+      {
+        std::cout << "The element " << temp << " has been found in the min-skew heap\n";
       }
       else
       {
-        std::cout << "The minimum element is " << temp << "\n";
+        std::cout << "Failed to find the element " << temp << " in the min-skew heap\n";
       }
     }
     else if (userInput == 5) //Preorder

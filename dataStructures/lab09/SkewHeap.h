@@ -33,9 +33,7 @@ public:
 
   bool insert(int x);
 
-  int deleteMin();
-
-  int findMin();
+  bool remove(int x);
 
   BinaryNode<int>* merge(BinaryNode<int>* heap1, BinaryNode<int>* heap2);
 
