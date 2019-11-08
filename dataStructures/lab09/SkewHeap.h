@@ -1,7 +1,7 @@
 /*******************************************************************************
 *@author  Evan Trout
 *@file    SkewHeap.h
-*@date    09/25/19
+*@date    11/08/19
 *@brief   Header file for SkewHeap class, which controls a tree of linked
 *         BinaryNodes and allows for various operations on them.
 *******************************************************************************/
@@ -29,12 +29,32 @@ public:
   **/
   ~SkewHeap();
 
+  /**
+  * @pre called with a valid, tested file name
+  * @post builds the heap from the file of data using insert calls
+  * @param fileName: name of file containing data
+  **/
   void buildHeap(std::string fileName);
 
+  /**
+  * @post creates a new node with the given element and calls merge
+  * @param x: element to be inserted
+  * @return true if successful, otherwise false
+  **/
   bool insert(int x);
 
+  /**
+  * @post finds and removes the given element from the heap
+  * @param x: element to be removed
+  * @return true if successful, otherwise false
+  **/
   bool remove(int x);
 
+  /**
+  * @post 
+  * @param
+  * @return
+  **/
   BinaryNode<int>* merge(BinaryNode<int>* heap1, BinaryNode<int>* heap2);
 
   /**
@@ -49,6 +69,12 @@ public:
   **/
   bool isEmpty() const;
 
+  /**
+  * @pre
+  * @post
+  * @param
+  * @return
+  **/
   int heightHelper(BinaryNode<int> *subTreePtr) const;
 
   /**
@@ -110,13 +136,37 @@ public:
   **/
   void printLevel(BinaryNode<int>* subTreePtr, int level) const;
 
+  /**
+  * @pre
+  * @post
+  * @param
+  * @return
+  **/
   bool isSwapped();
 
+  /**
+  * @pre
+  * @post
+  * @param
+  * @return
+  **/
   BinaryNode<int>* findElement(BinaryNode<int>* curPtr, int x);
 
+  /**
+  * @pre
+  * @post
+  * @param
+  * @return
+  **/
   bool isPresent(int x);
   
-  bool showMerge(int x, int y, int z);
+  /**
+  * @pre
+  * @post
+  * @param
+  * @return
+  **/
+  void mergeToRoot(BinaryNode<int>* newHeap);
 };
 
 #endif

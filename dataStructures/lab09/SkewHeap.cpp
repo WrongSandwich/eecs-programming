@@ -1,7 +1,7 @@
 /*******************************************************************************
 *@author  Evan Trout
 *@file    SkewHeap.cpp
-*@date    09/25/19
+*@date    11/08/19
 *@brief   Implementation file for SkewHeap class, which controls a tree of linked
 *         BinaryNodes and allows for various operations on them.
 *******************************************************************************/
@@ -265,40 +265,7 @@ bool SkewHeap::isPresent(int x)
   }
 }
 
-bool SkewHeap::showMerge(int x, int y, int z)
+void SkewHeap::mergeToRoot(BinaryNode<int>* newHeap)
 {
-  if (x == y || y == z || x == z)
-  {
-    return false;
-  }
-  if (isPresent(x) || isPresent(y) || isPresent(z))
-  {
-    return false;
-  }
-  // create appropriate new heap
-  if (x > y)
-  {
-    int temp = x;
-    x = y;
-    y = temp;
-  }
-  if (y > z)
-  {
-    int temp = y;
-    y = z;
-    z = temp;
-  }
-  if (x > y)
-  {
-    int temp = x;
-    x = y;
-    y = temp;
-  }
-  BinaryNode<int>* newRoot = new BinaryNode<int>(x);
-  BinaryNode<int>* leftChild = new BinaryNode<int>(z);
-  BinaryNode<int>* rightChild = new BinaryNode<int>(y);
-  newRoot->setLeftChildPtr(leftChild);
-  newRoot->setRightChildPtr(rightChild);
-  rootPtr = merge(rootPtr, newRoot);
-  return true;
+  rootPtr = merge(rootPtr, newHeap);
 }

@@ -127,9 +127,14 @@ void Executive::userInterface()
         std::cin >> temp3;
       }
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-      bool success = skew.showMerge(temp1, temp2, temp3);
-      if (success)
+      if (!skew.isPresent(temp1) && !skew.isPresent(temp2) && !skew.isPresent(temp3))
       {
+        BinaryNode<int>* temp1Node = new BinaryNode<int>(temp1);
+        BinaryNode<int>* temp2Node = new BinaryNode<int>(temp2);
+        BinaryNode<int>* temp3Node = new BinaryNode<int>(temp3);
+        temp1Node = skew.merge(temp1Node, temp2Node);
+        temp1Node = skew.merge(temp1Node, temp3Node);
+        skew.mergeToRoot(temp1Node);
         std::cout << "Trees H1 and H2 have been merged to form new tree H3. The new level order traversal for tree H3 is:\n";
         skew.levelorder();
         std::cout << "\n";
