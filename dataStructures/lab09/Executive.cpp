@@ -42,7 +42,7 @@ void Executive::userInterface()
   while (userInput != 9)
   {
     std::cout << "Please choose one of the following commands:\n";
-    std::cout << "1- Insert\n2- Merge\n3- Deletemin\n4- Findmin\n";
+    std::cout << "1- Insert\n2- Merge\n3- Delete\n4- Find\n";
     std::cout << "5- Preorder\n6- Inorder\n7- Postorder\n";
     std::cout << "8- Levelorder\n9- Exit\n>";
     std::cin >> userInput;
@@ -65,7 +65,7 @@ void Executive::userInterface()
     if (userInput == 1) //Insert
     {
       int temp;
-      std::cout << "Enter an integer value to be inserted into the leftist heap:\n>";
+      std::cout << "Enter an integer value to be inserted into the min-skew heap:\n>";
       std::cin >> temp;
 
       while (std::cin.fail())
