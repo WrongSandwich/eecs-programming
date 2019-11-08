@@ -14,8 +14,8 @@
 
 class SkewHeap {
 private:
-  BinaryNode<int>* rootPtr;
-  bool swapped;
+  BinaryNode<int>* rootPtr; //root of the heap
+  bool swapped; //boolean tracking whether or not subtrees have been swapped
 public:
   /**
   * @pre constructor is called
