@@ -51,9 +51,9 @@ public:
   bool remove(int x);
 
   /**
-  * @post 
-  * @param
-  * @return
+  * @post merges the two given heaps recursively
+  * @param heap1/heap2: two heaps to be merged
+  * @return root of newly merged heap
   **/
   BinaryNode<int>* merge(BinaryNode<int>* heap1, BinaryNode<int>* heap2);
 
@@ -70,10 +70,9 @@ public:
   bool isEmpty() const;
 
   /**
-  * @pre
-  * @post
-  * @param
-  * @return
+  * @post recursively determines the height of the current subtree
+  * @param subTreePtr: current location in tree
+  * @return height of subtree
   **/
   int heightHelper(BinaryNode<int> *subTreePtr) const;
 
@@ -137,34 +136,29 @@ public:
   void printLevel(BinaryNode<int>* subTreePtr, int level) const;
 
   /**
-  * @pre
-  * @post
-  * @param
-  * @return
+  * @post returns the current state of swapped and then sets it back to false
+  * @return the current state of swapped
   **/
   bool isSwapped();
 
   /**
-  * @pre
-  * @post
-  * @param
-  * @return
+  * @post calls itself recursively to find the parent of the given element
+  * @param curPtr: current location in tree
+  * @param x: element being searched for
+  * @return pointer of x's parent, otherwise nullptr
   **/
   BinaryNode<int>* findElement(BinaryNode<int>* curPtr, int x);
 
   /**
-  * @pre
-  * @post
-  * @param
-  * @return
+  * @post calls findElement on rootPtr and then returns a bool of if the element was found
+  * @param x: element being searched for
+  * @return true if x was found, otherwise false
   **/
   bool isPresent(int x);
   
   /**
-  * @pre
-  * @post
-  * @param
-  * @return
+  * @post merges the newHeap into rootPtr
+  * @param newHeap: heap to be merged into rootPtr
   **/
   void mergeToRoot(BinaryNode<int>* newHeap);
 };
