@@ -1,40 +1,22 @@
 #include "BinomialNode.h"
 
-BinomialNode::BinomialNode()
+BinomialNode::BinomialNode(const int& newKey)
 {
   leftSibling = nullptr;
   rightSibling = nullptr;
   firstChild = nullptr;
-  key = 0;
+  key = newKey;
   order = 0;
 }
 
-BinomialNode::BinomialNode(const int& key)
+void BinomialNode::setKey(const int& newKey)
 {
-  leftSibling = nullptr;
-  rightSibling = nullptr;
-  firstChild = nullptr;
-  key = key;
-  order = 0;
+  key = newKey;
 }
 
-BinomialNode::BinomialNode(const int& key, const int& order, BinomialNode* leftSibling, BinomialNode* rightSibling)
+void BinomialNode::setOrder(const int& newOrder)
 {
-  key = key;
-  order = order;
-  leftSibling = leftSibling;
-  rightSibling = rightSibling;
-  firstChild = nullptr;
-}
-
-void BinomialNode::setKey(const int& key)
-{
-  key = key;
-}
-
-void BinomialNode::setOrder(const int& order)
-{
-  order = order;
+  order = newOrder;
 }
 
 void BinomialNode::setLeft(BinomialNode* left)
