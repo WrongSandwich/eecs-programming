@@ -4,7 +4,7 @@ BinomialNode::BinomialNode(int newKey)
 {
   key = newKey;
   order = 0;
-  parent = nullptr;
+  left = nullptr;
   sibling = nullptr;
   child = nullptr;
 }
@@ -19,9 +19,9 @@ void BinomialNode::setOrder(int newOrder)
   order = newOrder;
 }
 
-void BinomialNode::setParent(BinomialNode* newParent)
+void BinomialNode::setLeft(BinomialNode* newLeft)
 {
-  parent = newParent;
+  left = newLeft;
 }
 
 void BinomialNode::setSibling(BinomialNode* newSibling)
@@ -44,9 +44,9 @@ int BinomialNode::getOrder() const
   return order;
 }
 
-BinomialNode* BinomialNode::getParent() const
+BinomialNode* BinomialNode::getLeft() const
 {
-  return parent;
+  return left;
 }
 
 BinomialNode* BinomialNode::getSibling() const

@@ -6,19 +6,19 @@ class BinomialNode
 private:
   int order;
   int key;
-  BinomialNode* parent;
+  BinomialNode* left;
   BinomialNode* sibling;
   BinomialNode* child;
 public:
   BinomialNode(int newKey);
   void setKey(int newKey);
   void setOrder(int newOrder);
-  void setParent(BinomialNode* newParent);
+  void setLeft(BinomialNode* newLeft);
   void setSibling(BinomialNode* newSibling);
   void setChild(BinomialNode* newChild);
   int getKey() const;
   int getOrder() const;
-  BinomialNode* getParent() const;
+  BinomialNode* getLeft() const;
   BinomialNode* getSibling() const;
   BinomialNode* getChild() const;
 };
