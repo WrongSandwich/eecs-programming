@@ -1,7 +1,0 @@
-Vivado Simulator 2019.1
-Time resolution is 1 ps
-ERROR: Index 268500992 out of bound 0 to 116
-Time: 0 ps  Iteration: 1  Process: /mips_single_cycle_tb/uut/DataMem_instr/line__29
-  File: H:/EECS_645/HW10_MIPS_Single_Cycle_Trout/design_sources/DataMem.vhd
-
-HDL Line: H:/EECS_645/HW10_MIPS_Single_Cycle_Trout/design_sources/DataMem.vhd:29
