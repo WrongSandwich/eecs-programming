@@ -6,21 +6,21 @@ class BinomialNode
 private:
   int order;
   int key;
-  BinomialNode* leftSibling;
-  BinomialNode* rightSibling;
-  BinomialNode* firstChild;
+  BinomialNode* parent;
+  BinomialNode* sibling;
+  BinomialNode* child;
 public:
-  BinomialNode(const int& newKey);
-  void setKey(const int& newKey);
-  void setOrder(const int& newOrder);
-  void setLeft(BinomialNode* left);
-  void setRight(BinomialNode* right);
-  void setFirst(BinomialNode* child);
+  BinomialNode(int newKey);
+  void setKey(int newKey);
+  void setOrder(int newOrder);
+  void setParent(BinomialNode* newParent);
+  void setSibling(BinomialNode* newSibling);
+  void setChild(BinomialNode* newChild);
   int getKey() const;
   int getOrder() const;
-  BinomialNode* getLeft() const;
-  BinomialNode* getRight() const;
-  BinomialNode* getFirst() const;
+  BinomialNode* getParent() const;
+  BinomialNode* getSibling() const;
+  BinomialNode* getChild() const;
 };
 
 #endif

@@ -1,55 +1,60 @@
 #include "BinomialNode.h"
 
-BinomialNode::BinomialNode(const int& newKey)
+BinomialNode::BinomialNode(int newKey)
 {
-  leftSibling = nullptr;
-  rightSibling = nullptr;
-  firstChild = nullptr;
   key = newKey;
   order = 0;
+  parent = nullptr;
+  sibling = nullptr;
+  child = nullptr;
 }
 
-void BinomialNode::setKey(const int& newKey)
+void BinomialNode::setKey(int newKey)
 {
   key = newKey;
 }
 
-void BinomialNode::setOrder(const int& newOrder)
+void BinomialNode::setOrder(int newOrder)
 {
   order = newOrder;
 }
 
-void BinomialNode::setLeft(BinomialNode* left)
+void BinomialNode::setParent(BinomialNode* newParent)
 {
-  leftSibling = left;
+  parent = newParent;
 }
 
-void BinomialNode::setRight(BinomialNode* right)
+void BinomialNode::setSibling(BinomialNode* newSibling)
 {
-  rightSibling = right;
+  sibling = newSibling;
 }
 
-void BinomialNode::setFirst(BinomialNode* child)
+void BinomialNode::setChild(BinomialNode* newChild)
 {
-  firstChild = child;
+  child = newChild;
 }
 
-int BinomialNode::getKey() const
+int BinomialNode::getKey() const 
 {
   return key;
 }
 
-int BinomialNode::getOrder() const
+int BinomialNode::getOrder() const 
 {
   return order;
 }
 
-BinomialNode* BinomialNode::getRight() const
+BinomialNode* BinomialNode::getParent() const
 {
-  return rightSibling;
+  return parent;
 }
 
-BinomialNode* BinomialNode::getFirst() const
+BinomialNode* BinomialNode::getSibling() const
 {
-  return firstChild;
+  return sibling;
+}
+
+BinomialNode* BinomialNode::getChild() const
+{
+  return child;
 }

@@ -2,21 +2,23 @@
 #define BINOMIAL_HEAP_H
 
 #include "BinomialNode.h"
-#include "BinomialTree.h"
 
 class BinomialHeap
 {
 private:
-  BinomialTree* headPtr;
+  BinomialNode* headPtr;
 public:
   BinomialHeap();
-  bool insert(int x);
-  void mergeTrees(BinomialNode* tree1, BinomialNode* tree2);
-  void mergeHeaps(BinomialHeap* heap1, BinomialHeap* heap2);
-  void deleteMin();
-  void levelorder();
+  void link(BinomialNode* tree1, BinomialNode* tree2);
   BinomialNode* findMin();
-  BinomialTree* getHeadPtr();
+  void insert(int x);
+  void merge(BinomialHeap H);
+  void extractMin();
+  void printLevelOrder();
+  void printTree(BinomialNode* curPtr);
+  bool printAtDepth(BinomialNode* curPtr, int depth);
+  void setHead(BinomialNode* newHead);
+  BinomialNode* getHead();
 };
 
 #endif

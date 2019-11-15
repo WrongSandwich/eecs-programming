@@ -7,7 +7,7 @@
 *******************************************************************************/
 
 #include "Executive.h"
-#include "SkewHeap.h"
+#include "BinomialHeap.h"
 #include <string>
 #include <sstream>
 #include <stdexcept>
@@ -23,14 +23,10 @@ Executive::Executive(std::string fileName)
   if (inFile.is_open())
   {
     int temp;
-    bool success = true;
     while (inFile >> temp)
     {
-      success = heap.insert(temp);
-      if (!success)
-      {
-        throw std::runtime_error("Heap building failed -> please remove duplicate/invalid elements from input file");
-      }
+      heap.insert(temp);
+      std::cout << "Inserted " << temp << "\n";
     }
     userInterface();
   }
@@ -84,30 +80,18 @@ void Executive::userInterface()
       }
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-      if (heap.insert(temp))
-      {
-        std::cout << temp << " has been inserted successfully!\n";
-      }
-      else
-      {
-        std::cout << "Failed to insert value " << temp << "\n";
-      }
+      heap.insert(temp);
+      std::cout << temp << " has been inserted successfully!\n";
     }
     else if (userInput == 2) //DeleteMin
     {
-      if (heap.deleteMin())
-      {
-        std::cout << "Minimum element was successfully deleted.\n";
-      }
-      else
-      {
-        std::cout << "Minimum element could not be deleted. \n";
-      }
+      heap.extractMin();
+      std::cout << "Minimum element was successfully deleted.\n";
     }
     else if (userInput == 3) //Levelorder
     {
       std::cout << "Local Level Order:\n\n";
-      heap.levelorder();
+      heap.printLevelOrder();
       std::cout << "\n";
     }
     else if (userInput == 4) //Exit
