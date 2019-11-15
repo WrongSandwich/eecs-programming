@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Thu Nov 14 13:18:27 2019
+# Process ID: 13780
+# Current directory: H:/EECS_645/HW10_MIPS_Single_Cycle_Trout/vivado_project/vivado_project.sim/sim_1/behav/xsim
+# Command line: wbtcv.exe -mode batch -source H:/EECS_645/HW10_MIPS_Single_Cycle_Trout/vivado_project/vivado_project.sim/sim_1/behav/xsim/xsim.dir/mips_single_cycle_tb_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: H:/EECS_645/HW10_MIPS_Single_Cycle_Trout/vivado_project/vivado_project.sim/sim_1/behav/xsim/webtalk.log
+# Journal file: H:/EECS_645/HW10_MIPS_Single_Cycle_Trout/vivado_project/vivado_project.sim/sim_1/behav/xsim\webtalk.jou
+#-----------------------------------------------------------
+source H:/EECS_645/HW10_MIPS_Single_Cycle_Trout/vivado_project/vivado_project.sim/sim_1/behav/xsim/xsim.dir/mips_single_cycle_tb_behav/webtalk/xsim_webtalk.tcl -notrace
