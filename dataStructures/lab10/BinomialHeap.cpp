@@ -24,8 +24,25 @@ void BinomialHeap::mergeTrees(BinomialNode* tree1, BinomialNode* tree2)
 
 void BinomialHeap::mergeHeaps(BinomialHeap* heap1, BinomialHeap* heap2)
 {
-  BinomialNode* headPtr1 = heap1->getHeadPtr();
-  BinomialNode* headPtr2 = heap2->getHeadPtr();
+  BinomialTree* headPtr1 = heap1->getHeadPtr();
+  BinomialTree* headPtr2 = heap2->getHeadPtr();
+  if (headPtr1 == nullptr)
+  {
+    headPtr = headPtr2;
+  }
+  else if (headPtr2 == nullptr)
+  {
+    headPtr = headPtr1;
+  }
+  else 
+  {
+    BinomialTree* cur1 = headPtr1;
+    BinomialTree* cur2 = headPtr2;
+    do 
+    {
+      
+    } while (cur1 != headPtr1 && cur2 != headPtr2);
+  }
 }
 
 BinomialNode* BinomialHeap::findMin()
@@ -47,7 +64,7 @@ BinomialNode* BinomialHeap::findMin()
   return minPtr;
 }
 
-BinomialNode* BinomialHeap::getHeadPtr()
+BinomialTree* BinomialHeap::getHeadPtr()
 {
   return headPtr;
 }
