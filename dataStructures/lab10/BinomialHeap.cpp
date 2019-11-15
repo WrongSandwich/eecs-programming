@@ -12,7 +12,8 @@ void BinomialHeap::link(BinomialNode* tree1, BinomialNode* tree2)
   tree2->setParent(tree1);
   tree2->setSibling(tree1->getChild());
   tree1->setChild(tree2);
-  tree1->setOrder(tree1->getOrder() + 1);
+  int temp = tree1->getOrder();
+  tree1->setOrder(temp + 1);
 }
 
 BinomialNode* BinomialHeap::findMin()
@@ -50,6 +51,12 @@ void BinomialHeap::merge(BinomialHeap H)
   BinomialNode* y = H.getHead();
   BinomialNode* z = nullptr;
   BinomialNode* temp = nullptr;
+
+  if (x == nullptr)
+  {
+    headPtr = y;
+    return;
+  }
 
   if (x->getOrder() <= y->getOrder())
   {
@@ -138,7 +145,7 @@ void BinomialHeap::extractMin() {
   BinomialNode* prevMin = nullptr;
   BinomialNode* minPtr = nullptr;
   BinomialNode* prevPtr = nullptr;
-  if (cur = nullptr)
+  if (cur == nullptr)
   {
     return;
   }
@@ -184,16 +191,18 @@ void BinomialHeap::printLevelOrder()
   {
     printTree(cur);
     std::cout << "---\n";
+    cur = cur->getSibling();
   }
 }
 
 void BinomialHeap::printTree(BinomialNode* curPtr)
 {
+  std::cout << curPtr->getKey() << "\n";
   bool success = true;
   int depth = 0;
   while (success)
   {
-    success = printAtDepth(curPtr, depth);
+    success = printAtDepth(curPtr->getChild(), depth);
     std::cout << "\n";
     depth++;
   }
