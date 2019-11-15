@@ -10,11 +10,9 @@ private:
   BinomialNode* rightSibling;
   BinomialNode* firstChild;
 public:
-  BinomialNode();
-  BinomialNode(const int& key);
-  BinomialNode(const int& key, const int& order, BinomialNode* leftSibling, BinomialNode* rightSibling);
-  void setKey(const int& key);
-  void setOrder(const int& order);
+  BinomialNode(const int& newKey);
+  void setKey(const int& newKey);
+  void setOrder(const int& newOrder);
   void setLeft(BinomialNode* left);
   void setRight(BinomialNode* right);
   void setFirst(BinomialNode* child);
