@@ -1,5 +1,0 @@
-https://en.wikipedia.org/wiki/Binomial_heap
-
-https://www.geeksforgeeks.org/binomial-heap-2/
-
-https://brilliant.org/wiki/binomial-heap/
