@@ -9,32 +9,10 @@ BinomialHeap::BinomialHeap()
 
 void BinomialHeap::link(BinomialNode* tree1, BinomialNode* tree2)
 {
-  tree2->setParent(tree1);
   tree2->setSibling(tree1->getChild());
   tree1->setChild(tree2);
   int temp = tree1->getOrder();
   tree1->setOrder(temp + 1);
-}
-
-BinomialNode* BinomialHeap::findMin()
-{
-  BinomialNode* curPtr = headPtr;
-  BinomialNode* minPtr = headPtr;
-  if (minPtr = nullptr)
-  {
-    return minPtr;
-  }
-  int min = minPtr->getKey();
-  while (curPtr != nullptr)
-  {
-    if (curPtr->getKey() < min)
-    {
-      minPtr = curPtr;
-      min = minPtr->getKey();
-    }
-    curPtr = curPtr->getSibling();
-  }
-  return minPtr;
 }
 
 void BinomialHeap::insert(int x)
@@ -173,11 +151,11 @@ void BinomialHeap::extractMin() {
 
   BinomialNode* child = minPtr->getChild();
   BinomialNode* temp = child;
-  while (child != nullptr)
-  {
-    child->setParent(nullptr);
-    child = child->getSibling();
-  }
+  // while (child != nullptr)
+  // {
+  //   child->setParent(nullptr);
+  //   child = child->getSibling();
+  // }
 
   BinomialHeap tempHeap;
   tempHeap.setHead(temp);
@@ -216,8 +194,9 @@ bool BinomialHeap::printAtDepth(BinomialNode* curPtr, int depth)
   }
   if (depth == 0)
   {
-    std::cout << curPtr->getKey() << " ";
-    printAtDepth(curPtr->getSibling(), depth);
+    // std::cout << curPtr->getKey() << " ";
+    // printAtDepth(curPtr->getSibling(), depth);
+    printSiblings(curPtr);
     return true;
   }
   else
@@ -226,6 +205,15 @@ bool BinomialHeap::printAtDepth(BinomialNode* curPtr, int depth)
     a = printAtDepth(curPtr->getChild(), depth - 1);
     b = printAtDepth(curPtr->getSibling(), depth);
     return (a || b);
+  }
+}
+
+void BinomialHeap::printSiblings(BinomialNode* curPtr)
+{
+  if (curPtr)
+  {
+    printSiblings(curPtr->getSibling());
+    std::cout << curPtr->getKey() << " ";
   }
 }
 

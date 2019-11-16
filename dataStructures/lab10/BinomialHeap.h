@@ -10,13 +10,13 @@ private:
 public:
   BinomialHeap();
   void link(BinomialNode* tree1, BinomialNode* tree2);
-  BinomialNode* findMin();
   void insert(int x);
   void merge(BinomialHeap H);
   void extractMin();
   void printLevelOrder();
   void printTree(BinomialNode* curPtr);
   bool printAtDepth(BinomialNode* curPtr, int depth);
+  void printSiblings(BinomialNode* curPtr);
   void setHead(BinomialNode* newHead);
   BinomialNode* getHead();
 };
