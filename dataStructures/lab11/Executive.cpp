@@ -52,7 +52,7 @@ void Executive::userInterface()
 {
   int userInput = 0;
   bool setBuilt = false;
-  while (userInput != 5)
+  while (userInput != 6)
   {
     std::cout << "Please choose one of the following commands:\n";
     std::cout << "1- MakeSet\n2- StartUnion\n3- Find_Timer\n";
@@ -163,6 +163,10 @@ void Executive::userInterface()
     else if (userInput == 5) //Exit
     {
       std::cout << "Exiting...\n";
+    }
+    else if (userInput == 6) // experiment
+    {
+      set.runExperiment();
     }
     else //Invalid input
     {

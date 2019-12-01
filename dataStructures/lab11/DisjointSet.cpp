@@ -4,15 +4,16 @@
 #include <fstream>
 #include <chrono>
 #include <iostream>
+#include <ostream>
 
 DisjointSet::DisjointSet() : setSize(0), array(nullptr)
-{}
-    
+{
+}
 
 void DisjointSet::loadArray(std::string fileName, int sizeIn)
 {
     setSize = sizeIn;
-    array = new Node*[setSize];
+    array = new Node *[setSize];
     std::ifstream inFile;
     inFile.open(fileName);
     if (inFile.is_open())
@@ -28,7 +29,6 @@ void DisjointSet::loadArray(std::string fileName, int sizeIn)
     }
     else
     {
-
     }
 }
 
@@ -61,8 +61,8 @@ int DisjointSet::unionDS(int x, int y)
     {
         return -2;
     }
-    Node* xNode = array[index(x)];
-    Node* yNode = array[index(y)];
+    Node *xNode = array[index(x)];
+    Node *yNode = array[index(y)];
     int xRank = xNode->getRank();
     int yRank = yNode->getRank();
     if (xRank < yRank)
@@ -90,7 +90,7 @@ int DisjointSet::find(int x)
     {
         return -1;
     }
-    Node* curPtr = array[curIndex];
+    Node *curPtr = array[curIndex];
     return findHelper(curPtr, false)->getValue();
 }
 
@@ -101,11 +101,11 @@ void DisjointSet::pathCompress(int x)
     {
         return;
     }
-    Node* curPtr = array[curIndex];
+    Node *curPtr = array[curIndex];
     findHelper(curPtr, true);
 }
 
-Node* DisjointSet::findHelper(Node* curPtr, bool compress)
+Node *DisjointSet::findHelper(Node *curPtr, bool compress)
 {
     if (curPtr->getParent() == curPtr)
     {
@@ -113,7 +113,7 @@ Node* DisjointSet::findHelper(Node* curPtr, bool compress)
     }
     else
     {
-        Node* tempPtr = findHelper(curPtr->getParent(), compress);
+        Node *tempPtr = findHelper(curPtr->getParent(), compress);
         if (compress)
         {
             curPtr->setParent(tempPtr);
@@ -129,9 +129,9 @@ int DisjointSet::find_timer(int x)
     auto t2 = std::chrono::high_resolution_clock::now();
     if (result != -1)
     {
-        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>( t2 - t1).count();
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
         std::cout << "Time taken to find " << x << " is " << duration << " nanoseconds\n";
-        return result;
+        return duration;
     }
     else
     {
@@ -150,4 +150,92 @@ int DisjointSet::index(int x)
         }
     }
     return -1;
+}
+
+void DisjointSet::runExperiment()
+{
+    //UNION ALL ELEMENTS
+    for (int i = 1; i < 1000; i = i + 2)
+    {
+        unionDS(i, i + 1);
+    }
+    for (int i = 1; i < 1000; i = i + 4)
+    {
+        if ((i + 2) <= 1000)
+        {
+            unionDS(i, i + 2);
+        }
+    }
+    for (int i = 1; i < 1000; i = i + 8)
+    {
+        if ((i + 4) <= 1000)
+        {
+            unionDS(i, i + 4);
+        }
+    }
+    for (int i = 1; i < 1000; i = i + 16)
+    {
+        if ((i + 8) <= 1000)
+        {
+            unionDS(i, i + 8);
+        }
+    }
+    for (int i = 1; i < 1000; i = i + 32)
+    {
+        if ((i + 16) <= 1000)
+        {
+            unionDS(i, i + 16);
+        }
+    }
+    for (int i = 1; i < 1000; i = i + 64)
+    {
+        if ((i + 32) <= 1000)
+        {
+            unionDS(i, i + 32);
+        }
+    }
+    for (int i = 1; i < 1000; i = i + 128)
+    {
+        if ((i + 64) <= 1000)
+        {
+            unionDS(i, i + 64);
+        }
+    }
+    for (int i = 1; i < 1000; i = i + 256)
+    {
+        if ((i + 128) <= 1000)
+        {
+            unionDS(i, i + 128);
+        }
+    }
+    for (int i = 1; i < 1000; i = i + 512)
+    {
+        if ((i + 256) <= 1000)
+        {
+            unionDS(i, i + 256);
+        }
+    }
+    unionDS(1, 1000);
+
+    //FIRST RUN OF TESTS
+    std::ofstream firstRun("first.csv");
+    for (int i = 1; i <= 1000; i++)
+    {
+        int temp = find_timer(i);
+        firstRun << temp << '\n';
+    }
+    firstRun.close();
+    //PERFORM PATH COMPRESSION
+    for (int i = 1; i <= 1000; i++)
+    {
+        pathCompress(i);
+    }
+    //SECOND RUN OF TESTS
+    std::ofstream secondRun("second.csv");
+    for (int i = 1; i <= 1000; i++)
+    {
+        int temp = find_timer(i);
+        secondRun << temp << '\n';
+    }
+    secondRun.close();
 }

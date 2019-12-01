@@ -19,6 +19,7 @@ public:
     Node* findHelper(Node* curPtr, bool compress);
     int find_timer(int x);
     int index(int x);
+    void runExperiment();
 };
 
 #endif
