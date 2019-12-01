@@ -91,10 +91,21 @@ int DisjointSet::find(int x)
         return -1;
     }
     Node* curPtr = array[curIndex];
-    return findHelper(curPtr)->getValue();
+    return findHelper(curPtr, false)->getValue();
 }
 
-Node* DisjointSet::findHelper(Node* curPtr)
+void DisjointSet::pathCompress(int x)
+{
+    int curIndex = index(x);
+    if (curIndex == -1)
+    {
+        return;
+    }
+    Node* curPtr = array[curIndex];
+    findHelper(curPtr, true);
+}
+
+Node* DisjointSet::findHelper(Node* curPtr, bool compress)
 {
     if (curPtr->getParent() == curPtr)
     {
@@ -102,8 +113,11 @@ Node* DisjointSet::findHelper(Node* curPtr)
     }
     else
     {
-        Node* tempPtr = findHelper(curPtr->getParent());
-        curPtr->setParent(tempPtr);
+        Node* tempPtr = findHelper(curPtr->getParent(), compress);
+        if (compress)
+        {
+            curPtr->setParent(tempPtr);
+        }
         return tempPtr;
     }
 }

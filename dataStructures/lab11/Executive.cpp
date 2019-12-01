@@ -145,7 +145,20 @@ void Executive::userInterface()
     }
     else if (userInput == 4) //Path_Compression
     {
-      std::cout << "This option is under construction\n";
+      int temp;
+      std::cout << "Enter the element on whose set you want to perform path compression:\n>";
+      std::cin >> temp;
+      while (std::cin.fail())
+      {
+        std::cin.clear(); // unset failbit
+        // skip bad input up to the next newline
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Sorry, your input did not seem to be an int. Try again: ";
+        std::cin >> temp;
+      }
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      set.pathCompress(temp);
+      std::cout << "Path compression has been done successfully";
     }
     else if (userInput == 5) //Exit
     {

@@ -15,7 +15,8 @@ public:
     void makeSet();
     int unionDS(int x, int y);
     int find(int x);
-    Node* findHelper(Node* curPtr);
+    void pathCompress(int x);
+    Node* findHelper(Node* curPtr, bool compress);
     int find_timer(int x);
     int index(int x);
 };
