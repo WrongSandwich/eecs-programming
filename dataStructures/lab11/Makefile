@@ -1,12 +1,12 @@
-lab10: main.o Executive.o BinomialHeap.o BinomialNode.o
-	g++ -std=c++11 -g -o lab10 main.o Executive.o BinomialHeap.o BinomialNode.o
-main.o: BinomialHeap.h Executive.h main.cpp
+lab11: main.o Executive.o DisjointSet.o Node.o
+	g++ -std=c++11 -g -o lab11 main.o Executive.o DisjointSet.o Node.o
+main.o: DisjointSet.h Executive.h main.cpp
 	g++ -std=c++11 -c -g main.cpp
-Executive.o: BinomialHeap.h Executive.h Executive.cpp
+Executive.o: DisjointSet.h Executive.h Executive.cpp
 	g++ -std=c++11 -c -g Executive.cpp
-BinomialHeap.o: BinomialNode.h BinomialHeap.h BinomialHeap.cpp
-	g++ -std=c++11 -c -g BinomialHeap.cpp
-BinomialNode.o: BinomialNode.h BinomialNode.cpp
-	g++ -std=c++11 -c -g BinomialNode.cpp
+DisjointSet.o: Node.h DisjointSet.h DisjointSet.cpp
+	g++ -std=c++11 -c -g DisjointSet.cpp
+Node.o: Node.h Node.cpp
+	g++ -std=c++11 -c -g Node.cpp
 clean:
-	rm *.o lab10
+	rm *.o lab11
