@@ -2,6 +2,8 @@
 #include "Node.h"
 #include <string>
 #include <fstream>
+#include <chrono>
+#include <iostream>
 
 DisjointSet::DisjointSet() : setSize(0), array(nullptr)
 {}
@@ -106,9 +108,22 @@ Node* DisjointSet::findHelper(Node* curPtr)
     }
 }
 
-int find_timer(int x)
+int DisjointSet::find_timer(int x)
 {
-    return 1;
+    auto t1 = std::chrono::high_resolution_clock::now();
+    int result = find(x);
+    auto t2 = std::chrono::high_resolution_clock::now();
+    if (result != -1)
+    {
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>( t2 - t1).count();
+        std::cout << "Time taken to find " << x << " is " << duration << " nanoseconds\n";
+        return result;
+    }
+    else
+    {
+        std::cout << "Sorry! " << x << " is not found!\n";
+        return -1;
+    }
 }
 
 int DisjointSet::index(int x)

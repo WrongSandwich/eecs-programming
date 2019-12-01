@@ -129,7 +129,19 @@ void Executive::userInterface()
     }
     else if (userInput == 3) //Find_timer
     {
-      std::cout << "This option is under construction\n";
+      int temp;
+      std::cout << "Enter the element you want to find:\n>";
+      std::cin >> temp;
+      while (std::cin.fail())
+      {
+        std::cin.clear(); // unset failbit
+        // skip bad input up to the next newline
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Sorry, your input did not seem to be an int. Try again: ";
+        std::cin >> temp;
+      }
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      set.find_timer(temp);
     }
     else if (userInput == 4) //Path_Compression
     {
