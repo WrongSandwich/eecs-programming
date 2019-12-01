@@ -155,6 +155,7 @@ int DisjointSet::index(int x)
 void DisjointSet::runExperiment()
 {
     //UNION ALL ELEMENTS
+    std::cout << "UNION ALL ELEMENTS\n";
     for (int i = 1; i < 1000; i = i + 2)
     {
         unionDS(i, i + 1);
@@ -218,6 +219,7 @@ void DisjointSet::runExperiment()
     unionDS(1, 1000);
 
     //FIRST RUN OF TESTS
+    std::cout << "FIRST RUN OF TESTS\n";
     std::ofstream firstRun("first.csv");
     for (int i = 1; i <= 1000; i++)
     {
@@ -226,11 +228,13 @@ void DisjointSet::runExperiment()
     }
     firstRun.close();
     //PERFORM PATH COMPRESSION
+    std::cout << "PATH COMPRESSION\n";
     for (int i = 1; i <= 1000; i++)
     {
         pathCompress(i);
     }
     //SECOND RUN OF TESTS
+    std::cout << "SECOND RUN OF TESTS\n";
     std::ofstream secondRun("second.csv");
     for (int i = 1; i <= 1000; i++)
     {
