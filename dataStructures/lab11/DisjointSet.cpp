@@ -3,7 +3,11 @@
 #include <string>
 #include <fstream>
 
-DisjointSet::DisjointSet(std::string fileName, int sizeIn)
+DisjointSet::DisjointSet() : setSize(0), array(nullptr)
+{}
+    
+
+void DisjointSet::loadArray(std::string fileName, int sizeIn)
 {
     setSize = sizeIn;
     array = new Node*[setSize];

@@ -9,7 +9,8 @@ private:
     int setSize;
     Node** array;
 public:
-    DisjointSet(std::string fileName, int sizeIn);
+    DisjointSet();
+    void loadArray(std::string fileName, int sizeIn);
     ~DisjointSet();
     void makeSet();
     int unionDS(int x, int y);
