@@ -7,7 +7,7 @@
 *******************************************************************************/
 
 #include "Executive.h"
-#include "BinomialHeap.h"
+#include "DisjointSet.h"
 #include <string>
 #include <sstream>
 #include <stdexcept>
@@ -22,11 +22,19 @@ Executive::Executive(std::string fileName)
   inFile.open(fileName);
   if (inFile.is_open())
   {
+    int count = 0;
     int temp;
     while (inFile >> temp)
     {
-      heap.insert(temp);
-      std::cout << "Inserted " << temp << "\n";
+      count++;
+    }
+    if (count > 0)
+    {
+      set.loadArray(fileName, count);
+    }
+    else
+    {
+      throw std::runtime_error("ERROR: No elements in file");
     }
     userInterface();
   }
@@ -43,10 +51,12 @@ Executive::~Executive()
 void Executive::userInterface()
 {
   int userInput = 0;
-  while (userInput != 4)
+  bool setBuilt = false;
+  while (userInput != 5)
   {
     std::cout << "Please choose one of the following commands:\n";
-    std::cout << "1- Insert\n2- DeleteMin\n3- LevelOrder\n4- Exit\n>";
+    std::cout << "1- MakeSet\n2- StartUnion\n3- Find_Timer\n";
+    std::cout << "4- Path_Compression\n5- Exit\n>";
     std::cin >> userInput;
     std::cout << '\n';
 
@@ -64,37 +74,62 @@ void Executive::userInterface()
 
     //END OF VALIDATION
 
-    if (userInput == 1) //Insert
+    if (userInput == 1) //MakeSet
     {
-      int temp;
-      std::cout << "Enter an integer value to be inserted into the binomial heap:\n>";
-      std::cin >> temp;
-
+      if (setBuilt)
+      {
+        std::cout << "The disjoint sets have already been constructed; please choose another option\n";
+      }
+      else
+      {
+        set.makeSet();
+      }
+    }
+    else if (userInput == 2) //StartUnion
+    {
+      std::cout << "Enter the representative elements for the two sets which you wish to union:\n>";
+      int temp1, temp2;
+      std::cin >> temp1;
       while (std::cin.fail())
       {
         std::cin.clear(); // unset failbit
         // skip bad input up to the next newline
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "Sorry, your input did not seem to be an int. Try again: ";
-        std::cin >> temp;
+        std::cin >> temp1;
       }
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-      heap.insert(temp);
-      std::cout << temp << " has been inserted successfully!\n";
+      std::cout << '>';
+      std::cin >> temp2;
+      while (std::cin.fail())
+      {
+        std::cin.clear(); // unset failbit
+        // skip bad input up to the next newline
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Sorry, your input did not seem to be an int. Try again: ";
+        std::cin >> temp2;
+      }
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      int result = set.unionDS(temp1, temp2);
+      if (result == -1)
+      {
+        std::cout << "One or both of the given values could not be found; union aborted\n";
+      }
+      else
+      {
+        std::cout << "Union on " << temp1 << " and " << " has been completed.";
+        std::cout << "The representative element is " << result << '\n';
+      }
     }
-    else if (userInput == 2) //DeleteMin
+    else if (userInput == 3) //Find_timer
     {
-      heap.extractMin();
-      std::cout << "Minimum element was successfully deleted.\n";
+      std::cout << "This option is under construction\n";
     }
-    else if (userInput == 3) //Levelorder
+    else if (userInput == 4) //Path_Compression
     {
-      std::cout << "Local Level Order:\n\n";
-      heap.printLevelOrder();
-      std::cout << "\n";
+      std::cout << "This option is under construction\n";
     }
-    else if (userInput == 4) //Exit
+    else if (userInput == 5) //Exit
     {
       std::cout << "Exiting...\n";
     }

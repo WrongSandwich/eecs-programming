@@ -11,12 +11,12 @@
 #define EXECUTIVE
 
 #include <string>
-#include "BinomialHeap.h"
+#include "DisjointSet.h"
 
 class Executive
 {
 private:
-  BinomialHeap heap;
+  DisjointSet set;
 public:
   /**
 * @pre constructor is called with valid file name
