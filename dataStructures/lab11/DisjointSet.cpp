@@ -57,7 +57,7 @@ int DisjointSet::unionDS(int x, int y)
     }
     if (xRep == yRep)
     {
-        return xRep;
+        return -2;
     }
     Node* xNode = array[index(x)];
     Node* yNode = array[index(y)];
@@ -75,7 +75,7 @@ int DisjointSet::unionDS(int x, int y)
     }
     else // ranks are equal
     {
-        xNode->setParent(yNode);
+        yNode->setParent(xNode);
         xNode->setRank(xRank + 1);
         return xRep;
     }

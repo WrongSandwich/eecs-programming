@@ -83,6 +83,8 @@ void Executive::userInterface()
       else
       {
         set.makeSet();
+        setBuilt = true;
+        std::cout << "The disjoint sets have been constructed\n";
       }
     }
     else if (userInput == 2) //StartUnion
@@ -115,9 +117,13 @@ void Executive::userInterface()
       {
         std::cout << "One or both of the given values could not be found; union aborted\n";
       }
+      else if (result == -2)
+      {
+        std::cout << "The given elements are already in the same set; union aborted\n";
+      }
       else
       {
-        std::cout << "Union on " << temp1 << " and " << " has been completed.";
+        std::cout << "Union on " << temp1 << " and " << temp2 << " has been completed.";
         std::cout << "The representative element is " << result << '\n';
       }
     }
