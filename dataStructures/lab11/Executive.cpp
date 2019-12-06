@@ -14,6 +14,7 @@
 #include <limits>
 #include <fstream>
 #include <iostream>
+#include <list>
 
 Executive::Executive(std::string fileName)
 {
@@ -65,13 +66,22 @@ void Executive::chooseType(std::string fileName)
       {
         int count = 0;
         int temp;
+        std::list<int> l = {};
         while (inFile >> temp)
         {
+          l.push_back(temp);
           count++;
         }
         if (count > 0)
         {
-          set.loadArray(fileName, count);
+          int * array = new int[count];
+          int i = 0;
+          for (auto el : l)
+          {
+            array[i] = el;
+            i++;
+          }
+          set.loadArray(array, count);
         }
         else
         {
@@ -143,7 +153,7 @@ void Executive::graphInterface()
     }
     else if (userInput == 3) //Kruskal
     {
-
+      graph.Kruskal();
     }
     else if (userInput == 4) //Prim
     {

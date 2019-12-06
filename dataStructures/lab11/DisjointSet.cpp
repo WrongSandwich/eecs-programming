@@ -10,25 +10,15 @@ DisjointSet::DisjointSet() : setSize(0), array(nullptr)
 {
 }
 
-void DisjointSet::loadArray(std::string fileName, int sizeIn)
+void DisjointSet::loadArray(int* arrayIn, int sizeIn)
 {
     setSize = sizeIn;
     array = new Node *[setSize];
-    std::ifstream inFile;
-    inFile.open(fileName);
-    if (inFile.is_open())
+    for (int i = 0; i < setSize; i++)
     {
-        int temp;
-        //TODO: prevent duplicates
-        // populate array with nodes
-        for (int i = 0; i < setSize; i++)
-        {
-            inFile >> temp;
-            array[i] = new Node(temp);
-        }
-    }
-    else
-    {
+        int temp = arrayIn[i];
+        std::cout << temp << '\n';
+        array[i] = new Node(temp);
     }
 }
 

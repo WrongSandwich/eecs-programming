@@ -1,5 +1,6 @@
 #include "Graph.h"
 #include "Edge.h"
+#include "DisjointSet.h"
 #include <iostream>
 #include <list>
 
@@ -163,6 +164,22 @@ void Graph::DFSHelper(Edge **results, int index, bool *visited)
     }
 }
 
+void Graph::Kruskal()
+{
+    int weight = 0;
+    std::list<Edge*> edgeList = {};
+    for (int i = 0; i < size; i++)
+    {
+        Edge* curPtr = edges[i];
+        while (curPtr != nullptr)
+        {
+            edgeList.push_back(curPtr);
+            curPtr = curPtr->next;
+        }
+    }
+    edgeList.sort([](Edge * lhs, Edge * rhs) {return lhs->cost < rhs->cost;});
+}
+
 // HELPER FUNCTIONS
 
 void Graph::printEdgeList(Edge *curPtr)
@@ -192,6 +209,12 @@ void Graph::printVert(Edge *curPtr, int index)
         curPtr = curPtr->next;
     }
     std::cout << '\n';
+}
+
+void Graph::printEdge(Edge* target)
+{
+    std::cout << '(' << target->src << ", " << target->dst << "){";
+    std::cout << target->cost << "} ";
 }
 
 Edge *Graph::getTail(Edge *curPtr)
@@ -225,3 +248,48 @@ bool Graph::isRepeat(int src, int dst, Edge *curList)
     }
     return false;
 }
+
+bool Graph::isCycle(int src, int dst, Edge *curList)
+{
+    bool srcFound = false;
+    bool dstFound = false;
+    while (curList != nullptr)
+    {
+        int curSrc = curList->src;
+        int curDst = curList->dst;
+        if (src == curSrc || src == curDst)
+        {
+            srcFound = true;
+        }
+        if (dst == curSrc || dst == curDst)
+        {
+            dstFound = true;
+        }
+        curList = curList->next;
+    }
+    if (srcFound && dstFound)
+    {
+        return true;
+    }
+    return false;
+}
+
+// std::list<Edge*> Graph::sortEdges()
+// {
+//     std::list<Edge*> edgeList = {};
+//     for (int i = 0; i < size; i++)
+//     {
+//         Edge* curPtr = edges[i];
+//         while (curPtr != nullptr)
+//         {
+//             edgeList.push_back(curPtr);
+//             curPtr = curPtr->next;
+//         }
+//     }
+//     edgeList.sort([](Edge * lhs, Edge * rhs) {return lhs->cost < rhs->cost;});
+//     for (auto edge : edgeList)
+//     {
+//         std::cout << edge->cost << ' ';
+//     }
+//     std::cout << '\n';
+// }

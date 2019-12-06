@@ -10,7 +10,7 @@ private:
     Node** array;
 public:
     DisjointSet();
-    void loadArray(std::string fileName, int sizeIn);
+    void loadArray(int* arrayIn, int sizeIn);
     ~DisjointSet();
     void makeSet();
     int unionDS(int x, int y);
