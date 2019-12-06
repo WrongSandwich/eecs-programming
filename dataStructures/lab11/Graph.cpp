@@ -1,6 +1,7 @@
 #include "Graph.h"
 #include "Edge.h"
 #include <iostream>
+#include <list>
 
 Graph::Graph() : size(0), edges(nullptr)
 {
@@ -27,6 +28,76 @@ void Graph::buildGraph(int sizeIn, int **edgesIn)
                 }
             }
         }
+    }
+}
+
+void Graph::BFS()
+{
+    bool *visited = new bool[size];
+    for (int i = 0; i < size; i++)
+    {
+        visited[i] = false;
+    }
+    Edge **results = new Edge *[2];
+    BFSHelper(results, 0, visited);
+    for (int i = 0; i < size; i++)
+    {
+        Edge *curEdge = edges[i];
+        while (curEdge != nullptr)
+        {
+            int curSrc = curEdge->src;
+            int curDst = curEdge->dst;
+            if (!isRepeat(curSrc, curDst, results[0]) && !isRepeat(curSrc, curDst, results[1]))
+            {
+                Edge *tailPtr = getTail(results[1]);
+                if (tailPtr == nullptr)
+                {
+                    results[1] = new Edge(curSrc, curDst, curEdge->cost);
+                }
+                else
+                {
+                    tailPtr->next = new Edge(curSrc, curDst, curEdge->cost);
+                }
+            }
+            curEdge = curEdge->next;
+        }
+    }
+    // Print the results
+    std::cout << "Tree Edges: ";
+    printEdgeList(results[0]);
+    std::cout << "Cross Edges: ";
+    printEdgeList(results[1]);
+}
+
+void Graph::BFSHelper(Edge **results, int index, bool *visited)
+{
+    Edge *curEdge = edges[index];
+    visited[index] = true;
+    std::list<int> targets = {};
+    while (curEdge != nullptr)
+    {
+        int curDst = curEdge->dst;
+        if (!visited[curDst]) // not visited -> it's a tree edge, must be traversed
+        {
+            Edge *tailPtr = getTail(results[0]);
+            if (tailPtr == nullptr)
+            {
+                results[0] = new Edge(curEdge->src, curEdge->dst, curEdge->cost);
+            }
+            else
+            {
+                tailPtr->next = new Edge(curEdge->src, curEdge->dst, curEdge->cost);
+            }
+            visited[curDst] = true;
+            targets.push_back(curDst);
+        }
+        curEdge = curEdge->next;
+    }
+    while (!targets.empty())
+    {
+        int cur = targets.front();
+        BFSHelper(results, cur, visited);
+        targets.pop_front();
     }
 }
 

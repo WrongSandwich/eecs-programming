@@ -10,7 +10,8 @@ private:
 public:
     Graph();
     void buildGraph(int sizeIn, int ** edgesIn);
-    Edge ** BFS();
+    void BFS();
+    void BFSHelper(Edge ** results, int index, bool * visited);
     void DFS();
     void DFSHelper(Edge ** results, int index, bool * visited);
     void printEdgeList(Edge* curPtr);

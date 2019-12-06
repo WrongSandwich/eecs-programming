@@ -135,6 +135,7 @@ void Executive::graphInterface()
     std::cin >> userInput;
     if (userInput == 1) //BFS
     {
+      graph.BFS();
     }
     else if (userInput == 2) //DFS
     {
