@@ -17,7 +17,6 @@ void DisjointSet::loadArray(int* arrayIn, int sizeIn)
     for (int i = 0; i < setSize; i++)
     {
         int temp = arrayIn[i];
-        std::cout << temp << '\n';
         array[i] = new Node(temp);
     }
 }

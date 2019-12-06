@@ -8,7 +8,7 @@ DisjointSet.o: Node.h DisjointSet.h DisjointSet.cpp
 	g++ -std=c++11 -c -g DisjointSet.cpp
 Node.o: Node.h Node.cpp
 	g++ -std=c++11 -c -g Node.cpp
-Graph.o: Graph.h Graph.cpp Edge.h
+Graph.o: Graph.h Graph.cpp Edge.h DisjointSet.h
 	g++ -std=c++11 -c -g Graph.cpp
 clean:
 	rm *.o lab11

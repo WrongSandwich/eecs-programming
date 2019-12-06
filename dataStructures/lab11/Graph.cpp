@@ -178,6 +178,26 @@ void Graph::Kruskal()
         }
     }
     edgeList.sort([](Edge * lhs, Edge * rhs) {return lhs->cost < rhs->cost;});
+    DisjointSet set;
+    int * inputArray = new int[size];
+    for (int i = 0; i < size; i++)
+    {
+        inputArray[i] = i;
+    }
+    set.loadArray(inputArray, size);
+    set.makeSet();
+    for (auto edge : edgeList)
+    {
+        int srcRep = set.find(edge->src);
+        int dstRep = set.find(edge->dst);
+        if (srcRep != dstRep)
+        {
+            printEdge(edge);
+            weight += edge->cost;
+            set.unionDS(srcRep, dstRep);
+        }
+    }
+    std::cout << "\nTotal cost: " << weight << '\n';
 }
 
 // HELPER FUNCTIONS
@@ -213,7 +233,7 @@ void Graph::printVert(Edge *curPtr, int index)
 
 void Graph::printEdge(Edge* target)
 {
-    std::cout << '(' << target->src << ", " << target->dst << "){";
+    std::cout << '(' << target->src + 1 << ", " << target->dst + 1 << "){";
     std::cout << target->cost << "} ";
 }
 
