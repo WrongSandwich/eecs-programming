@@ -22,21 +22,7 @@ Executive::Executive(std::string fileName)
   inFile.open(fileName);
   if (inFile.is_open())
   {
-    int count = 0;
-    int temp;
-    while (inFile >> temp)
-    {
-      count++;
-    }
-    if (count > 0)
-    {
-      set.loadArray(fileName, count);
-    }
-    else
-    {
-      throw std::runtime_error("ERROR: No elements in file");
-    }
-    userInterface();
+    chooseType(fileName);
   }
   else
   {
@@ -46,6 +32,80 @@ Executive::Executive(std::string fileName)
 
 Executive::~Executive()
 {
+}
+
+void Executive::chooseType(std::string fileName)
+{
+  int userInput = 0;
+  while (userInput != 3)
+  {
+    std::cout << "Please choose the data structure you'd like to construct:\n";
+    std::cout << "1- Disjoint Set\n2- Graph\n3- Exit\n>";
+    std::cin >> userInput;
+  
+  //Validation of user input.
+
+    while (std::cin.fail())
+    {
+      std::cin.clear(); // unset failbit
+      // skip bad input up to the next newline
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      std::cout << "Sorry, your input did not seem to be an int. Try again: ";
+      std::cin >> userInput;
+    }
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    //END OF VALIDATION
+
+    if (userInput == 1) //Disjoint Set
+    {
+      userInterface();
+    }
+    else if (userInput == 2) // Graph
+    {
+      //Construct 2D array for passing
+      std::ifstream inFile;
+      inFile.open(fileName);
+      if (inFile.is_open())
+      {
+        int size = 0;
+        inFile >> size;
+        int ** array = new int*[size];
+        for (int i = 0; i < size; i++)
+        {
+          array[i] = new int[size];
+        }
+        for (int i = 0; i < size; i++)
+        {
+          for (int j = 0; j < size; j++)
+          {
+            inFile >> array[i][j];
+          }
+        }
+        graph.buildGraph(size, array);
+        graphInterface();
+      }
+      else
+      {
+        throw std::runtime_error("Could not open file");
+      }
+    }
+    else if (userInput == 3) // Exit
+    {
+      std::cout << "Exiting...\n";
+    }
+    else 
+    {
+      std::cout << "Please enter a valid menu option\n"; 
+    }
+    std::cout << "------------------------------------------------------\n";
+  }
+}
+
+void Executive::graphInterface()
+{
+  int userInput = 0; 
+  graph.printGraph();
 }
 
 void Executive::userInterface()

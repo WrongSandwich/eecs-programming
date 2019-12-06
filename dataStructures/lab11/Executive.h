@@ -12,11 +12,13 @@
 
 #include <string>
 #include "DisjointSet.h"
+#include "Graph.h"
 
 class Executive
 {
 private:
   DisjointSet set;
+  Graph graph;
 public:
   /**
 * @pre constructor is called with valid file name
@@ -31,10 +33,15 @@ public:
 **/
   ~Executive();
 
+  void chooseType(std::string fileName);
+
+  void graphInterface();
+
 /**
 * @pre Executive constructor finishes successfully and calls userInterface
 * @post Runs the user interface and interacts with HashTable based on user input
 **/
   void userInterface();
+
 };
 #endif
