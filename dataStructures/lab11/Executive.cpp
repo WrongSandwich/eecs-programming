@@ -42,8 +42,8 @@ void Executive::chooseType(std::string fileName)
     std::cout << "Please choose the data structure you'd like to construct:\n";
     std::cout << "1- Disjoint Set\n2- Graph\n3- Exit\n>";
     std::cin >> userInput;
-  
-  //Validation of user input.
+
+    //Validation of user input.
 
     while (std::cin.fail())
     {
@@ -59,7 +59,30 @@ void Executive::chooseType(std::string fileName)
 
     if (userInput == 1) //Disjoint Set
     {
-      userInterface();
+      std::ifstream inFile;
+      inFile.open(fileName);
+      if (inFile.is_open())
+      {
+        int count = 0;
+        int temp;
+        while (inFile >> temp)
+        {
+          count++;
+        }
+        if (count > 0)
+        {
+          set.loadArray(fileName, count);
+        }
+        else
+        {
+          throw std::runtime_error("ERROR: No elements in file");
+        }
+        userInterface();
+      }
+      else
+      {
+        throw std::runtime_error("Could not open file");
+      }
     }
     else if (userInput == 2) // Graph
     {
@@ -70,7 +93,7 @@ void Executive::chooseType(std::string fileName)
       {
         int size = 0;
         inFile >> size;
-        int ** array = new int*[size];
+        int **array = new int *[size];
         for (int i = 0; i < size; i++)
         {
           array[i] = new int[size];
@@ -94,9 +117,9 @@ void Executive::chooseType(std::string fileName)
     {
       std::cout << "Exiting...\n";
     }
-    else 
+    else
     {
-      std::cout << "Please enter a valid menu option\n"; 
+      std::cout << "Please enter a valid menu option\n";
     }
     std::cout << "------------------------------------------------------\n";
   }
@@ -104,7 +127,42 @@ void Executive::chooseType(std::string fileName)
 
 void Executive::graphInterface()
 {
-  int userInput = 0; 
+  int userInput = 0;
+  while (userInput != 5)
+  {
+    std::cout << "Please choose one of the following commands:\n";
+    std::cout << "1- BFS\n2- DFS\n3- Kruskal MST\n4- Prim MST\n5- Exit\n>";
+    std::cin >> userInput;
+    if (userInput == 1) //BFS
+    {
+
+    }
+    else if (userInput == 2) //DFS
+    {
+
+    }
+    else if (userInput == 3) //Kruskal
+    {
+
+    }
+    else if (userInput == 4) //Prim
+    {
+
+    }
+    else if (userInput == 5) //Exit
+    {
+      std::cout << "Exiting.......\n";
+    }
+    else if (userInput == 6) //Print (debugging)
+    {
+      graph.printGraph();
+    }
+    else
+    {
+      std::cout << "Please enter a valid menu option\n";
+    }
+    std::cout << "------------------------------------------------------\n";
+  }
   graph.printGraph();
 }
 
