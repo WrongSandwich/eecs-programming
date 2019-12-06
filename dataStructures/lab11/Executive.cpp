@@ -135,11 +135,10 @@ void Executive::graphInterface()
     std::cin >> userInput;
     if (userInput == 1) //BFS
     {
-
     }
     else if (userInput == 2) //DFS
     {
-
+      graph.DFS();
     }
     else if (userInput == 3) //Kruskal
     {

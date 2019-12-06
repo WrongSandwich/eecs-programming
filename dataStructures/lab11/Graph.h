@@ -10,9 +10,14 @@ private:
 public:
     Graph();
     void buildGraph(int sizeIn, int ** edgesIn);
+    Edge ** BFS();
+    void DFS();
+    void DFSHelper(Edge ** results, int index, bool * visited);
+    void printEdgeList(Edge* curPtr);
     void printGraph();
-    void printVert(int index);
-    Edge* getTail(int index);
+    void printVert(Edge* curPtr, int index);
+    Edge* getTail(Edge* curPtr);
+    bool isRepeat(int src, int dst, Edge * curList);
 };
 
 #endif
