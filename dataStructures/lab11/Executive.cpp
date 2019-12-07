@@ -250,7 +250,7 @@ void Executive::userInterface()
       }
       else
       {
-        std::cout << "Union on " << temp1 << " and " << temp2 << " has been completed.";
+        std::cout << "Union on " << temp1 << " and " << temp2 << " has been completed.\n";
         std::cout << "The representative element is " << result << '\n';
       }
     }
@@ -285,7 +285,7 @@ void Executive::userInterface()
       }
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       set.pathCompress(temp);
-      std::cout << "Path compression has been done successfully";
+      std::cout << "Path compression has been done successfully\n";
     }
     else if (userInput == 5) //Exit
     {
