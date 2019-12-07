@@ -8,5 +8,7 @@ I apologize if this makes testing harder, it made my development process much ea
 Other notes:
 - Disjoint Set example data is in data.txt
 - Graph example data is in graphData.txt
+- Experimental profiling output is in output.ods and output.pdf (wasn't sure which format was preferred)
 - Experimental Profiling input is experiment.txt, and raw output is first.csv and second.csv
     - I didn't think this was something you guys tested but if you want to run it it's menu option 6 for disjoint set
+- Graph question answers are in Answer_Lab11.pdf
