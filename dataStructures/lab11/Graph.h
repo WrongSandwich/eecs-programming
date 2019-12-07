@@ -3,6 +3,7 @@
 
 #include "Edge.h"
 #include "DisjointSet.h"
+#include <list>
 
 class Graph {
 private:
@@ -16,6 +17,10 @@ public:
     void DFS();
     void DFSHelper(Edge ** results, int index, bool * visited);
     void Kruskal();
+    void Prim();
+    void Prim_updateCosts(bool * connected, int * minCost, Edge ** minEdge, std::list<Edge*> edgeList);
+    int Prim_findMinEdge(bool * connected, int * minCost);
+    bool Prim_updateFinished(bool * connected);
     void printEdgeList(Edge* curPtr);
     void printGraph();
     void printVert(Edge* curPtr, int index);

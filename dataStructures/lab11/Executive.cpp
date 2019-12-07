@@ -157,7 +157,7 @@ void Executive::graphInterface()
     }
     else if (userInput == 4) //Prim
     {
-
+      graph.Prim();
     }
     else if (userInput == 5) //Exit
     {

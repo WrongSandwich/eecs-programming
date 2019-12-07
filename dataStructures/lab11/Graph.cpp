@@ -167,19 +167,19 @@ void Graph::DFSHelper(Edge **results, int index, bool *visited)
 void Graph::Kruskal()
 {
     int weight = 0;
-    std::list<Edge*> edgeList = {};
+    std::list<Edge *> edgeList = {};
     for (int i = 0; i < size; i++)
     {
-        Edge* curPtr = edges[i];
+        Edge *curPtr = edges[i];
         while (curPtr != nullptr)
         {
             edgeList.push_back(curPtr);
             curPtr = curPtr->next;
         }
     }
-    edgeList.sort([](Edge * lhs, Edge * rhs) {return lhs->cost < rhs->cost;});
+    edgeList.sort([](Edge *lhs, Edge *rhs) { return lhs->cost < rhs->cost; });
     DisjointSet set;
-    int * inputArray = new int[size];
+    int *inputArray = new int[size];
     for (int i = 0; i < size; i++)
     {
         inputArray[i] = i;
@@ -198,6 +198,93 @@ void Graph::Kruskal()
         }
     }
     std::cout << "\nTotal cost: " << weight << '\n';
+}
+
+void Graph::Prim()
+{
+    // initializing all tracking variables
+    const int MAX_WEIGHT = 100000;
+    int weight = 0;
+    int *minCost = new int[size];
+    Edge **minEdge = new Edge *[size];
+    bool *connected = new bool[size];
+    for (int i = 0; i < size; i++)
+    {
+        minCost[i] = MAX_WEIGHT;
+        minEdge[i] = nullptr;
+        connected[i] = false;
+    }
+    std::list<Edge *> tree = {};
+    // store all edges in a list for convenient parsing
+    std::list<Edge *> edgeList = {};
+    for (int i = 0; i < size; i++)
+    {
+        Edge *curPtr = edges[i];
+        while (curPtr != nullptr)
+        {
+            edgeList.push_back(curPtr);
+            curPtr = curPtr->next;
+        }
+    }
+    // add initial vertex
+    connected[0] = true;
+    // loop to carry out Prim
+    bool finished = Prim_updateFinished(connected);
+    while (!finished)
+    {
+        Prim_updateCosts(connected, minCost, minEdge, edgeList);
+        int index = Prim_findMinEdge(connected, minCost);
+        // Add min edge to tree
+        weight += minCost[index];
+        tree.push_back(minEdge[index]);
+        connected[index] = true;
+        finished = Prim_updateFinished(connected);
+    }
+    // finished, need to print results
+    for (auto edge : tree)
+    {
+        printEdge(edge);
+    }
+    std::cout << "\nTotal cost: " << weight << '\n';
+}
+
+void Graph::Prim_updateCosts(bool *connected, int *minCost, Edge **minEdge, std::list<Edge *> edgeList)
+{
+    for (auto edge : edgeList)
+    {
+        if (connected[edge->src] && !connected[edge->dst] && (edge->cost < minCost[edge->dst]))
+        {
+            minCost[edge->dst] = edge->cost;
+            minEdge[edge->dst] = edge;
+        }
+    }
+}
+
+int Graph::Prim_findMinEdge(bool *connected, int *minCost)
+{
+    int minimum = minCost[0];
+    int index = 0;
+    for (int i = 0; i < size; i++)
+    {
+        if (minCost[i] < minimum && !connected[i])
+        {
+            minimum = minCost[i];
+            index = i;
+        }
+    }
+    return index;
+}
+
+bool Graph::Prim_updateFinished(bool * connected)
+{
+    for (int i = 0; i < size; i++)
+    {
+        if (!connected[i])
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 // HELPER FUNCTIONS
@@ -231,7 +318,7 @@ void Graph::printVert(Edge *curPtr, int index)
     std::cout << '\n';
 }
 
-void Graph::printEdge(Edge* target)
+void Graph::printEdge(Edge *target)
 {
     std::cout << '(' << target->src + 1 << ", " << target->dst + 1 << "){";
     std::cout << target->cost << "} ";
