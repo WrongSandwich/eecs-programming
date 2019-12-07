@@ -38,7 +38,7 @@ Executive::~Executive()
 void Executive::chooseType(std::string fileName)
 {
   int userInput = 0;
-  while (userInput != 3)
+  while (userInput > 3 || userInput < 1)
   {
     std::cout << "Please choose the data structure you'd like to construct:\n";
     std::cout << "1- Disjoint Set\n2- Graph\n3- Exit\n>";
@@ -173,14 +173,13 @@ void Executive::graphInterface()
     }
     std::cout << "------------------------------------------------------\n";
   }
-  graph.printGraph();
 }
 
 void Executive::userInterface()
 {
   int userInput = 0;
   bool setBuilt = false;
-  while (userInput != 6)
+  while (userInput != 5)
   {
     std::cout << "Please choose one of the following commands:\n";
     std::cout << "1- MakeSet\n2- StartUnion\n3- Find_Timer\n";
